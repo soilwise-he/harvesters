@@ -12,3 +12,6 @@ flowchart LR
     hc -->|harvests| db[(temporary storage)]
     hc -->|data cleaning| db[(temporary storage)]
 ```
+
+This repository will contain the definition of a container used as a github action to harvest resources; as well as git action definitions to harvest actual sources. 
+
