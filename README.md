@@ -14,8 +14,17 @@ flowchart LR
     r -->|deploys| hc[Harvest container]
     hc -->|harvests| db[(temporary storage)]
     hc -->|data cleaning| db[(storage)]
+    db -->|triplify| TS[(Triple store)]
+    db -->|indexing| CT[Catalogue] 
 ```
 
 This repository will contain the definition of a container used as a github action to harvest resources; as well as git action definitions to harvest actual sources. 
 
 This component is tightly related to the [triple store](https://github.com/soilwise-he/triplestore-virtuoso) component. Harvested records are stored on the triple store. Some interaction with the triple store to understand if existing records need to be kept, overwritten or even removed. 
+
+## Harvesters
+
+- [inspire](./inspire)
+- [CSW](./csw) (for example Bonares)
+- [ESDAC](./esdac)
+- [Cordis/OpenAire](./cordis)
