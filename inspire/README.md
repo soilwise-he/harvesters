@@ -12,6 +12,20 @@ Documents are identified using their md5 hash, so the database also builds up a 
 
 Records which fail parsing are not processed further.
 
+Set environment variables, or create a local .env file for the db connection:
+- POSTGRES_HOST
+- POSTGRES_PORT
+- POSTGRES_DB
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+
+```bash
+virtualenv .
+. bin/activate
+vi .env # set db connection details
+pip install -r requirements.txt
+python metadata.py
+```
 
 
 
