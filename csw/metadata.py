@@ -1,13 +1,14 @@
-
+# import a range of records from a csw endpoint constraint by a filter
 
 from dotenv import load_dotenv
 import json
-from pygeometa.schemas.iso19139 import ISO19139OutputSchema
 import hashlib
 import os
+from owslib.iso import *
+from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
-import sys
+import sys,time
 sys.path.append('../utils')
 from database import insertRecord
 
@@ -76,8 +77,19 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
                 recxml = etree.tostring(rec2[0])
 
             hashcode = hashlib.md5(recxml).hexdigest() # get unique hash for xml 
-            md = ISO19139OutputSchema().import_(recxml) # import xml to mcf
-            insertRecord(md, hashcode, source=label) # insert into db
+
+            id=''
+            hierarchy=''
+            try:            
+                m=MD_Metadata(etree.fromstring(recxml))
+                id = m.dataseturi or next(i for i in m.identification[0].uricode if i is not None) or m.identifier
+                hierarchy = m.hierarchy
+            except Exception as e:
+                print(e)
+
+            #md = ISO19139OutputSchema().import_(recxml) # import xml to mcf
+            insertRecord('doi.publications',['identifier','uri','oafresult','hash','source','type','insert_date'],
+                         (m.identifier,id,recxml.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
 
         except Exception as e:
             print(f"Parse rec failed ; {str(e)}")

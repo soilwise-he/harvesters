@@ -1,5 +1,4 @@
-requests
+pygeometa
 psycopg2-binary
 python-dotenv
-pycurl
-owslib
+rdflib
