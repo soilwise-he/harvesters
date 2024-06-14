@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from rdflib import Graph
 from pyRdfa import pyRdfa
 from dotenv import load_dotenv
 
@@ -17,11 +16,7 @@ label = 'ESDAC'
 
 html = requests.get(url).text
 soup = BeautifulSoup(html, 'html.parser')
-j=0
 for tr in soup.find_all('tr'):
-    j=j+1
-    if j==5:
-        exit
     i=0
     md = {}
     for td in tr.find_all('td'):
