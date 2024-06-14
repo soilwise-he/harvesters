@@ -15,8 +15,6 @@ from database import insertRecord
 # Load environment variables from .env file
 load_dotenv()
 
-#url= "https://apps.titellus.net/geonetwork/srv/api/search/records/_search"
-
 url = os.environ.get("HARVEST_URL")
 if not url:
     print('env HARVEST_URL not set')
@@ -33,8 +31,6 @@ pagesize = 50
 maxrecords= 2500
 
 csw = CatalogueServiceWeb(url)
-
-# qry = PropertyIsEqualTo('csw:AnyText', 'soil')
 
 returned = 1
 recs = {}
@@ -79,20 +75,21 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
             hashcode = hashlib.md5(recxml).hexdigest() # get unique hash for xml 
 
             id=''
+            identifier=''
             hierarchy=''
             try:            
                 m=MD_Metadata(etree.fromstring(recxml))
                 id = m.dataseturi or next(i for i in m.identification[0].uricode if i is not None) or m.identifier
+                identifier = m.identifier
                 hierarchy = m.hierarchy
             except Exception as e:
-                print(e)
+                print('Failed parse xml: ', str(e))
 
-            #md = ISO19139OutputSchema().import_(recxml) # import xml to mcf
             insertRecord('doi.publications',['identifier','uri','oafresult','hash','source','type','insert_date'],
-                         (m.identifier,id,recxml.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
+                         (identifier,id,recxml.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
 
         except Exception as e:
-            print(f"Parse rec failed ; {str(e)}")
+            print("Parse rec failed;", str(e))
 
 
 
