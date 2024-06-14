@@ -25,6 +25,16 @@ This component is tightly related to the [triple store](https://github.com/soilw
 ## Harvesters
 
 - [inspire](./inspire)
-- [CSW](./csw) (for example Bonares)
+- [CSW](./csw) (for example Bonares, EJP Soil)
 - [ESDAC](./esdac)
 - [Cordis/OpenAire](./cordis)
+- [Triplify](./mcf-triplify/)
+
+## Docker
+
+Run script as docker
+
+```
+docker built -t soilwise/harvesters .
+docker run -e POSTGRES_HOST=localhost soilwise/harvesters python wcs/metadata.py 
+```

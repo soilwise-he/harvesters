@@ -1,4 +1,0 @@
-pygeometa
-psycopg2-binary
-python-dotenv
-rdflib

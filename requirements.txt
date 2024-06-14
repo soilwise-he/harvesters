@@ -2,3 +2,8 @@ pygeometa
 owslib
 psycopg2-binary
 python-dotenv
+beautifulsoup4
+requests
+pyRdfa3
+pycurl
+rdflib

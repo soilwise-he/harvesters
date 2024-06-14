@@ -9,6 +9,11 @@ RUN apt-get update && apt-get install --yes \
 
 # initially copy only the requirements files
 COPY requirements.txt ./
+COPY csw ./
+COPY esdac ./
+COPY inspire ./
+COPY mcf-triplify ./
+COPY utils ./
 
 RUN pip install -U pip && \
     python3 -m pip install \

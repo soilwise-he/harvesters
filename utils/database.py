@@ -1,4 +1,4 @@
-import json,os, psycopg2
+import json, os, psycopg2
 
 def dbQuery(sql):
     dbconn = psycopg2.connect(
