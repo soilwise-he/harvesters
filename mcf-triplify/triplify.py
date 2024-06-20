@@ -12,7 +12,7 @@ load_dotenv()
 
 # fetch the mcf's
 
-recs = dbQuery("Select hash,oafresult from doi.publications where source = 'INSPIRE'")
+recs = dbQuery("Select hash,resultobject from harvest.items where source = 'INSPIRE'")
 
 for row in recs:
     hashcode = row[0]
@@ -26,5 +26,5 @@ for row in recs:
     g.parse(data=cnf, format='json-ld')
     foo = g.serialize(format='turtle')
 
-    recs = dbQuery(f"update doi.publications set turtle = '{foo}' where hash = '{hashcode}'")
+    recs = dbQuery(f"update harvest.items set turtle = '{foo}' where hash = '{hashcode}'")
 

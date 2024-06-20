@@ -137,7 +137,7 @@ while nextRecord < total and nextRecord < maxrecords:
                         print('Failed parse xml: ', str(e))
 
                     #md = ISO19139OutputSchema().import_(r) # import xml to mcf
-                    insertRecord('doi.publications',['identifier','uri','oafresult','hash','source','type','insert_date'],
+                    insertRecord('harvest.items',['identifier','uri','resultobject','hash','source','type','insert_date'],
                                 (id, identifier,r.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
 
             except Exception as e:

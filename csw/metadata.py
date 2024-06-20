@@ -8,7 +8,8 @@ from owslib.iso import *
 from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
-import sys,time
+import sys, uuid
+from datetime import datetime
 sys.path.append('../utils')
 from database import insertRecord
 
@@ -75,7 +76,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
             hashcode = hashlib.md5(recxml).hexdigest() # get unique hash for xml 
 
             id=''
-            identifier=''
+            identifier=str(uuid.uuid4())
             hierarchy=''
             try:            
                 m=MD_Metadata(etree.fromstring(recxml))
@@ -85,8 +86,12 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
             except Exception as e:
                 print('Failed parse xml: ', str(e))
 
-            insertRecord('doi.publications',['identifier','uri','oafresult','hash','source','type','insert_date'],
-                         (identifier,id,recxml.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
+            
+            insertRecord('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash','source','insert_date','itemtype'],
+                         (identifier,'uuid',id,recxml.decode('UTF-8'),'iso19139:2007',hashcode,label,datetime.now(),hierarchy)) # insert into db
+            
+            # add for duplicate check
+            insertRecord('harvest.item_duplicates',['identifier','identifiertype','source','hash'],(identifier,'uuid',label,hashcode))
 
         except Exception as e:
             print("Parse rec failed;", str(e))

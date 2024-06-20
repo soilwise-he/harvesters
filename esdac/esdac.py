@@ -41,7 +41,7 @@ for tr in soup.find_all('tr'):
             identifier = md['identifier']
             hierarchy = 'dataset'
 
-            insertRecord('doi.publications',['identifier','uri','oafresult','hash','source','type','insert_date'],
+            insertRecord('harvest.items',['identifier','uri','resultobject','hash','source','type','insert_date'],
                             (identifier,id,triples,hashcode,label,hierarchy,time.time())) # insert into db
         except Exception as e:
             print('Error:',md['identifier'],str(e))
