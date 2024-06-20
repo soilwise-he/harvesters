@@ -1,14 +1,11 @@
 # import a range of records from a csw endpoint constraint by a filter
 
 from dotenv import load_dotenv
-import json
-import hashlib
-import os
+import json, sys, hashlib, os, uuid
 from owslib.iso import *
 from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
-import sys, uuid
 from datetime import datetime
 sys.path.append('../utils')
 from database import insertRecord
@@ -80,21 +77,30 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
             hierarchy=''
             try:            
                 m=MD_Metadata(etree.fromstring(recxml))
-                id = m.dataseturi or next(i for i in m.identification[0].uricode if i is not None) or m.identifier
+                id = m.dataseturi
+                if id in [None,'']:
+                    for i in m.identification:
+                        for i2 in i.uricode:
+                            if i2 not in [None,'']:
+                                id = i2
+                if id in [None,'']:
+                    id = m.identifier
                 identifier = m.identifier
                 hierarchy = m.hierarchy
             except Exception as e:
-                print('Failed parse xml: ', str(e))
+                print(f'Failed parse xml: {str(e)} {str(sys.exc_info())}')
 
+            insertRecord(       identifier=id,
+                                uri=identifier,
+                                identifiertype='uuid',
+                                resulttype='iso19139:2007',
+                                resultobject=recxml.decode('UTF-8'),
+                                hashcode=hashcode,
+                                source=label,
+                                itemtype=hierarchy) # insert into db
             
-            insertRecord('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash','source','insert_date','itemtype'],
-                         (identifier,'uuid',id,recxml.decode('UTF-8'),'iso19139:2007',hashcode,label,datetime.now(),hierarchy)) # insert into db
-            
-            # add for duplicate check
-            insertRecord('harvest.item_duplicates',['identifier','identifiertype','source','hash'],(identifier,'uuid',label,hashcode))
-
         except Exception as e:
-            print("Parse rec failed;", str(e))
+            print(f"Parse rec failed; {str(e)}")
 
 
 

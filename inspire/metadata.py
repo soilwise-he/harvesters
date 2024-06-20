@@ -1,7 +1,7 @@
 import pycurl
 from io import BytesIO
 from dotenv import load_dotenv
-import json
+import json, sys
 from owslib.iso import *
 from owslib.etree import etree
 import hashlib
@@ -97,15 +97,11 @@ def getRecord(id):
     c.setopt(c.HTTPHEADER, reqheaders)
     c.setopt(c.WRITEDATA, buffer)
     c.perform()
-    print(f'R: {id}, Time: {c.getinfo(c.TOTAL_TIME)}')
     c.close()
     
     response = buffer.getvalue()
 
     return response
-
-
-   
 
 while nextRecord < total and nextRecord < maxrecords:
 
@@ -123,22 +119,37 @@ while nextRecord < total and nextRecord < maxrecords:
                     
                     hierarchy=''
                     identifier=''
+
                     try:            
-                        m=MD_Metadata(etree.fromstring(r))
+                        m=MD_Metadata(etree.fromstring(r)) # use owslib to parse iso metadata
                         identifier = f"{url}api/records/{m.identifier}"
-                        id2 = next(i for i in m.identification[0].uricode if i is not None)
+                        
+                        id = m.identifier
                         if m.dataseturi not in [None,''] and m.dataseturi.startswith('http'):
                             identifier = m.dataseturi
-                        elif id2 not in [None,''] and id2.startswith('http'):
-                            identifier = id2
-                        id = m.identifier
+                        elif id not in [None,''] and id.startswith('http'):
+                            identifier = id
+                        else:
+                            for i in m.identification:
+                                for i2 in i.uricode:
+                                    if i2 not in [None,'']:
+                                        identifier = i2
+                        if identifier in [None,'']:
+                            identifier = id
+
                         hierarchy = m.hierarchy
                     except Exception as e:
-                        print('Failed parse xml: ', str(e))
+                        print(f'Failed parse xml for id:{id}, {str(e)},  {str(sys.exc_info())}')
 
                     #md = ISO19139OutputSchema().import_(r) # import xml to mcf
-                    insertRecord('harvest.items',['identifier','uri','resultobject','hash','source','type','insert_date'],
-                                (id, identifier,r.decode('UTF-8'),hashcode,label,hierarchy,time.time())) # insert into db
+                    insertRecord(   identifier=id,
+                                    uri=identifier,
+                                    identifiertype='uuid',
+                                    resulttype='iso19139:2007',
+                                    resultobject=r.decode('UTF-8'),
+                                    hashcode=hashcode,
+                                    source=label,
+                                    itemtype=hierarchy) # insert into db
 
             except Exception as e:
                 print(f'parse-error {id}; {str(e)}')                

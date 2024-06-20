@@ -29,8 +29,7 @@ for tr in soup.find_all('tr'):
             md['year'] = td.text
         i=i+1
 
-    if 'title' in md and md['title'] not in [None,'']:
-        print('parse', md['identifier'])
+    if 'title' in md and md['title'] not in [None,''] and 'identifier' in md and md['identifier'] not in [None,'']:
         try:            
             graph = pyRdfa().graph_from_source(md['identifier'])
             triples = graph.serialize(format='turtle')
@@ -41,8 +40,15 @@ for tr in soup.find_all('tr'):
             identifier = md['identifier']
             hierarchy = 'dataset'
 
-            insertRecord('harvest.items',['identifier','uri','resultobject','hash','source','type','insert_date'],
-                            (identifier,id,triples,hashcode,label,hierarchy,time.time())) # insert into db
+            insertRecord(   identifier=identifier,
+                            uri=id,
+                            identifiertype='uuid',
+                            resulttype='esdac',
+                            resultobject=triples,
+                            hashcode=hashcode,
+                            source=label,
+                            itemtype=hierarchy) # insert into db
+
         except Exception as e:
             print('Error:',md['identifier'],str(e))
 
