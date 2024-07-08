@@ -7,3 +7,5 @@ requests
 pyRdfa3
 pycurl
 rdflib
+git+https://github.com/geopython/pycsw.git#egg=pycsw
+SQLAlchemy<2.0.0

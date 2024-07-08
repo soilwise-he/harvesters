@@ -11,17 +11,19 @@ def dbInit():
         password=os.environ.get("POSTGRES_PASSWORD")
     )  
 
-def dbQuery(sql):
+def dbQuery(sql,params=(),hasoutput=True):
     dbconn = dbInit()
     try:
         cursor = dbconn.cursor()
-        cursor.execute(sql)
-        return cursor.fetchall()
+        cursor.execute(sql,params)
+        if hasoutput:
+            return cursor.fetchall()
+        else:
+            dbconn.commit()
     except Exception as e:
         print(f"Error: {str(e)}")
     finally:
         dbconn.close();
-
 
 
 def insertRecord(identifier,resulttype,resultobject,hashcode,source,itemtype="",uri="",identifiertype=""):
