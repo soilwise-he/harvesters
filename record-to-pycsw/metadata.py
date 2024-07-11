@@ -30,7 +30,12 @@ repo = repository.Repository(database, context, table=table)
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery(f"select DISTINCT ON (identifier) identifier, resultobject from harvest.items where identifier is not null and identifier not in (select identifier from {table}) limit 100")
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, s.turtle_prefix, s.type, i.resultobject, i.turtle 
+                from harvest.items i, harvest.sources s 
+                where i.identifier is not null 
+                and i.source = s.name 
+                and i.identifier not in (select identifier from public.records) 
+                order by i.identifier, i.insert_date desc limit 100""")
 loaded_files = []
 
 if recs:
@@ -38,7 +43,15 @@ if recs:
     counter = 0
     
     for rec in sorted(recs):
-        id, recfile = rec
+        id, turtle_prefix, rtype, resultobject, turtle  = rec
+
+        if rtype=='SPARQL' and turtle not in [None,'']:
+            recfile = f"{turtle_prefix}\r\n{turtle}"
+        else:
+            recfile = resultobject
+
+        print(recfile)
+
         counter += 1
         metadata_record = None
 
@@ -46,46 +59,34 @@ if recs:
 
         if recfile not in [None,'']:
 
-            # read document
-            try:
-                metadata_record = json.loads(recfile)
-                metadata_record['@context'] = "https://www.w3.org/ns/dcat.jsonld"
-                metadata_record['@id'] = id
-
-                print(f'parse {id} as json, try ld')
+            if rtype=='SPARQL':
                 try:
                     g = Graph()
-                    g.parse(data=json.dumps(metadata_record), format='json-ld')
+                    g.parse(data=recfile, format='turtle')
                     metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
-                    print(f'parse {id} as json-ld, {metadata_record}')
+                    print(f'parse {id} as turtle, {metadata_record}')
                 except Exception as err:
-                    print(f'failed parse as json-ld, {err} {traceback.print_stack()}')
-
-            except json.decoder.JSONDecodeError as err:
-                print(f'{id} no json -> xml')
-            except Exception as err:
-                print(f'failed parse as json, try xml; {err}')
-            
-            if metadata_record in [None,'']:
-                try:
-                    metadata_record = etree.fromstring(recfile)
-                    print(f'parse {id} as xml')
-                except etree.XMLSyntaxError as err:
-                    print(f'XML document {id} is not well-formed {err}')
+                    print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
+            else:
+                # JSON (mcf?)
+                try: 
+                    metadata_record = json.loads(recfile)
+                    print(f'parse {id} as json, try ld')
+                except json.decoder.JSONDecodeError as err:
+                    print(f'{id} no turtle -> xml')
                 except Exception as err:
-                    print(f'XML document {id} is not string, {err}')
-                    metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
+                    print(f'failed parse as json, try xml; {err}')
+                # XML
+                if metadata_record in [None,'']:
+                    try:
+                        metadata_record = etree.fromstring(recfile)
+                        print(f'parse {id} as xml')
+                    except etree.XMLSyntaxError as err:
+                        print(f'XML document {id} is not well-formed {err}')
+                    except Exception as err:
+                        print(f'XML document {id} is not string, {err}')
+                        metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
 
-            if metadata_record in [None,'']:
-                
-
-                try:
-                    g = Graph()
-                    g.parse(data=recfile)
-                    metadata_record = etree.fromstring(g.serialize(format="xml"))
-                    print(f'parse {id} as rdf')
-                except Exception as err:
-                    print(f'failed parse as rdf, stop trying; {err}')
             try:
                 record = metadata.parse_record(context, metadata_record, repo)
             except Exception as err:
