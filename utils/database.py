@@ -26,11 +26,11 @@ def dbQuery(sql,params=(),hasoutput=True):
         dbconn.close();
 
 
-def insertRecord(identifier,resulttype,resultobject,hashcode,source,itemtype="",uri="",identifiertype=""):
+def insertRecord(identifier,resulttype,resultobject,hashcode,source,title="",description="",date="",itemtype="",uri="",identifiertype=""):
 
     # todo: check existing before enter?
-    insertSQL('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash',  'source','insert_date','itemtype'],
-                                (identifier,   identifiertype,  uri,  resultobject,  resulttype,  hashcode,source, datetime.now(),itemtype)) # insert into db
+    insertSQL('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash',  'source','insert_date','itemtype','title','description','date'],
+                                (identifier,   identifiertype,  uri,  resultobject,  resulttype,  hashcode,source, datetime.now(),itemtype,title,description,date)) # insert into db
     
     # add for duplicate check
     insertSQL('harvest.item_duplicates',['identifier','identifiertype','source','hash'],(identifier,identifiertype,source,hashcode))

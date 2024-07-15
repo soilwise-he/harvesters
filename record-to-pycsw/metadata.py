@@ -4,8 +4,10 @@ from pycsw.core import metadata, repository, util
 from pycsw.core.etree import etree
 from pycsw.core.etree import PARSER
 from pycsw.core.util import parse_ini_config
-from rdflib import Graph
-import traceback
+from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
+
+import traceback,urllib
 
 import json, os, psycopg2
 
@@ -30,27 +32,30 @@ repo = repository.Repository(database, context, table=table)
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, s.turtle_prefix, s.type, i.resultobject, i.turtle 
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.turtle 
                 from harvest.items i, harvest.sources s 
                 where i.identifier is not null 
                 and i.source = s.name 
-                and i.identifier not in (select identifier from public.records) 
-                order by i.identifier, i.insert_date desc limit 100""")
+                and not exists (
+					select identifier from public.records
+					where identifier = i.identifier 
+                    or identifier like '%%'||i.identifier) 
+                order by i.identifier, i.insert_date desc limit 5000""")
 loaded_files = []
 
 if recs:
     total = len(recs)
     counter = 0
     
+    print('boo')
+
     for rec in sorted(recs):
-        id, turtle_prefix, rtype, resultobject, turtle  = rec
+        id, title, date, turtle_prefix, rtype, resultobject, turtle  = rec
 
         if rtype=='SPARQL' and turtle not in [None,'']:
             recfile = f"{turtle_prefix}\r\n{turtle}"
         else:
             recfile = resultobject
-
-        print(recfile)
 
         counter += 1
         metadata_record = None
@@ -63,10 +68,38 @@ if recs:
                 try:
                     g = Graph()
                     g.parse(data=recfile, format='turtle')
+
+                    if id.startswith('http'):
+                        rid = URIRef(id)
+                    else:
+                        rid = URIRef(f"http://example.com/#{urllib.parse.quote_plus(id)}")
+
+                    for s,p,o in g.triples((None,None,None)):
+                        if s:
+                            rid = str(s)
+                            break
+
+                    g.add((s,DC.identifier,Literal(rid)))
+                    if title not in [None, '']:
+                        g.add((s,DC.title,Literal(title)))
+                    if date not in [None, '']:
+                        g.add((s,DC.date,Literal(date)))
+
+                    for s,p,o in g.triples((None,DCTERMS.description,None)):
+                        g.add((s,DC.description,o))
+                    for s,p,o in g.triples((None,DCTERMS.subject,None)):
+                        g.add((s,DC.subject,o))
+                    for s,p,o in g.triples((None,DCTERMS.creator,None)):
+                        g.add((s,DC.creator,o))
+
                     metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
-                    print(f'parse {id} as turtle, {metadata_record}')
+
+                    print(f'parse {id} as turtle')
                 except Exception as err:
                     print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
+
+                
+
             else:
                 # JSON (mcf?)
                 try: 
@@ -94,8 +127,6 @@ if recs:
                 continue
 
             for rec in record:
-                print(f'Inserting {rec.typename} {rec.identifier}')
-
                 try:
                     repo.insert(rec, 'local', util.get_today_and_now())
                     loaded_files.append(id)
