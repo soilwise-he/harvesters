@@ -12,6 +12,7 @@ from database import insertRecord, dbQuery
 # Load environment variables from .env file
 load_dotenv()
 
+recsPerPage = 5000
 
 def fullurl(u):
     if u.startswith('/'):
@@ -77,14 +78,14 @@ def parseDOC(s2):
     for f in s2.find_all("span",{"class":"file"}):
         for fl in f.find_all("a"):
             ds['relation'].append(fullurl(fl.get('href')))
-            if 'doi' in fl.get('href') or ds['identifier'] in [None,'']:
+            if 'doi' in fl.get('href') or 'identifier' not in ds:
                 ds['identifier'] = fullurl(fl.get('href'))
     for desc in s2.find_all("div",{"class":"details"}):
         for desc2 in desc.find_all("p"):
             ds['description'] = desc.text
             break # only first
         for a in desc.find_all("a"):
-            if 'doi' in a.get('href') or ds['identifier'] in [None,'']:
+            if 'doi' in a.get('href') or 'identifier' not in ds:
                 ds['identifier'] = fullurl(a.get('href'))
             ds['relation'].append(fullurl(a.get('href')))
     return ds 
@@ -97,7 +98,7 @@ def parseESDAC(s2):
         if not 'image_captcha' in img.get('src'):
             ds['thumbnailUrl'] = fullurl(img.get('src'))
     for uc in s2.find_all("div",{"class":"field-name-field-data-dataset-notification"}):
-        ds['constraints'] = uc.text
+        ds['accessRights'] = uc.text
     for ref in s2.find_all("div",{"class":"field-name-field-data-dataset-references"}):
         for ref2 in ref.find_all("li"):
             ds['source'].append(ref2.text)
@@ -113,7 +114,7 @@ def parseESDAC(s2):
     return ds
 
 # retrieve unparsed records
-unparsed = dbQuery("select identifier,resultobject,resulttype,title,itemtype from harvest.items where source= 'ESDAC' and turtle is Null limit 10")
+unparsed = dbQuery(f"select identifier,resultobject,resulttype,title,itemtype from harvest.items where source= 'ESDAC' and turtle is Null limit {recsPerPage}")
 for rec in sorted(unparsed):
     rid,res,restype,ttl,itemtype = rec
     print(f'Parse {rid}')
