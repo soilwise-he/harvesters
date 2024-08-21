@@ -20,10 +20,18 @@ def fullurl(u):
     return u
 
 def addNS(e):
-    if e in ['thumbnailUrl']:
+    if e in ['thumbnailUrl','includedInDataCatalog']:
         return SDO[e]
     else:
         return DCTERMS[e]
+
+def urlasid(uri,ds):
+    if 'doi' in uri or 'identifier' not in ds:
+        if uri.startswith('http'):
+            pf = uri.split('/')
+            del pf[0:2]
+            uri = "/".join(pf)
+        ds['identifier'] = uri.replace('?','-').replace('#','-').replace('&','-').replace('=','-')
 
 def dict2graph(d):
     g = Graph()
@@ -37,7 +45,7 @@ def dict2graph(d):
     return g
 
 def parseEUDASM(s2):
-    ds = {'relation':[],'subject':[],'type':'dataset'}
+    ds = {'relation':[],'subject':[],'type':'dataset','includedInDataCatalog':'EUDASM'}
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
@@ -65,7 +73,7 @@ def parseEUDASM(s2):
     return ds
 
 def parseDOC(s2):
-    ds = {'relation':[],'subject':[],'type':'document'}
+    ds = {'relation':[],'subject':[],'type':'document','includedInDataCatalog':'ESDAC'}
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
@@ -75,23 +83,28 @@ def parseDOC(s2):
             ds['subject'].append(kw)
     for d in s2.find_all("span",{"property":"dc:date"}):
         ds['date'] = d.text
+    for f in s2.find_all("a",{"aria-label":"Download"}):
+        ds['relation'].append(fullurl(f.get('href')))
+        urlasid(f.get('href'),ds)
     for f in s2.find_all("span",{"class":"file"}):
         for fl in f.find_all("a"):
             ds['relation'].append(fullurl(fl.get('href')))
-            if 'doi' in fl.get('href') or 'identifier' not in ds:
-                ds['identifier'] = fullurl(fl.get('href'))
+            urlasid(fl.get('href'),ds)
     for desc in s2.find_all("div",{"class":"details"}):
         for desc2 in desc.find_all("p"):
             ds['description'] = desc.text
             break # only first
         for a in desc.find_all("a"):
-            if 'doi' in a.get('href') or 'identifier' not in ds:
-                ds['identifier'] = fullurl(a.get('href'))
+            urlasid(a.get('href'),ds)
             ds['relation'].append(fullurl(a.get('href')))
+    if 'description' not in ds or ds['description'] in [None,'']:
+        for desc in s2.find_all("div",{"class":"field-content"}):
+            ds['description'] = desc.text
+            break
     return ds 
 
 def parseESDAC(s2):
-    ds = {'relation':[],'subject':[],'source':[],'type':'dataset','title':ttl}
+    ds = {'relation':[],'subject':[],'source':[],'type':'dataset','title':ttl,'includedInDataCatalog':'ESDAC'}
     for desc in s2.find_all('div',{'property':"dct:description"}):
         ds['description'] = desc.text
     for img in s2.find_all('img',{'typeof':"foaf:Image"}):
@@ -114,7 +127,8 @@ def parseESDAC(s2):
     return ds
 
 # retrieve unparsed records
-unparsed = dbQuery(f"select identifier,resultobject,resulttype,title,itemtype from harvest.items where source= 'ESDAC' and turtle is Null limit {recsPerPage}")
+unparsed = dbQuery(f"select identifier,resultobject,resulttype,title,itemtype from harvest.items where source = 'ESDAC' and (turtle is Null or turtle = '') limit {recsPerPage}")
+
 for rec in sorted(unparsed):
     rid,res,restype,ttl,itemtype = rec
     print(f'Parse {rid}')

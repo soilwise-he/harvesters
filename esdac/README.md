@@ -14,3 +14,7 @@ Then each link is fetched.
 
 The parse script queries the html from the database and parses the content to Dublin Core metadata, which is placed back into the database.
 
+## Resume parameter
+
+The harvest process should resume where it left of last time. This mechanism is triggered by a environment parameter `HV_RESUME` (default:true). Url's requested in previous runs are fetched from database and each url to be requested is verified if it exists in this list.
+
