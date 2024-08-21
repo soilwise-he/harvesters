@@ -3,3 +3,5 @@
 /bin/
 /lib/
 /share/
+/include/
+*.env

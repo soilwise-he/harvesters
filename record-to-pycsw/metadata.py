@@ -52,7 +52,7 @@ if recs:
         id, title, date, turtle_prefix, rtype, resultobject, turtle = rec
 
         recfile = None
-        if rtype in ['SPARQL','HTML']:
+        if rtype in ['SPARQL','HTML']: 
             if turtle not in [None,'']:
                 if turtle_prefix not in [None,'']:
                     recfile = f"{turtle_prefix}\n\n{turtle}"
@@ -64,10 +64,11 @@ if recs:
         counter += 1
         metadata_record = None
 
-        print(f'Processing record {id} ({counter} of {total})')
+        print(f'Processing record {id} ({counter} of {total} as {rtype})')
 
-        if recfile not in [None,'']:
-
+        if recfile in [None,'']:
+            print("Recfile empty")
+        else: 
             if rtype in ['SPARQL','HTML']:
                 try:
                     g = Graph()
@@ -89,7 +90,11 @@ if recs:
                             g.add((s,DCTERMS.abstract,o))
                     if (None,DC.identifier,None) not in g:
                         g.add((s,DC.identifier,Literal(id)))
-
+                    if (None,DC.type,None) not in g:
+                        g.add((s,DC.type,Literal('document')))
+                    #if len(str(id).split('/')) == 2:
+                    #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
+                    
                     metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
 
                     print(f'parse {id} as turtle')
@@ -115,8 +120,8 @@ if recs:
                     except Exception as err:
                         print(f'XML document {id} is not string, {err}')
                         metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
-
-
+                else:
+                    print('no rec as json')
 
             try:
                 record = metadata.parse_record(context, metadata_record, repo)
@@ -141,3 +146,4 @@ if recs:
                     if '' not in [id,rec.identifier] and id != rec.identifier:
                         print(f'updating asynchronous id {id}')
                         dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = '{id}'",(),False)
+
