@@ -1,3 +1,7 @@
+CORDIS used EURIO: EUropean Research Information Ontology. https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/eurio
+
+The UML: https://git.wur.nl/soilwise/soilwise-docs/-/wikis/uploads/28e281900fb54e106518919ccdeec9a4/CordisProjectUML.png
+
 **STEP 1. LOAD TITLE OF PROJECTS AND DOI AND TITLE OF PPROJECT PUBLICATIONS FROM CORDIS INTO VIRTUOSO: 2598 HITS**
 
 **First try was to query CORDIS for Publications of Projects from a certain Funding Scheme. This resulted in 0 (Zero) results as it turned out the Funding Scheme has not been filled for soil-related projects.**
