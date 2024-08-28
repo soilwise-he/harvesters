@@ -1,4 +1,4 @@
-CORDIS used EURIO: EUropean Research Information Ontology. https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/eurio
+**CORDIS uses EURIO: EUropean Research Information Ontology.** https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/eurio
 
 The UML: https://git.wur.nl/soilwise/soilwise-docs/-/wikis/uploads/28e281900fb54e106518919ccdeec9a4/CordisProjectUML.png
 
