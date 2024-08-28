@@ -122,7 +122,7 @@ CONSTRUCT {
 }
 ```
 
-Based on the CORDIS generated CURL request the generated URL is loaded into virtuoso directly at graph [https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594](https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594DOIs#)Publications
+Based on the CORDIS generated CURL request the generated URL is loaded into virtuoso directly at graph "cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594Publications"
 
 **CURL-generated http-request to retrieve DOIs**:
 
@@ -154,7 +154,7 @@ WHERE
 }
 ```
 
-Based on the CORDIS generated CURL request the generated URL is loaded into virtuoso directly at graph [https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594](https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594DOIs#)Publications
+Based on the CORDIS generated CURL request the generated URL is loaded into virtuoso directly at graph "cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594Publications"
 
 **CURL-generated http-request to retrieve DOIs**:
 
@@ -190,7 +190,7 @@ WHERE
 
 **N.b.** with **optional { ?result eurio:doi ?doi } .** the number of hits is 3339
 
-And again load the result into virtuoso directly at graph [https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594](https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594DOIs#)Publicationsby using the CORDIS generated CURL request.
+And again load the result into virtuoso directly at graph "cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594Publications" by using the CORDIS generated CURL request.
 
 **CURL-generated http-request to retrieve TITLES:**
 
@@ -220,7 +220,7 @@ WHERE
 }
 ```
 
-And again load the 4 additional result into virtuoso directly at graph [https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594](https://cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594DOIs#)Publicationsby using the CORDIS generated CURL request.
+And again load the 4 additional result into virtuoso directly at graph "cordis.europa.eu/datalab/sparql-endpoint/CordisSoil2594Publications" by using the CORDIS generated CURL request.
 
 **CURL-generated http-request to retrieve TITLES:**
 
