@@ -291,6 +291,8 @@ When parsing the oaf:result there will be searched for the following predicates:
   * \-\> dcterms/description
 * subject
   * \-\> dcterms/subject
+* journal
+  * \-\> dcterms/isPartOf
 
 **Step 4** is to invoke **DBWrite** with parameter '**hash'**.
 
