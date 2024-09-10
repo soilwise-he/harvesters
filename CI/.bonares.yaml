@@ -15,7 +15,7 @@ harvest-bonares-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://maps.bonares.de/soapServices/CSWStartup
-    - HARVEST_LABEL=BONARES 
+    - export HARVEST_LABEL=BONARES 
 
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
@@ -36,7 +36,7 @@ harvest-bonares-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://maps.bonares.de/soapServices/CSWStartup
-    - HARVEST_LABEL=BONARES 
+    - export HARVEST_LABEL=BONARES 
 
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
