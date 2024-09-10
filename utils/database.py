@@ -21,10 +21,20 @@ def dbQuery(sql,params=(),hasoutput=True):
         else:
             dbconn.commit()
     except Exception as e:
-        print(f"Error: {str(e)}")
+        print(f"DB Error: {str(e)}, {sql}")
     finally:
         dbconn.close();
 
+def dbUQuery(sql):
+    dbconn = dbInit()
+    try:
+        cursor = dbconn.cursor()
+        cursor.execute(sql)
+        dbconn.commit()
+    except Exception as e:
+        print(f"DBU Error: {str(e)}, {sql}")
+    finally:
+        dbconn.close();
 
 def insertRecord(identifier,resulttype,resultobject,hashcode,source,title="",description="",date="",itemtype="",uri="",identifiertype=""):
 

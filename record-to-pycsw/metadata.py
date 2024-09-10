@@ -29,6 +29,9 @@ table = os.environ.get('PYCSW_TABLE') or 'records'
 
 repo = repository.Repository(database, context, table=table)
 
+# clean up public table first
+# dbQuery("""truncate public.records""",False)
+
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
 recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.turtle 
@@ -38,10 +41,11 @@ recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.dat
                 and not exists (
 					select identifier from public.records
 					where identifier = i.identifier 
+                    or replace(identifier,'//','/') = i.identifier
                     or identifier like '%%'||i.identifier
                     or identifier = i.uri 
                     or identifier like '%%'||i.uri) 
-                order by i.identifier, i.insert_date desc limit 5000""")
+                order by i.identifier, i.insert_date desc""")
 loaded_files = []
 
 if recs:
@@ -90,6 +94,12 @@ if recs:
                             g.add((s,DCTERMS.abstract,o))
                     if (None,DC.identifier,None) not in g:
                         g.add((s,DC.identifier,Literal(id)))
+                    for s,p,o in g.triples((None,DC.identifier,None)):
+                        id2 = str(o)
+                        if id2.startswith('http'):
+                            g.add((s,DCTERMS.references,Literal(URIRef(id2))))
+                        elif id2.startswith('10.'):
+                            g.add((s,DCTERMS.references,Literal(f'http://doi.org/{id2}')))
                     if (None,DC.type,None) not in g:
                         g.add((s,DC.type,Literal('document')))
                     #if len(str(id).split('/')) == 2:
@@ -97,7 +107,6 @@ if recs:
                     
                     metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
 
-                    print(f'parse {id} as turtle')
                 except Exception as err:
                     print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
 

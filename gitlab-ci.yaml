@@ -1,0 +1,4 @@
+include:
+  - local: "CI/inspire.yaml"
+  #- local: "CI/bonares.yaml"
+  #- local: "CI/esdac.yaml"
