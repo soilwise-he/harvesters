@@ -20,14 +20,14 @@ def fullurl(u):
     return u
 
 def addNS(e):
-    if e in ['thumbnailUrl','includedInDataCatalog']:
+    if e in ['thumbnailUrl']:
         return SDO[e]
     else:
         return DCTERMS[e]
 
 def urlasid(uri,ds):
-    if 'doi' in uri or 'identifier' not in ds:
-        if uri.startswith('http'):
+    if 'identifier' not in ds or 'doi.org' in uri: # prefer doi
+        if uri.startswith('http' and 'doi.org' in uri): # strip doi.org from uri
             pf = uri.split('/')
             del pf[0:2]
             uri = "/".join(pf)
@@ -45,7 +45,7 @@ def dict2graph(d):
     return g
 
 def parseEUDASM(s2):
-    ds = {'relation':[],'subject':[],'type':'dataset','includedInDataCatalog':'EUDASM'}
+    ds = {'relation':[],'subject':[],'type':'dataset','isReferencedBy':'EUDASM'}
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
@@ -73,7 +73,7 @@ def parseEUDASM(s2):
     return ds
 
 def parseDOC(s2):
-    ds = {'relation':[],'subject':[],'type':'document','includedInDataCatalog':'ESDAC'}
+    ds = {'relation':[],'subject':[],'type':'document','isReferencedBy':'ESDAC'}
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
@@ -104,7 +104,7 @@ def parseDOC(s2):
     return ds 
 
 def parseESDAC(s2):
-    ds = {'relation':[],'subject':[],'source':[],'type':'dataset','title':ttl,'includedInDataCatalog':'ESDAC'}
+    ds = {'relation':[],'subject':[],'source':[],'type':'dataset','title':ttl,'isReferencedBy':'ESDAC'}
     for desc in s2.find_all('div',{'property':"dct:description"}):
         ds['description'] = desc.text
     for img in s2.find_all('img',{'typeof':"foaf:Image"}):

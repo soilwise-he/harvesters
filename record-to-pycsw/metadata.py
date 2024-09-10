@@ -36,7 +36,7 @@ repo = repository.Repository(database, context, table=table)
 # if failed, save as failed, not ask again, or maybe later
 recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.turtle 
                 from harvest.items i, harvest.sources s 
-                where i.identifier is not null 
+                where coalesce(i.identifier,'') <> '' 
                 and i.source = s.name 
                 and not exists (
 					select identifier from public.records
@@ -155,4 +155,7 @@ if recs:
                     if '' not in [id,rec.identifier] and id != rec.identifier:
                         print(f'updating asynchronous id {id}')
                         dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = '{id}'",(),False)
+
+# workaround for '//' to '/' bahavior
+dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like '%//%'""",False)
 
