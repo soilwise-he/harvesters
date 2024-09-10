@@ -39,7 +39,7 @@ harvest-ejpsoil-prod:
     - export HARVEST_LABEL=EJPSOIL 
 
     - pip3 install -r csw/requirements.txt
-    - python3 csw/metdata.py
+    - python3 csw/metadata.py
   rules:  
     - if: $PROJECT != "EJPSOIL"
       when: never
