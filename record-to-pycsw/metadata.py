@@ -5,13 +5,9 @@ from pycsw.core.etree import etree, PARSER
 from pycsw.core.util import parse_ini_config
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
-
 import traceback,urllib
-
-import json, os, psycopg2
-
-import sys
-sys.path.append('../utils')
+import json, os, psycopg2, sys
+sys.path.append('utils')
 from database import dbQuery
 
 # Load environment variables from .env file
