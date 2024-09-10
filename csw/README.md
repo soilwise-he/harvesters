@@ -30,14 +30,13 @@ CREATE TABLE IF NOT EXISTS harvest.items
     error text COLLATE pg_catalog."default",
     language character varying(9) COLLATE pg_catalog."default",
     project text COLLATE pg_catalog."default",
-    CONSTRAINT item_pkey PRIMARY KEY (identifier),
     CONSTRAINT item_hash UNIQUE (hash)
-
+)
 ```
 
-A harvester run is best configured as a CI-CD pipeline in GIT, using docker image
+A harvester run is best configured as a CI-CD pipeline in GIT
 
-# environment variables
+## Environment variables
 
 environment variables can also be added to a .env file
 
