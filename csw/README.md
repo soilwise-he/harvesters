@@ -1,6 +1,10 @@
 # CSW
 
-[CSW](https://www.ogc.org/standard/cat/) can be used to fetch records from for example from [Bonares data repository](https://www.bonares.de/service-portal/data-repository)
+[CSW](https://www.ogc.org/standard/cat/) can be used to fetch records from for example from 
+- [Bonares data repository](https://www.bonares.de/service-portal/data-repository) ([csw](https://maps.bonares.de/soapServices/services/CSWDiscovery))
+- ejpsoil repository ([csw](https://catalogue.ejpsoil.eu/csw))
+- isric ([csw](https://data.isric.org/geonetwork/srv/eng/csw))
+- islandr ([csw](https://geonetwork.greendecision.eu/geonetwork/srv/eng/csw))
 
 uses [owslib](https://github.com/geopython/OWSLib) to fetch records
 
