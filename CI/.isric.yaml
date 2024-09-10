@@ -16,7 +16,7 @@ harvest-isric-dev:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://data.isric.org/geonetwork/srv/eng/csw
     - export HARVEST_LABEL=ISRIC 
-    - ECHO $PROJECT
+
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
   rules:  
@@ -39,7 +39,7 @@ harvest-isric-prod:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://data.isric.org/geonetwork/srv/eng/csw
     - export HARVEST_LABEL=ISRIC 
-    - ECHO $PROJECT
+
     - pip3 install -r ../inspire/requirements.txt
     - python3 ../inspire/metdata.py
   rules:  

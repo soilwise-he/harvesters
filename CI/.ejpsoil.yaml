@@ -16,7 +16,7 @@ harvest-ejpsoil-dev:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://catalogue.ejpsoil.eu/csw
     - export HARVEST_LABEL=EJPSOIL 
-    - ECHO $PROJECT
+
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
   rules:  

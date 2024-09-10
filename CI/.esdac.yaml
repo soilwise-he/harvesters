@@ -14,7 +14,7 @@ harvest-esdac-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - ECHO $PROJECT
+
     - pip3 install -r esdac/requirements.txt
     - python3 esdac/metadata.py
   rules:  
