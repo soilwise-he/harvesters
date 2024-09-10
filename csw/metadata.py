@@ -23,9 +23,9 @@ if os.environ.get("HARVEST_FILTER"):
     filters = json.loads(os.environ.get("HARVEST_FILTER"))
 
 # check if source is in sources table
-sources = dbQuery(f"select from harvest.sources where name is upper({label})")
+sources = dbQuery(f"select name from harvest.sources where name is upper({label})")
 if not sources:
-    dbQuery(f"insert into harvest.sources set name,url,filter,type values '{label}','{url}','{filters}','CSW' ",False)
+    dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{filters}','CSW')",False)
     
 nextRecord = 1
 pagesize = 50
@@ -99,7 +99,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
                                 resulttype='iso19139:2007',
                                 resultobject=recxml.decode('UTF-8'),
                                 hashcode=hashcode,
-                                source=label,
+                                source=label.upper(),
                                 itemtype=hierarchy) # insert into db
             
         except Exception as e:

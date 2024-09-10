@@ -15,7 +15,7 @@ harvest-iso-triplify-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - pip3 install -r iso-triplify/requirements.txt
-    - python3 iso-triplify/metadata.py
+    - python3 iso-triplify/triplify.py
   rules:  
     - if: $PROJECT != "ISOTRIPLIFY"
       when: never
@@ -32,7 +32,7 @@ harvest-iso-triplify-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - pip3 install -r iso-triplify/requirements.txt
-    - python3 iso-triplify/metadata.py
+    - python3 iso-triplify/triplify.py
   rules:  
     - if: $PROJECT != "ISOTRIPLIFY"
       when: never
