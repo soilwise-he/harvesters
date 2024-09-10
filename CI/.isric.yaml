@@ -41,7 +41,7 @@ harvest-isric-prod:
     - export HARVEST_LABEL=ISRIC 
 
     - pip3 install -r ../inspire/requirements.txt
-    - python3 ../inspire/metdata.py
+    - python3 ../inspire/metadata.py
   rules:  
     - if: $PROJECT != "ISRIC"
       when: never
