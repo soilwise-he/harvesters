@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import sys,time,hashlib,os
-sys.path.append('../utils')
+sys.path.append('utils')
 from database import insertRecord, dbQuery
 
 # Load environment variables from .env file

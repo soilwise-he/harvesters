@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, SKOS, SDO, FOAF
 import sys,time,hashlib,os
-sys.path.append('../utils')
+sys.path.append('utils')
 from database import insertRecord, dbQuery
 
 # Load environment variables from .env file

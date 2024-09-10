@@ -7,8 +7,10 @@ from owslib.etree import etree
 import hashlib
 import os,time
 
+# call script from root as ./inpire/metadata.py
+
 import sys
-sys.path.append('../utils')
+sys.path.append('utils')
 from database import insertRecord
 
 # Load environment variables from .env file
@@ -49,12 +51,12 @@ def getRecords(nextRecord,pagesize):
                                 "query_string": {
                                     "query": '(th_httpinspireeceuropaeutheme-theme.link:"http://inspire.ec.europa.eu/theme/so")'
                                 }
-                            },
-                            {
-                                "query_string": {
-                                    "query": "(th_httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope.link:*national*)"
-                                }
-                            }
+                            }#,
+                            #{
+                            #    "query_string": {
+                            #        "query": "(th_httpinspireeceuropaeumetadatacodelistSpatialScope-SpatialScope.link:*national*)"
+                            #    }
+                            #}
                         ]
                     }
                 }
@@ -114,43 +116,47 @@ while nextRecord < total and nextRecord < maxrecords:
             try: 
                 id = rec.get('_source',{}).get('id')
                 if id:
+                    print(f'Fetch record {id}')
                     r = getRecord(id) # get full iso record
-                    hashcode = hashlib.md5(r).hexdigest() # get unique hash for xml 
-                    
-                    hierarchy=''
-                    identifier=''
-
-                    try:            
-                        m=MD_Metadata(etree.fromstring(r)) # use owslib to parse iso metadata
-                        identifier = f"{url}api/records/{m.identifier}"
+                    if r and r not in [None,'']:
+                        hashcode = hashlib.md5(r).hexdigest() # get unique hash for xml 
                         
-                        id = m.identifier
-                        if m.dataseturi not in [None,''] and m.dataseturi.startswith('http'):
-                            identifier = m.dataseturi
-                        elif id not in [None,''] and id.startswith('http'):
-                            identifier = id
-                        else:
-                            for i in m.identification:
-                                for i2 in i.uricode:
-                                    if i2 not in [None,'']:
-                                        identifier = i2
-                        if identifier in [None,'']:
-                            identifier = id
+                        hierarchy=''
+                        identifier=''
 
-                        hierarchy = m.hierarchy
-                    except Exception as e:
-                        print(f'Failed parse xml for id:{id}, {str(e)},  {str(sys.exc_info())}')
+                        try:            
+                            m=MD_Metadata(etree.fromstring(r)) # use owslib to parse iso metadata
+                            identifier = f"{url}api/records/{m.identifier}"
+                            
+                            id = m.identifier
+                            if m.dataseturi not in [None,''] and m.dataseturi.startswith('http'):
+                                identifier = m.dataseturi
+                            elif id not in [None,''] and id.startswith('http'):
+                                identifier = id
+                            else:
+                                for i in m.identification:
+                                    for i2 in i.uricode:
+                                        if i2 not in [None,'']:
+                                            identifier = i2
+                            if identifier in [None,'']:
+                                identifier = id
 
-                    #md = ISO19139OutputSchema().import_(r) # import xml to mcf
-                    insertRecord(   identifier=id,
-                                    uri=identifier,
-                                    identifiertype='uuid',
-                                    resulttype='iso19139:2007',
-                                    resultobject=r.decode('UTF-8'),
-                                    hashcode=hashcode,
-                                    source=label,
-                                    itemtype=hierarchy) # insert into db
+                            hierarchy = m.hierarchy
+                        except Exception as e:
+                            print(f'Failed parse xml for id:{id}, {str(e)},  {str(sys.exc_info())}')
 
+                        #md = ISO19139OutputSchema().import_(r) # import xml to mcf
+                        insertRecord(   identifier=id,
+                                        uri=identifier,
+                                        identifiertype='uuid',
+                                        resulttype='iso19139:2007',
+                                        resultobject=r.decode('UTF-8'),
+                                        hashcode=hashcode,
+                                        source=label,
+                                        itemtype=hierarchy) # insert into db
+                    else:
+                        print(f'No record at {id}')
+                        
             except Exception as e:
                 print(f'parse-error {id}; {str(e)}')                
 

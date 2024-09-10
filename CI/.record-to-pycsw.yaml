@@ -3,10 +3,10 @@ default:
   interruptible: false
 stages:
   - run-harvest
-
+  
 # metadata
-run-harvest-dev:
-  image: harbor.containers.wurnet.nl/proxy-cache/pvgenuchten/geodatacrawler:1.5.4
+harvest-record-to-pycsw-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
@@ -14,16 +14,16 @@ run-harvest-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=$HARVEST_URL_TEST
-
-    - pip3 install -r ../inspire/requirements.txt
-    - python3 ../inspire/metdata.py
-  only:
-    - dev
+    - pip3 install -r record-to-pycsw/requirements.txt
+    - python3 record-to-pycsw/metadata.py
+  rules:  
+    - if: $PROJECT != "RECORD2PYCSW"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "dev"
 
 # metadata
-run-harvest-prod:
-  image: harbor.containers.wurnet.nl/proxy-cache/pvgenuchten/geodatacrawler:1.5.4
+harvest-record-to-pycsw-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
@@ -31,9 +31,9 @@ run-harvest-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=$HARVEST_URL_TEST
-
-    - pip3 install -r ../inspire/requirements.txt
-    - python3 ../inspire/metdata.py
-  only:
-    - main
+    - pip3 install -r record-to-pycsw/requirements.txt
+    - python3 record-to-pycsw/metadata.py
+  rules:  
+    - if: $PROJECT != "RECORD2PYCSW"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "main"

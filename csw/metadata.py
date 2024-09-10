@@ -7,7 +7,7 @@ from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
 from datetime import datetime
-sys.path.append('../utils')
+sys.path.append('utils')
 from database import insertRecord
 
 # Load environment variables from .env file
