@@ -4,3 +4,6 @@ include:
   - local: "/CI/.inspire.yaml"
   - local: "/CI/.esdac.yaml"
   - local: "/CI/.ejpsoil.yaml"
+  - local: "/CI/.iso-triplify.yaml"
+  - local: "/CI/.isric.yaml"
+  - local: "/CI/.record-to-pycsw.yaml"
