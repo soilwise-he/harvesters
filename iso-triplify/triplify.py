@@ -1,7 +1,7 @@
 import lxml.etree as ET
 from dotenv import load_dotenv
 import sys
-sys.path.append('../utils')
+sys.path.append('utils')
 from database import dbQuery, dbUQuery
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
