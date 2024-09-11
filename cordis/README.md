@@ -235,16 +235,16 @@ From the previous step VIRTUOSO holds two triples for every project publication:
 * the DOI (as subject, with predicate 'eurio:ProjectPublication' and object the eurio result-URI
 * the title (as object, with subject the eurio result-URI and predicate 'dcterms:title')
 
-JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** s starting point for all the functionality.
+JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** with method **main** as starting point for all the functionality.
 
 **DBWrite** can be invoked in four ways:
 
-* without parameter
+* with parameter **'doi'**
 * with parameter **'title'**
-* with parameter **'dbturtle'**
+* with parameter **'turtle'**
 * with parameter **'hash'**
 
-**Step 1** is to invoke **DBWrite** without parameter.
+**Step 1** is to invoke **DBWrite** with parameter **'doi'**.
 
 =\>
 
@@ -273,7 +273,7 @@ Queries all Cordis titles from Virtuoso. Result:
 * The Project Publication records in table 'items' get enriched with the title from Virtuoso.
 * Cordis Projects get added to table 'items', if not already there.
 
-**Step 3** is to invoke **DBWrite** with parameter '**dbturtle'**.
+**Step 3** is to invoke **DBWrite** with parameter '**turtle'**.
 
 =\>
 
