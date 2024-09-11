@@ -1,0 +1,32 @@
+# a cordis harvest, java soilwise_doi.jar, DBWrite.main()
+default:
+  interruptible: false
+stages:
+  - run-harvest
+  
+# metadata
+harvest-cordis-turtle-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
+  stage: run-harvest
+  script:
+    - mkdir /opt/app
+    - cp ../cordis/soilwise_doi.jar /opt/app
+    - java -jar /opt/app/soilwise_doi.jar turtle
+  rules:  
+    - if: $PROJECT != "cordis"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "dev"
+
+
+# metadata
+harvest-cordis-turtle-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
+  stage: run-harvest
+  script:
+    - mkdir /opt/app
+    - cp ../cordis/soilwise_doi.jar /opt/app
+    - java -jar /opt/app/soilwise_doi.jar turtle
+  rules:  
+    - if: $PROJECT != "cordis"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "main"
