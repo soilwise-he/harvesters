@@ -1,5 +1,6 @@
 
 include:
+  - local: "/CI/.cordis-turtle.yaml"
   - local: "/CI/.bonares.yaml"
   - local: "/CI/.inspire.yaml"
   - local: "/CI/.esdac.yaml"
