@@ -239,12 +239,12 @@ JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** s s
 
 **DBWrite** can be invoked in four ways:
 
-* without parameter
+* with parameter **'doi**
 * with parameter **'title'**
 * with parameter **'dbturtle'**
 * with parameter **'hash'**
 
-**Step 1** is to invoke **DBWrite** without parameter.
+**Step 1** is to invoke **DBWrite** with parameter **'doi**.
 
 =\>
 
