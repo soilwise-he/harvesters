@@ -10,8 +10,9 @@ harvest-cordis-turtle-dev:
   stage: run-harvest
   script:
     - mkdir /opt/app
-    - cp ../cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar turtle
+    - cp cordis/soilwise_doi_test.jar /opt/app
+    - java -jar /opt/app/soilwise_doi_test.jar title
+    - java -jar /opt/app/soilwise_doi_test.jar turtle
   rules:  
     - if: $PROJECT != "cordis"
       when: never
@@ -24,8 +25,9 @@ harvest-cordis-turtle-prod:
   stage: run-harvest
   script:
     - mkdir /opt/app
-    - cp ../cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar turtle
+#    - cp cordis/soilwise_doi_prod.jar /opt/app
+#    - java -jar /opt/app/soilwise_doi_prod.jar title
+#    - java -jar /opt/app/soilwise_doi_prod.jar turtle
   rules:  
     - if: $PROJECT != "cordis"
       when: never
