@@ -40,6 +40,35 @@ WHERE
 
 **N.b. you will find hits when using a different search text, i.e. "generation"**
 
+**Query CORDIS to load Title of Projects into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
+
+```
+PREFIX eurio:<http://data.europa.eu/s66#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT {
+  ?project dcterms:title ?title
+}
+WHERE
+{
+  ?project a eurio:Project.
+  ?project eurio:abstract ?abstract.
+  ?project eurio:title ?title.
+  ?project eurio:hasResult ?result.
+  ?result rdf:type ?type.
+  optional {  ?result eurio:doi ?doi. }
+  FILTER regex(?abstract, "Soil", "i")
+  FILTER regex(?type, eurio:ProjectPublication)
+}
+```
+
+Based on the CORDIS generated CURL request the generated URL is loaded into virtuoso directly at graph "https://soilwise-he.github.io/soil-health"
+
+**CURL-generated http-request to retrieve DOIs**:
+```
+curl https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3Fproject%20dcterms%3Atitle%20%3Ftitle%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20rdf%3Atype%20%3Ftype.%0A%20%20optional%20%7B%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%20%7D%0A%20%20FILTER%20regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%0A%20%20FILTER%20regex%28%3Ftype%2C%20eurio%3AProjectPublication%29%0A%7D
+```
+
 **Query CORDIS to load DOIs of Project Publications into VIRTUOSO where the Projects in CORDIS have "Soil" as part of the abstract.**
 
 ```
