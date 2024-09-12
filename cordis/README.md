@@ -298,12 +298,11 @@ From the previous step VIRTUOSO holds two triples for every project publication:
 
 JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** with method **main** as starting point for all the functionality.
 
-**DBWrite** can be invoked in four ways:
+**DBWrite** can be invoked in three ways:
 
 * with parameter **'doi'**
 * with parameter **'title'**
 * with parameter **'turtle'**
-* with parameter **'hash'**
 
 **Step 1** is to invoke **DBWrite** with parameter **'doi'**.
 
@@ -333,6 +332,7 @@ Queries all Cordis titles from Virtuoso. Result:
 
 * The Project Publication records in table 'items' get enriched with the title from Virtuoso.
 * Cordis Projects get added to table 'items', if not already there.
+* The hash gets calculated, based on the title and the result object.
 
 **Step 3** is to invoke **DBWrite** with parameter '**turtle'**.
 
@@ -355,13 +355,8 @@ When parsing the oaf:result there will be searched for the following predicates:
 * journal
   * \-\> dcterms/isPartOf
 
-**Step 4** is to invoke **DBWrite** with parameter '**hash'**.
 
-=\>
-
-For all records with a hit in OpenAire: The combination of the fields **'resultobject'** and **'title'** get hashed. If the hash is already there the hash is set to null and the key-values are loaded into table item_duplicates .
-
-**Step 5** is loading the turtle into Virtuoso. Project **soilwise-repo** has an endpoint to be directly used by Virtuoso load by Resource URL.
+**Step 4** is loading the turtle into Virtuoso. Project **soilwise-repo** has an endpoint to be directly used by Virtuoso load by Resource URL.
 
 The endpoints:
 
