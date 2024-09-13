@@ -1,4 +1,5 @@
 import lxml.etree as ET
+
 from dotenv import load_dotenv
 import sys
 sys.path.append('utils')
@@ -9,9 +10,16 @@ from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
 # Load environment variables from .env file
 load_dotenv()
 
-# fetch the mcf's
+count=2500
 
-recs = dbQuery("Select identifier, hash, resultobject, source from harvest.items where resulttype = 'iso19139:2007' and coalesce(turtle,'') = '' and coalesce(error,'') = '' limit 250")
+class LinkResolver(ET.Resolver):
+    def resolve(self, url, id, context):
+        return self.resolve_string(
+            '<!ENTITY myentity "[resolved text: %s]">' % url, context)
+
+
+# fetch the mcf's
+recs = dbQuery(f"Select identifier, hash, resultobject, source from harvest.items where resulttype = 'iso19139:2007' and coalesce(turtle,'') = '' and coalesce(error,'') = '' limit {count}")
 
 if recs:
     total = len(recs)
@@ -36,13 +44,20 @@ if recs:
         except Exception as err:
             print(f'Failed read from string {id}, {err}')
 
-        xsl = ET.parse('iso-19139-to-dcat-ap.xsl')
+
+        iso_parser = ET.XMLParser(ns_clean=True, recover=True, encoding='utf-8')
+        iso_parser.resolvers.add( LinkResolver() )
+        #xsl = ET.parse(StringIO(open('iso-triplify/iso-19139-to-dcat-ap.xsl', "r").read().encode('utf-8')), iso_parser)
+        xsl = ET.fromstring(open('iso-triplify/iso-19139-to-dcat-ap.xsl', "r").read().encode('utf-8'), parser=iso_parser)
+
+        #xsl = ET.parse('iso-triplify/iso-19139-to-dcat-ap.xsl')
         rdfxml = None
         ttl = None
         tmerror = None
 
-        if xml:
-            transform = ET.XSLT(xsl)
+        if xml not in [None,'']:
+            #ac = ET.XSLTAccessControl(read_network=False, read_file=False)
+            transform = ET.XSLT(xsl)#, access_control=ac)
             try:
                 rdfxml = ET.tostring(transform(xml), pretty_print=True)
             except:
@@ -63,12 +78,21 @@ if recs:
                     if l not in [None,'']:
                         lang=l
                         break
-
+                # what is my id?
+                sj = None
+                for s,p,o in g.triples((None,DCTERMS.identifier,None)):
+                    sj = s
+                    break
+                #append source
+                if sj:
+                    g.add((sj,DCTERMS.isReferencedBy,Literal(source)))
+                
                 ttl = g.serialize(format='turtle')
             except Exception as err:
                 tmerror = f'Failed serialise {id}, {err}'
                 print(f'Failed serialise {id}, {err}')
             
+
             try: 
                 if ttl:
                     recs = dbUQuery(f"update harvest.items set turtle = '{ttl}', language='{lang}' where hash = '{hashcode}'")
@@ -79,4 +103,3 @@ if recs:
             if tmerror:
                 recs = dbUQuery(f"update harvest.items set error = '{tmerror}' where hash = '{hashcode}'")
 
-            
