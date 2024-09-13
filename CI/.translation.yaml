@@ -15,8 +15,8 @@ harvest-translation-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
   
-    - pip3 install -r translation/requirements.txt
-    - python3 translation/request-translation.py
+    - pip3 install -r translate/requirements.txt
+    - python3 translate/request-translation.py
   rules:  
     - if: $PROJECT != "TRANSLATION"
       when: never
@@ -34,8 +34,8 @@ harvest-translation-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
-    - pip3 install -r translation/requirements.txt
-    - python3 translation/request-translation.py
+    - pip3 install -r translate/requirements.txt
+    - python3 translate/request-translation.py
   rules:  
     - if: $PROJECT != "TRANSLATION"
       when: never
