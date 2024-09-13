@@ -247,6 +247,9 @@
   <xsl:variable name="lowercase">abcdefghijklmnopqrstuvwxyz</xsl:variable>
   <xsl:variable name="uppercase">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
 
+  <xsl:variable name="nonurlchars">{ }</xsl:variable>
+  <xsl:variable name="rpnonurlchars">___</xsl:variable>
+
 <!-- URIs, URNs and names for spatial reference system registers. -->
 
   <xsl:param name="EpsgSrsBaseUri">http://www.opengis.net/def/crs/EPSG/0</xsl:param>
@@ -440,18 +443,31 @@
 
 -->
 
-  <xsl:param name="ResourceUri">
-    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString"/>
-    <xsl:if test="$rURI != '' and ( starts-with($rURI, 'http://') or starts-with($rURI, 'https://') )">
-      <xsl:value-of select="$rURI"/>
-    </xsl:if>
-  </xsl:param>
-
   <xsl:param name="MetadataUri">
     <xsl:variable name="mURI" select="gmd:fileIdentifier/gco:CharacterString"/>
-    <xsl:if test="$mURI != '' and ( starts-with($mURI, 'http://') or starts-with($mURI, 'https://') )">
-      <xsl:value-of select="$mURI"/>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="starts-with(normalize-space($mURI), 'http')">
+        <xsl:value-of select="translate(normalize-space($mURI),$nonurlchars,$rpnonurlchars)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="concat('http://soilwise-he.github.io/soil-health#',translate(normalize-space($mURI),$nonurlchars,$rpnonurlchars))"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:param>
+
+  <xsl:param name="ResourceUri">
+    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString | gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href"/>
+    <xsl:choose>
+      <xsl:when test="$rURI = ''">
+        <xsl:value-of select="$MetadataUri"/>
+      </xsl:when>
+      <xsl:when test="starts-with(normalize-space($rURI), 'http')">
+        <xsl:value-of select="translate(normalize-space($rURI),$nonurlchars,$rpnonurlchars)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="concat('http://soilwise-he.github.io/soil-health#',translate(normalize-space($rURI),$nonurlchars,$rpnonurlchars))"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:param>
 
 <!--

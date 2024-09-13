@@ -298,11 +298,14 @@ From the previous step VIRTUOSO holds two triples for every project publication:
 
 JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** with method **main** as starting point for all the functionality.
 
-**DBWrite** can be invoked in three ways:
+**DBWrite.main** can be invoked in four ways:
+
 
 * with parameter **'doi'**
 * with parameter **'title'**
 * with parameter **'turtle'**
+* with parameter **'hash'**
+
 
 **Step 1** is to invoke **DBWrite** with parameter **'doi'**.
 
