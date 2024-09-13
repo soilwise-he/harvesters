@@ -1,8 +1,6 @@
 from rdflib import Graph, Literal, URIRef, term
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
-import traceback,urllib
 import json, os, psycopg2
-import requests
 
 import sys
 sys.path.append('utils')
@@ -12,7 +10,6 @@ from database import dbQuery, insertSQL
 from dotenv import load_dotenv
 load_dotenv()
 
-TRANSAPIURL = os.environ.get('TRANSAPIURL') or False
 translatableProperties = [DCTERMS.title,DCTERMS.description]
 ISOPairs = {    
     "bg": {"code":"bul","label":"Bulgarian"},        
