@@ -1,45 +1,99 @@
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, Literal, URIRef, term
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
-import traceback,urllib
 import json, os, psycopg2
-import requests
 
 import sys
-sys.path.append('../utils')
-from database import dbQuery
+sys.path.append('utils')
+from database import dbQuery, insertSQL
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
 load_dotenv()
 
-TRANSAPIURL = os.environ.get('TRANSAPIURL') or False
+translatableProperties = [DCTERMS.title,DCTERMS.description]
+ISOPairs = {    
+    "bg": {"code":"bul","label":"Bulgarian"},        
+    "fr": {"code":"fre|fra","label":"French"},            
+    "pl": {"code":"pol","label":"Polish"},    
+    "cs": {"code":"cze|ces","label":"Czech"},            
+    "hr": {"code":"hrv","label":"Croatian"},            
+    "pt": {"code":"por","label":"Portuguese"},    
+    "da": {"code":"dan","label":"Danish"},        
+    "hu": {"code":"hun|mag","label":"Hungarian"},            
+    "ro": {"code":"rum|ron","label":"Romanian"},    
+    "de": {"code":"ger|deu","label":"German"},    
+    "is": {"code":"ice|isl","label":"Icelandic"},        
+    "ru": {"code":"rus","label":"Russian"},    
+    "et": {"code":"est","label":"Estonian"},        
+    "it": {"code":"ita","label":"Italian"},
+    "sk": {"code":"slo|slk","label":"Slovak"},    
+    "el": {"code":"gre|ell","label":"Greek"},    
+    "lt": {"code":"lit","label":"Lithuanian"},    
+    "sl": {"code":"slv","label":"Slovenian"},    
+    "es": {"code":"spa|esp","label":"Spanish"},    
+    "lv": {"code":"lav","label":"Latvian"},    
+    "sv": {"code":"swe","label":"Swedish"},    
+    "fi": {"code":"fin","label":"Finnish"},    
+    "nl": {"code":"dut|nld","label":"Dutch"},
+    "ch": {"code":"chi|zho", "label":"Chinese"},
+    "ar": {"code":"ara|arb", "label": "Arabic"}, 
+    "ja": {"code":"jap", "label": "Japanese"},
+    "ga": {"code":"gle", "label": "Irish"},
+    "nn": {"code":"nor", "label":"Norwegian"},
+    "tr": {"code":"tur", "label":"Turkish"}
+}
 
-def manageTrans(gr,ky,id,ln):
-    # first get the untranslated string
-    src = None
-    for s,p,o in gr.triples((None,ky,None)):
-        src = str(o)
-        if o.language.lower() == ln.lower(): #(3-letter vs 2-letter?)
-           src = str(o) 
-           break
+def isoMatch(lang):
+    for k,v in ISOPairs.items():
+        if lang.lower() == k or lang.lower() in v['code']:
+            return k
+    return None
 
-    hasENG = False
-    for s,p,o in gr.triples((None,ky,None)):
-        if o.language == 'en':
-            hasENG = True
-            # insert trans
 
-    if not hasENG:
-        # insert untranslated
-        dbQuery(f'insert into translations () values()',False)
+def manageTrans(turtle,subject,prop,id,lang_source,lang_target="en"):
+    lang_source = isoMatch(lang_source)
+    if lang_source:
+        # first get the untranslated string
+        srctxt = None
+        for s,p,o in turtle.triples((subject,prop,None)):
+            if o.__class__ == term.Literal:
+                srctxt = str(o) # use any language
+                if isoMatch(o.language) == lang_source: # if default language
+                    srctxt = str(o)
+                    break
+            else:
+                print (f'No term {o}')
+
+        if not srctxt:
+            print('No source for {prop}:{lang_source}')
+        else:
+            # find a english translation
+            hasENG = False
+            for s,p,o in turtle.triples((subject,prop,None)):
+                if o.language == 'en':
+                    hasENG = True
+                    # insert trans
+                    insertSQL('harvest.translations',
+                            ['source','target','lang_source','lang_target','context'],
+                            (srctxt,o,lang_source,lang_target,prop))
+                    break
+        
+            # prepare a translation for this record
+            if not hasENG:
+                # insert untranslated
+                insertSQL('harvest.translations',
+                        ['source','lang_source','lang_target','context'],
+                        (srctxt,lang_source,lang_target,id))
+
+
 
 # get records which have language<>en and are not already translated
 sql = '''select identifier,language,turtle from harvest.items 
-where not coalesce(language,'') = ''
-and not coalesce(turtle,'') = ''
-and not upper(language) = any(ARRAY['EN','ENG']) 
-and identifier not in (select coalesce(context,'') from harvest.translations) 
-limit 5'''
+    where not coalesce(language,'') = ''
+    and not coalesce(turtle,'') = ''
+    and not upper(language) = any(ARRAY['EN','ENG']) 
+    and identifier not in (select coalesce(context,'') from harvest.translations) 
+    limit 2500'''
 
 recs = dbQuery(sql)
 
@@ -53,5 +107,19 @@ if recs:
 
         g = Graph()
         g.parse(data=turtle, format='turtle')
-        manageTrans(g,DCTERMS.title,identifier,language)
-        manageTrans(g,DCTERMS.description,identifier,language)
+        
+        subject = None
+        # combination of language and description are the objects we're interested in
+        for s,p,o in g.triples((None,DCTERMS.description,None)):
+            if (s, DCTERMS.language, None) in g:
+                subject = s
+                break
+    
+        if subject:
+            if isoMatch(language) not in ['None','en','']:
+                print(f"translations for {identifier} in {isoMatch(language)}")
+                for p in translatableProperties:
+                    manageTrans(g,subject,p,identifier,language)
+        else:
+            print('no subject')
+
