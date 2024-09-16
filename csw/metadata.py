@@ -20,16 +20,18 @@ if not url:
 label = os.environ.get("HARVEST_LABEL") or url
 filters = None
 if os.environ.get("HARVEST_FILTER"):
-    filters = json.loads(os.environ.get("HARVEST_FILTER"))
+    filterstring = os.environ.get("HARVEST_FILTER")
+    filters = json.loads(filterstring)
 
 # check if source is in sources table
-sources = dbQuery(f"select name from harvest.sources where name is upper({label})")
-if not sources:
-    dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{filters}','CSW')",False)
+sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
+if not len(sources):
+    dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{os.environ.get('HARVEST_FILTER')}','CSW')",(),False)
     
 nextRecord = 1
 pagesize = 50
 maxrecords= 2500
+matched = 2500
 
 csw = CatalogueServiceWeb(url)
 
@@ -50,9 +52,16 @@ if filters and len(filters.keys()) > 0:
         # todo: check if key is in getcapabilities
         constraints.append(PropertyIsEqualTo(key, filters[f]))
 
-while nextRecord > 0 and returned > 0 and nextRecord < maxrecords:
-    csw.getrecords2(maxrecords=pagesize,outputschema='http://www.isotc211.org/2005/gmd',startposition=nextRecord,esn='full')
+while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < maxrecords:
+
+    if len(constraints) > 0:
+        csw.getrecords2(maxrecords=pagesize,outputschema='http://www.isotc211.org/2005/gmd',constraints=constraints,startposition=nextRecord,esn='full')
+    else:
+        csw.getrecords2(maxrecords=pagesize,outputschema='http://www.isotc211.org/2005/gmd',startposition=nextRecord,esn='full')
+    
+    
     print('CSW query ' + str(csw.results['returned']) + ' of ' + str(csw.results['matches']) + ' records from ' + str(nextRecord) + '.')
+    matched = csw.results['matches']
     nextRecord = csw.results['nextrecord'] or (nextRecord+pagesize)
     returned = csw.results['returned'] or len(csw.records)
     

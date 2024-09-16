@@ -26,22 +26,14 @@ table = os.environ.get('PYCSW_TABLE') or 'records'
 repo = repository.Repository(database, context, table=table)
 
 # clean up public table first
-# dbQuery("""truncate public.records""",False)
+dbQuery("""truncate public.records""",(),False)
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
 recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.turtle 
                 from harvest.items i, harvest.sources s 
                 where coalesce(i.identifier,'') <> '' 
-                and i.source = s.name 
-                and not exists (
-					select identifier from public.records
-					where identifier = i.identifier 
-                    or replace(identifier,'//','/') = i.identifier
-                    or identifier like '%%'||i.identifier
-                    or identifier = i.uri 
-                    or identifier like '%%'||i.uri) 
-                order by i.identifier, i.insert_date desc""")
+                and i.source = s.name""")
 loaded_files = []
 
 if recs:

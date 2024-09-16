@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-translation-dev:
+harvest-ejpsoil-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -14,17 +14,20 @@ harvest-translation-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-  
-    - pip3 install -r translate/requirements.txt
-    - python3 translate/request-translation.py
+    - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
+    - export HARVEST_FILTER={"any":"soil"}
+    - export HARVEST_LABEL=FAO 
+
+    - pip3 install -r csw/requirements.txt
+    - python3 csw/metadata.py
   rules:  
-    - if: $PROJECT != "TRANSLATION"
+    - if: $PROJECT != "FAO"
       when: never
     - if: $CI_COMMIT_BRANCH == "dev"
 
 
 # metadata
-harvest-translation-prod:
+harvest-ejpsoil-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -33,10 +36,12 @@ harvest-translation-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+    - export HARVEST_URL=https://catalogue.ejpsoil.eu/csw
+    - export HARVEST_LABEL=EJPSOIL 
 
-    - pip3 install -r translate/requirements.txt
-    - python3 translate/request-translation.py
+    - pip3 install -r csw/requirements.txt
+    - python3 csw/metadata.py
   rules:  
-    - if: $PROJECT != "TRANSLATION"
+    - if: $PROJECT != "EJPSOIL"
       when: never
     - if: $CI_COMMIT_BRANCH == "main"
