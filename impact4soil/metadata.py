@@ -21,6 +21,10 @@ def tp(id):
     else:
         return 'uuid'
 
+
+label = "IMPACT4SOIL"
+
+
 if os.environ.get("HARVESTTYPES"):
     harvesttypes = os.environ.get("HARVESTTYPES").split(',')
 else:
@@ -29,13 +33,12 @@ else:
 # harvest   publications
 if 'document' in harvesttypes:
     url="https://www.impact4soil.com/scientific-evidence/publicationstojson"
-    label = "IMPACT4SOIL"
     # add source if it does not exist
     hasSource(label,url,'',label)
-
+    
     count=10
     page=1
-    max=10
+    max=50
     print('Impact4Soil Publications')
     while count > 0 and (page*20 < max):
         headers = {'Accept': 'application/json', "User-Agent": "Soilwise Harvest v0.1"}
@@ -71,10 +74,12 @@ if 'document' in harvesttypes:
 # harvest datasets
 if 'dataset' in harvesttypes:
     url = "https://www.impact4soil.com/datasets-api/datasets" # ?size=5&page=10
+    # add source if it does not exist
+    hasSource(label,url,'',label)
     count=10
     page=1
     size=50
-    max=2500
+    max=50
     print('Impact4Soil Datasets')
 
     while count > 0 and (page-1*size < max):
