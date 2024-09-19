@@ -36,11 +36,11 @@ def dbUQuery(sql):
     finally:
         dbconn.close();
 
-def insertRecord(identifier,resulttype,resultobject,hashcode,source,title="",description="",date="",itemtype="",uri="",identifiertype=""):
+def insertRecord(identifier,resulttype,resultobject,hashcode,source,title="",language="",date="",itemtype="",uri="",identifiertype=""):
 
     # todo: check existing before enter?
-    insertSQL('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash',  'source','insert_date','itemtype','title','description','date'],
-                                (identifier,   identifiertype,  uri,  resultobject,  resulttype,  hashcode,source, datetime.now(),itemtype,title,description,date)) # insert into db
+    insertSQL('harvest.items',['identifier','identifiertype','uri','resultobject','resulttype','hash','source','insert_date','itemtype','title','language','date'],
+                                (identifier,   identifiertype,  uri,  resultobject,  resulttype,  hashcode,source, datetime.now(),itemtype,title,language,date)) # insert into db
     
     # add for duplicate check
     insertSQL('harvest.item_duplicates',['identifier','identifiertype','source','hash'],(identifier,identifiertype,source,hashcode))
@@ -63,3 +63,9 @@ def insertSQL(table, fields, values):
             dbconn.close();
       
 
+def hasSource(label,url,filter,type):
+    # check if source is in sources table
+    sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
+    if not len(sources):
+        dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{filter}','{type}')",(),False)
+    
