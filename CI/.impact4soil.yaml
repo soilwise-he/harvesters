@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-ejpsoil-dev:
+harvest-esdac-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -14,20 +14,17 @@ harvest-ejpsoil-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
-    - export HARVEST_LABEL=FAO 
 
-    - pip3 install -r csw/requirements.txt
-    - python3 csw/metadata.py
+    - pip3 install -r impact4soil/requirements.txt
+    - python3 impact4soil/metadata.py
   rules:  
-    - if: $PROJECT != "FAO"
+    - if: $PROJECT != "IMPACT4SOIL"
       when: never
     - if: $CI_COMMIT_BRANCH == "dev"
 
 
 # metadata
-harvest-ejpsoil-prod:
+harvest-esdac-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -36,13 +33,10 @@ harvest-ejpsoil-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
-    - export HARVEST_LABEL=FAO 
 
-    - pip3 install -r csw/requirements.txt
-    - python3 csw/metadata.py
+    - pip3 install -r ../impact4soil/requirements.txt
+    - python3 ../impact4soil/metadata.py
   rules:  
-    - if: $PROJECT != "FAO"
+    - if: $PROJECT != "IMPACT4SOIL"
       when: never
     - if: $CI_COMMIT_BRANCH == "main"

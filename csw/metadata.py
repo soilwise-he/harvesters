@@ -8,7 +8,7 @@ from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
 from datetime import datetime
 sys.path.append('utils')
-from database import insertRecord,dbQuery
+from database import insertRecord,dbQuery,hasSource
 
 # Load environment variables from .env file
 load_dotenv()
@@ -23,11 +23,9 @@ if os.environ.get("HARVEST_FILTER"):
     filterstring = os.environ.get("HARVEST_FILTER")
     filters = json.loads(filterstring)
 
-# check if source is in sources table
-sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
-if not len(sources):
-    dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{os.environ.get('HARVEST_FILTER')}','CSW')",(),False)
-    
+# add source, if it does not exist yet
+hasSource(label,url,os.environ.get('HARVEST_FILTER'),'CSW')
+
 nextRecord = 1
 pagesize = 50
 maxrecords= 2500
