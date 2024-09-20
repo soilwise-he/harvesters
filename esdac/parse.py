@@ -8,6 +8,7 @@ from rdflib.namespace import DC, DCAT, DCTERMS, SKOS, SDO, FOAF
 import sys,time,hashlib,os
 sys.path.append('utils')
 from database import insertRecord, dbQuery
+import requests
 
 # Load environment variables from .env file
 load_dotenv()
@@ -44,8 +45,32 @@ def dict2graph(d):
             g.add((r,addNS(k),Literal(v)))
     return g
 
+def getCountryLabel():
+    # sparql query:
+    # select distinct ?country_code ?label 
+    # where 
+    # {?s <http://publications.europa.eu/ontology/euvoc#countryCode> ?country_code.
+    # ?country_code <http://www.w3.org/2004/02/skos/core#prefLabel>?label
+    # filter (lang(?label) = 'en')
+    # }
+    resp = requests.get("https://publications.europa.eu/webapi/rdf/sparql?default-graph-uri=&query=select+distinct+%3Fcountry_code+%3Flabel+%0D%0Awhere+%0D%0A%7B%3Fs+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Feuvoc%23countryCode%3E+%3Fcountry_code.%0D%0A%3Fcountry_code+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23prefLabel%3E%3Flabel%0D%0Afilter+%28lang%28%3Flabel%29+%3D+%27en%27%29%0D%0A%7D%0D%0A%0D%0A%0D%0A%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on&run=+Run+Query+")
+    if resp.ok:
+        res = resp.json()
+        results = res['results']['bindings']
+        uri_labels = []
+        for r in results:
+            uri = r['country_code']['value']
+            label = r['label']['value']
+            uri_labels.append({'uri': uri, 'label':label})
+        return (uri_labels)
+    else:
+        print ('fail to fetch country labels')
+        return []
+
+
 def parseEUDASM(s2):
     ds = {'relation':[],'subject':[],'type':'dataset','isReferencedBy':'EUDASM'}
+    uri_labels = getCountryLabel()
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
@@ -59,6 +84,13 @@ def parseEUDASM(s2):
         section = s.text
     for l in s2.find_all("span",{"class":"country"}):
         ds['subject'].append(l.text)
+        if len(uri_labels) > 0:
+            text = l.text
+            for i in uri_labels:
+                if text.lower() == i['label'].lower():
+                    ds['subject'].append(i['uri'])
+                    break
+
     for f in s2.find_all("a",{"title":"File"}):
         ds['relation'].append(fullurl(f.get('href')))
         ds['identifier'] = fullurl(f.get('href')) #set the id to ds url
@@ -126,8 +158,11 @@ def parseESDAC(s2):
             ds['publisher'] = c.text
     return ds
 
+# for dev only
+# dbQuery(f"update harvest.items set turtle=Null where identifier='https://esdac.jrc.ec.europa.eu/resource-type/national-soil-maps-eudasm?page=122/6'",(),False)
 # retrieve unparsed records
 unparsed = dbQuery(f"select identifier,resultobject,resulttype,title,itemtype from harvest.items where source = 'ESDAC' and (turtle is Null or turtle = '') limit {recsPerPage}")
+
 
 for rec in sorted(unparsed):
     rid,res,restype,ttl,itemtype = rec
@@ -145,7 +180,9 @@ for rec in sorted(unparsed):
         ds['identifier'] = rid
     dsRDF = dict2graph(ds)    
     triples = dsRDF.serialize(format='turtle') # todo: strip the namespaces?
-    dbQuery(f"update harvest.items set uri=%s, turtle=%s where identifier=%s",(ds['identifier'],triples,rid),False)     
+    dbQuery(f"update harvest.items set uri=%s, turtle=%s where identifier=%s",(ds['identifier'],triples,rid),False)
+
+ 
 
 
 
