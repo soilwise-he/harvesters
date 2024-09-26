@@ -15,7 +15,9 @@ harvest-cordis-turtle-dev:
 
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-#    - java -jar /opt/app/soilwise_doi.jar impact4soil
+    - java -jar /opt/app/soilwise_doi.jar cordis
+    - java -jar /opt/app/soilwise_doi.jar title
+#    - java -jar /opt/app/soilwise_doi.jar openairedoi
     - java -jar /opt/app/soilwise_doi.jar turtle
   rules:  
     - if: $PROJECT != "cordis"
@@ -34,7 +36,7 @@ harvest-cordis-turtle-prod:
     
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar doi
+    - java -jar /opt/app/soilwise_doi.jar cordis
     - java -jar /opt/app/soilwise_doi.jar title
     - java -jar /opt/app/soilwise_doi.jar turtle
   rules:  
