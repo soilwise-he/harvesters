@@ -10,12 +10,16 @@ load_dotenv()
 def stripdoi(uri):
     if 'doi.org/' in uri:
         return uri.split('doi.org/').pop()
+    elif 'geonetwork/' in uri:
+        return uri.split('/').pop()
     else:
         return uri
 
 def tp(id):
     if 'doi.org' in id:
         return 'doi'
+    elif 'geonetwork' in id:
+        return 'uuid'
     elif id.startswith('http'):
         return 'uri'
     else:
