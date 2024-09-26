@@ -40,8 +40,8 @@ harvest-isric-prod:
     - export HARVEST_URL=https://data.isric.org/geonetwork/srv/eng/csw
     - export HARVEST_LABEL=ISRIC 
 
-    - pip3 install -r ../inspire/requirements.txt
-    - python3 ../inspire/metadata.py
+    - pip3 install -r csw/requirements.txt
+    - python3 csw/metadata.py
   rules:  
     - if: $PROJECT != "ISRIC"
       when: never

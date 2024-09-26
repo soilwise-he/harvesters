@@ -34,8 +34,8 @@ harvest-esdac-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
-    - pip3 install -r ../esdac/requirements.txt
-    - python3 ../esdac/metadata.py
+    - pip3 install -r esdac/requirements.txt
+    - python3 esdac/metadata.py
   rules:  
     - if: $PROJECT != "ESDAC"
       when: never
