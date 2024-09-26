@@ -25,15 +25,57 @@ table = os.environ.get('PYCSW_TABLE') or 'records'
 
 repo = repository.Repository(database, context, table=table)
 
+
+
+def parseRDF(md,id,title):
+    try:
+        g = Graph()
+        g.parse(data=md, format='turtle')
+
+        # map DCT to DC 
+        elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience','provenance']
+        for e in elms:
+            for s,p,o in g.triples((None,DCTERMS[e],None)):
+                g.add((s,DC[e],o))
+                g.remove((s,DCTERMS[e],o))
+        if (None,DCTERMS.abstract,None) not in g:
+            for s,p,o in g.triples((None,DC.description,None)):
+                g.add((s,DCTERMS.abstract,o))
+        for s,p,o in g.triples((None,DC.identifier,None)):
+            id2 = str(o)
+            if id2.startswith('http'):
+                g.add((s,DCTERMS.references,Literal(URIRef(id2))))
+            elif id2.startswith('10.'):
+                g.add((s,DCTERMS.references,Literal(f'https://doi.org/{id2}')))
+        
+        if s:
+            # if no title, use from DB  (ESDAC case)
+            if (None,DC.title,None) not in g:
+                g.add((s,DC.title,Literal(title)))
+            # if abstract is empty, use description    
+            if (None,DC.identifier,None) not in g:
+                g.add((s,DC.identifier,Literal(id)))
+            if (None,DC.type,None) not in g:
+                g.add((s,DC.type,Literal('document')))
+            #if len(str(id).split('/')) == 2:
+            #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
+            
+            metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
+
+    except Exception as err:
+        print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
+
+
 # clean up public table first
 dbQuery("""truncate public.records""",(),False)
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.turtle 
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.turtle 
                 from harvest.items i, harvest.sources s 
                 where coalesce(i.identifier,'') <> '' 
-                and i.source = s.name""")
+                and (lower(resulttype) ='iso19139:2007' or coalesce(turtle,'') <> '')
+                and i.source = s.name""",(),True)
 loaded_files = []
 
 if recs:
@@ -41,109 +83,61 @@ if recs:
     counter = 0
     
     for rec in sorted(recs):
-        id, title, date, turtle_prefix, rtype, resultobject, turtle = rec
+        id, title, date, turtle_prefix, rtype, resultobject, restype, turtle = rec
 
-        recfile = None
-        if rtype in ['SPARQL','HTML']: 
-            if turtle not in [None,'']:
-                if turtle_prefix not in [None,'']:
-                    recfile = f"{turtle_prefix}\n\n{turtle}"
-                else:
-                    recfile = turtle
-        else:
-            recfile = resultobject
-        
         counter += 1
         metadata_record = None
 
-        print(f'Processing record {id} ({counter} of {total} as {rtype})')
-
-        if recfile in [None,'']:
-            print("Recfile empty")
-        else: 
-            if rtype in ['SPARQL','HTML']:
-                try:
-                    g = Graph()
-                    g.parse(data=recfile, format='turtle')
-
-                    # map DCT to DC 
-                    elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience','provenance']
-                    for e in elms:
-                        for s,p,o in g.triples((None,DCTERMS[e],None)):
-                            g.add((s,DC[e],o))
-                            g.remove((s,DCTERMS[e],o))
-
-                    # if no title, use from DB  (ESDAC case)
-                    if (None,DC.title,None) not in g:
-                        g.add((s,DC.title,Literal(title)))
-                    # if abstract is empty, use description    
-                    if (None,DCTERMS.abstract,None) not in g:
-                        for s,p,o in g.triples((None,DC.description,None)):
-                            g.add((s,DCTERMS.abstract,o))
-                    if (None,DC.identifier,None) not in g:
-                        g.add((s,DC.identifier,Literal(id)))
-                    for s,p,o in g.triples((None,DC.identifier,None)):
-                        id2 = str(o)
-                        if id2.startswith('http'):
-                            g.add((s,DCTERMS.references,Literal(URIRef(id2))))
-                        elif id2.startswith('10.'):
-                            g.add((s,DCTERMS.references,Literal(f'http://doi.org/{id2}')))
-                    if (None,DC.type,None) not in g:
-                        g.add((s,DC.type,Literal('document')))
-                    #if len(str(id).split('/')) == 2:
-                    #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
-                    
-                    metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
-
-                except Exception as err:
-                    print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
-
-            else:
-                # JSON (mcf?)
-                try: 
-                    metadata_record = json.loads(recfile)
-                    print(f'parse {id} as json, try ld')
-                except json.decoder.JSONDecodeError as err:
-                    print(f'{id} no turtle -> xml')
-                except Exception as err:
-                    print(f'failed parse as json, try xml; {err}')
-                # XML
-                if metadata_record in [None,'']:
-                    try:
-                        metadata_record = etree.fromstring(recfile)
-                        print(f'parse {id} as xml')
-                    except etree.XMLSyntaxError as err:
-                        print(f'XML document {id} is not well-formed {err}')
-                    except Exception as err:
-                        print(f'XML document {id} is not string, {err}')
-                        metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
-                else:
-                    print('no rec as json')
-
+        # for now keep iso records as is
+        if restype and restype.lower() in ['iso19139', 'iso19139:2007', 'iso19115']:
+            # import as xml
+            recfile = resultobject
             try:
-                record = metadata.parse_record(context, metadata_record, repo)
+                print(f'parse {id} as xml')
+                metadata_record = etree.fromstring(recfile)
+            except etree.XMLSyntaxError as err:
+                print(f'ERROR: XML document {id} is not well-formed {err}')
             except Exception as err:
-                print(f'Could not parse {id} as record, {err}, {traceback.print_exc()}')
-                continue
-
-            for rec in record:
+                print(f'WARNING: XML document {id} is not string, {err}')
                 try:
-                    repo.insert(rec, 'local', util.get_today_and_now())
-                    loaded_files.append(id)
-                    print(f'Inserted {id}')
+                    metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
                 except Exception as err:
-                    if force_update:
-                        repo.update(rec)
-                        print(f'Updated {id}')
+                    print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
+        elif turtle not in [None,'']:   
+            # import as Dublin Core
+            recfile = turtle
+            if turtle_prefix not in [None,'']: # identify if prefix is needed
+                recfile = f"{turtle_prefix}\n\n{turtle}"
+            metadata_record = parseRDF(recfile,id,title)
+        else: 
+            print(f'ERROR: Can not parse {id}')
+
+        # insert into repo
+        try:
+            if metadata_record not in [None,'']:
+                record = metadata.parse_record(context, metadata_record, repo)
+                for rec in record:
+                    try:
+                        repo.insert(rec, 'local', util.get_today_and_now())
                         loaded_files.append(id)
-                    else:
-                        print(f'ERROR: {id} not inserted: {err}, {traceback.print_exc()}')
+                        print(f'Inserted {id}')
+                    except Exception as err:
+                        if force_update:
+                            repo.update(rec)
+                            print(f'Updated {id}')
+                            loaded_files.append(id)
+                        else:
+                            print(f'ERROR: {id} not inserted: {err}, {traceback.print_exc()}')
 
-                    #in some cases the origianl id is not the derived id, update it
-                    if '' not in [id,rec.identifier] and id != rec.identifier:
-                        print(f'updating asynchronous id {id}')
-                        dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = '{id}'",(),False)
+                        # in some cases the origianl id is not the derived id, update it
+                        if '' not in [id,rec.identifier] and id != rec.identifier:
+                            print(f'updating asynchronous id {id}')
+                            dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = '{id}'",(),False)
+        except Exception as err:
+            print(f'Could not parse {id} as record, {err}, {traceback.print_exc()}')
+            continue
 
+        
 # workaround for '//' to '/' bahavior
 dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like '%//%'""",False)
 
