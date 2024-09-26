@@ -30,8 +30,8 @@ harvest-cordis-turtle-prod:
   stage: run-harvest
   script:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
-    - export POSTGRES_USERNAME=$POSTGRES_USER_PROD
-    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_PROD
+    - export POSTGRES_USERNAME=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
