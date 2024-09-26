@@ -2,4 +2,4 @@ rdflib
 psycopg2-binary
 SQLAlchemy<2.0.0
 python-dotenv
-git+https://github.com/geopython/pycsw.git#egg=pycsw
+# git+https://github.com/geopython/pycsw.git#egg=pycsw # use this locally, not on git CI
