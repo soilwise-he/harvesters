@@ -9,7 +9,7 @@ harvest-cordis-turtle-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
   stage: run-harvest
   script:
-    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_DB=$POSTGRES_JDBC_TEST
     - export POSTGRES_USERNAME=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
@@ -28,7 +28,7 @@ harvest-cordis-turtle-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
   stage: run-harvest
   script:
-    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_DB=$POSTGRES_JDBC_PROD
     - export POSTGRES_USERNAME=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     
