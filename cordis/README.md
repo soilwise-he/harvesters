@@ -301,13 +301,13 @@ JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** wit
 **DBWrite.main** can be invoked in three ways:
 
 
-* with parameter **'doi'**
+* with parameter **'codis'**
 * with parameter **'title'**
 * with parameter **'turtle'**
 
 The scheduled CI job 'cordis-harvest' runs them all.
 
-**Step 1** is to invoke **DBWrite** with parameter **'doi'**.
+**Step 1** is to invoke **DBWrite** with parameter **'cordis'**.
 
 =\>
 
