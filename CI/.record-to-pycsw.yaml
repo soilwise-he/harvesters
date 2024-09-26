@@ -6,7 +6,7 @@ stages:
   
 # metadata
 harvest-record-to-pycsw-dev:
-  image: harbor.containers.wurnet.nl/proxy-cache/cicirello/pyaction:4.14.0
+  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
