@@ -1,0 +1,44 @@
+# a inspire harvest, db credentials are populated with git ci variables
+default:
+  interruptible: false
+stages:
+  - run-harvest
+  
+# metadata
+harvest-esdac-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+
+    - pip3 install -r prepsoil/requirements.txt
+    - python3 prepsoil/fetch.py
+    - python3 prepsoil/parse.py
+  rules:  
+    - if: $PROJECT != "PREPSOIL"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "dev"
+
+
+# metadata
+harvest-esdac-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_PROD
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+
+    - pip3 install -r prepsoil/requirements.txt
+    - python3 prepsoil/fetch.py
+    - python3 prepsoil/parse.py
+  rules:  
+    - if: $PROJECT != "PREPSOIL"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "main"
