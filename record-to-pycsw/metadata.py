@@ -21,11 +21,11 @@ force_update = os.environ.get('force_update') or False
 
 database = f"postgresql://{os.environ.get('POSTGRES_USER')}:{os.environ.get('POSTGRES_PASSWORD')}@{os.environ.get('POSTGRES_HOST')}:{os.environ.get('POSTGRES_PORT')}/{os.environ.get('POSTGRES_DB')}" 
 
-table = os.environ.get('PYCSW_TABLE') or 'records'
+table = os.environ.get('PYCSW_TABLE') or 'public.records'
+
+# what if we post to new table, then when done rename new table to old table?
 
 repo = repository.Repository(database, context, table=table)
-
-
 
 def parseRDF(md,id,title):
     try:
@@ -60,7 +60,7 @@ def parseRDF(md,id,title):
             #if len(str(id).split('/')) == 2:
             #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
             
-            metadata_record = etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
+        return etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
 
     except Exception as err:
         print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
@@ -81,6 +81,7 @@ loaded_files = []
 if recs:
     total = len(recs)
     counter = 0
+    failed_counter = 0
     
     for rec in sorted(recs):
         id, title, date, turtle_prefix, rtype, resultobject, restype, turtle = rec
@@ -93,7 +94,7 @@ if recs:
             # import as xml
             recfile = resultobject
             try:
-                print(f'parse {id} as xml')
+                print(f'{counter}. parse {id} as xml')
                 metadata_record = etree.fromstring(recfile)
             except etree.XMLSyntaxError as err:
                 print(f'ERROR: XML document {id} is not well-formed {err}')
@@ -103,7 +104,8 @@ if recs:
                     metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
                 except Exception as err:
                     print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
-        elif turtle not in [None,'']:   
+        elif turtle not in [None,'']: 
+            print(f'{counter}. parse {id} as rdf')  
             # import as Dublin Core
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
@@ -132,12 +134,12 @@ if recs:
                         # in some cases the origianl id is not the derived id, update it
                         if '' not in [id,rec.identifier] and id != rec.identifier:
                             print(f'updating asynchronous id {id}')
-                            dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = '{id}'",(),False)
+                            dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = %s",(id),False)
         except Exception as err:
-            print(f'Could not parse {id} as record, {err}, {traceback.print_exc()}')
+            print(f'Error: Could not parse {id} as record, {err}, {traceback.print_exc()}')
             continue
 
         
 # workaround for '//' to '/' bahavior
-dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like '%//%'""",False)
+dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%'),False)
 
