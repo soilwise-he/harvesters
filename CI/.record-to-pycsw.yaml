@@ -6,8 +6,8 @@ stages:
   
 # metadata
 harvest-record-to-pycsw-dev:
-  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw
-  stage: run-harvest
+  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:2b90752b8d53838390c49d4bfef633d1e7c667f9031efa56faaae4552e6d548b
+  stage: run-harvest 
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
     - export POSTGRES_PORT=$POSTGRES_PORT_TEST
@@ -23,7 +23,7 @@ harvest-record-to-pycsw-dev:
 
 # metadata
 harvest-record-to-pycsw-prod:
-  image: harbor.containers.wurnet.nl/proxy-cache/cicirello/pyaction:4.14.0
+  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:2b90752b8d53838390c49d4bfef633d1e7c667f9031efa56faaae4552e6d548b
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
