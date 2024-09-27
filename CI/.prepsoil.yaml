@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-esdac-dev:
+harvest-prepsoil-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -25,7 +25,7 @@ harvest-esdac-dev:
 
 
 # metadata
-harvest-esdac-prod:
+harvest-prepsoil-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:

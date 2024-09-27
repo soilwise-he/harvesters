@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-esdac-dev:
+harvest-impact4soil-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -24,7 +24,7 @@ harvest-esdac-dev:
 
 
 # metadata
-harvest-esdac-prod:
+harvest-impact4soil-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
