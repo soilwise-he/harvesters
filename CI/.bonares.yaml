@@ -22,7 +22,7 @@ harvest-bonares-dev:
   rules:
     - if: $PROJECT != "BONARES"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -43,4 +43,4 @@ harvest-bonares-prod:
   rules:
     - if: $PROJECT != "BONARES"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

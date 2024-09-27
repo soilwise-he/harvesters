@@ -20,7 +20,7 @@ harvest-inspire-dev:
   rules:  
     - if: $PROJECT != "INSPIRE"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -39,4 +39,4 @@ harvest-inspire-prod:
   rules:  
     - if: $PROJECT != "INSPIRE"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

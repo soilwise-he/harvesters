@@ -21,7 +21,7 @@ harvest-prepsoil-dev:
   rules:  
     - if: $PROJECT != "PREPSOIL"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -41,4 +41,4 @@ harvest-prepsoil-prod:
   rules:  
     - if: $PROJECT != "PREPSOIL"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"
