@@ -12,11 +12,14 @@ from database import insertRecord, dbQuery
 # Load environment variables from .env file
 load_dotenv()
 
-recsPerPage = 5000
+recsPerPage = 10000
 
 def fullurl(u):
-    if u.startswith('/'):
-        u = 'https://esdac.jrc.ec.europa.eu/'+u
+    if not u.startswith('http'):
+        if u.startswith('/'):
+            u = 'https://esdac.jrc.ec.europa.eu'+u
+        else:    
+            u = 'https://esdac.jrc.ec.europa.eu/'+u
     return u
 
 def addNS(e):
