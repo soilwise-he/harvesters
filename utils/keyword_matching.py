@@ -3,7 +3,7 @@ import json
 
     
 def matchCountryUri(label):
-    with open('utils\\country_data.json', 'r') as f:
+    with open('utils/country_data.json', 'r') as f:
         uri_labels = json.load(f)
     for uri_label in uri_labels:
         if label.lower() == uri_label['label'].lower():
