@@ -19,7 +19,7 @@ harvest-iso-triplify-dev:
   rules:  
     - if: $PROJECT != "ISOTRIPLIFY"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 # metadata
 harvest-iso-triplify-prod:
@@ -36,4 +36,4 @@ harvest-iso-triplify-prod:
   rules:  
     - if: $PROJECT != "ISOTRIPLIFY"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-ejpsoil-dev:
+harvest-eea-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -23,11 +23,11 @@ harvest-ejpsoil-dev:
   rules:  
     - if: $PROJECT != "EEA"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
-harvest-ejpsoil-prod:
+harvest-eea-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -45,4 +45,4 @@ harvest-ejpsoil-prod:
   rules:  
     - if: $PROJECT != "EEA"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

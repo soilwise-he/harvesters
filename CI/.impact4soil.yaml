@@ -5,7 +5,7 @@ stages:
   - run-harvest
   
 # metadata
-harvest-esdac-dev:
+harvest-impact4soil-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -20,11 +20,11 @@ harvest-esdac-dev:
   rules:  
     - if: $PROJECT != "IMPACT4SOIL"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
-harvest-esdac-prod:
+harvest-impact4soil-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -34,9 +34,9 @@ harvest-esdac-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
-    - pip3 install -r ../impact4soil/requirements.txt
-    - python3 ../impact4soil/metadata.py
+    - pip3 install -r impact4soil/requirements.txt
+    - python3 impact4soil/metadata.py
   rules:  
     - if: $PROJECT != "IMPACT4SOIL"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

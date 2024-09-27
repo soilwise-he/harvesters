@@ -20,7 +20,7 @@ harvest-translation-dev:
   rules:  
     - if: $PROJECT != "TRANSLATION"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -39,4 +39,4 @@ harvest-translation-prod:
   rules:  
     - if: $PROJECT != "TRANSLATION"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"
