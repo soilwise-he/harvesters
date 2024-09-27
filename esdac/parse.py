@@ -47,7 +47,6 @@ def dict2graph(d):
 
 def parseEUDASM(s2):
     ds = {'relation':[],'subject':[],'type':'dataset','isReferencedBy':'EUDASM'}
-    uri_labels = getCountryLabel()
     for i in s2.find_all("img"):
         ds['title'] = i.get('title')
         ds['thumbnailUrl'] = fullurl(i.get('src'))
