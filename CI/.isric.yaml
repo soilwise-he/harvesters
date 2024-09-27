@@ -22,7 +22,7 @@ harvest-isric-dev:
   rules:  
     - if: $PROJECT != "ISRIC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
       
 
@@ -45,4 +45,4 @@ harvest-isric-prod:
   rules:  
     - if: $PROJECT != "ISRIC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

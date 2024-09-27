@@ -19,7 +19,7 @@ harvest-record-to-pycsw-dev:
   rules:  
     - if: $PROJECT != "RECORD2PYCSW"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 # metadata
 harvest-record-to-pycsw-prod:
@@ -36,4 +36,4 @@ harvest-record-to-pycsw-prod:
   rules:  
     - if: $PROJECT != "RECORD2PYCSW"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"
