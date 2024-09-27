@@ -8,6 +8,7 @@ from rdflib.namespace import DC, DCAT, DCTERMS, SKOS, SDO, FOAF
 import sys,time,hashlib,os
 sys.path.append('utils')
 from database import insertRecord, dbQuery
+from keyword_matching import matchCountryUri
 
 # Load environment variables from .env file
 load_dotenv()
@@ -62,6 +63,10 @@ def parseEUDASM(s2):
         section = s.text
     for l in s2.find_all("span",{"class":"country"}):
         ds['subject'].append(l.text)
+        country_uri = matchCountryUri(l.text)
+        if country_uri:
+            ds['subject'].append(country_uri)
+
     for f in s2.find_all("a",{"title":"File"}):
         ds['relation'].append(fullurl(f.get('href')))
         ds['identifier'] = fullurl(f.get('href')) #set the id to ds url
@@ -129,8 +134,11 @@ def parseESDAC(s2):
             ds['publisher'] = c.text
     return ds
 
+# for dev only
+# dbQuery(f"update harvest.items set turtle=Null where identifier='https://esdac.jrc.ec.europa.eu/resource-type/national-soil-maps-eudasm?page=122/6'",(),False)
 # retrieve unparsed records
 unparsed = dbQuery(f"select identifier,resultobject,resulttype,title,itemtype from harvest.items where source = 'ESDAC' and (turtle is Null or turtle = '') limit {recsPerPage}")
+
 
 for rec in sorted(unparsed):
     rid,res,restype,ttl,itemtype = rec
@@ -148,7 +156,9 @@ for rec in sorted(unparsed):
         ds['identifier'] = rid
     dsRDF = dict2graph(ds)    
     triples = dsRDF.serialize(format='turtle') # todo: strip the namespaces?
-    dbQuery(f"update harvest.items set uri=%s, turtle=%s where identifier=%s",(ds['identifier'],triples,rid),False)     
+    dbQuery(f"update harvest.items set uri=%s, turtle=%s where identifier=%s",(ds['identifier'],triples,rid),False)
+
+ 
 
 
 
