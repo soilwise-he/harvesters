@@ -21,7 +21,7 @@ harvest-esdac-dev:
   rules:  
     - if: $PROJECT != "ESDAC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -41,4 +41,4 @@ harvest-esdac-prod:
   rules:  
     - if: $PROJECT != "ESDAC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"
