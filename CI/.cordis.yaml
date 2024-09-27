@@ -22,7 +22,7 @@ harvest-cordis-turtle-dev:
   rules:  
     - if: $PROJECT != "cordis"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -42,4 +42,4 @@ harvest-cordis-turtle-prod:
   rules:  
     - if: $PROJECT != "cordis"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"

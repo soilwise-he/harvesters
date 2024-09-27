@@ -16,11 +16,12 @@ harvest-esdac-dev:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
     - pip3 install -r esdac/requirements.txt
-    - python3 esdac/metadata.py
+    - python3 esdac/fetch.py
+    - python3 esdac/parse.py
   rules:  
     - if: $PROJECT != "ESDAC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
@@ -35,8 +36,9 @@ harvest-esdac-prod:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
     - pip3 install -r esdac/requirements.txt
-    - python3 esdac/metadata.py
+    - python3 esdac/fetch.py
+    - python3 esdac/parse.py
   rules:  
     - if: $PROJECT != "ESDAC"
       when: never
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_REF_NAME == "main"
