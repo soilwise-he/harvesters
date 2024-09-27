@@ -13,11 +13,14 @@ from keyword_matching import matchCountryUri
 # Load environment variables from .env file
 load_dotenv()
 
-recsPerPage = 5000
+recsPerPage = 10000
 
 def fullurl(u):
-    if u.startswith('/'):
-        u = 'https://esdac.jrc.ec.europa.eu/'+u
+    if not u.startswith('http'):
+        if u.startswith('/'):
+            u = 'https://esdac.jrc.ec.europa.eu'+u
+        else:    
+            u = 'https://esdac.jrc.ec.europa.eu/'+u
     return u
 
 def addNS(e):
@@ -28,10 +31,8 @@ def addNS(e):
 
 def urlasid(uri,ds):
     if 'identifier' not in ds or 'doi.org' in uri: # prefer doi
-        if uri.startswith('http' and 'doi.org' in uri): # strip doi.org from uri
-            pf = uri.split('/')
-            del pf[0:2]
-            uri = "/".join(pf)
+        if uri.startswith('http') and 'doi.org' in uri: # strip doi.org from uri
+            uri = uri.split('doi.org/').pop()
         ds['identifier'] = uri.replace('?','-').replace('#','-').replace('&','-').replace('=','-')
 
 def dict2graph(d):
@@ -89,19 +90,22 @@ def parseDOC(s2):
     for d in s2.find_all("span",{"property":"dc:date"}):
         ds['date'] = d.text
     for f in s2.find_all("a",{"aria-label":"Download"}):
-        ds['relation'].append(fullurl(f.get('href')))
-        urlasid(f.get('href'),ds)
+        if f.get('href'):
+            ds['relation'].append(fullurl(f.get('href')))
+            urlasid(f.get('href'),ds)
     for f in s2.find_all("span",{"class":"file"}):
         for fl in f.find_all("a"):
-            ds['relation'].append(fullurl(fl.get('href')))
-            urlasid(fl.get('href'),ds)
+            if fl.get('href'):
+                ds['relation'].append(fullurl(fl.get('href')))
+                urlasid(fl.get('href'),ds)
     for desc in s2.find_all("div",{"class":"details"}):
         for desc2 in desc.find_all("p"):
             ds['description'] = desc.text
             break # only first
         for a in desc.find_all("a"):
-            urlasid(a.get('href'),ds)
-            ds['relation'].append(fullurl(a.get('href')))
+            if a.get('href'):
+                urlasid(a.get('href'),ds)
+                ds['relation'].append(fullurl(a.get('href')))
     if 'description' not in ds or ds['description'] in [None,'']:
         for desc in s2.find_all("div",{"class":"field-content"}):
             ds['description'] = desc.text

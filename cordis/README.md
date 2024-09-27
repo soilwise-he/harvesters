@@ -298,16 +298,16 @@ From the previous step VIRTUOSO holds two triples for every project publication:
 
 JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** with method **main** as starting point for all the functionality.
 
-**DBWrite.main** can be invoked in four ways:
+**DBWrite.main** can be invoked in three ways:
 
 
-* with parameter **'doi'**
+* with parameter **'codis'**
 * with parameter **'title'**
 * with parameter **'turtle'**
-* with parameter **'hash'**
 
+The scheduled CI job 'cordis-harvest' runs them all.
 
-**Step 1** is to invoke **DBWrite** with parameter **'doi'**.
+**Step 1** is to invoke **DBWrite** with parameter **'cordis'**.
 
 =\>
 
@@ -365,3 +365,37 @@ The endpoints:
 
 * (test) https://repo.soilwise-he-test.containers.wurnet.nl/item/turtle/CORDIS
 * (prod) https://repo.soilwise-he.containers.wur.nl/item/turtle/CORDIS
+
+
+**Finally the Virtuoso triple store can be used by SPARQL queries**
+
+default-graph-uri <https://soilwise-he.github.io/soil-health>
+
+**Query one doi:**
+
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX eurio:<http://data.europa.eu/s66#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX datacite: <http://purl.org/spar/datacite/>
+select ?sub ?pred ?obj
+WHERE {
+  ?sub ?pred ?obj
+FILTER (?sub= <https://doi.org/10.1002/2017JG004269>) 
+}
+```
+
+**Query one doi for predicate "isReferencedBy":**
+
+```
+PREFIX dcterms:<http://purl.org/dc/terms/>
+
+SELECT ?o
+WHERE {
+?s ?p ?o
+FILTER regex(?p, "isReferencedBy", "i")
+FILTER regex(?s,"10.1002/adfm.202112374","i")
+}
+```
+

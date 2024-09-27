@@ -9,14 +9,15 @@ harvest-cordis-turtle-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
   stage: run-harvest
   script:
-    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_DB=$POSTGRES_JDBC_TEST
     - export POSTGRES_USERNAME=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
 
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar doi
+    - java -jar /opt/app/soilwise_doi.jar cordis
     - java -jar /opt/app/soilwise_doi.jar title
+#    - java -jar /opt/app/soilwise_doi.jar openairedoi
     - java -jar /opt/app/soilwise_doi.jar turtle
   rules:  
     - if: $PROJECT != "cordis"
@@ -29,13 +30,13 @@ harvest-cordis-turtle-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/eclipse-temurin:17-alpine
   stage: run-harvest
   script:
-    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_DB=$POSTGRES_JDBC_PROD
     - export POSTGRES_USERNAME=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar doi
+    - java -jar /opt/app/soilwise_doi.jar cordis
     - java -jar /opt/app/soilwise_doi.jar title
     - java -jar /opt/app/soilwise_doi.jar turtle
   rules:  
