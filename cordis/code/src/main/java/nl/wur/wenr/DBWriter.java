@@ -24,15 +24,15 @@ public class DBWriter {
         //DBConnection.setupDatabaseParameters("virtuoso.jdbc4.Driver", "dba", "secret", "jdbc:virtuoso://localhost:1111");
         String username = System.getenv("POSTGRES_USERNAME");
         if(username == null || username.length()==0) {
-            username = "soilwise" ; // "soilwise";
+            username = "XXXX" ;
         }
         String password = System.getenv("POSTGRES_PASSWORD");
         if(password == null || password.length()==0) {
-            password = "Brugge2503" ; // "Brugge2503";
+            password = "XXXX" ;
         }
         String connecturi = System.getenv("POSTGRES_DB");
         if(connecturi == null || connecturi.length()==0) {
-            connecturi = "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentschema=harvester" ; // "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/test_soilwise?currentschema=harvester";
+            connecturi = "jdbc:postgresql://host:port/database?currentschema=harvester" ; // "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/test_soilwise?currentschema=harvester";
         }
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
         db = DBConnection.instance();
