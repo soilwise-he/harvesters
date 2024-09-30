@@ -1,6 +1,7 @@
 
 include:
   - local: "/CI/.cordis.yaml"
+  - local: "/CI/.openaire.yaml"
   - local: "/CI/.bonares.yaml"
   - local: "/CI/.inspire.yaml"
   - local: "/CI/.esdac.yaml"
