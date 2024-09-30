@@ -230,7 +230,7 @@ public class DBWriter {
     public long queryDOIsOpenAire()  {
         long cnt = 0;
 
-        cnt = queryDOIs("select identifier, uri, source from harvest.items where turtle IS NULL and resulttype != 'oaf' and identifiertype = ?"
+        cnt = queryDOIs("select uri, identifier as doi, source from harvest.items where turtle IS NULL and resulttype != 'oaf' and identifiertype = ?"
                         , new Object[] {  "doi" } );
         return cnt;
     }
@@ -238,7 +238,7 @@ public class DBWriter {
     public long queryDOIsCORDIS()  {
         long cnt = 0;
 
-        cnt = queryDOIs("select uri, resultobject from harvest.items where upper(source) = ? and resulttype = ?"
+        cnt = queryDOIs("select uri, resultobject as doi, source from harvest.items where upper(source) = ? and resulttype = ?"
                 , new Object[] {  "CORDIS", "doi" } );
 
         return cnt;
@@ -258,10 +258,11 @@ public class DBWriter {
                 while (rs.next()) {
 
                     result = "";
-                    String doi = rs.getString("resultobject");
+                    String doi = rs.getString("doi");
                     String uri = rs.getString("uri");
+                    String source = rs.getString("source");
 
-                    queryOneDOI("CORDIS", uri, doi);
+                    queryOneDOI(source, uri, doi);
 
                     cnt++;
 
