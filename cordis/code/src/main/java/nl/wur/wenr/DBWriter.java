@@ -126,13 +126,11 @@ public class DBWriter {
 
                     for (int i = 0; i < bindingsarray.length(); i++) {
 
-//                        if ((i >= (pageSize * (pageNum - 1))) && (i < (pageSize * pageNum))) {
                             eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("obj").getString("value");
                             loadOneDOI(
                                     bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value"));
 
 
-//                        }
                         if (DBWrite.loglevel >= 1 && (i % 100 == 0)) {
                             System.out.println(i);
                         }
@@ -299,19 +297,6 @@ public class DBWriter {
 
         String opaire = DBWrite.getHTTPResult(requestOpenaire);
 
-//        try {  // replace existing record
-//            db.executeVoid(con, "delete from harvest.items where uri=? and source=? "
-//                    , new Object[] { eurioIndentifier, "CORDIS" } );
-//
-//
-//            db.executeVoid(con, "insert into harvest.items(identifier, resultobject, uri, itemtype, insert_date, source, identifiertype, resulttype) VALUES(?, ?, ?, ?, now(), ?,?, ? ) "
-//                    , new Object[] { eurioIndentifier.substring( eurioIndentifier.lastIndexOf('/')+1 ), doi,  eurioIndentifier, "publication", "CORDIS", "cordis", "doi" } );
-//            //System.out.println(eurioIndentifier.substring( eurioIndentifier.lastIndexOf('/')+1 ));
-//        }
-//
-//        catch(Exception e) {
-//            System.out.println(e.getMessage());
-//        }
 
         if (opaire != null) {
 
@@ -352,59 +337,7 @@ public class DBWriter {
         }
 //        }
     }
-//    public long hashDOIs()  {
-//        long cnt = 0;
-//        try {
-//
-//
-//            WrapResultSet rs= db.executeQuery( "select identifier, identifiertype, resultobject, title, hash from harvest.items where upper(source) = ? and resulttype = ?", new Object[] {  "CORDIS", "oaf" }  );
-//
-//            con = db.getConnection();
-//            db.executeVoid(con, "delete from harvest.item_duplicates where upper(source) = ?", new Object[] { "CORDIS" });
-//
-//            try {
-//                int i = 0;
-//                while (rs.next()) {
-//
-//                    result = "";
-//                    String doi = rs.getString("identifier");
-//                    String idtype = rs.getString("identifiertype");
-//                    String oldhash = rs.getString("hash");
-//                    String newhash = calculateMD5(rs.getString("resultobject")+rs.getString("title").toLowerCase()) ;  // +rs.getString("title").toLowerCase()
-//
-//                    if(newhash != null && (oldhash == null || ! oldhash.equalsIgnoreCase(newhash))) {
-//
-//                        try {
-//
-//                            db.executeVoid(con, "update harvest.items set hash = ? where identifier = ? and upper(source) = ? and resulttype = ?", new Object[] {newhash, doi, "CORDIS", "oaf"});
-//
-//                        }
-//                        catch (Exception e) {
-//                            db.executeVoid(con, "update harvest.items set hash = NULL where identifier = ? and upper(source) = ? and resulttype = ?", new Object[] {doi, "CORDIS", "oaf"});
-//                            db.executeVoid(con, "INSERT INTO harvest.cordis_duplicates select * from (identifier, identifiertype, source, hash) VALUES(?, ?, ?, ?)", new Object[] {doi, idtype, "CORDIS", newhash });
-//
-//                        }
-//                    }
-//                    i++;
-//
-//                    if (DBWrite.loglevel >= 1 && (i % 100 == 0)) {
-//                        System.out.println(i);
-//                    }
-//                }
-//                cnt = i;
-//            }
-//            finally {
-//                rs.close();
-//            }
-//        }
-//        catch(Exception e) {
-//            System.out.println(e.getMessage());
-//
-//        }
-//
-//        return cnt;
-//
-//    }
+
 
 public long turtleDOIs()  {
     long cnt = 0;
@@ -492,7 +425,7 @@ public long turtleDOIs()  {
                             }
                             if (orcid != null && orcid.length() > 0 ) {
                             // separate entries for every orcid
-                                writeTripleLiteral(doiURI, predicate, "https://orcid.org/" + orcid);
+                                writeTripleURI(doiURI, predicate, "https://orcid.org/" + orcid);
                             }
                             String rank = "0";
                             if (arrPredicate.getJSONObject(i).keySet().contains("@rank")) {
