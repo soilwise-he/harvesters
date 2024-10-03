@@ -32,7 +32,7 @@ public class DBWriter {
         }
         String connecturi = System.getenv("POSTGRES_DB");
         if(connecturi == null || connecturi.length()==0) {
-            connecturi = "jdbc:postgresql://host:port/database?currentschema=harvester" ; // "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/test_soilwise?currentschema=harvester";
+            connecturi = "jdbc:postgresql://host:port/database?currentschema=harvester" ; 
         }
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
         db = DBConnection.instance();
@@ -231,7 +231,7 @@ public class DBWriter {
         long cnt = 0;
 
         cnt = queryDOIs("select uri, identifier as doi, source from harvest.items where turtle IS NULL and resulttype != 'oaf' and identifiertype = ?"
-                        , new Object[] {  "doi" } );
+                , new Object[] {  "doi" } );
         return cnt;
     }
 
@@ -245,7 +245,7 @@ public class DBWriter {
     }
 
     public long queryDOIs(String statement, Object[] parameters)  {
-    // enrich from OpenAire
+        // enrich from OpenAire
         long cnt = 0;
         try {
 
@@ -469,7 +469,7 @@ public long turtleDOIs()  {
             JSONObject oafresult = new JSONObject(oafresultstring);
 
             predicate = "creator";
-                // special handling because of ranking
+                // special handling because of ranking and @orcid
 
                 if (oafresult.keySet().contains(predicate)) {
                     Object objPredicate = oafresult.get(predicate);
@@ -486,6 +486,14 @@ public long turtleDOIs()  {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                         for (int i = 0; i < arrPredicate.length(); i++) {
                             String addString = cleanValue(arrPredicate.getJSONObject(i).get("$").toString());
+                            String orcid="";
+                            if (arrPredicate.getJSONObject(i).keySet().contains("@orcid")) {
+                                orcid = arrPredicate.getJSONObject(i).get("@orcid").toString();
+                            }
+                            if (orcid != null && orcid.length() > 0 ) {
+                            // separate entries for every orcid
+                                writeTripleLiteral(doiURI, predicate, "https://orcid.org/" + orcid);
+                            }
                             String rank = "0";
                             if (arrPredicate.getJSONObject(i).keySet().contains("@rank")) {
                                 rank = arrPredicate.getJSONObject(i).get("@rank").toString();
