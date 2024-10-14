@@ -10,7 +10,7 @@ The final result will be that for identifiers which are DOIs:
 **STEPS:** 
 - 1. QUERY OPENAIRE
 - 2. CREATE TURTLE OUT IF THE RESULT
-- 3. LOAD THE TURTLE INTO VIRTUOSO**
+- 3. LOAD THE TURTLE INTO VIRTUOSO
 
 Both the steps 1 and 2 use the runnable class **DBWrite** from JAVA project **'soilwise-cordis-fetch-dois'**.
 The .jar file has originally be created for cordis, and is located inside the cordis folder.
