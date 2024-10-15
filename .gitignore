@@ -5,3 +5,5 @@
 /share/
 /include/
 *.env
+cordis/code/target
+cordis/soilwise_doi_old.jar

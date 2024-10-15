@@ -301,7 +301,7 @@ JAVA project **'soilwise-cordis-fetch-dois'** has runnable class **DBWrite** wit
 **DBWrite.main** can be invoked in three ways:
 
 
-* with parameter **'codis'**
+* with parameter **'cordis'**
 * with parameter **'title'**
 * with parameter **'turtle'**
 

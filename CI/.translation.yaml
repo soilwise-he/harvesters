@@ -4,7 +4,7 @@ default:
 stages:
   - run-harvest
   
-# metadata
+# metadata | this won't work, because endpoint is not open to outside
 harvest-translation-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
@@ -14,9 +14,10 @@ harvest-translation-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+    - export TR_CALLBACK_URL=https://api.soilwise-he.containers.wur.nl/tolk/callback
   
-    - pip3 install -r translate/requirements.txt
-    - python3 translate/request-translation.py
+    # - pip3 install -r translate/requirements.txt
+    # - python3 translate/request-translation.py
   rules:  
     - if: $PROJECT != "TRANSLATION"
       when: never
@@ -33,8 +34,10 @@ harvest-translation-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+    - export TR_CALLBACK_URL=https://api.soilwise-he.containers.wur.nl/tolk/callback
 
     - pip3 install -r translate/requirements.txt
+    - python3 translate/extract-translation.py
     - python3 translate/request-translation.py
   rules:  
     - if: $PROJECT != "TRANSLATION"
