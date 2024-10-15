@@ -15,6 +15,8 @@ harvest-translation-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export TR_CALLBACK_URL=https://api.soilwise-he.containers.wur.nl/tolk/callback
+    - export TR_LOGIN=$EC_TRANS_LOGIN
+    - export TR_PASSCODE=$EC_TRANS_PASSCODE
   
     # - pip3 install -r translate/requirements.txt
     # - python3 translate/request-translation.py
@@ -35,7 +37,9 @@ harvest-translation-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export TR_CALLBACK_URL=https://api.soilwise-he.containers.wur.nl/tolk/callback
-
+    - export TR_LOGIN=$EC_TRANS_LOGIN
+    - export TR_PASSCODE=$EC_TRANS_PASSCODE
+    
     - pip3 install -r translate/requirements.txt
     - python3 translate/extract-translation.py
     - python3 translate/request-translation.py
