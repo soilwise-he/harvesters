@@ -1,4 +1,5 @@
 # query openaire to enrich DOIs, java soilwise_doi.jar, DBWrite.main()
+# select from harvest.items where turtle IS NULL and resulttype != 'oaf' and identifiertype = 'doi'
 default:
   interruptible: false
 stages:
