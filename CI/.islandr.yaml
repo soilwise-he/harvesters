@@ -5,7 +5,7 @@ stages:
   - run-harvest
 
 # metadata
-harvest-bonares-dev:
+harvest-islandr-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -26,7 +26,7 @@ harvest-bonares-dev:
 
 
 # metadata
-harvest-bonares-prod:
+harvest-islandr-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
