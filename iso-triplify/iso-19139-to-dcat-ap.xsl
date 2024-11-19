@@ -743,17 +743,19 @@
     </xsl:param>
 
     <xsl:param name="MetadataDate">
-      <xsl:choose>
-        <xsl:when test="gmd:dateStamp/gco:Date">
-          <xsl:value-of select="gmd:dateStamp/gco:Date"/>
-        </xsl:when>
-        <xsl:when test="gmd:dateStamp/gco:DateTime">
-<!--
-          <xsl:value-of select="substring(gmd:dateStamp/gco:DateTime/text(),1,10)"/>
--->
-          <xsl:value-of select="normalize-space(gmd:dateStamp/gco:DateTime/text())"/>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:call-template name="isDate">
+        <xsl:with-param name="dt">
+          <xsl:choose>
+            <xsl:when test="gmd:dateStamp/gco:Date">
+              <xsl:value-of select="normalize-space(gmd:dateStamp/gco:Date/text())"/>
+            </xsl:when>
+            <xsl:when test="gmd:dateStamp/gco:DateTime">
+              <xsl:value-of select="substring(normalize-space(gmd:dateStamp/gco:DateTime/text()),1,10)"/>
+              <!--  <xsl:value-of select="normalize-space(gmd:dateStamp/gco:DateTime/text())"/>-->
+            </xsl:when>
+          </xsl:choose>
+      </xsl:with-param>
+    </xsl:call-template>
     </xsl:param>
 
     <xsl:param name="UniqueResourceIdentifier">
@@ -2576,23 +2578,19 @@
 -->
     <xsl:for-each select="gmd:extent/*[local-name() = 'TimeInstant']|gmd:extent/*[local-name() = 'TimePeriod']">
       <xsl:if test="local-name(.) = 'TimeInstant' or ( local-name(.) = 'TimePeriod' and *[local-name() = 'beginPosition'] and *[local-name() = 'endPosition'] )">
-<!--
-        <xsl:variable name="dctperiod">
-          <xsl:choose>
-            <xsl:when test="local-name(.) = 'TimeInstant'">start=<xsl:value-of select="gml:timePosition"/>; end=<xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise>start=<xsl:value-of select="gml:beginPosition"/>; end=<xsl:value-of select="gml:endPosition"/></xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
--->
         <xsl:variable name="dateStart">
-          <xsl:choose>
-<!--
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="gml:beginPosition"/></xsl:otherwise>
--->
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="normalize-space(*[local-name() = 'beginPosition'])"/></xsl:otherwise>
-          </xsl:choose>
+          <xsl:call-template name="isDate">
+            <xsl:with-param name="dt">
+              <xsl:choose>
+                <xsl:when test="local-name(.) = 'TimeInstant'">
+                  <xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(*[local-name() = 'beginPosition'])"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateStart-data-type">
           <xsl:call-template name="DateDataType">
@@ -2600,14 +2598,18 @@
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateEnd">
-          <xsl:choose>
-<!--
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="gml:endPosition"/></xsl:otherwise>
--->
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/></xsl:when>
-      <xsl:otherwise><xsl:value-of select="normalize-space(*[local-name() = 'endPosition'])"/></xsl:otherwise>
-          </xsl:choose>
+          <xsl:call-template name="isDate">
+            <xsl:with-param name="dt">
+              <xsl:choose>
+                <xsl:when test="local-name(.) = 'TimeInstant'">
+                  <xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(*[local-name() = 'endPosition'])"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateEnd-data-type">
           <xsl:call-template name="DateDataType">
@@ -2650,7 +2652,11 @@
 
   <xsl:template name="Dates" match="gmd:date/gmd:CI_Date">
     <xsl:param name="date">
-      <xsl:value-of select="normalize-space(gmd:date/gco:Date)"/>
+      <xsl:call-template name="isDate">
+        <xsl:with-param name="dt">
+          <xsl:value-of select="normalize-space(gmd:date/gco:Date)"/>
+        </xsl:with-param>
+      </xsl:call-template>
     </xsl:param>
     <xsl:param name="type">
       <xsl:value-of select="gmd:dateType/gmd:CI_DateTypeCode/@codeListValue"/>
@@ -2660,23 +2666,25 @@
         <xsl:with-param name="date" select="$date"/>
       </xsl:call-template>
     </xsl:param>
-    <xsl:choose>
-      <xsl:when test="$type = 'publication'">
-        <dct:issued rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:issued>
-      </xsl:when>
-      <xsl:when test="$type = 'revision'">
-        <dct:modified rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:modified>
-      </xsl:when>
-      <xsl:when test="$type = 'creation' and $profile = $extended">
-        <dct:created rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:created>
-      </xsl:when>
-    </xsl:choose>
+    <xsl:if test="$date != ''">
+      <xsl:choose>
+        <xsl:when test="$type = 'publication'">
+          <dct:issued rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:issued>
+        </xsl:when>
+        <xsl:when test="$type = 'revision'">
+          <dct:modified rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:modified>
+        </xsl:when>
+        <xsl:when test="$type = 'creation' and $profile = $extended">
+          <dct:created rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:created>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:if>
   </xsl:template>
 
 <!-- Generic date data type template -->
@@ -4071,6 +4079,13 @@
         </xsl:element>
       </xsl:if>
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template name="isDate">
+    <xsl:param name="dt"/>
+    <xsl:if test="translate($dt, '123456789', '000000000') = '0000-00-00'">
+      <xsl:value-of select="$dt"/>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template name="Alpha3-to-Alpha2">
