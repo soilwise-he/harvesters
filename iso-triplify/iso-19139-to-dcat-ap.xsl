@@ -456,7 +456,8 @@
   </xsl:param>
 
   <xsl:param name="ResourceUri">
-    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString | gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href"/>
+    <xsl:variable name="rURI" select="normalize-space(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString | 
+      gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href)"/>
     <xsl:choose>
       <xsl:when test="$rURI = ''">
         <xsl:value-of select="$MetadataUri"/>
