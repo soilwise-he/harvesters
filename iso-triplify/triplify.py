@@ -10,7 +10,7 @@ from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
 # Load environment variables from .env file
 load_dotenv()
 
-count=2500
+count=10000
 
 class LinkResolver(ET.Resolver):
     def resolve(self, url, id, context):
@@ -19,7 +19,7 @@ class LinkResolver(ET.Resolver):
 
 
 # fetch the mcf's
-recs = dbQuery(f"Select identifier, hash, resultobject, source from harvest.items where resulttype = 'iso19139:2007' and coalesce(turtle,'') = '' and coalesce(error,'') = '' limit {count}")
+recs = dbQuery(f"Select identifier, hash, resultobject, source from harvest.items where resulttype = 'iso19139:2007' and coalesce(turtle,'') = '' and coalesce(resultobject,'') <> '' and coalesce(error,'') = '' limit {count}")
 
 if recs:
     total = len(recs)
