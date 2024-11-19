@@ -75,8 +75,9 @@ The Turtle can be accessed by SOURCE:
 
 The endpoints:
 
-* (test) https://repo.soilwise-he-test.containers.wurnet.nl/item/turtle/IMPACT4SOIL?pageNo=0 / 1 / 2 etc. 
 * (prod) https://repo.soilwise-he.containers.wur.nl/item/turtle/IMPACT4SOIL?pageNo=0 / 1 / 2 etc.
+
+* (test) https://repo.soilwise-he-test.containers.wurnet.nl/item/turtle/IMPACT4SOIL?pageNo=0 / 1 / 2 etc. 
 
 **As the TURTLE result can exceed the limits set by Virtuoso paging has been implemented. The default pageSize=3000**
 
