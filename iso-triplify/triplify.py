@@ -60,6 +60,7 @@ if recs:
             transform = ET.XSLT(xsl)#, access_control=ac)
             try:
                 rdfxml = ET.tostring(transform(xml), pretty_print=True)
+                print(transform.error_log)
             except:
                 tmerror = f'Failed xslt, {id}'
                 for error in transform.error_log:
