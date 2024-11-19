@@ -456,7 +456,8 @@
   </xsl:param>
 
   <xsl:param name="ResourceUri">
-    <xsl:variable name="rURI" select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString | gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href"/>
+    <xsl:variable name="rURI" select="normalize-space(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gco:CharacterString | 
+      gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href)"/>
     <xsl:choose>
       <xsl:when test="$rURI = ''">
         <xsl:value-of select="$MetadataUri"/>
@@ -742,18 +743,19 @@
     </xsl:param>
 
     <xsl:param name="MetadataDate">
-      <xsl:choose>
-        <xsl:when test="gmd:dateStamp/gco:Date">
-            <xsl:call-template name="validate-date">
-              <xsl:with-param name="dt" select="gmd:dateStamp/gco:Date/text()"/>
-            </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="gmd:dateStamp/gco:DateTime">
-            <xsl:call-template name="validate-date">
-              <xsl:with-param name="dt" select="substring(gmd:dateStamp/gco:DateTime/text(),1,10)"/>
-            </xsl:call-template>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:call-template name="isDate">
+        <xsl:with-param name="dt">
+          <xsl:choose>
+            <xsl:when test="gmd:dateStamp/gco:Date">
+              <xsl:value-of select="normalize-space(gmd:dateStamp/gco:Date/text())"/>
+            </xsl:when>
+            <xsl:when test="gmd:dateStamp/gco:DateTime">
+              <xsl:value-of select="substring(normalize-space(gmd:dateStamp/gco:DateTime/text()),1,10)"/>
+              <!--  <xsl:value-of select="normalize-space(gmd:dateStamp/gco:DateTime/text())"/>-->
+            </xsl:when>
+          </xsl:choose>
+      </xsl:with-param>
+    </xsl:call-template>
     </xsl:param>
 
     <xsl:param name="UniqueResourceIdentifier">
@@ -1586,9 +1588,7 @@
     </xsl:param>
 
     <xsl:param name="ResponsiblePartyRole">
-      <xsl:call-template name="valid-uri">
-        <xsl:with-param name="uri" select="concat($ResponsiblePartyRoleCodelistUri,'/',$role)"/>
-      </xsl:call-template>
+      <xsl:value-of select="concat($ResponsiblePartyRoleCodelistUri,'/',$role)"/>
     </xsl:param>
 
     <xsl:param name="IndividualURI">
@@ -1629,9 +1629,6 @@
         <xsl:when test="$OrganisationURI != ''">
           <xsl:value-of select="$OrganisationURI"/>
         </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
-        </xsl:otherwise>
       </xsl:choose>
     </xsl:param>
 
@@ -1667,13 +1664,13 @@
 
     <xsl:param name="Email">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/*[normalize-space() != '' and normalize-space() != '|']">
-        <foaf:mbox rdf:resource="{translate(normalize-space(.),';, ','')}"/>
+        <foaf:mbox rdf:resource="{normalize-space(.)}"/>
       </xsl:for-each>
     </xsl:param>
 
     <xsl:param name="Email-vCard">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/*[normalize-space() != '' and normalize-space() != '|']">
-        <vcard:hasEmail rdf:resource="mailto:{translate(normalize-space(.),';, ','')}"/>
+        <vcard:hasEmail rdf:resource="mailto:{normalize-space(.)}"/>
       </xsl:for-each>
     </xsl:param>
 
@@ -1850,7 +1847,7 @@
           </rdf:Description>
         </xsl:when>
         <xsl:otherwise>
-          <rdf:Description rdf:about="{$URI}">
+          <rdf:Description>
             <xsl:copy-of select="$info"/>
           </rdf:Description>
         </xsl:otherwise>
@@ -2581,25 +2578,19 @@
 -->
     <xsl:for-each select="gmd:extent/*[local-name() = 'TimeInstant']|gmd:extent/*[local-name() = 'TimePeriod']">
       <xsl:if test="local-name(.) = 'TimeInstant' or ( local-name(.) = 'TimePeriod' and *[local-name() = 'beginPosition'] and *[local-name() = 'endPosition'] )">
-<!--
-        <xsl:variable name="dctperiod">
-          <xsl:choose>
-            <xsl:when test="local-name(.) = 'TimeInstant'">start=<xsl:value-of select="gml:timePosition"/>; end=<xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise>start=<xsl:value-of select="gml:beginPosition"/>; end=<xsl:value-of select="gml:endPosition"/></xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
--->
         <xsl:variable name="dateStart">
-          <xsl:choose>
-<!--
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="gml:beginPosition"/></xsl:otherwise>
--->
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:call-template name="validate-date">
-              <xsl:with-param name="dt" select="normalize-space(*[local-name() = 'timePosition'])"/></xsl:call-template></xsl:when>
-            <xsl:otherwise><xsl:call-template name="validate-date">
-              <xsl:with-param name="dt" select="normalize-space(*[local-name() = 'beginPosition'])"/></xsl:call-template></xsl:otherwise>
-          </xsl:choose>
+          <xsl:call-template name="isDate">
+            <xsl:with-param name="dt">
+              <xsl:choose>
+                <xsl:when test="local-name(.) = 'TimeInstant'">
+                  <xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(*[local-name() = 'beginPosition'])"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateStart-data-type">
           <xsl:call-template name="DateDataType">
@@ -2607,16 +2598,18 @@
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateEnd">
-          <xsl:choose>
-<!--
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:value-of select="gml:timePosition"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="gml:endPosition"/></xsl:otherwise>
--->
-            <xsl:when test="local-name(.) = 'TimeInstant'"><xsl:call-template name="validate-date">
-              <xsl:with-param name="dt" select="normalize-space(*[local-name() = 'timePosition'])"/></xsl:call-template></xsl:when>
-      <xsl:otherwise><xsl:call-template name="validate-date">
-        <xsl:with-param name="dt" select="normalize-space(*[local-name() = 'endPosition'])"/></xsl:call-template></xsl:otherwise>
-          </xsl:choose>
+          <xsl:call-template name="isDate">
+            <xsl:with-param name="dt">
+              <xsl:choose>
+                <xsl:when test="local-name(.) = 'TimeInstant'">
+                  <xsl:value-of select="normalize-space(*[local-name() = 'timePosition'])"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="normalize-space(*[local-name() = 'endPosition'])"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="dateEnd-data-type">
           <xsl:call-template name="DateDataType">
@@ -2659,8 +2652,10 @@
 
   <xsl:template name="Dates" match="gmd:date/gmd:CI_Date">
     <xsl:param name="date">
-      <xsl:call-template name="validate-date">
-        <xsl:with-param name="dt" select="gmd:date/gco:Date/text()"/>
+      <xsl:call-template name="isDate">
+        <xsl:with-param name="dt">
+          <xsl:value-of select="normalize-space(gmd:date/gco:Date)"/>
+        </xsl:with-param>
       </xsl:call-template>
     </xsl:param>
     <xsl:param name="type">
@@ -2672,23 +2667,23 @@
       </xsl:call-template>
     </xsl:param>
     <xsl:if test="$date != ''">
-    <xsl:choose>
-      <xsl:when test="$type = 'publication'">
-        <dct:issued rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:issued>
-      </xsl:when>
-      <xsl:when test="$type = 'revision'">
-        <dct:modified rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:modified>
-      </xsl:when>
-      <xsl:when test="$type = 'creation' and $profile = $extended">
-        <dct:created rdf:datatype="{$xsd}{$data-type}">
-          <xsl:value-of select="$date"/>
-        </dct:created>
-      </xsl:when>
-    </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="$type = 'publication'">
+          <dct:issued rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:issued>
+        </xsl:when>
+        <xsl:when test="$type = 'revision'">
+          <dct:modified rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:modified>
+        </xsl:when>
+        <xsl:when test="$type = 'creation' and $profile = $extended">
+          <dct:created rdf:datatype="{$xsd}{$data-type}">
+            <xsl:value-of select="$date"/>
+          </dct:created>
+        </xsl:when>
+      </xsl:choose>
     </xsl:if>
   </xsl:template>
 
@@ -3117,11 +3112,7 @@
 <!-- Topic category -->
 
   <xsl:template name="TopicCategory" match="gmd:identificationInfo/*/gmd:topicCategory">
-    <xsl:param name="TopicCategory">
-    <xsl:call-template name="valid-uri">
-        <xsl:with-param name="uri" select="normalize-space(gmd:MD_TopicCategoryCode)"/>
-      </xsl:call-template>
-    </xsl:param>
+    <xsl:param name="TopicCategory"><xsl:value-of select="normalize-space(gmd:MD_TopicCategoryCode)"/></xsl:param>
     <xsl:if test="$TopicCategory != ''">
       <dct:subject rdf:resource="{$TopicCategoryCodelistUri}/{$TopicCategory}"/>
     </xsl:if>
@@ -4090,6 +4081,13 @@
     </xsl:for-each>
   </xsl:template>
 
+  <xsl:template name="isDate">
+    <xsl:param name="dt"/>
+    <xsl:if test="translate($dt, '123456789', '000000000') = '0000-00-00'">
+      <xsl:value-of select="$dt"/>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="Alpha3-to-Alpha2">
     <xsl:param name="lang"/>
     <xsl:choose>
@@ -4327,19 +4325,6 @@
     <xsl:if test="$endpoint-description != ''">
       <dcat:endpointDescription rdf:resource="{$endpoint-description}"/>
     </xsl:if>
-  </xsl:template>
-
-  <xsl:template name="validate-date">
-    <xsl:param name="dt"/>
-    <xsl:variable name="d" select="number(translate(translate($dt,'/',''),'-',''))"/>
-    <xsl:if test="number($d) &gt; 0 and string-length($d) &gt; 7">
-      <xsl:value-of select="concat(substring($d,1,4),'-',substring($d,5,2),'-',substring($d,7,2))"/>
-    </xsl:if>
-  </xsl:template>
-  
-  <xsl:template name="valid-uri">
-    <xsl:param name="uri"/>
-    <xsl:value-of select="translate(translate(translate($uri,';',''),',',''),' ','')"/>
   </xsl:template>
 
 </xsl:transform>

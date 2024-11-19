@@ -3,9 +3,9 @@ default:
   interruptible: false
 stages:
   - run-harvest
-  
+
 # metadata
-harvest-ejpsoil-dev:
+harvest-islandr-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -19,14 +19,14 @@ harvest-ejpsoil-dev:
 
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
-  rules:  
+  rules:
     - if: $PROJECT != "ISLANDR"
       when: never
     - if: $CI_COMMIT_REF_NAME == "dev"
 
 
 # metadata
-harvest-ejpsoil-prod:
+harvest-islandr-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -40,7 +40,7 @@ harvest-ejpsoil-prod:
 
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
-  rules:  
+  rules:
     - if: $PROJECT != "ISLANDR"
       when: never
     - if: $CI_COMMIT_REF_NAME == "main"
