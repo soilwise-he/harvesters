@@ -10,6 +10,14 @@ Fetches the html pages into the postgres database.
 Then each link is fetched. 
 - For maps (EUDASM) and documents, there are no child pages, so the metadata is directly scraped from the list page
 
+## fetch-projects.py
+
+Fetches the relevant projects from 
+- https://esdac.jrc.ec.europa.eu/projects/Eufunded/Eufunded.html
+- https://mission-soil-platform.ec.europa.eu/project-hub/funded-projects-under-mission-soil
+
+Which are later used as a filter to query openaire
+
 ## parse.py
 
 The parse script queries the html from the database and parses the content to Dublin Core metadata, which is placed back into the database.
