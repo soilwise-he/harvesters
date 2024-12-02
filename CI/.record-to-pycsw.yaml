@@ -18,10 +18,10 @@ harvest-record-to-pycsw-dev:
     - python3 record-to-pycsw/metadata.py
   workflow:
     name: 'Harvest: $PROJECT $CI_COMMIT_BRANCH'
-  rules:  
-    - if: $PROJECT != "RECORD2PYCSW"
-      when: never
-    - if: $CI_COMMIT_REF_NAME == "dev"
+    rules:  
+      - if: $PROJECT != "RECORD2PYCSW"
+        when: never
+      - if: $CI_COMMIT_REF_NAME == "dev"
 
 # metadata
 harvest-record-to-pycsw-prod:
