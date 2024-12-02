@@ -3,7 +3,10 @@ default:
   interruptible: false
 stages:
   - run-harvest
-  
+
+workflow:
+  name: 'Harvest: $PROJECT'
+
 # metadata
 harvest-record-to-pycsw-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:2b90752b8d53838390c49d4bfef633d1e7c667f9031efa56faaae4552e6d548b
@@ -16,12 +19,10 @@ harvest-record-to-pycsw-dev:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - pip3 install -r record-to-pycsw/requirements.txt
     - python3 record-to-pycsw/metadata.py
-  workflow:
-    name: 'Harvest: $PROJECT $CI_COMMIT_BRANCH'
-    rules:  
-      - if: $PROJECT != "RECORD2PYCSW"
-        when: never
-      - if: $CI_COMMIT_REF_NAME == "dev"
+  rules:  
+    - if: $PROJECT != "RECORD2PYCSW"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "dev"
 
 # metadata
 harvest-record-to-pycsw-prod:
