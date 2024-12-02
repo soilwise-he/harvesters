@@ -16,6 +16,8 @@ harvest-record-to-pycsw-dev:
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - pip3 install -r record-to-pycsw/requirements.txt
     - python3 record-to-pycsw/metadata.py
+  workflow:
+    name: 'Harvest: $PROJECT $CI_COMMIT_BRANCH'
   rules:  
     - if: $PROJECT != "RECORD2PYCSW"
       when: never
