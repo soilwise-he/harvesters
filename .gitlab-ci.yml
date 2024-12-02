@@ -1,4 +1,7 @@
 
+workflow:
+  name: 'Harvest: $PROJECT'
+
 include:
   - local: "/CI/.cordis.yaml"
   - local: "/CI/.islandr.yaml"
