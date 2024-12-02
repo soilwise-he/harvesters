@@ -3,7 +3,10 @@ default:
   interruptible: false
 stages:
   - run-harvest
-  
+
+workflow:
+  name: 'Harvest: $PROJECT'
+
 # metadata
 harvest-record-to-pycsw-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:2b90752b8d53838390c49d4bfef633d1e7c667f9031efa56faaae4552e6d548b
