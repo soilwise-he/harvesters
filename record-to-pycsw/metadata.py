@@ -141,5 +141,5 @@ if recs:
 
         
 # workaround for '//' to '/' bahavior
-dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%'),False)
+dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%',),False)
 
