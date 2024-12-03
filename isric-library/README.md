@@ -1,13 +1,11 @@
 # Harvesting metadata from ISRIC library
 
-[ISRIC library](https://library.wur.nl/WebQuery/isric) is a collection of books and maps on global soil maintained by the ISRIC collections team.
-There is an overlap with the EUDASM collection. Which makes an interesting case for deduplication.
-
-The collection currently holds 10250 maps.
+[ISRIC library](https://library.wur.nl/WebQuery/isric) (10250 maps) is a collection of books and maps on global soil maintained by the ISRIC collections team.
+There is an overlap with the [EUDASM](https://esdac.jrc.ec.europa.eu/resource-type/national-soil-maps-eudasm) collection (2500 maps). Which makes an interesting case for deduplication.
 
 ## fetch.py 
 
-Fetches search results (filtered by 'map') by 50 records per page. For each record a `ris` citation is requested, which includes all metadata properties.
+Fetches search results (filtered by 'map') by 50 records per page. For each record a `ris` citation is requested ([sample](https://library.wur.nl/WebQuery/isric/start/2268261)), which includes all metadata properties (including bbox).
 
 ## parse.py
 
