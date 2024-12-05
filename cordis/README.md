@@ -61,7 +61,8 @@ WHERE
   optional { ?result eurio:doi ?doi } .
   ?result eurio:title ?restitle.
   FILTER regex(?type, eurio:ProjectPublication)
-   FILTER regex(?abstract, "Soil", "i")
+#  FILTER regex(?type, eurio:JournalPaper)
+  FILTER regex(?abstract, "Soil", "i")
 #      VALUES ?identifier { "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  "817819"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  "884316"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  "890561"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal>  }
 }
 ```
