@@ -21,11 +21,10 @@ force_update = os.environ.get('force_update') or False
 
 database = f"postgresql://{os.environ.get('POSTGRES_USER')}:{os.environ.get('POSTGRES_PASSWORD')}@{os.environ.get('POSTGRES_HOST')}:{os.environ.get('POSTGRES_PORT')}/{os.environ.get('POSTGRES_DB')}" 
 
-table = os.environ.get('PYCSW_TABLE') or 'public.records'
+table = os.environ.get('PYCSW_TABLE') or 'public.records2'
 
 # what if we post to new table, then when done rename new table to old table?
-
-repo = repository.Repository(database, context, table=table)
+repo = repository.Repository(database, context, table='public.records2')
 
 def parseRDF(md,id,title):
     try:
@@ -67,7 +66,10 @@ def parseRDF(md,id,title):
 
 
 # clean up public table first
-dbQuery("""truncate public.records""",(),False)
+try:
+    dbQuery("""truncate public.records2""",(),False)
+except:
+    None
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
@@ -99,7 +101,7 @@ if recs:
             except etree.XMLSyntaxError as err:
                 print(f'ERROR: XML document {id} is not well-formed {err}')
             except Exception as err:
-                print(f'WARNING: XML document {id} is not string, {err}')
+                print(f'WARNING: XML parsing as string {id} failed, {err}')
                 try:
                     metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
                 except Exception as err:
@@ -122,7 +124,6 @@ if recs:
                     try:
                         repo.insert(rec, 'local', util.get_today_and_now())
                         loaded_files.append(id)
-                        print(f'Inserted {id}')
                     except Exception as err:
                         if force_update:
                             repo.update(rec)
@@ -141,5 +142,9 @@ if recs:
 
         
 # workaround for '//' to '/' bahavior
-dbQuery("""update public.records set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%',),False)
+dbQuery("""UPDATE public.records2 set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%',),False)
+# copy to temp table, then rename it
+dbQuery("""truncate table public.records""",(),False)
+dbQuery("""insert into public.records select * from public.records2""",(),False)
+
 
