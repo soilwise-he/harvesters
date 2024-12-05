@@ -343,6 +343,11 @@ Queries all Cordis titles from Virtuoso. Result:
 
 For all records with a hit in OpenAire: Convert the oaf:result into Turtle which can be loaded into Virtuoso.
 
+Selection of records:
+```
+select identifier, resultobject, source from harvest.items where turtle IS NULL and resulttype = 'oaf'
+```
+
 When parsing the oaf:result there will be searched for the following predicates:
 
 * "creator"
@@ -357,6 +362,8 @@ When parsing the oaf:result there will be searched for the following predicates:
   * \-\> dcterms/subject
 * journal
   * \-\> dcterms/isPartOf
+* fulltext **with 'pdf' as part of the string**
+  * \-\> dcterms/source
 
 
 **Step 4** is loading the turtle into Virtuoso. Project **soilwise-repo** has an endpoint to be directly used by Virtuoso load by Resource URL.
