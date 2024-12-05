@@ -22,18 +22,11 @@ public class DBWriter {
 
     public DBWriter() throws Exception {
         //DBConnection.setupDatabaseParameters("virtuoso.jdbc4.Driver", "dba", "secret", "jdbc:virtuoso://localhost:1111");
+
         String username = System.getenv("POSTGRES_USERNAME");
-        if(username == null || username.length()==0) {
-            username = "XXXX" ;
-        }
         String password = System.getenv("POSTGRES_PASSWORD");
-        if(password == null || password.length()==0) {
-            password = "XXXX" ;
-        }
         String connecturi = System.getenv("POSTGRES_DB");
-        if(connecturi == null || connecturi.length()==0) {
-            connecturi = "jdbc:postgresql://host:port/database?currentschema=harvester" ; 
-        }
+
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
         db = DBConnection.instance();
 
@@ -126,11 +119,13 @@ public class DBWriter {
 
                     for (int i = 0; i < bindingsarray.length(); i++) {
 
+//                        if ((i >= (pageSize * (pageNum - 1))) && (i < (pageSize * pageNum))) {
                             eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("obj").getString("value");
                             loadOneDOI(
                                     bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value"));
 
 
+//                        }
                         if (DBWrite.loglevel >= 1 && (i % 100 == 0)) {
                             System.out.println(i);
                         }
@@ -297,6 +292,19 @@ public class DBWriter {
 
         String opaire = DBWrite.getHTTPResult(requestOpenaire);
 
+//        try {  // replace existing record
+//            db.executeVoid(con, "delete from harvest.items where uri=? and source=? "
+//                    , new Object[] { eurioIndentifier, "CORDIS" } );
+//
+//
+//            db.executeVoid(con, "insert into harvest.items(identifier, resultobject, uri, itemtype, insert_date, source, identifiertype, resulttype) VALUES(?, ?, ?, ?, now(), ?,?, ? ) "
+//                    , new Object[] { eurioIndentifier.substring( eurioIndentifier.lastIndexOf('/')+1 ), doi,  eurioIndentifier, "publication", "CORDIS", "cordis", "doi" } );
+//            //System.out.println(eurioIndentifier.substring( eurioIndentifier.lastIndexOf('/')+1 ));
+//        }
+//
+//        catch(Exception e) {
+//            System.out.println(e.getMessage());
+//        }
 
         if (opaire != null) {
 
@@ -337,7 +345,59 @@ public class DBWriter {
         }
 //        }
     }
-
+//    public long hashDOIs()  {
+//        long cnt = 0;
+//        try {
+//
+//
+//            WrapResultSet rs= db.executeQuery( "select identifier, identifiertype, resultobject, title, hash from harvest.items where upper(source) = ? and resulttype = ?", new Object[] {  "CORDIS", "oaf" }  );
+//
+//            con = db.getConnection();
+//            db.executeVoid(con, "delete from harvest.item_duplicates where upper(source) = ?", new Object[] { "CORDIS" });
+//
+//            try {
+//                int i = 0;
+//                while (rs.next()) {
+//
+//                    result = "";
+//                    String doi = rs.getString("identifier");
+//                    String idtype = rs.getString("identifiertype");
+//                    String oldhash = rs.getString("hash");
+//                    String newhash = calculateMD5(rs.getString("resultobject")+rs.getString("title").toLowerCase()) ;  // +rs.getString("title").toLowerCase()
+//
+//                    if(newhash != null && (oldhash == null || ! oldhash.equalsIgnoreCase(newhash))) {
+//
+//                        try {
+//
+//                            db.executeVoid(con, "update harvest.items set hash = ? where identifier = ? and upper(source) = ? and resulttype = ?", new Object[] {newhash, doi, "CORDIS", "oaf"});
+//
+//                        }
+//                        catch (Exception e) {
+//                            db.executeVoid(con, "update harvest.items set hash = NULL where identifier = ? and upper(source) = ? and resulttype = ?", new Object[] {doi, "CORDIS", "oaf"});
+//                            db.executeVoid(con, "INSERT INTO harvest.cordis_duplicates select * from (identifier, identifiertype, source, hash) VALUES(?, ?, ?, ?)", new Object[] {doi, idtype, "CORDIS", newhash });
+//
+//                        }
+//                    }
+//                    i++;
+//
+//                    if (DBWrite.loglevel >= 1 && (i % 100 == 0)) {
+//                        System.out.println(i);
+//                    }
+//                }
+//                cnt = i;
+//            }
+//            finally {
+//                rs.close();
+//            }
+//        }
+//        catch(Exception e) {
+//            System.out.println(e.getMessage());
+//
+//        }
+//
+//        return cnt;
+//
+//    }
 
 public long turtleDOIs()  {
     long cnt = 0;
@@ -363,14 +423,16 @@ public long turtleDOIs()  {
                      // handleOneDOI fills result with turtle-lines
 
                     db.executeVoid(con, "update harvest.items set turtle = ? where identifier = ? and upper(source) = ? and resulttype = ?", new Object[] { result, doi,  source, "oaf" }  );
+                    if(result.contains("journalpaper")) {
+                        db.executeVoid(con, "update harvest.items set itemtype = ? where identifier = ? and upper(source) = ? and resulttype = ?", new Object[]{"journalpaper", doi, source, "oaf"});
+                    }
 
-                     i++;
+                    i++;
 
                     if (DBWrite.loglevel >= 1 && (i % 100 == 0)) {
                         System.out.println(i);
                     }
                 }
-
             }
             finally {
                 rs.close();
@@ -466,6 +528,45 @@ public long turtleDOIs()  {
 
                     }
                 }
+            predicate = "fulltext";
+            // special handling because of multiple separate entrances
+            if (oafresult.keySet().contains(predicate)) {
+                Object objPredicate = oafresult.get(predicate);
+
+                if (JSONObject.NULL.equals(objPredicate)) {
+                    resultString = "";
+                    writeTripleURI(doiURI, "source", resultString);
+                } else if (objPredicate instanceof JSONObject) {
+                    String flltxt = "";
+                    try {
+                        flltxt = oafresult.getJSONObject(predicate).get("$").toString();
+                    }
+                    catch (Exception e) {
+                        flltxt = "";
+                    }
+                    resultString = cleanValue(flltxt);
+                    if(flltxt.toLowerCase().contains("pdf")) {
+                        writeTripleURI(doiURI, "source", resultString);
+                    }
+                } else if (objPredicate instanceof JSONArray) {
+                    JSONArray arrPredicate = oafresult.getJSONArray(predicate);
+                    for (int i = 0; i < arrPredicate.length(); i++) {
+                        String flltxt = "";
+                        try {
+                            flltxt = arrPredicate.getJSONObject(i).get("$").toString();
+                        }
+                        catch (Exception e) {
+                            flltxt = "";
+                        }
+                        // write separate Turtle for every element
+                        resultString = cleanValue(flltxt);
+                        if(flltxt.toLowerCase().contains("pdf")) {
+                            writeTripleURI(doiURI, "source", resultString);
+                        }
+                    }
+
+                }
+            }
             predicate = "journal";
             // special handling because of multiple separate entrances
 
@@ -479,6 +580,8 @@ public long turtleDOIs()  {
                     String jrnl = "";
                     try {
                         jrnl = oafresult.getJSONObject(predicate).get("$").toString();
+                        // journalPaper!
+                        writeTripleLiteral(doiURI, "type", "journalpaper");
                     }
                     catch (Exception e) {
                         jrnl = "";
@@ -489,15 +592,20 @@ public long turtleDOIs()  {
                     JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                     for (int i = 0; i < arrPredicate.length(); i++) {
                         String jrnl = "";
+                        boolean done=false;
                         try {
                             jrnl = arrPredicate.getJSONObject(i).get("$").toString();
                         }
                         catch (Exception e) {
                             jrnl = "";
                         }
-                        resultString = cleanValue(jrnl);
                         // write separate Turtle for every element
                         resultString = cleanValue(jrnl);
+                        if(!done && jrnl != null && jrnl.length() > 0) {
+                            // journalPaper!
+                            writeTripleLiteral(doiURI, "type", "journalpaper");
+                            done=true;
+                        }
                         writeTripleLiteral(doiURI, "isPartOf", resultString);
                     }
 
@@ -609,9 +717,10 @@ public long turtleDOIs()  {
         // replace " by ' in content ?
         // String subId = sub.substring( sub.lastIndexOf('/')+1 ) ;
 
-        result +=  "<" + sub + ">	eurio:" + pred  + "	<" + obj + "> .\n";
+        result +=  "<" + sub + ">	dct:" + pred  + "	<" + obj + "> .\n";
     }
 
     private void writeFooterTurtle() {
     }
 }
+

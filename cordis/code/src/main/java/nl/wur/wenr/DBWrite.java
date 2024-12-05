@@ -44,6 +44,7 @@ public class DBWrite
                 } else if (args[0].equalsIgnoreCase("turtle")) {
 
                     System.out.println("Turtle count: " + dbwriter.turtleDOIs());
+
                 } else if (args[0].equalsIgnoreCase("cordis")) {
 
                     JSONObject doiresult = new JSONObject(getHTTPResult(urlGetSubObjDoi));
