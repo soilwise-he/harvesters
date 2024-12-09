@@ -30,7 +30,7 @@ def parseRDF(md,id,title):
     try:
         g = Graph()
         g.parse(data=md, format='turtle')
-
+        s = None
         # map DCT to DC 
         elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience','provenance']
         for e in elms:
