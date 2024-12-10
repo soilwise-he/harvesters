@@ -21,7 +21,6 @@ public class DBWriter {
     FileWriter fw ;
 
     public DBWriter() throws Exception {
-        //DBConnection.setupDatabaseParameters("virtuoso.jdbc4.Driver", "dba", "secret", "jdbc:virtuoso://localhost:1111");
 
         String username = System.getenv("POSTGRES_USERNAME");
         String password = System.getenv("POSTGRES_PASSWORD");
@@ -32,7 +31,7 @@ public class DBWriter {
 
     }
 
-    public int setTitles(JSONObject identifierlist) throws Exception {
+    public int setCordisProjectTitles(JSONObject identifierlist) throws Exception {
         int ret = 0;
 
         JSONArray bindingsarray = identifierlist.getJSONObject("results").getJSONArray("bindings");
@@ -51,18 +50,7 @@ public class DBWriter {
                         eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value");
                         String objResult =  bindingsarray.getJSONObject(i).getJSONObject("obj").getString("value");
 
-
-                        if(eurioIndentifier.contains("s66/resource/result") ) {
-                        // the project publication is allready there
-                            String resultobject= db.executeStringResultStatement(con, "select resultobject from harvest.items where uri = ? and itemtype= ? and source = ? "
-                                    , new Object[] { eurioIndentifier, "publication", "CORDIS" } );
-                            String hash = calculateMD5(resultobject + objResult.toLowerCase());
-
-                            db.executeVoid(con, "update harvest.items set title = ?, hash = ? where uri = ? and itemtype= ? and source = ? "
-                                    , new Object[] { objResult, hash, eurioIndentifier, "publication", "CORDIS" } );
-
-                        }
-                        else if(eurioIndentifier.contains("s66/resource/project") ) {
+                        if(eurioIndentifier.contains("s66/resource/project") ) {
                         // the project could be new
                             long existing = db.executeLongResultStatement(con, "select count(*) from harvest.items where uri = ? and itemtype= ? and source = ? "
                                     , new Object[] { eurioIndentifier, "project", "CORDIS" } );
@@ -104,7 +92,7 @@ public class DBWriter {
         return ret; // bindingsarray.length();
     }
 
-    public int loadDOIs(JSONObject doilist) throws Exception {
+    public int loadDOIsCordis(JSONObject doilist) throws Exception {
         int ret = 1;
 
         JSONArray bindingsarray = doilist.getJSONObject("results").getJSONArray("bindings");
@@ -121,8 +109,9 @@ public class DBWriter {
 
 //                        if ((i >= (pageSize * (pageNum - 1))) && (i < (pageSize * pageNum))) {
                             eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("obj").getString("value");
-                            loadOneDOI(
-                                    bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value"));
+                            loadOneDOICordis(
+                                    bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value"),
+                                    bindingsarray.getJSONObject(i).getJSONObject("title").getString("value"));
 
 
 //                        }
@@ -149,12 +138,12 @@ public class DBWriter {
         return bindingsarray.length();
     }
 
-    private void loadOneDOI(String doi_uri)  {
+    private void loadOneDOICordis(String doi_uri, String title)  {
 //        String do_these_dois = "@10.1029/2019jg005511#@10.1038/s41467-019-13361-5#@10.5281/zenodo.6913303#@10.5281/zenodo.6912948#@10.5281/zenodo.6907266#@10.1016/j.agee.2022.107867#@10.1016/j.biocon.2022.109475#@10.1016/j.agsy.2021.103251#@10.5281/zenodo.6918749#@10.5281/zenodo.6921427#@10.5281/zenodo.6907243#@10.5281/zenodo.4884673#@10.5281/zenodo.6907367#@10.5281/zenodo.6921248#@10.5281/zenodo.6921102#@10.5281/zenodo.6912908#@10.5281/zenodo.6921504#@10.5281/zenodo.6913278#@10.5281/zenodo.6918597#@10.5281/zenodo.6922621#@10.5281/zenodo.6921010#@10.5281/zenodo.6920909#@10.5281/zenodo.6907391#@10.5281/zenodo.6923496#@10.5281/zenodo.6918779#@10.3390/agronomy10101535#@10.5281/zenodo.6907313#@10.5281/zenodo.6920841#@10.5281/zenodo.6907365#@10.5281/zenodo.6907081#@10.5281/zenodo.6907345#@10.5281/zenodo.6906867#@10.5281/zenodo.6907562#@10.5281/zenodo.6918843#@10.5281/zenodo.6921607#@10.1016/j.csbj.2021.04.023#@10.1039/d2np00011c#@10.1080/17445647.2022.2088305#@10.1038/s41598-023-31334-z#@10.12688/openreseurope.13135.2#@10.3390/en15072683#";
 //
 //        if(do_these_dois.contains("@" + doi + "#")) {
             String doi = doi_uri.replace("https://doi.org/","");
-             String requestOpenaire = "https://api.openaire.eu/search/researchProducts?format=json&doi=" + doi;
+            String requestOpenaire = "https://api.openaire.eu/search/researchProducts?format=json&doi=" + doi;
 
             String openAireObjectValue;
 
@@ -168,13 +157,13 @@ public class DBWriter {
 
         try {  // add record if needed
 
-            long existing = db.executeLongResultStatement(con, "select count(*) from harvest.items where uri = ? and itemtype= ? and source = ? "
-                    , new Object[] { eurioIndentifier, "publication", "CORDIS" } );
+            long existing = db.executeLongResultStatement(con, "select count(*) from harvest.items where uri = ? and source = ? "
+                    , new Object[] { eurioIndentifier, "CORDIS" } );
 
             if( existing == 0 ) {
 
-                db.executeVoid(con, "insert into harvest.items(identifier, resultobject, uri, itemtype, insert_date, source, identifiertype, resulttype) VALUES(?, ?, ?, ?, now(), ?,?, ? ) "
-                        , new Object[]{ eurioIndentifier.substring(eurioIndentifier.lastIndexOf('/') + 1), doi, eurioIndentifier, "publication", "CORDIS", "cordis", "doi"});
+                db.executeVoid(con, "insert into harvest.items(identifier, uri, itemtype, insert_date, source, identifiertype, resulttype, resultobject, title) VALUES(?, ?, ?, now(), ?,?, ?, ?, ? ) "
+                        , new Object[]{ eurioIndentifier.substring(eurioIndentifier.lastIndexOf('/') + 1), eurioIndentifier, "publication", "CORDIS", "cordis", "doi", doi, title });
             }
             //System.out.println(eurioIndentifier.substring( eurioIndentifier.lastIndexOf('/')+1 ));
         }
@@ -206,8 +195,8 @@ public class DBWriter {
                     }
                     try {  // REPLACE
 
-                        db.executeVoid(con, "update harvest.items set identifier=?, resultobject=?, itemtype=?, identifiertype=?, resulttype=? where uri=? "
-                                , new Object[] { doi, oafresult, "publication", "doi", "oaf", eurioIndentifier } );
+                        db.executeVoid(con, "update harvest.items set identifier=?, resultobject=?, itemtype=?, identifiertype=?, resulttype=?, hash=? where uri=? "
+                                , new Object[] { doi, oafresult, "publication", "doi", "oaf", calculateMD5(oafresult + title.toLowerCase()), eurioIndentifier } );
 
                     }
                     catch(Exception e) {
