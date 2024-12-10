@@ -13,10 +13,35 @@ import java.net.URL;
 public class DBWrite
 {
 
-    public static String urlGetSubObjDoi = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0ASELECT+%3Fsub+%3Fobj+WHERE+%7B%0D%0A++%3Fsub+%3Fpred+%3Fobj+.%0D%0AFILTER+regex%28%3Fpred%2C+%22ProjectPublication%22%2C+%22i%22%29%0D%0A%7D%0D%0A%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
-    // get Cordis DOIs from virtuoso
-    public static String urlGetSubObjTitle = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0APREFIX%20datacite%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fdatacite%2F%3E%0Aselect%20%20%20%3Fsub%20%3Fpred%20%3Fobj%0AWHERE%20%7B%0A%20%20%3Fsub%20%3Fpred%20%3Fobj%0AFILTER%20(%3Fpred%3D%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Ftitle%3E)%0A%7D&&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
-    // get Cordis titles from virtuoso, BOTH projects and projectPublications (results)
+    public static String urlGetSubObjDoiTitle = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+datacite%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fdatacite%2F%3E%0D%0Aselect+++%3Fsub+%3Fobj+%3Ftitle%0D%0AWHERE%0D%0A%7B%0D%0A%3Fsub+%3Fpred+%3Fobj.%0D%0A%3Fobj+dcterms%3Atitle+%3Ftitle.%0D%0AFILTER+regex%28%3Fpred+%2C+%22ProjectPublication%22%2C+%22i%22%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
+
+//    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+//    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+//    PREFIX eurio:<http://data.europa.eu/s66#>
+//    PREFIX dcterms: <http://purl.org/dc/terms/>
+//    PREFIX datacite: <http://purl.org/spar/datacite/>
+//    select   ?sub ?obj ?title
+//    WHERE
+//    {
+//            ?sub ?pred ?obj.
+//            ?obj dcterms:title ?title.
+//            FILTER regex(?pred , "ProjectPublication", "i")
+//    }
+
+    public static String urlGetSubObjCordisTitle = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+datacite%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fdatacite%2F%3E%0D%0Aselect+++%3Fsub+%3Fobj+%3Ftitle%0D%0AWHERE%0D%0A%7B%0D%0A%3Fsub+%3Fpred+%3Fobj.%0D%0A%3Fobj+dcterms%3Atitle+%3Ftitle.%0D%0AFILTER+regex%28%3Fpred+%2C+%22ProjectPublication%22%2C+%22i%22%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
+
+//    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+//    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+//    PREFIX eurio:<http://data.europa.eu/s66#>
+//    PREFIX dcterms: <http://purl.org/dc/terms/>
+//    select   ?sub ?title
+//        WHERE
+//    {
+//            ?sub ?pred ?obj.
+//            ?sub dcterms:title ?title.
+//            FILTER regex(?sub , "s66/resource/project", "i")
+//    }
+
 
     public static int loglevel = 1;
 
@@ -47,18 +72,19 @@ public class DBWrite
 
                 } else if (args[0].equalsIgnoreCase("cordis")) {
 
-                    JSONObject doiresult = new JSONObject(getHTTPResult(urlGetSubObjDoi));
+                    JSONObject doiresult = new JSONObject(getHTTPResult(urlGetSubObjDoiTitle));
 
-                    System.out.println(dbwriter.loadDOIs(doiresult));
+                    System.out.println(dbwriter.loadDOIsCordis(doiresult));
                 }
 //            else if (args[0].equalsIgnoreCase("hash") ) {
 //
 //                System.out.println(dbwriter.hashDOIs() );
 //            }
                 else if (args[0].equalsIgnoreCase("title")) {
-                    JSONObject titleresult = new JSONObject(getHTTPResult(urlGetSubObjTitle));
-
-                    System.out.println(dbwriter.setTitles(titleresult));
+//                    JSONObject titleresult = new JSONObject(getHTTPResult(urlGetSubObjCordisTitle));
+//
+//                    System.out.println(dbwriter.setCordisProjectTitles(titleresult));
+                    System.out.println("TODO: setCordisProjectTitles");
                 }
 
 
