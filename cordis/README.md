@@ -274,7 +274,7 @@ select identifier, resultobject, source from harvest.items where turtle IS NULL 
 
 When parsing the oaf:result there will be searched for the following predicates:
 
-* "creator"
+* creator
   * \-\> dcterms/creator
 * collectedfrom
   * \-\> dcterms/isReferencedBy
@@ -284,10 +284,13 @@ When parsing the oaf:result there will be searched for the following predicates:
   * \-\> dcterms/description
 * subject
   * \-\> dcterms/subject
+* dateofacceptance
+  * \-\> dcterms/date
 * journal
   * \-\> dcterms/isPartOf
 * fulltext **with 'pdf' as part of the string**
-  * \-\> dcterms/source
+  * \-\> dcterms/references (as Literal)
+  * \-\> dcat/downloadURL (as URI)
 
 
 **Step 4** is loading the turtle into Virtuoso. Project **soilwise-repo** has an endpoint to be directly used by Virtuoso load by Resource URL.
