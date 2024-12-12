@@ -14,7 +14,7 @@ public class DBWrite
 {
 
     public static String urlGetSubObjDoiTitle = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+datacite%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fdatacite%2F%3E%0D%0Aselect+++%3Fsub+%3Fobj+%3Ftitle%0D%0AWHERE%0D%0A%7B%0D%0A%3Fsub+%3Fpred+%3Fobj.%0D%0A%3Fobj+dcterms%3Atitle+%3Ftitle.%0D%0AFILTER+regex%28%3Fpred+%2C+%22ProjectPublication%22%2C+%22i%22%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
-
+// Query our Virtuoso
 //    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 //    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 //    PREFIX eurio:<http://data.europa.eu/s66#>
@@ -28,18 +28,27 @@ public class DBWrite
 //            FILTER regex(?pred , "ProjectPublication", "i")
 //    }
 
-    public static String urlGetSubObjCordisTitle = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0APREFIX+datacite%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fdatacite%2F%3E%0D%0Aselect+++%3Fsub+%3Fobj+%3Ftitle%0D%0AWHERE%0D%0A%7B%0D%0A%3Fsub+%3Fpred+%3Fobj.%0D%0A%3Fobj+dcterms%3Atitle+%3Ftitle.%0D%0AFILTER+regex%28%3Fpred+%2C+%22ProjectPublication%22%2C+%22i%22%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
-
+    public static String urlGetSubObjCordisTitle = "https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20{%0A%20%20%3Fproject%20dcterms%3Atitle%20%3Ftitle%0A}%0AWHERE%0A{%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3Aurl%20%3Furl.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20rdf%3Atype%20%3Ftype.%0A%20%20optional%20{%20%3Fresult%20eurio%3Adoi%20%3Fdoi%20}%20.%0A%20%20%3Fresult%20eurio%3Atitle%20%3Frestitle.%0A%20%20FILTER%20regex(%3Ftype%2C%20eurio%3AProjectPublication)%0A%20%20FILTER%20regex(%3Fabstract%2C%20%22Soil%22%2C%20%22i%22)%0A}&format=application%2Fsparql-results%2Bjson&timeout=0&signal_void=on";
+// Query Cordis
+//PREFIX eurio: <http://data.europa.eu/s66#>
 //    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-//    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-//    PREFIX eurio:<http://data.europa.eu/s66#>
 //    PREFIX dcterms: <http://purl.org/dc/terms/>
-//    select   ?sub ?title
-//        WHERE
+//    CONSTRUCT {
+//  ?project dcterms:title ?title
+//    }
+//    WHERE
 //    {
-//            ?sub ?pred ?obj.
-//            ?sub dcterms:title ?title.
-//            FILTER regex(?sub , "s66/resource/project", "i")
+//  ?project a eurio:Project.
+//            ?project eurio:title ?title.
+//            ?project eurio:url ?url.
+//            ?project eurio:abstract ?abstract.
+//  ?project eurio:identifier ?identifier.
+//            ?project eurio:hasResult ?result.
+//            ?result rdf:type ?type.
+//            optional { ?result eurio:doi ?doi } .
+//  ?result eurio:title ?restitle.
+//            FILTER regex(?type, eurio:ProjectPublication)
+//        FILTER regex(?abstract, "Soil", "i")
 //    }
 
 
@@ -81,10 +90,10 @@ public class DBWrite
 //                System.out.println(dbwriter.hashDOIs() );
 //            }
                 else if (args[0].equalsIgnoreCase("title")) {
-//                    JSONObject titleresult = new JSONObject(getHTTPResult(urlGetSubObjCordisTitle));
-//
-//                    System.out.println(dbwriter.setCordisProjectTitles(titleresult));
-                    System.out.println("TODO: setCordisProjectTitles");
+                    JSONObject titleresult = new JSONObject(getHTTPResult(urlGetSubObjCordisTitle));
+
+                    System.out.println(dbwriter.setCordisProjectTitles(titleresult));
+
                 }
 
 

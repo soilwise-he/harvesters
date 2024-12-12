@@ -17,6 +17,7 @@ public class DBWriter {
     private DBConnection db;
 
     private Connection con;
+
     private String doiURI;
     FileWriter fw ;
 
@@ -47,8 +48,8 @@ public class DBWriter {
                     for (int i = 0; i < bindingsarray.length(); i++) {
 
 
-                        eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("sub").getString("value");
-                        String objResult =  bindingsarray.getJSONObject(i).getJSONObject("obj").getString("value");
+                        eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("s").getString("value");
+                        String objResult =  bindingsarray.getJSONObject(i).getJSONObject("o").getString("value");
 
                         if(eurioIndentifier.contains("s66/resource/project") ) {
                         // the project could be new
@@ -460,11 +461,11 @@ public long turtleDOIs()  {
 
                     if (JSONObject.NULL.equals(objPredicate)) {
                         resultString = "";
-                        writeTripleLiteral(doiURI, predicate, resultString);
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString);
                     } else if (objPredicate instanceof JSONObject) {
 
                         resultString = cleanValue(oafresult.getJSONObject(predicate).get("$").toString());
-                        writeTripleLiteral(doiURI, predicate, resultString);
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString);
                         //writeTripleHTML(doiURI, App.predicate, openAireObjectValue);
                     } else if (objPredicate instanceof JSONArray) {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
@@ -476,7 +477,7 @@ public long turtleDOIs()  {
                             }
                             if (orcid != null && orcid.length() > 0 ) {
                             // separate entries for every orcid
-                                writeTripleURI(doiURI, predicate, "https://orcid.org/" + orcid);
+                                writeDctermsTripleURI(doiURI, predicate, "https://orcid.org/" + orcid);
                             }
                             String rank = "0";
                             if (arrPredicate.getJSONObject(i).keySet().contains("@rank")) {
@@ -490,29 +491,29 @@ public long turtleDOIs()  {
                             }
                         }
                         // outside for-loop: one element with all authors listed
-                        writeTripleLiteral(doiURI, predicate, resultString);
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString);
                     }
                 }
             predicate = "collectedfrom";
                 // special handling because of multiple separate entrances
-            writeTripleLiteral(doiURI, "isReferencedBy", source);
-            writeTripleLiteral(doiURI, "isReferencedBy", "OpenAire");
+            writeDctermsTripleLiteral(doiURI, "isReferencedBy", source);
+            writeDctermsTripleLiteral(doiURI, "isReferencedBy", "OpenAire");
                 if (oafresult.keySet().contains(predicate)) {
                     Object objPredicate = oafresult.get(predicate);
 
                     if (JSONObject.NULL.equals(objPredicate)) {
                         resultString = "";
-                        writeTripleLiteral(doiURI, "isReferencedBy", resultString);
+                        writeDctermsTripleLiteral(doiURI, "isReferencedBy", resultString);
                     } else if (objPredicate instanceof JSONObject) {
 
                         resultString = cleanValue(oafresult.getJSONObject(predicate).get("@name").toString());
-                        writeTripleLiteral(doiURI, "isReferencedBy", resultString);
+                        writeDctermsTripleLiteral(doiURI, "isReferencedBy", resultString);
                     } else if (objPredicate instanceof JSONArray) {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                         for (int i = 0; i < arrPredicate.length(); i++) {
                             // write separate Turtle for every element
                             resultString = cleanValue(arrPredicate.getJSONObject(i).get("@name").toString());
-                            writeTripleLiteral(doiURI, "isReferencedBy", resultString);
+                            writeDctermsTripleLiteral(doiURI, "isReferencedBy", resultString);
                         }
 
                     }
@@ -524,7 +525,7 @@ public long turtleDOIs()  {
 
                 if (JSONObject.NULL.equals(objPredicate)) {
                     resultString = "";
-                    writeTripleURI(doiURI, "source", resultString);
+                    writeDctermsTripleURI(doiURI, "source", resultString);
                 } else if (objPredicate instanceof JSONObject) {
                     String flltxt = "";
                     try {
@@ -535,7 +536,17 @@ public long turtleDOIs()  {
                     }
                     resultString = cleanValue(flltxt);
                     if(flltxt.toLowerCase().contains("pdf")) {
-                        writeTripleURI(doiURI, "source", resultString);
+                        // references temporary as Literal for PyCSW
+                        writeDctermsTripleLiteral(doiURI, "references", resultString);
+                        writeDcatTripleURI(doiURI, "downloadURL", resultString);
+                        try {
+                            db.executeVoid(con, "update harvest.items set downloadlink=?, downloadtype=? where identifier = ? and upper(source) = ? and resulttype = ?"
+                                    , new Object[]{resultString, "pdf", doi, source, "oaf"});
+//                            System.out.println("update harvest.items set downloadlink='" + resultString + "', downloadtype='pdf' where uri=" + eurioIndentifier + "' and source='" + source + "'" );
+                        }
+                        catch(Exception e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                 } else if (objPredicate instanceof JSONArray) {
                     JSONArray arrPredicate = oafresult.getJSONArray(predicate);
@@ -550,10 +561,19 @@ public long turtleDOIs()  {
                         // write separate Turtle for every element
                         resultString = cleanValue(flltxt);
                         if(flltxt.toLowerCase().contains("pdf")) {
-                            writeTripleURI(doiURI, "source", resultString);
+                            // references temporary as Literal for PyCSW
+                            writeDctermsTripleLiteral(doiURI, "references", resultString);
+                            writeDcatTripleURI(doiURI, "downloadURL", resultString);
+                            try {
+                                db.executeVoid(con, "update harvest.items set downloadlink=?, downloadtype=? where identifier = ? and upper(source) = ? and resulttype = ?"
+                                        , new Object[]{resultString, "pdf", doi, source, "oaf"});
+//                                System.out.println("update harvest.items set downloadlink='" + resultString + "', downloadtype='pdf' where uri=" + eurioIndentifier + "' and source='" + source + "'" );
+                            }
+                            catch(Exception e) {
+                                System.out.println(e.getMessage());
+                            }
                         }
                     }
-
                 }
             }
             predicate = "journal";
@@ -564,19 +584,19 @@ public long turtleDOIs()  {
 
                 if (JSONObject.NULL.equals(objPredicate)) {
                     resultString = "";
-                    writeTripleLiteral(doiURI, "isPartOf", resultString);
+                    writeDctermsTripleLiteral(doiURI, "isPartOf", resultString);
                 } else if (objPredicate instanceof JSONObject) {
                     String jrnl = "";
                     try {
                         jrnl = oafresult.getJSONObject(predicate).get("$").toString();
                         // journalPaper!
-                        writeTripleLiteral(doiURI, "type", "journalpaper");
+                        writeDctermsTripleLiteral(doiURI, "type", "journalpaper");
                     }
                     catch (Exception e) {
                         jrnl = "";
                     }
                     resultString = cleanValue(jrnl);
-                    writeTripleLiteral(doiURI, "isPartOf", resultString);
+                    writeDctermsTripleLiteral(doiURI, "isPartOf", resultString);
                 } else if (objPredicate instanceof JSONArray) {
                     JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                     for (int i = 0; i < arrPredicate.length(); i++) {
@@ -592,10 +612,10 @@ public long turtleDOIs()  {
                         resultString = cleanValue(jrnl);
                         if(!done && jrnl != null && jrnl.length() > 0) {
                             // journalPaper!
-                            writeTripleLiteral(doiURI, "type", "journalpaper");
+                            writeDctermsTripleLiteral(doiURI, "type", "journalpaper");
                             done=true;
                         }
-                        writeTripleLiteral(doiURI, "isPartOf", resultString);
+                        writeDctermsTripleLiteral(doiURI, "isPartOf", resultString);
                     }
 
                 }
@@ -608,17 +628,17 @@ public long turtleDOIs()  {
 
                     if (JSONObject.NULL.equals(objPredicate)) {
                         resultString = "";
-                        writeTripleLiteral(doiURI, "license", resultString);
+                        writeDctermsTripleLiteral(doiURI, "license", resultString);
                     } else if (objPredicate instanceof JSONObject) {
 
                         resultString = cleanValue(resultString = oafresult.getJSONObject(predicate).get("@classname").toString());
-                        writeTripleLiteral(doiURI, "license", resultString);
+                        writeDctermsTripleLiteral(doiURI, "license", resultString);
                     } else if (objPredicate instanceof JSONArray) {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                         for (int i = 0; i < arrPredicate.length(); i++) {
                             // write separate Turtle for every element
                             resultString = cleanValue(arrPredicate.getJSONObject(i).get("@classname").toString());
-                            writeTripleLiteral(doiURI, "license", resultString);
+                            writeDctermsTripleLiteral(doiURI, "license", resultString);
                         }
 
                     }
@@ -630,33 +650,59 @@ public long turtleDOIs()  {
 
                     if (JSONObject.NULL.equals(objPredicate)) {
                         resultString = "";
-                        writeTripleLiteral(doiURI, predicate, resultString);
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString);
                     } else if (objPredicate instanceof JSONObject) {
 
                         resultString = cleanValue(oafresult.getJSONObject(predicate).get("$").toString());
-                        writeTripleLiteral(doiURI, predicate, resultString.replace('"','\''));
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString.replace('"','\''));
                     } else if (objPredicate instanceof JSONArray) {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
                         for (int i = 0; i < arrPredicate.length(); i++) {
                             // write separate Turtle for every element
                             resultString = resultString + cleanValue(arrPredicate.getJSONObject(i).get("$").toString()) + " ";
-                            writeTripleLiteral(doiURI, predicate, resultString.replace('"','\''));
+                            writeDctermsTripleLiteral(doiURI, predicate, resultString.replace('"','\''));
                         }
                     }
                 }
+            predicate = "dateofacceptance";
+            if (oafresult.keySet().contains(predicate)) {
+                Object objPredicate = oafresult.get(predicate);
+
+                if (JSONObject.NULL.equals(objPredicate)) {
+                    resultString = "";
+                    writeDctermsTripleLiteral(doiURI, "date", resultString);
+                } else if (objPredicate instanceof JSONObject) {
+
+                    JSONObject resultObj = oafresult.getJSONObject(predicate);
+                    if (resultObj != null  && resultObj.has("$") ) {
+                        resultString = cleanValue(resultObj.get("$").toString());
+                        writeDctermsTripleLiteral(doiURI, "date", resultString);
+                    }
+                } else if (objPredicate instanceof JSONArray) {
+                    JSONArray arrPredicate = oafresult.getJSONArray(predicate);
+                    for (int i = 0; i < arrPredicate.length(); i++) {
+                        // inside for-loop: write separate Turtle for every element
+                        JSONObject jsonObj = arrPredicate.getJSONObject(i);
+                        if (jsonObj != null && jsonObj.has("$")) {
+                            resultString = cleanValue(jsonObj.get("$").toString());
+                            writeDctermsTripleLiteral(doiURI, "date", resultString);
+                        }
+                    }
+                }
+            }
             predicate = "subject";
                 if (oafresult.keySet().contains(predicate)) {
                     Object objPredicate = oafresult.get(predicate);
 
                     if (JSONObject.NULL.equals(objPredicate)) {
                         resultString = "";
-                        writeTripleLiteral(doiURI, predicate, resultString);
+                        writeDctermsTripleLiteral(doiURI, predicate, resultString);
                     } else if (objPredicate instanceof JSONObject) {
 
                         JSONObject resultObj = oafresult.getJSONObject(predicate);
                         if (resultObj != null  && resultObj.has("$") ) {
                             resultString = cleanValue(resultObj.get("$").toString());
-                            writeTripleLiteral(doiURI, predicate, resultString);
+                            writeDctermsTripleLiteral(doiURI, predicate, resultString);
                         }
                     } else if (objPredicate instanceof JSONArray) {
                         JSONArray arrPredicate = oafresult.getJSONArray(predicate);
@@ -665,7 +711,7 @@ public long turtleDOIs()  {
                             JSONObject jsonObj = arrPredicate.getJSONObject(i);
                             if (jsonObj != null && jsonObj.has("$")) {
                                 resultString = cleanValue(jsonObj.get("$").toString());
-                                writeTripleLiteral(doiURI, predicate, resultString);
+                                writeDctermsTripleLiteral(doiURI, predicate, resultString);
                             }
                         }
                     }
@@ -692,20 +738,22 @@ public long turtleDOIs()  {
         result += "@prefix dct:	" +  url  + " .\n" ;
     }
 
-    private void writeTripleLiteral(String sub, String pred, String obj) {
-        // replace " by ' in content ?
-        // String subId = sub.substring( sub.lastIndexOf('/')+1 ) ;
-
+    private void writeDcatTripleLiteral(String sub, String pred, String obj) {
+        result +=  "<" + sub + ">	dcat:" + pred  + "	\"" + obj + "\" .\n";
+    }
+    private void writeDctermsTripleLiteral(String sub, String pred, String obj) {
         result +=  "<" + sub + ">	dct:" + pred  + "	\"" + obj + "\" .\n";
     }
 
     private void writeHeaderURI(String url) {
         result += "@prefix eurio:	" +  url  + " .\n" ;
     }
-    private void writeTripleURI(String sub, String pred, String obj) {
-        // replace " by ' in content ?
-        // String subId = sub.substring( sub.lastIndexOf('/')+1 ) ;
 
+    private void writeDcatTripleURI(String sub, String pred, String obj) {
+        result +=  "<" + sub + ">	dcat:" + pred  + "	<" + obj + "> .\n";
+    }
+    
+    private void writeDctermsTripleURI(String sub, String pred, String obj) {
         result +=  "<" + sub + ">	dct:" + pred  + "	<" + obj + "> .\n";
     }
 
