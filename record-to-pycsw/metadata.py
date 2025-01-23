@@ -143,9 +143,10 @@ if recs:
             print(f'Error: Could not parse {id} as record, {err}, {traceback.print_exc()}')
             continue
 
+
         
 # workaround for '//' to '/' bahavior
-dbQuery("""UPDATE public.records2 set identifier = replace(identifier,'//','/') where identifier like %s""",('%//%',),False)
+dbQuery("""UPDATE public.records2 set identifier = MD5('identifier') where identifier like %s""",('%//%',),False)
 # copy to temp table, then rename it
 dbQuery("""truncate table public.records""",(),False)
 dbQuery("""insert into public.records select * from public.records2""",(),False)
