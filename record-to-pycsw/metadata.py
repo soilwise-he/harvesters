@@ -122,7 +122,10 @@ if recs:
                 record = metadata.parse_record(context, metadata_record, repo)
                 for rec in record:
                     try:
-                        repo.insert(rec, 'local', util.get_today_and_now())
+                        dt = util.get_today_and_now()
+                        if hasattr(rec,'date') and rec.date not in [None,'']:
+                            dt = rec.date
+                        repo.insert(rec, 'local', dt)
                         loaded_files.append(id)
                     except Exception as err:
                         if force_update:
