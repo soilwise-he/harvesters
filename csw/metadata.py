@@ -17,7 +17,7 @@ url = os.environ.get("HARVEST_URL")
 if not url:
     print('env HARVEST_URL not set')
     exit
-label = os.environ.get("HARVEST_LABEL") or url
+label = os.environ.get("HARVEST_LABEL").upper() or url
 filters = None
 if os.environ.get("HARVEST_FILTER"):
     filterstring = os.environ.get("HARVEST_FILTER")
@@ -40,15 +40,17 @@ filterMapping = {
     "any": 'csw:AnyText',
     "title": 'dc:title',
     "keyword": 'dc:subject',
-    "type": 'dc:type'
+    "type": 'dc:type',
+    "id": 'dc:identifier'
     }
 
 constraints = []
-if filters and len(filters.keys()) > 0:
+if filters and len(filters) > 0:
     for f in filters:
-        key = filterMapping.get(f,f)
-        # todo: check if key is in getcapabilities
-        constraints.append(PropertyIsEqualTo(key, filters[f]))
+        for k,v in f.items():
+            key = filterMapping.get(k,k)
+            # todo: check if key is in getcapabilities
+            constraints.append(PropertyIsEqualTo(key, v))
 
 while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < maxrecords:
 
@@ -106,7 +108,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                                 resulttype='iso19139:2007',
                                 resultobject=recxml.decode('UTF-8'),
                                 hashcode=hashcode,
-                                source=label.upper(),
+                                source=label,
                                 itemtype=hierarchy) # insert into db
             
         except Exception as e:

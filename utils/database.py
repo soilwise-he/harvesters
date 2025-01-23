@@ -66,6 +66,7 @@ def insertSQL(table, fields, values):
 def hasSource(label,url,filter,type):
     # check if source is in sources table
     sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
-    if not len(sources):
-        dbQuery(f"insert into harvest.sources (name,url,filter,type) values ('{label.upper()}','{url}','{filter}','{type}')",(),False)
+    if not len(sources) and len(sources) < 1:
+        print(f'Add non existing source {label}')
+        dbQuery(f"insert into harvest.sources (name,url,filter,type) values (%s,%s,%s,%s)",(label,url,filter[:200],type),False)
     
