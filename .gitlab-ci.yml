@@ -8,7 +8,7 @@ include:
   - local: "/CI/.eea-csw.yaml"
   - local: "/CI/.ejpsoil.yaml"  
   - local: "/CI/.esdac.yaml"
-  - local: "/CI/.fao.yaml"
+  - local: "/CI/.fao-csw.yaml"
   - local: "/CI/.ejpsoil.yaml"
   - local: "/CI/.impact4soil.yaml"
   - local: "/CI/.inspire.yaml"

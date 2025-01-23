@@ -15,7 +15,7 @@ harvest-fao-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
+    - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=FAO 
 
     - pip3 install -r csw/requirements.txt
@@ -37,7 +37,7 @@ harvest-fao-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
+    - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=FAO 
 
     - pip3 install -r csw/requirements.txt

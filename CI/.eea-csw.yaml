@@ -15,7 +15,7 @@ harvest-eea-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://sdi.eea.europa.eu/catalogue/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
+    - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=EEA 
 
     - pip3 install -r csw/requirements.txt
@@ -37,7 +37,7 @@ harvest-eea-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://sdi.eea.europa.eu/catalogue/srv/eng/csw
-    - export HARVEST_FILTER={"any":"soil"}
+    - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=EEA  
 
     - pip3 install -r csw/requirements.txt
