@@ -5,7 +5,7 @@ stages:
   - run-harvest
 
 # metadata
-harvest-islandr-dev:
+harvest-ngr-dev:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -27,7 +27,7 @@ harvest-islandr-dev:
 
 
 # metadata
-harvest-islandr-prod:
+harvest-ngr-prod:
   image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
@@ -36,12 +36,13 @@ harvest-islandr-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=https://geonetwork.greendecision.eu/geonetwork/srv/eng/csw
-    - export HARVEST_LABEL=ISLANDR 
+    - export HARVEST_URL=https://www.nationaalgeoregister.nl/geonetwork/srv/eng/csw
+    - export HARVEST_LABEL=NGR 
+    - export HARVEST_FILTER=[{"dc:identifier":"ed960299-a147-4c1a-bc57-41ff83a2264f"},{"dc:identifier":"1689d1b7-ef22-417a-becd-d8d9a8a90a10"},{"dc:identifier":"7891e711-df3b-44df-bc35-81c3856a7efc"},{"dc:identifier":"b756dabe-a331-42cd-b45e-f61828ee4534"},{"dc:identifier":"d9bf1ce1-5197-409e-b19e-340e50afafc4"},{"dc:identifier":"6318009c-7b11-4ab9-9929-735584dfb692"},{"dc:identifier":"7400a9d7-7bf1-48da-8d81-a38e75723ea5"},{"dc:identifier":"44d77864-928d-46a5-9585-b73315d04834"},{"dc:identifier":"7400a9d7-7bf1-48da-8d81-a38e75723ea5"},{"dc:identifier":"4fa03182-df71-4c39-87da-e7d5c0b82d88"},{"dc:identifier":"b812a145-b4fe-4331-8dc6-d914327a87ff"},{"dc:identifier":"9125c784-6346-4a67-ab28-506ac70f9bf0"},{"dc:identifier":"5aaeb5c3-410d-4abb-99bb-7bac1a031755"},{"dc:identifier":"708bde43-a977-4ed1-8027-f332592e80b7"},{"dc:identifier":"708bde43-a977-4ed1-8027-f332592e80b7"},{"dc:identifier":"a36eee64-da2b-438c-b005-e8cf921d951d"},{"dc:identifier":"{1DC7B49F-FEFD-43A3-8627-CC24D7D87EE2}"},{"dc:identifier":"{15CFB9D6-BEC5-4B16-BD78-56CEF9EC3418}"},{"dc:identifier":"d2ea3dea-3b2c-45dd-823f-d6d8db8c3510"}]
 
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
   rules:
-    - if: $PROJECT != "ISLANDR"
+    - if: $PROJECT != "NGR"
       when: never
     - if: $CI_COMMIT_REF_NAME == "main"
