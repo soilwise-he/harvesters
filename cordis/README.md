@@ -350,8 +350,8 @@ FILTER (?obj=<https://doi.org/10.1007/s11356-022-22599-4>)
 ```
 
 **Query projects and link all attributes to the identifier as well (subquery):**
-- subQuery the projec title
-- exclude the project title as a row
+- subQuery the project title
+- exclude the project title from being a separate row
 
 ```
 PREFIX eurio:<http://data.europa.eu/s66#> 
