@@ -335,6 +335,20 @@ FILTER regex(?s,"10.1002/adfm.202112374","i")
 }
 ```
 
+
+**For a certain DOI query the triple store for the project and project title**
+```
+PREFIX eurio:<http://data.europa.eu/s66#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+SELECT ?obj ?sub (SELECT ?o WHERE {?s ?p ?o FILTER regex(?p,  "title", "i") FILTER(?s=?sub)} ) 
+WHERE {
+  ?sub ?pred ?obj
+FILTER (?pred=<http://data.europa.eu/s66#hasResult>) 
+FILTER (?obj=<https://doi.org/10.1007/s11356-022-22599-4>)
+}
+```
+
 **Query projects and link all attributes to the identifier as well (subquery):**
 
 ```
