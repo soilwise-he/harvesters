@@ -349,7 +349,7 @@ FILTER (?obj=<https://doi.org/10.1007/s11356-022-22599-4>)
 }
 ```
 
-**Query projects and link all attributes to the identifier as well (subquery):**
+**Query projects and link all attributes to the title as well (subquery):**
 - subQuery the project title
 - exclude the project title from being a separate row
 
