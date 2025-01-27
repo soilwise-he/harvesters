@@ -350,16 +350,18 @@ FILTER (?obj=<https://doi.org/10.1007/s11356-022-22599-4>)
 ```
 
 **Query projects and link all attributes to the identifier as well (subquery):**
+- subQuery the projec title
+- exclude the project title as a row
 
 ```
 PREFIX eurio:<http://data.europa.eu/s66#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-SELECT ?sub (SELECT ?o WHERE {?s ?p ?o FILTER regex(?p,  "cordis.europa.eu/project/id/", "i") FILTER(?s=?sub)} ) ?pred ?obj
+SELECT ?sub (SELECT ?o WHERE {?s ?p ?o FILTER regex(?p,  "title", "i") FILTER(?s=?sub)} ) ?pred ?obj
 WHERE {
 ?sub ?pred ?obj 
-FILTER regex(?sub,  "cordis.europa.eu/project/id/", "i") 
-# FILTER regex(?obj,  "Radiocarbon", "i") 
+FILTER regex(?sub,  "cordis.europa.eu/project/id", "i") 
+FILTER (!regex(?pred,  "title", "i") )
 }
 ```
 
