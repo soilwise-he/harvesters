@@ -344,7 +344,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?sub (SELECT ?o WHERE {?s ?p ?o FILTER regex(?p,  "http://data.europa.eu/s66#identifier", "i") FILTER(?s=?sub)} ) ?pred ?obj
 WHERE {
 ?sub ?pred ?obj 
-FILTER regex(?sub,  "http://data.europa.eu/s66/resource/projects", "i") 
+FILTER regex(?sub,  "cordis.europa.eu/project/id/", "i") 
 # FILTER regex(?obj,  "Radiocarbon", "i") 
 }
 ```
