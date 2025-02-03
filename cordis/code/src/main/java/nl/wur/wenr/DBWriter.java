@@ -2,6 +2,7 @@ package nl.wur.wenr;
 
 import nl.wur.wenr.persistency.DBConnection;
 import nl.wur.wenr.persistency.WrapResultSet;
+import nl.wur.wenr.xml.XSLTConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,6 +22,8 @@ public class DBWriter {
     private String doiURI;
     FileWriter fw ;
 
+    private static String jatsxslt = "";
+
     public DBWriter() throws Exception {
 
         String username = System.getenv("POSTGRES_USERNAME");
@@ -30,6 +33,9 @@ public class DBWriter {
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
         db = DBConnection.instance();
 
+        jatsxslt = db.executeSingleResultStatement(
+                "select value from harvest.xslt where type = ?"
+                ,  new Object[] {"jats"} );
     }
 
     public int setCordisProjectTitles(JSONObject identifierlist) throws Exception {
@@ -734,6 +740,31 @@ public long turtleDOIs()  {
         return null;
     }
 
+    private String jats2html(String obj)  {
+        String ret = obj;
+        String inp = obj.replaceAll("<jats:p", "<p").replaceAll("</jats:p", "</p");
+        // makes it worse, as jats"list-items seem to be provided as a paragraph <jats:p> inp = inp.replaceAll("<jats:list-item", "<br />- <jats:list-item");
+        try {
+            XSLTConverter jatsConverter = new XSLTConverter();
+            ret =jatsConverter.transformXSLTFromString(inp,
+                    jatsxslt ) ;
+            ret = ret.substring(0, ret.length()-2);
+        }
+        catch(Exception e) {
+            if (DBWrite.loglevel >= 1) {
+
+                System.out.println("Error jats2html: " + e.getMessage());
+            }
+            ret = obj;
+        }
+        if (DBWrite.loglevel >= 3) {
+
+            System.out.println("Input jats2html: " + inp);
+            System.out.println("Output jats2html: " + ret);
+        }
+        return ret;
+    }
+
     private void writeHeaderLiteral(String url) {
         result += "@prefix dct:	" +  url  + " .\n" ;
     }
@@ -742,7 +773,12 @@ public long turtleDOIs()  {
         result +=  "<" + sub + ">	dcat:" + pred  + "	\"" + obj + "\" .\n";
     }
     private void writeDctermsTripleLiteral(String sub, String pred, String obj) {
-        result +=  "<" + sub + ">	dct:" + pred  + "	\"" + obj + "\" .\n";
+        String objval = obj;
+        if(obj.toLowerCase().contains("jats")) {
+            objval = jats2html("<?xml version='1.0' encoding='UTF-8'?><article>" + obj + "</article>");
+        }
+
+        result +=  "<" + sub + ">	dct:" + pred  + "	\"" + objval + "\" .\n";
     }
 
     private void writeHeaderURI(String url) {
