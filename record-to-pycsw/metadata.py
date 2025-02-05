@@ -149,6 +149,22 @@ if recs:
 dbQuery("""UPDATE public.records2 set identifier = MD5('identifier') where identifier like %s""",('%//%',),False)
 # copy to temp table, then rename it
 dbQuery("""truncate table public.records""",(),False)
-dbQuery("""insert into public.records select * from public.records2""",(),False)
+dbQuery("""insert into public.records select 
+    r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type, 
+	language, type, coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, 
+	coalesce((select max(target) from harvest.translations where source=r.abstract),r.abstract) as abstract, 
+	title_alternate, edition, keywords, keywordstype, themes, 
+    parentidentifier, relation, time_begin, time_end, topicategory, resourcelanguage, creator, 
+	publisher, contributor, organization, securityconstraints, accessconstraints, otherconstraints, 
+	date, date_revision, date_creation, date_publication, date_modified, format, source, crs, 
+	geodescode, denominator, distancevalue, distanceuom, wkt_geometry, servicetype, 
+	servicetypeversion, operation, couplingtype, operateson, operatesonidentifier, operatesoname, 
+	degree, classification, conditionapplyingtoaccessanduse, lineage, responsiblepartyrole, 
+	specificationtitle, specificationdate, specificationdatetype, platform, instrument, sensortype, 
+	cloudcover, bands, links, contacts, anytext_tsvector, wkb_geometry, 
+	k.soil_functions, k.soil_physical_properties, k.productivity, k.soil_services, k.soil_classification, k.soil_processes, 
+	k.soil_biological_properties, k.contamination, k.soil_properties, k.soil_threats, k.ecosystem_services, 
+	k.soil_chemical_properties
+from public.records2 r left join public.keywords_temp k on r.identifier = k.identifier""",hasoutput=False)
 
 
