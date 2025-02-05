@@ -149,8 +149,8 @@ if recs:
 dbQuery("""UPDATE public.records2 set identifier = MD5('identifier') where identifier like %s""",('%//%',),False)
 # copy to temp table, then rename it
 dbQuery("""truncate table public.records""",(),False)
-dbQuery("""insert into public.records select 
-    r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type, 
+dbQuery("""insert into public.records select
+    distinct on (r.identifier) identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type,
 	language, type, coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, 
 	coalesce((select max(target) from harvest.translations where source=r.abstract),r.abstract) as abstract, 
 	title_alternate, edition, keywords, keywordstype, themes, 

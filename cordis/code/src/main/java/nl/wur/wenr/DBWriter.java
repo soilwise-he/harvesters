@@ -51,7 +51,7 @@ public class DBWriter {
                         eurioIndentifier = bindingsarray.getJSONObject(i).getJSONObject("s").getString("value");
                         String objResult =  bindingsarray.getJSONObject(i).getJSONObject("o").getString("value");
 
-                        if(eurioIndentifier.contains("s66/resource/project") ) {
+                        if(eurioIndentifier.contains("cordis.europa.eu/project/id") ) {
                         // the project could be new
                             long existing = db.executeLongResultStatement(con, "select count(*) from harvest.items where uri = ? and itemtype= ? and source = ? "
                                     , new Object[] { eurioIndentifier, "project", "CORDIS" } );
