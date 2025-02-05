@@ -57,38 +57,38 @@ def isoMatch(lang):
 
 def manageTrans(turtle,subject,prop,id,lang_source,lang_target="en"):
     lang_source = isoMatch(lang_source)
-    if lang_source:
-        # first get the untranslated string
-        srctxt = None
-        for s,p,o in turtle.triples((subject,prop,None)):
-            if o.__class__ == term.Literal:
-                srctxt = str(o) # use any language
-                if isoMatch(o.language) == lang_source: # if default language
-                    srctxt = str(o)
-                    break
-            else:
-                print (f'No term {o}')
+    if lang_source in [None,'']:
+        lang_source = 'LD' # Language Detect
 
-        if not srctxt:
-            print('No source for {prop}:{lang_source}')
-        else:
-            # find a english translation
-            hasENG = False
-            for s,p,o in turtle.triples((subject,prop,None)):
-                if o.language == 'en':
-                    hasENG = True
-                    # insert trans
-                    insertSQL('harvest.translations',
-                            ['source','target','lang_source','lang_target','context','date_inserted'],
-                            (srctxt,o,lang_source,lang_target,id,datetime.now()))
-                    break
-        
-            # prepare a translation for this record
-            if not hasENG:
-                # insert untranslated
+    # first get the untranslated string
+    srctxt = None
+    for s,p,o in turtle.triples((subject,prop,None)):
+        if o.__class__ == term.Literal:
+            srctxt = str(o) # use any language
+            if isoMatch(o.language) == lang_source: # if default language
+                srctxt = str(o)
+                break
+
+    if not srctxt:
+        print('No source for {prop}:{lang_source}')
+    else:
+        # find a english translation
+        hasENG = False
+        for s,p,o in turtle.triples((subject,prop,None)):
+            if o.language == 'en' and lang_source != 'LD': # translate anyway, because we don't knw source-lang
+                hasENG = True
+                # insert trans
                 insertSQL('harvest.translations',
-                        ['source','lang_source','lang_target','context','date_inserted'],
-                        (srctxt,lang_source,lang_target,id,datetime.now()))
+                        ['source','target','lang_source','lang_target','context','date_inserted'],
+                        (srctxt,o,lang_source,lang_target,id,datetime.now()))
+                break
+    
+        # prepare a translation for this record
+        if not hasENG:
+            # insert untranslated
+            insertSQL('harvest.translations',
+                    ['source','lang_source','lang_target','context','date_inserted'],
+                    (srctxt,lang_source,lang_target,id,datetime.now()))
 
 
 
@@ -100,8 +100,9 @@ sql = '''select identifier,language,turtle from harvest.items
     and identifier not in (
         select coalesce(context,'') 
         from harvest.translations 
-        where target is not null and date_inserted > now() - interval '1 day' ) 
-    limit 50'''
+        where target is not null 
+        OR date_inserted > (now() - interval '1 day')) 
+    limit 250'''
 
 recs = dbQuery(sql,(),True)
 

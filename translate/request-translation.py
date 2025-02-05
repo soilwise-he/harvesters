@@ -25,6 +25,9 @@ allowed_languages = os.environ.get("TR_ALLOWED_LANGUAGES") or '*'
 
 def requestRecord(lang_source,lang_target,source):
 
+    if lang_source in [None,'']:
+        lang_source = 'LD' # Language Detection
+
     translationRequest = {}
     translationRequest['sourceLanguage'] = lang_source
     translationRequest['targetLanguages'] = [lang_target]
@@ -47,7 +50,7 @@ def requestRecord(lang_source,lang_target,source):
 
     if(requestId and requestId not in [None,'']):
         # insert the ticket to the database, to identify which string to be updated
-        dbQuery("update harvest.translations set ticket=%s where lang_source=%s and lang_target=%s and source=%s;",(requestId,lang_source,lang_target,source),hasoutput=False)
+        dbQuery("update harvest.translations set ticket=%s where lang_target=%s and source=%s;",(requestId,lang_target,source),hasoutput=False)
         return requestId
     else:
         return "Error: No requestId"
