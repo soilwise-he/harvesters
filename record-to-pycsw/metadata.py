@@ -8,7 +8,7 @@ from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
 import traceback,urllib
 import json, os, psycopg2, sys
 sys.path.append('utils')
-from database import dbQuery
+from database import dbQuery, dbInit
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
@@ -143,28 +143,34 @@ if recs:
             print(f'Error: Could not parse {id} as record, {err}, {traceback.print_exc()}')
             continue
 
+try:
+    conn = dbInit()
+    cursor = conn.cursor()
+    print('truncate records')
+    cursor.execute("truncate table public.records")   
+    print('move * from records2 to records') 
+    cursor.execute("""insert into public.records select
+        distinct on (r.identifier) r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type,
+        language, type, coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, 
+        coalesce((select max(target) from harvest.translations where source=r.abstract),r.abstract) as abstract, 
+        title_alternate, edition, keywords, keywordstype, themes, 
+        parentidentifier, relation, time_begin, time_end, topicategory, resourcelanguage, creator, 
+        publisher, contributor, organization, securityconstraints, accessconstraints, otherconstraints, 
+        date, date_revision, date_creation, date_publication, date_modified, format, source, crs, 
+        geodescode, denominator, distancevalue, distanceuom, wkt_geometry, servicetype, 
+        servicetypeversion, operation, couplingtype, operateson, operatesonidentifier, operatesoname, 
+        degree, classification, conditionapplyingtoaccessanduse, lineage, responsiblepartyrole, 
+        specificationtitle, specificationdate, specificationdatetype, platform, instrument, sensortype, 
+        cloudcover, bands, links, contacts, anytext_tsvector, wkb_geometry, 
+        k.soil_functions, k.soil_physical_properties, k.productivity, k.soil_services, k.soil_classification, k.soil_processes, 
+        k.soil_biological_properties, k.contamination, k.soil_properties, k.soil_threats, k.ecosystem_services, 
+        k.soil_chemical_properties
+        from public.records2 r left join public.keywords_temp k on r.identifier = k.identifier""")
 
-        
-# workaround for '//' to '/' bahavior
-dbQuery("""UPDATE public.records2 set identifier = MD5('identifier') where identifier like %s""",('%//%',),False)
-# copy to temp table, then rename it
-dbQuery("""truncate table public.records""",(),False)
-dbQuery("""insert into public.records select
-    distinct on (r.identifier) r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type,
-	language, type, coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, 
-	coalesce((select max(target) from harvest.translations where source=r.abstract),r.abstract) as abstract, 
-	title_alternate, edition, keywords, keywordstype, themes, 
-    parentidentifier, relation, time_begin, time_end, topicategory, resourcelanguage, creator, 
-	publisher, contributor, organization, securityconstraints, accessconstraints, otherconstraints, 
-	date, date_revision, date_creation, date_publication, date_modified, format, source, crs, 
-	geodescode, denominator, distancevalue, distanceuom, wkt_geometry, servicetype, 
-	servicetypeversion, operation, couplingtype, operateson, operatesonidentifier, operatesoname, 
-	degree, classification, conditionapplyingtoaccessanduse, lineage, responsiblepartyrole, 
-	specificationtitle, specificationdate, specificationdatetype, platform, instrument, sensortype, 
-	cloudcover, bands, links, contacts, anytext_tsvector, wkb_geometry, 
-	k.soil_functions, k.soil_physical_properties, k.productivity, k.soil_services, k.soil_classification, k.soil_processes, 
-	k.soil_biological_properties, k.contamination, k.soil_properties, k.soil_threats, k.ecosystem_services, 
-	k.soil_chemical_properties
-from public.records2 r left join public.keywords_temp k on r.identifier = k.identifier""",hasoutput=False)
-
-
+    # workaround for '//' to '/' bahavior
+    print("remove '//' from identifier")
+    cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%'""")
+    conn.commit()  
+except Exception as err:
+    print(f'Error: Could update records table, {err}, {traceback.print_exc()}')
+    
