@@ -149,11 +149,10 @@ print('truncate records')
 cursor.execute("truncate table public.records")   
 print('move * from records2 to records') 
 cursor.execute("""insert into public.records select
-    distinct on (r.identifier) r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type,
-    language, type, coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, 
+    distinct on (r.identifier) r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type, language, type, 
+    coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, title_alternate,
     coalesce((select max(target) from harvest.translations where source=r.abstract),r.abstract) as abstract, 
-    title_alternate, edition, keywords, keywordstype, themes, 
-    parentidentifier, relation, time_begin, time_end, topicategory, resourcelanguage, creator, 
+    edition, keywords, keywordstype, themes, parentidentifier, relation, time_begin, time_end, topicategory, resourcelanguage, creator, 
     publisher, contributor, organization, securityconstraints, accessconstraints, otherconstraints, 
     date, date_revision, date_creation, date_publication, date_modified, format, source, crs, 
     geodescode, denominator, distancevalue, distanceuom, wkt_geometry, servicetype, 
