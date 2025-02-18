@@ -10,6 +10,7 @@ include:
   - local: "/CI/.esdac.yaml"
   - local: "/CI/.fao-csw.yaml"
   - local: "/CI/.ejpsoil.yaml"
+  - local: "/CI/.it-er.yaml"
   - local: "/CI/.impact4soil.yaml"
   - local: "/CI/.inspire.yaml"
   - local: "/CI/.iso-triplify.yaml"
