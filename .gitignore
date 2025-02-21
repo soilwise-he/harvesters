@@ -7,3 +7,4 @@
 *.env
 cordis/code/target
 cordis/soilwise_doi_old.jar
+/utils/__pycache__/database.cpython-310.pyc

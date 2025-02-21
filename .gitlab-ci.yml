@@ -21,3 +21,4 @@ include:
   - local: "/CI/.prepsoil.yaml"
   - local: "/CI/.record-to-pycsw.yaml"
   - local: "/CI/.translation.yaml"
+  - local: "/CI/.newsfeeds.yaml"

@@ -1,0 +1,42 @@
+# a inspire harvest, db credentials are populated with git ci variables
+default:
+  interruptible: false
+stages:
+  - run-harvest
+  
+# metadata | this won't work, because endpoint is not open to outside
+harvest-newsfeeds-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+    - export FEED_URLS=https://soilwise-he.eu/feed/,https://soilhealthbenchmarks.eu/feed/,https://soilolive.eu/feed/,https://soilvalues.eu/feed/,https://novasoil-project.eu/index.php/feed/,https://inbestsoil.eu/feed,https://humus-project.eu/feed/,https://nbsoil.eu/feed/,https://delisoil.eu/feed/,https://mrv4soc.eu/feed/,https://loess-project.eu/feed/,https://project-fenix.eu/feed/,https://www.soilutions-project.eu/feed/,https://curiosoil.eu/feed/,https://www.bin2bean.eu/news/feed/,https://echosoil.eu/feed/,https://deephorizon.eu/feed/,https://soilprom.eu,https://soilprom.eu/feed/,https://www.phishes-project.eu/feed/,https://e-spfdigit.eu/feed/,https://wheatwatcher.eu/feed/,https://terrasafe.eu/feed/,https://monalisa4land.eu/feed/,https://hort2thefuture.eu/feed/,https://spinfert.eu/feed/,https://livingsoill.eu/feed/,https://gov4all.eu/feed/,https://www.path4med.eu/feed/
+    - pip3 install -r newsfeeds/requirements.txt
+    - python3 newsfeeds/feeder.py
+  rules:  
+    - if: $PROJECT != "NEWSFEEDS"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "dev"
+
+
+# metadata
+harvest-newsfeeds-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_PROD
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+    - export FEED_URLS=https://soilwise-he.eu/feed/,https://soilhealthbenchmarks.eu/feed/,https://soilolive.eu/feed/,https://soilvalues.eu/feed/,https://novasoil-project.eu/index.php/feed/,https://inbestsoil.eu/feed,https://humus-project.eu/feed/,https://nbsoil.eu/feed/,https://delisoil.eu/feed/,https://mrv4soc.eu/feed/,https://loess-project.eu/feed/,https://project-fenix.eu/feed/,https://www.soilutions-project.eu/feed/,https://curiosoil.eu/feed/,https://www.bin2bean.eu/news/feed/,https://echosoil.eu/feed/,https://deephorizon.eu/feed/,https://soilprom.eu,https://soilprom.eu/feed/,https://www.phishes-project.eu/feed/,https://e-spfdigit.eu/feed/,https://wheatwatcher.eu/feed/,https://terrasafe.eu/feed/,https://monalisa4land.eu/feed/,https://hort2thefuture.eu/feed/,https://spinfert.eu/feed/,https://livingsoill.eu/feed/,https://gov4all.eu/feed/,https://www.path4med.eu/feed/
+    - pip3 install -r newsfeeds/requirements.txt
+    - python3 newsfeeds/feeder.py
+  rules:  
+    - if: $PROJECT != "NEWSFEEDS"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "main"
