@@ -31,8 +31,8 @@ cursor = conn.cursor()
 for fd in os.environ.get("FEED_URLS").split(','):
     fdp = feedparser.parse(fd)
     print('Feed:',fd)
-    if fdp.bozo_exception:
-        print (fdp.bozo_exception)
+    if 'bozo_exception' in fdp:
+        print (fdp.get('bozo_exception',''))
     else:
         for ent in fdp.entries:
             print('-',ent.get('title',''))
