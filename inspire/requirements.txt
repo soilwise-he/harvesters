@@ -1,4 +1,0 @@
-owslib
-psycopg2-binary
-python-dotenv
-pycurl

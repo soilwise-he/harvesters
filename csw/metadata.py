@@ -17,6 +17,9 @@ url = os.environ.get("HARVEST_URL")
 if not url:
     print('env HARVEST_URL not set')
     exit
+else:
+    print('harvest',url)
+
 label = os.environ.get("HARVEST_LABEL").upper() or url
 filters = None
 if os.environ.get("HARVEST_FILTER"):
@@ -24,7 +27,7 @@ if os.environ.get("HARVEST_FILTER"):
     filters = json.loads(filterstring)
 
 # add source, if it does not exist yet
-hasSource(label,url,os.environ.get('HARVEST_FILTER'),'CSW')
+# hasSource(label,url,os.environ.get('HARVEST_FILTER'),'CSW')
 
 nextRecord = 1
 pagesize = 50
