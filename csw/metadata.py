@@ -27,7 +27,7 @@ if os.environ.get("HARVEST_FILTER"):
     filters = json.loads(filterstring)
 
 # add source, if it does not exist yet
-# hasSource(label,url,os.environ.get('HARVEST_FILTER'),'CSW')
+hasSource(label,url,os.environ.get('HARVEST_FILTER'),'CSW')
 
 nextRecord = 1
 pagesize = 50

@@ -37,7 +37,7 @@ harvest-inspire-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://inspire-geoportal.ec.europa.eu/srv/eng/csw
-    - export HARVEST_FILTER=[{"keyword":"soil"}]
+    - export HARVEST_FILTER=[{"th_httpinspireeceuropaeutheme-theme.link":"http://inspire.ec.europa.eu/theme/so"}]
     - export HARVEST_LABEL=INSPIRE 
 
     - pip3 install -r csw/requirements.txt
