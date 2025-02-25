@@ -1,11 +1,8 @@
-# harvesters
+# SWR Harvesters
 
-- Component: Harvested
-- Lead: Paul & Cenk
+A component to fetch metadata from remote sources as documented at <https://soilwise-he.github.io/SoilWise-documentation/technical_components/ingestion/>.
 
-A component or approach to fetch metadata (and data?) from remote sources as documented at <https://soilwise-he.github.io/SoilWise-documentation/technical_components/ingestion/>
-
-In this approach each harvester runs in a dedicated container. The result of the harvester is ingested into a (temporary) storage, where follow up processes pick up the results. Typically this process runs as a GITHub actions.
+Harvesting tasks can best be triggered from a tast runner, such as a CI-CD pipeline. Configuration scripts for running various harvesting tasks in a Gitlab CI-CD environment are available in [CI](./CI/). Tasks are configured using environment variables. The result of the harvester are ingested into a PostGres storage, where follow up processes pick up the results.
 
 ``` mermaid
 flowchart LR
@@ -18,17 +15,23 @@ flowchart LR
     db -->|indexing| CT[Catalogue] 
 ```
 
-This repository will contain the definition of a container used as a github action to harvest resources; as well as git action definitions to harvest actual sources. 
+This component is tightly related to the [triple store](https://github.com/soilwise-he/triplestore-virtuoso) component and [catalogue component](https://github.com/soilwise-he/pycsw). Harvested records are stored on the triple store as well as the catalogue storage. 
 
-This component is tightly related to the [triple store](https://github.com/soilwise-he/triplestore-virtuoso) component. Harvested records are stored on the triple store. Some interaction with the triple store to understand if existing records need to be kept, overwritten or even removed. 
+The following harvesting tasks are available.
 
-## Harvesters
+## Fetch records 
 
-- [inspire](./inspire)
-- [CSW](./csw) (for example Bonares, EJP Soil)
-- [ESDAC](./esdac)
-- [Cordis/OpenAire](./cordis)
-- [Triplify](./mcf-triplify/)
+- [CSW](./csw) (for example Bonares, EJP Soil, islandr, inspire)
+- [ESDAC](./esdac) a dedicated API
+- [Cordis/OpenAire](./cordis) combination of SPARQL and API's
+- [Prepsoil](./prepsoil/) a dedicated API
+- [Newsfeeds](./newsfeeds/) imports newsfeeds from soil mission websites
+
+## Process records
+
+- [iso-triplify](./iso-triplify/) exports iso19139 records to GeoDCAT-AP to be included in SWR triplestore
+- [record-to-pycsw](./record-to-pycsw/) exports records to catalogue (as iso19139 or Dublin Core)
+- [translate](./translate/) triggers a translation of non english records
 
 ## Docker
 
@@ -36,5 +39,5 @@ Run script as docker
 
 ```
 docker built -t soilwise/harvesters .
-docker run -e POSTGRES_HOST=localhost soilwise/harvesters python wcs/metadata.py 
+docker run -e POSTGRES_HOST=localhost soilwise/harvesters python csw/metadata.py 
 ```
