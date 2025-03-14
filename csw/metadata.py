@@ -57,14 +57,20 @@ if filters and len(filters) > 0:
             constraints.append(PropertyIsEqualTo(key, v))
 
 while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < maxrecords:
+    reqsuc = False
     try:
         if len(constraints) > 0:
             csw.getrecords2(maxrecords=pagesize,outputschema='http://www.isotc211.org/2005/gmd',constraints=constraints,startposition=nextRecord,esn='full')
         else:
             csw.getrecords2(maxrecords=pagesize,outputschema='http://www.isotc211.org/2005/gmd',startposition=nextRecord,esn='full')
-        
+        reqsuc = True
+    except Exception as e:
+        print(f"Request recs failed; {str(e)}")
+        nextRecord = nextRecord+pagesize
+    
+    if reqsuc:  
         print('CSW query ' + str(csw.results['returned']) + ' of ' + str(csw.results['matches']) + ' records from ' + str(nextRecord) + '.')
-        matched = csw.results['matches']
+        matched = csw.results.get('matches',0)
         nextRecord = csw.results['nextrecord'] or (nextRecord+pagesize)
         returned = csw.results['returned'] or len(csw.records)
         
@@ -116,8 +122,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                 
             except Exception as e:
                 print(f"Parse rec failed; {str(e)}")
-    except Exception as e:
-        print(f"Request recs failed; {str(e)}")
+    
 
 
 
