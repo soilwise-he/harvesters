@@ -33,27 +33,28 @@ conn = dbInit()
 cursor = conn.cursor()
 for row in recs:
     p,u = row
-    html = requests.get(u,headers=headers).text
-    soup = BeautifulSoup(html, "html.parser")
-    fd = None
-    for l in soup.find_all("link", {"rel": "alternate"}):
-        if l.get('type') == "application/rss+xml":
-            fd = l.get('href') 
-            break
-        # elif l.attr('type') == "text/calendar": # calendar events
-    if fd:
-        fdp = feedparser.parse(fd)
-        print('Project:',p,'Feed:',fd)
-        if 'bozo_exception' in fdp:
-            print (fdp.get('bozo_exception',''))
-        else:
-            for ent in fdp.entries:
-                print('-',ent.get('title',''))
-                if ent.get('link') not in [None,'']:
-                    cursor.execute('insert into harvest.feeds (published,title,summary,link,image,author,tags,asjson,project) values (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING',
-                        (datetime.fromtimestamp(mktime(ent.get('published_parsed',''))), ent.get('title',''), ent.get('summary',''), ent.get('link',''), 
-                        ent.get('image',{}).get('href',''), ent.get('author',''), ';'.join([t.get('term','') for t in ent.get('tags',[])]), json.dumps(ent), p )
-                    )
+    if u.startswith('http'):
+        html = requests.get(u,headers=headers).text
+        soup = BeautifulSoup(html, "html.parser")
+        fd = None
+        for l in soup.find_all("link", {"rel": "alternate"}):
+            if l.get('type') == "application/rss+xml":
+                fd = l.get('href') 
+                break
+            # elif l.attr('type') == "text/calendar": # calendar events
+        if fd not in [None,'']:
+            fdp = feedparser.parse(fd)
+            print('Project:',p,'Feed:',fd)
+            if 'bozo_exception' in fdp:
+                print (fdp.get('bozo_exception',''))
+            else:
+                for ent in fdp.entries:
+                    print('-',ent.get('title',''))
+                    if ent.get('link') not in [None,'']:
+                        cursor.execute('insert into harvest.feeds (published,title,summary,link,image,author,tags,asjson,project) values (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING',
+                            (datetime.fromtimestamp(mktime(ent.get('published_parsed',''))), ent.get('title',''), ent.get('summary',''), ent.get('link',''), 
+                            ent.get('image',{}).get('href',''), ent.get('author',''), ';'.join([t.get('term','') for t in ent.get('tags',[])]), json.dumps(ent), p )
+                        )
 
 conn.commit() 
 
