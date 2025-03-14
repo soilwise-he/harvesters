@@ -24,6 +24,7 @@ label = os.environ.get("HARVEST_LABEL").upper() or url
 filters = None
 if os.environ.get("HARVEST_FILTER"):
     filterstring = os.environ.get("HARVEST_FILTER")
+    print('Filter:', filterstring)
     filters = json.loads(filterstring)
 
 # add source, if it does not exist yet
