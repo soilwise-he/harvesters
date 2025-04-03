@@ -10,31 +10,19 @@ Some relevant CSW catalogues are:
 - ejpsoil catalogue ([csw](https://catalogue.ejpsoil.eu/csw))
 - isric catalogue ([csw](https://data.isric.org/geonetwork/srv/eng/csw))
 - islandr project ([csw](https://geonetwork.greendecision.eu/geonetwork/srv/eng/csw))
+- FAO
+- EEA
+- ISRIC
+- INSPIRE geoportal
 
 The script uses the [owslib](https://github.com/geopython/OWSLib) library to fetch records and stores them on a PostGreSQL database table `harvest.items` with structure
 
-```sql
-CREATE TABLE IF NOT EXISTS harvest.items
-(
-    identifier text COLLATE pg_catalog."default" NOT NULL,
-    identifiertype character varying(50) COLLATE pg_catalog."default",
-    itemtype character varying(50) COLLATE pg_catalog."default",
-    resultobject text COLLATE pg_catalog."default" NOT NULL,
-    resulttype character varying(50) COLLATE pg_catalog."default",
-    uri text COLLATE pg_catalog."default" NOT NULL,
-    insert_date timestamp without time zone,
-    source text COLLATE pg_catalog."default",
-    hash text COLLATE pg_catalog."default",
-    turtle text COLLATE pg_catalog."default",
-    date character varying(10) COLLATE pg_catalog."default",
-    error text COLLATE pg_catalog."default",
-    language character varying(9) COLLATE pg_catalog."default",
-    project text COLLATE pg_catalog."default",
-    CONSTRAINT item_hash UNIQUE (hash)
-)
-```
+A harvester run is best configured as a CI-CD pipeline in GIT. You can run this harvest locally by adding a .env file in this folder, from partent folder run:
 
-A harvester run is best configured as a CI-CD pipeline in GIT
+```
+pip3 install -r csw/requirements.txt
+python3 csw/metadata.py
+```
 
 ## Environment variables
 
@@ -57,6 +45,10 @@ Format json, key-value pairs:
 export HARVEST_FILTER='{"keywords":"Soil","type":"dataset"}'
 ```
 
+for INSPIRE Soil theme
+```
+HARVEST_FILTER=[{"th_httpinspireeceuropaeutheme-theme.link":"http://inspire.ec.europa.eu/theme/so"}] 
+```
 
 
 
