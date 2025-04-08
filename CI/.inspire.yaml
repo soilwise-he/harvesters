@@ -17,8 +17,11 @@ harvest-inspire-dev:
     - export HARVEST_URL=https://inspire-geoportal.ec.europa.eu/srv/eng/csw
     - export HARVEST_FILTER='[{"th_httpinspireeceuropaeutheme-theme.link":"http://inspire.ec.europa.eu/theme/so"}]'
     - export HARVEST_LABEL=INSPIRE 
-
+    - echo "Theme; INSPIRE Soil"
     - pip3 install -r csw/requirements.txt
+    - python3 csw/metadata.py
+    - echo "IACS data"
+    - export HARVEST_FILTER='[{"tag.default":"GSAA","tag.key":"*/IACSData/GSAA","tag.default":"LPIS","tag.key":"*/IACSData/LPIS"}]'
     - python3 csw/metadata.py
   rules:  
     - if: $PROJECT != "INSPIRE"
