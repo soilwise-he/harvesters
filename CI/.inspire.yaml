@@ -21,7 +21,7 @@ harvest-inspire-dev:
     - pip3 install -r csw/requirements.txt
     - python3 csw/metadata.py
     - echo "IACS data"
-    - export HARVEST_FILTER='[{"tag.default:"GSAA","tag.key":"*/IACSData/GSAA","tag.default:"LPIS","tag.key":"*/IACSData/LPIS"}]'
+    - export HARVEST_FILTER='[{"tag.default":"GSAA","tag.key":"*/IACSData/GSAA","tag.default":"LPIS","tag.key":"*/IACSData/LPIS"}]'
     - python3 csw/metadata.py
   rules:  
     - if: $PROJECT != "INSPIRE"
