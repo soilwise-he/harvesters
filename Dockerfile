@@ -8,16 +8,27 @@ RUN apt-get update && apt-get install --yes \
     && rm -rf /var/lib/apt/lists/*
 
 # initially copy only the requirements files
-COPY requirements.txt ./
-COPY csw ./
-COPY esdac ./
-COPY inspire ./
-COPY mcf-triplify ./
-COPY utils ./
+COPY csw ./csw
+COPY esdac ./esdac
+COPY impact4soil ./impact4soil
+COPY iso-triplify ./iso-triplify
+COPY prepsoil ./prepsoil
+COPY record-to-pycsw ./record-to-pycsw
+COPY translate ./translate
+COPY newsfeeds ./newsfeeds
+COPY utils ./utils
 
 RUN pip install -U pip && \
     python3 -m pip install \
-    --requirement requirements.txt \
-    psycopg2-binary  
+    -r csw/requirements.txt \
+    psycopg2-binary && \
+    python3 -m pip install \
+    -r esdac/requirements.txt && \
+    python3 -m pip install \
+    -r iso-triplify/requirements.txt && \
+    python3 -m pip install \
+    -r record-to-pycsw/requirements.txt && \
+    python3 -m pip install \
+    -r newsfeeds/requirements.txt   
 
 
