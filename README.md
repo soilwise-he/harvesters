@@ -37,11 +37,12 @@ The following harvesting tasks are available.
 
 ## Docker
 
-Run script as docker
+Run script as docker.
+Create a .env file with harvester details.
 
 ```
-docker built -t soilwise/harvesters .
-docker run -e POSTGRES_HOST=localhost soilwise/harvesters python csw/metadata.py 
+docker build -t soilwise/harvesters .
+docker run --env-file csw/.env soilwise/harvesters python csw/metadata.py
 ```
 
 ## Database
