@@ -15,7 +15,7 @@ harvest-it-er-dev:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://servizimoka.regione.emilia-romagna.it/geoportalEsri/csw
-    - export HARVEST_FILTER='[{"any":"suoli"}]'
+    - export HARVEST_FILTER='[{"apiso:Abstract":"%soil%"}]'
     - export HARVEST_LABEL=IT-ER 
 
     - pip3 install -r csw/requirements.txt
@@ -37,7 +37,7 @@ harvest-it-er-prod:
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
     - export HARVEST_URL=https://servizimoka.regione.emilia-romagna.it/geoportalEsri/csw
-    - export HARVEST_FILTER='[{"any":"suoli"}]'
+    - export HARVEST_FILTER='[{"apiso:Abstract":"%soil%"}]'
     - export HARVEST_LABEL=IT-ER 
 
     - pip3 install -r csw/requirements.txt

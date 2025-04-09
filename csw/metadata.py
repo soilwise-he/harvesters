@@ -54,7 +54,10 @@ if filters and len(filters) > 0:
         for k,v in f.items():
             key = filterMapping.get(k,k)
             # todo: check if key is in getcapabilities
-            constraints.append(PropertyIsEqualTo(key, v))
+            if key.lower().split(':').pop() in ["title,description,abstract,anytext"]:
+                constraints.append(PropertyIsLike(key, v, matchCase=False))
+            else:
+                constraints.append(PropertyIsEqualTo(key, v))
 
 while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < maxrecords:
     reqsuc = False
