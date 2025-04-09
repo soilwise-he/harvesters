@@ -12,12 +12,11 @@ Some relevant CSW catalogues are:
 - islandr project ([csw](https://geonetwork.greendecision.eu/geonetwork/srv/eng/csw))
 - FAO
 - EEA
-- ISRIC
-- INSPIRE geoportal
+- [INSPIRE geoportal](https://inspire-geoportal.ec.europa.eu/srv/eng/csw)
 
 The script uses the [owslib](https://github.com/geopython/OWSLib) library to fetch records and stores them on a PostGreSQL database table `harvest.items` with structure
 
-A harvester run is best configured as a CI-CD pipeline in GIT. You can run this harvest locally by adding a .env file in this folder, from partent folder run:
+A harvester run is best configured as a CI-CD pipeline in GIT. You can run this harvest locally by adding a .env file in this folder, from parent folder run:
 
 ```
 pip3 install -r csw/requirements.txt
