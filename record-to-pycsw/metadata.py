@@ -138,7 +138,7 @@ if recs:
                             print(f'Updated {id}')
                             loaded_files.append(id)
                         else:
-                            print(f'ERROR: {id} not inserted: {err}, {traceback.print_exc()}')
+                            print(f'ERROR: {id} not inserted.') #: {err}, {traceback.print_exc()}')
 
                         # in some cases the origianl id is not the derived id, update it
                         if '' not in [id,rec.identifier] and id != rec.identifier:
