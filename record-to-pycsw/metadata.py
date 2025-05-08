@@ -26,7 +26,7 @@ table = os.environ.get('PYCSW_TABLE') or 'public.records2'
 # what if we post to new table, then when done rename new table to old table?
 repo = repository.Repository(database, context, table='public.records2')
 
-def parseRDF(md,id,title):
+def parseRDF(md,id,title,rtype):
     try:
         g = Graph()
         g.parse(data=md, format='turtle')
@@ -53,9 +53,14 @@ def parseRDF(md,id,title):
                 g.add((s,DC.title,Literal(title)))
             # if abstract is empty, use description    
             if (None,DC.identifier,None) not in g:
-                g.add((s,DC.identifier,Literal(id)))
+                    g.add((s,DC.identifier,Literal(id)))
             if (None,DC.type,None) not in g:
-                g.add((s,DC.type,Literal('document')))
+                if rtype not in [None,'']:
+                    g.add((s,DC.type,Literal(rtype)))
+                else:
+                    g.add((s,DC.type,Literal('document')))
+            if str(s).startswith('http'):
+                g.add((s,DCTERMS.references,Literal(URIRef(str(s)))))
             #if len(str(id).split('/')) == 2:
             #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
             
@@ -73,7 +78,7 @@ except:
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.turtle 
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.itemtype, i.turtle 
                 from harvest.items i, harvest.sources s 
                 where coalesce(i.identifier,'') <> '' 
                 and (lower(resulttype) ='iso19139:2007' or coalesce(turtle,'') <> '')
@@ -86,13 +91,13 @@ if recs:
     failed_counter = 0
     
     for rec in sorted(recs):
-        id, title, date, turtle_prefix, rtype, resultobject, restype, turtle = rec
+        id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle = rec
 
         counter += 1
         metadata_record = None
 
         # for now keep iso records as is
-        if restype and restype.lower() in ['iso19139', 'iso19139:2007', 'iso19115']:
+        if rectype and rectype.lower() in ['iso19139', 'iso19139:2007', 'iso19115']:
             # import as xml
             recfile = resultobject
             try:
@@ -112,7 +117,7 @@ if recs:
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
                 recfile = f"{turtle_prefix}\n\n{turtle}"
-            metadata_record = parseRDF(recfile,id,title)
+            metadata_record = parseRDF(recfile,id,title,restype)
         else: 
             print(f'ERROR: Can not parse {id}')
 
