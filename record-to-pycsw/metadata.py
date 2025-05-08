@@ -58,7 +58,7 @@ def parseRDF(md,id,title,rtype):
                 if rtype not in [None,'']:
                     g.add((s,DC.type,Literal(rtype)))
                 else:
-                    g.add((s,DC.type,Literal('document')))
+                    g.add((s,DC.type,Literal('unknown')))
             if str(s).startswith('http'):
                 g.add((s,DCTERMS.references,Literal(URIRef(str(s)))))
             #if len(str(id).split('/')) == 2:
@@ -112,7 +112,7 @@ if recs:
                 except Exception as err:
                     print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
         elif turtle not in [None,'']: 
-            print(f'{counter}. parse {id} as rdf')  
+            print(f'{counter}. Parse {id} as rdf ({restype})')  
             # import as Dublin Core
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
