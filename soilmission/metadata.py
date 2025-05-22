@@ -29,49 +29,39 @@ for rec in sorted(recs):
         print(f'HTTP error occurred: {http_err}')
     except Exception as err:
         print(f'Other error occurred: {err}')
-    matches = matches2 = matches3 = None
+
     if jsonResponse:
-        matches = jsonResponse.get('response',{})
-    if matches:
-        matches2 = matches.get('results',{})
-    if not matches2: # happens if query result is empty
-        matches3=[]
-    else:
-        matches3 = matches2.get('result',[])
-    if matches3:
-        print('project',code,'nr of records',len(matches3))
-        for r in matches3:
-            d = r.get('header',{}).get('dri:dateOfCollection',{}).get('$','')
-            m = r.get('metadata',{}).get('oaf:entity',{}).get('oaf:result',{})
-            type = m.get('resulttype',{}).get('@classid','')
-            title = m.get('title',{})
-            if isinstance(title, list):
-                #print('Warning: failed parsing as str',title)
-                title = title[0]
-            title = title.get('$','')
-            pid = None
-            for p in m.get('pid',[]):
-                if isinstance(p, dict) and p.get('@classid') == 'doi':
-                    pid = p.get('$','')
-                #else:
-                #    print('Warning: failed parsing as dict',p)
-            if pid:
-                # test if already exists
-                # hasrec = dbQuery(f"select identifier from harvest.items where identifier = '{pid}'")
-                # if not hasrec:
-                hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html
-                insertRecord(   identifier=pid,
-                                uri='https://doi.org/'+pid,
-                                identifiertype='doi',
-                                title=title,
-                                resulttype='JSON',
-                                resultobject=json.dumps(r),
-                                hashcode=hashcode,
-                                project=grant,
-                                source=label,
-                                itemtype=type)
-    else:
-        print('Warning, failed',code,jsonResponse)
+        matches = jsonResponse.get('response',{}).get('results',{}).get('result',[])
+    if not matches: # happens if query result is None
+        matches = []
+    print('project',code,'nr of records',len(matches))
+    for r in matches:
+        d = r.get('header',{}).get('dri:dateOfCollection',{}).get('$','')
+        m = r.get('metadata',{}).get('oaf:entity',{}).get('oaf:result',{})
+        type = m.get('resulttype',{}).get('@classid','')
+        title = m.get('title',{})
+        if isinstance(title, list): # multilingual
+            title = title[0]
+        title = title.get('$','')
+        pid = None
+        for p in m.get('pid',[]):
+            if isinstance(p, dict) and p.get('@classid') == 'doi':
+                pid = p.get('$','')
+            #else:
+            #    print('Warning: failed parsing as dict',p)
+        if pid:
+            hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for json
+            insertRecord(   identifier=pid,
+                            uri='https://doi.org/'+pid,
+                            identifiertype='doi',
+                            title=title,
+                            resulttype='JSON',
+                            resultobject=json.dumps(r),
+                            hashcode=hashcode,
+                            project=grant,
+                            source=label,
+                            itemtype=type)
+
 
 
     
