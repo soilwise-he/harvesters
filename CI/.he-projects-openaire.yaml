@@ -3,27 +3,29 @@ default:
   interruptible: false
 stages:
   - run-harvest
-
+  
 # metadata
-harvest-record-to-pycsw-dev:
-  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:6d7d478b5a0eae82506c2078aeb152ec20883468074314282f47ec6240eee12d
-  stage: run-harvest 
+harvest-he-projects-openaire-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
     - export POSTGRES_PORT=$POSTGRES_PORT_TEST
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - pip3 install -r record-to-pycsw/requirements.txt
-    - python3 record-to-pycsw/metadata.py
+    - export HARVEST_LABEL=OPENAIRE 
+
+    - pip3 install -r soilmission/requirements.txt
+    - python3 soilmission/metadata.py
   rules:  
-    - if: $PROJECT != "RECORD2PYCSW"
+    - if: $PROJECT != "HE-PROJECTS-OPENAIRE"
       when: never
     - if: $CI_COMMIT_REF_NAME == "dev"
 
 # metadata
-harvest-record-to-pycsw-prod:
-  image: harbor.containers.wurnet.nl/proxy-cache/geopython/pycsw@sha256:6d7d478b5a0eae82506c2078aeb152ec20883468074314282f47ec6240eee12d
+harvest-he-projects-openaire-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
@@ -31,9 +33,11 @@ harvest-record-to-pycsw-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - pip3 install -r record-to-pycsw/requirements.txt
-    - python3 record-to-pycsw/metadata.py
+    - export HARVEST_LABEL=OPENAIRE 
+
+    - pip3 install -r soilmission/requirements.txt
+    - python3 soilmission/metadata.py
   rules:  
-    - if: $PROJECT != "RECORD2PYCSW"
+    - if: $PROJECT != "HE-PROJECTS-OPENAIRE"
       when: never
     - if: $CI_COMMIT_REF_NAME == "main"
