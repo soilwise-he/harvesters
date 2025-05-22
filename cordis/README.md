@@ -77,6 +77,35 @@ https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%
  (?identifier = "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>)  || (?identifier = "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier =  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal> )
 ```
 
+**Query CORDIS to load abstract of Projects into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
+
+```
+PREFIX eurio: <http://data.europa.eu/s66#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT {
+  ?identifierURI dcterms:description ?abstract
+}
+WHERE
+{
+  ?project a eurio:Project.
+  ?project eurio:title ?title.
+  ?project eurio:identifier ?identifier.
+  BIND(IRI(CONCAT("https://cordis.europa.eu/project/id/", ?identifier)) AS ?identifierURI).
+  ?project eurio:abstract ?abstract.
+  ?project eurio:hasResult ?result.
+  ?result eurio:doi ?doi.
+  FILTER ((regex(?abstract, "Soil", "i")) || (?identifier = "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier = "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier =  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ))
+}
+```
+
+**CURL-generated http-request to retrieve abstracts**:
+
+```
+https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3FidentifierURI%20dcterms%3Adescription%20%3Fabstract%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20BIND%28IRI%28CONCAT%28%22https%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F%22%2C%20%3Fidentifier%29%29%20AS%20%3FidentifierURI%29.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%0A%20%20FILTER%20%28%28regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22676982%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22867468%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%20%22101006717%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%20%29%29%0A%7D
+```
+
+
 **Query CORDIS to load RCN numbers of Projects into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
 
 ```
@@ -105,6 +134,98 @@ WHERE
 ```
 https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3FidentifierURI%20eurio%3Arcn%20%3Frcn%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3Arcn%20%3Frcn.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20BIND%28IRI%28CONCAT%28%22https%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F%22%2C%20%3Fidentifier%29%29%20AS%20%3FidentifierURI%29.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%0A%20%20FILTER%20%28%28regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22676982%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22867468%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%20%22101006717%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%20%29%29%0A%7D
 ```
+
+
+**Query CORDIS to load startDate of Projects into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
+
+```
+PREFIX eurio: <http://data.europa.eu/s66#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT {
+  ?identifierURI eurio:startDate ?startDate
+}
+WHERE
+{
+  ?project a eurio:Project.
+  ?project eurio:title ?title.
+  ?project eurio:startDate ?startDate.
+  ?project eurio:identifier ?identifier.
+  BIND(IRI(CONCAT("https://cordis.europa.eu/project/id/", ?identifier)) AS ?identifierURI).
+  ?project eurio:abstract ?abstract.
+  ?project eurio:hasResult ?result.
+  ?result eurio:doi ?doi.
+  FILTER ((regex(?abstract, "Soil", "i")) || (?identifier = "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier = "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier =  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ))
+}
+```
+
+**CURL-generated http-request to retrieve startDates**:
+
+```
+https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3FidentifierURI%20eurio%3AstartDate%20%3FstartDate%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3AstartDate%20%3FstartDate.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20BIND%28IRI%28CONCAT%28%22https%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F%22%2C%20%3Fidentifier%29%29%20AS%20%3FidentifierURI%29.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%0A%20%20FILTER%20%28%28regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22676982%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22867468%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%20%22101006717%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%20%29%29%0A%7D
+```
+
+
+**Query CORDIS to load the project duration into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
+
+```
+PREFIX eurio: <http://data.europa.eu/s66#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT {
+  ?identifierURI eurio:duration ?duration
+}
+WHERE
+{
+  ?project a eurio:Project.
+  ?project eurio:title ?title.
+  ?project eurio:duration ?duration.
+  ?project eurio:identifier ?identifier.
+  BIND(IRI(CONCAT("https://cordis.europa.eu/project/id/", ?identifier)) AS ?identifierURI).
+  ?project eurio:abstract ?abstract.
+  ?project eurio:hasResult ?result.
+  ?result eurio:doi ?doi.
+  FILTER ((regex(?abstract, "Soil", "i")) || (?identifier = "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier = "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier =  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ))
+}
+```
+
+**CURL-generated http-request to retrieve the project duration**:
+
+```
+https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3FidentifierURI%20eurio%3Aduration%20%3Fduration%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3Aduration%20%3Fduration.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20BIND%28IRI%28CONCAT%28%22https%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F%22%2C%20%3Fidentifier%29%29%20AS%20%3FidentifierURI%29.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%0A%20%20FILTER%20%28%28regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22676982%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22867468%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%20%22101006717%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%20%29%29%0A%7D
+```
+
+
+
+**Query CORDIS to load the Project Status into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
+
+```
+PREFIX eurio: <http://data.europa.eu/s66#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+CONSTRUCT {
+  ?identifierURI eurio:projectStatus ?projectStatus
+}
+WHERE
+{
+  ?project a eurio:Project.
+  ?project eurio:title ?title.
+  ?project eurio:projectStatus ?projectStatus.
+  ?project eurio:identifier ?identifier.
+  BIND(IRI(CONCAT("https://cordis.europa.eu/project/id/", ?identifier)) AS ?identifierURI).
+  ?project eurio:abstract ?abstract.
+  ?project eurio:hasResult ?result.
+  ?result eurio:doi ?doi.
+  FILTER ((regex(?abstract, "Soil", "i")) || (?identifier = "676982"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier = "867468"^^<http://www.w3.org/2000/01/rdf-schema#Literal>) || (?identifier =  "101006717"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ))
+}
+```
+
+**CURL-generated http-request to retrieve the Project Status**:
+
+```
+https://cordis.europa.eu/datalab/sparql?query=PREFIX%20eurio%3A%20%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20dcterms%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0ACONSTRUCT%20%7B%0A%20%20%3FidentifierURI%20eurio%3AprojectStatus%20%3FprojectStatus%0A%7D%0AWHERE%0A%7B%0A%20%20%3Fproject%20a%20eurio%3AProject.%0A%20%20%3Fproject%20eurio%3Atitle%20%3Ftitle.%0A%20%20%3Fproject%20eurio%3AprojectStatus%20%3FprojectStatus.%0A%20%20%3Fproject%20eurio%3Aidentifier%20%3Fidentifier.%0A%20%20BIND%28IRI%28CONCAT%28%22https%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F%22%2C%20%3Fidentifier%29%29%20AS%20%3FidentifierURI%29.%0A%20%20%3Fproject%20eurio%3Aabstract%20%3Fabstract.%0A%20%20%3Fproject%20eurio%3AhasResult%20%3Fresult.%0A%20%20%3Fresult%20eurio%3Adoi%20%3Fdoi.%0A%20%20FILTER%20%28%28regex%28%3Fabstract%2C%20%22Soil%22%2C%20%22i%22%29%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22676982%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%22867468%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%29%20%7C%7C%20%28%3Fidentifier%20%3D%20%20%22101006717%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23Literal%3E%20%29%29%0A%7D
+```
+
 
 **Query CORDIS to load Organisations which contribute to Projects into VIRTUOSO. The Projects do have ProjectPublications and in CORDIS they have "Soil" as part of the abstract.**
 
