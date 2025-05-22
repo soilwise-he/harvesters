@@ -1,0 +1,6 @@
+psycopg2-binary
+python-dotenv
+beautifulsoup4
+requests
+rdflib
+SPARQLWrapper

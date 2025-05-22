@@ -8,7 +8,7 @@ from database import insertRecord, dbQuery, hasSource
 load_dotenv()
 
 label = 'OPENAIRE'
-iurl = 'https://library.wur.nl/WebQuery/isric'
+iurl = 'https://api.openaire.eu/search'
 headers = { "User-Agent": "Soilwise Harvest v0.1" }
 # add source if it does not exist
 hasSource(label,iurl,'',label)
