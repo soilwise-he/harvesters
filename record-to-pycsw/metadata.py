@@ -5,6 +5,7 @@ from pycsw.core.etree import etree, PARSER
 from pycsw.core.util import parse_ini_config
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
+import html
 import traceback,urllib
 import json, os, psycopg2, sys
 sys.path.append('utils')
@@ -26,7 +27,7 @@ table = os.environ.get('PYCSW_TABLE') or 'public.records2'
 # what if we post to new table, then when done rename new table to old table?
 repo = repository.Repository(database, context, table='public.records2')
 
-def parseRDF(md,id,title):
+def parseRDF(md,id,title,rtype):
     try:
         g = Graph()
         g.parse(data=md, format='turtle')
@@ -40,6 +41,16 @@ def parseRDF(md,id,title):
         if (None,DCTERMS.abstract,None) not in g:
             for s,p,o in g.triples((None,DC.description,None)):
                 g.add((s,DCTERMS.abstract,o))
+        for s,p,o in g.triples((None,DCTERMS.abstract,None)):
+            abs = str(o)
+            if '&lt;p&gt;' in abs:
+                try: 
+                    abs = html.unescape(abs)
+                    g.set((s, DCTERMS.abstract, Literal(abs)))
+                except:
+                    print("Failed parsing encoded html",abs)
+            if '\n' in abs or '\r' in abs:
+                g.set((s, DCTERMS.abstract, Literal(abs.replace('\n',' ').replace('\r',' '))))
         for s,p,o in g.triples((None,DC.identifier,None)):
             id2 = str(o)
             if id2.startswith('http'):
@@ -53,9 +64,14 @@ def parseRDF(md,id,title):
                 g.add((s,DC.title,Literal(title)))
             # if abstract is empty, use description    
             if (None,DC.identifier,None) not in g:
-                g.add((s,DC.identifier,Literal(id)))
+                    g.add((s,DC.identifier,Literal(id)))
             if (None,DC.type,None) not in g:
-                g.add((s,DC.type,Literal('document')))
+                if rtype not in [None,'']:
+                    g.add((s,DC.type,Literal(rtype)))
+                else:
+                    g.add((s,DC.type,Literal('unknown')))
+            if str(s).startswith('http'):
+                g.add((s,DCTERMS.references,Literal(URIRef(str(s)))))
             #if len(str(id).split('/')) == 2:
             #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
             
@@ -73,7 +89,7 @@ except:
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.turtle 
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.itemtype, i.turtle 
                 from harvest.items i, harvest.sources s 
                 where coalesce(i.identifier,'') <> '' 
                 and (lower(resulttype) ='iso19139:2007' or coalesce(turtle,'') <> '')
@@ -86,13 +102,13 @@ if recs:
     failed_counter = 0
     
     for rec in sorted(recs):
-        id, title, date, turtle_prefix, rtype, resultobject, restype, turtle = rec
+        id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle = rec
 
         counter += 1
         metadata_record = None
 
         # for now keep iso records as is
-        if restype and restype.lower() in ['iso19139', 'iso19139:2007', 'iso19115']:
+        if rectype and rectype.lower() in ['iso19139', 'iso19139:2007', 'iso19115']:
             # import as xml
             recfile = resultobject
             try:
@@ -107,12 +123,12 @@ if recs:
                 except Exception as err:
                     print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
         elif turtle not in [None,'']: 
-            print(f'{counter}. parse {id} as rdf')  
+            print(f'{counter}. Parse {id} as rdf ({restype})')  
             # import as Dublin Core
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
                 recfile = f"{turtle_prefix}\n\n{turtle}"
-            metadata_record = parseRDF(recfile,id,title)
+            metadata_record = parseRDF(recfile,id,title,restype)
         else: 
             print(f'ERROR: Can not parse {id}')
 
@@ -133,7 +149,7 @@ if recs:
                             print(f'Updated {id}')
                             loaded_files.append(id)
                         else:
-                            print(f'ERROR: {id} not inserted: {err}, {traceback.print_exc()}')
+                            print(f'ERROR: {id} not inserted.') #: {err}, {traceback.print_exc()}')
 
                         # in some cases the origianl id is not the derived id, update it
                         if '' not in [id,rec.identifier] and id != rec.identifier:
