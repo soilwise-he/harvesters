@@ -17,6 +17,7 @@ include:
   - local: "/CI/.isric.yaml"
   - local: "/CI/.islandr.yaml"
   - local: "/CI/.ngr-filtered.yaml"
+  - local: "/CI/.he-projects-openaire.yaml"
   - local: "/CI/.openaire.yaml"
   - local: "/CI/.prepsoil.yaml"
   - local: "/CI/.record-to-pycsw.yaml"

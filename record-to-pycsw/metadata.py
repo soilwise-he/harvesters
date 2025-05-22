@@ -5,6 +5,7 @@ from pycsw.core.etree import etree, PARSER
 from pycsw.core.util import parse_ini_config
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
+import html
 import traceback,urllib
 import json, os, psycopg2, sys
 sys.path.append('utils')
@@ -40,6 +41,16 @@ def parseRDF(md,id,title,rtype):
         if (None,DCTERMS.abstract,None) not in g:
             for s,p,o in g.triples((None,DC.description,None)):
                 g.add((s,DCTERMS.abstract,o))
+        for s,p,o in g.triples((None,DCTERMS.abstract,None)):
+            abs = str(o)
+            if '&lt;p&gt;' in abs:
+                try: 
+                    abs = html.unescape(abs)
+                    g.set((s, DCTERMS.abstract, Literal(abs)))
+                except:
+                    print("Failed parsing encoded html",abs)
+            if '\n' in abs or '\r' in abs:
+                g.set((s, DCTERMS.abstract, Literal(abs.replace('\n',' ').replace('\r',' '))))
         for s,p,o in g.triples((None,DC.identifier,None)):
             id2 = str(o)
             if id2.startswith('http'):
