@@ -1,7 +1,7 @@
 import requests
 from requests.exceptions import HTTPError
 from dotenv import load_dotenv
-import sys,time,hashlib,os,json
+import sys,time,hashlib,os,json,re
 sys.path.append('utils')
 from database import insertRecord, dbQuery, hasSource
 # Load environment variables from .env file
@@ -43,8 +43,14 @@ for rec in sorted(recs):
             type = m.get('resulttype',{}).get('@classid','')
             title = m.get('title',{})
             if isinstance(title, list): # multilingual
-                title = title[0]
-            title = title.get('$','')
+                for t2 in title:
+                    if t2.get('$') not in [None,'']: 
+                        title = t2
+                        break
+            
+            # remove html from title
+            title = re.sub('<[^<]+?>', '', title.get('$','') )
+
             pid = None
             for p in m.get('pid',[]):
                 if isinstance(p, dict) and p.get('@classid') == 'doi':
