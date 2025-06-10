@@ -184,4 +184,5 @@ cursor.execute("""insert into public.records select
 # workaround for '//' to '/' bahavior
 print("remove '//' from identifier")
 cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%'""")
+cursor.execute("""UPDATE public.records r SET type = a.value FROM harvest.augmentation a WHERE r.identifier = a.identifier AND a.element_type = 'type';""")
 conn.commit()  
