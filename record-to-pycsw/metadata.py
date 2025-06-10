@@ -112,7 +112,7 @@ if recs:
             # import as xml
             recfile = resultobject
             try:
-                print(f'{counter}. parse {id} as xml')
+                # print(f'{counter}. parse {id} as xml')
                 metadata_record = etree.fromstring(recfile)
             except etree.XMLSyntaxError as err:
                 print(f'ERROR: XML document {id} is not well-formed {err}')
@@ -123,7 +123,7 @@ if recs:
                 except Exception as err:
                     print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
         elif turtle not in [None,'']: 
-            print(f'{counter}. Parse {id} as rdf ({restype})')  
+            # print(f'{counter}. Parse {id} as rdf ({restype})')  
             # import as Dublin Core
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
