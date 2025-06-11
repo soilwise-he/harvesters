@@ -27,10 +27,14 @@ table = os.environ.get('PYCSW_TABLE') or 'public.records2'
 # what if we post to new table, then when done rename new table to old table?
 repo = repository.Repository(database, context, table='public.records2')
 
-def parseRDF(md,id,title,rtype):
+def parseRDF(md,id,title,rtype,project):
+
+    # CLEAN NEW LINE CHARS FROM XML
+    # md = md.replace('\r','').replace('\n','')
+
     try:
         g = Graph()
-        g.parse(data=md, format='turtle')
+        g.parse(data=md.replace('\n\t','').replace('\t',''), format='turtle')
         s = None
         # map DCT to DC 
         elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience','provenance']
@@ -74,11 +78,15 @@ def parseRDF(md,id,title,rtype):
                 g.add((s,DCTERMS.references,Literal(URIRef(str(s)))))
             #if len(str(id).split('/')) == 2:
             #    g.add((s,DC.relation,Literal(f'http://doi.org/{str(id)}')))
-            
+
+        # project workaround
+        if project not in [None,'']:
+             g.add((s,DCTERMS.relation,Literal(project)))
+
         return etree.fromstring(bytes(g.serialize(format="xml"), 'utf-8'))
 
     except Exception as err:
-        print(f'failed parse as Dublin Core, {err} {traceback.print_stack()}')
+        print(f'failed parse as Dublin Core, {err}')
 
 
 # clean up public table first
@@ -89,7 +97,7 @@ except:
 
 # get records to be imported from db (updated after xxx?) or "where id not in (select id from records)"
 # if failed, save as failed, not ask again, or maybe later
-recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.itemtype, i.turtle 
+recs = dbQuery("""select DISTINCT ON (i.identifier) i.identifier, i.title, i.date, s.turtle_prefix, s.type, i.resultobject, i.resulttype, i.itemtype, i.turtle, i.project 
                 from harvest.items i, harvest.sources s 
                 where coalesce(i.identifier,'') <> '' 
                 and (lower(resulttype) ='iso19139:2007' or coalesce(turtle,'') <> '')
@@ -102,7 +110,7 @@ if recs:
     failed_counter = 0
     
     for rec in sorted(recs):
-        id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle = rec
+        id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle, project = rec
 
         counter += 1
         metadata_record = None
@@ -112,7 +120,7 @@ if recs:
             # import as xml
             recfile = resultobject
             try:
-                print(f'{counter}. parse {id} as xml')
+                # print(f'{counter}. parse {id} as xml')
                 metadata_record = etree.fromstring(recfile)
             except etree.XMLSyntaxError as err:
                 print(f'ERROR: XML document {id} is not well-formed {err}')
@@ -123,12 +131,13 @@ if recs:
                 except Exception as err:
                     print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
         elif turtle not in [None,'']: 
-            print(f'{counter}. Parse {id} as rdf ({restype})')  
+            # print(f'{counter}. Parse {id} as rdf ({restype})')  
             # import as Dublin Core
             recfile = turtle
             if turtle_prefix not in [None,'']: # identify if prefix is needed
                 recfile = f"{turtle_prefix}\n\n{turtle}"
-            metadata_record = parseRDF(recfile,id,title,restype)
+            metadata_record = parseRDF(recfile,id,title,restype,project)
+            
         else: 
             print(f'ERROR: Can not parse {id}')
 
@@ -156,7 +165,7 @@ if recs:
                             print(f'updating asynchronous id {id}')
                             dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = %s",(id),False)
         except Exception as err:
-            print(f'Error: Could not parse {id} as record, {err}, {traceback.print_exc()}')
+            print(f'Error: Could not parse {id} as record, {err}')
             continue
 
 conn = dbInit()
