@@ -53,7 +53,6 @@ if 'document' in harvesttypes:
             records = resp.json()
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             proceed = False
-            count = 1
             print(f'Error fetching {url}?page={page}, {e}')
         
         if proceed : 
