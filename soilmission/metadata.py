@@ -38,8 +38,16 @@ for rec in sorted(recs):
     
         print('project',grant,':',code,'nr of records',len(matches2))
         for r in matches2:
-            d = r.get('header',{}).get('dri:dateOfCollection',{}).get('$','')
-            m = r.get('metadata',{}).get('oaf:entity',{}).get('oaf:result',{})
+            d=''
+            try:
+                d = r.get('header',{}).get('dri:dateOfCollection',{}).get('$','')
+            except:
+                None
+            m = {}
+            try:
+                m = r.get('metadata',{}).get('oaf:entity',{}).get('oaf:result',{})
+            except:
+                None
             type = m.get('resulttype',{}).get('@classid','')
             title = m.get('title',{})
             if isinstance(title, list): # multilingual
