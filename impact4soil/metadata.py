@@ -40,9 +40,9 @@ if 'document' in harvesttypes:
     # add source if it does not exist
     hasSource(label,url,'',label)
     
-    count=10
+    count=20
     page=1
-    max=50
+    max=10000
     print('Impact4Soil Publications')
     while count > 0 and (page*20 < max):
         headers = {'Accept': 'application/json', "User-Agent": "Soilwise Harvest v0.1"}
@@ -62,17 +62,17 @@ if 'document' in harvesttypes:
                 print(f"{(page-1)*20+cnt}. {r.get('url',r.get('id'))}")
                 cnt=cnt+1
                 id = r.get('url',r.get('id'))
-                
-                hashcode = hashlib.md5(str(r).encode("utf-8")).hexdigest() # get unique hash for html 
-                insertRecord(   identifier=stripdoi(id),
-                                uri=r.get('url'),
-                                identifiertype=tp(id),
-                                title=r.get('title',''),
-                                resulttype='JSON',
-                                resultobject=str(r),
-                                hashcode=hashcode,
-                                source=label,
-                                itemtype='document') # insert into db
+                if r.get('url','').startswith('http'):
+                    hashcode = hashlib.md5(str(r).encode("utf-8")).hexdigest() # get unique hash for html 
+                    insertRecord(   identifier=stripdoi(id),
+                                    uri=r.get('url'),
+                                    identifiertype=tp(id),
+                                    title=r.get('title',''),
+                                    resulttype='JSON',
+                                    resultobject=str(r),
+                                    hashcode=hashcode,
+                                    source=label,
+                                    itemtype='document') # insert into db
         page = page+1
 
 # harvest datasets
