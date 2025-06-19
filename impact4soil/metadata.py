@@ -42,7 +42,7 @@ if 'document' in harvesttypes:
     
     count=20
     page=1
-    max=10000
+    max=20000
     print('Impact4Soil Publications')
     while count>0 and (page*20)<max:
         headers = {'Accept': 'application/json', "User-Agent": "Soilwise Harvest v0.1"}
@@ -59,7 +59,6 @@ if 'document' in harvesttypes:
         if proceed : 
             cnt = 1
             count=len(records)
-            print(page,count)
             for r in records: 
                 print(f"{(page-1)*20+cnt}. {r.get('url',r.get('id'))}")
                 cnt=cnt+1
