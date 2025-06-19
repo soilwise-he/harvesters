@@ -44,7 +44,7 @@ if 'document' in harvesttypes:
     page=1
     max=10000
     print('Impact4Soil Publications')
-    while count > 0 and (page*20 < max):
+    while count>0 and (page*20)<max:
         headers = {'Accept': 'application/json', "User-Agent": "Soilwise Harvest v0.1"}
         proceed = True
         records = []
@@ -53,11 +53,13 @@ if 'document' in harvesttypes:
             records = resp.json()
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             proceed = False
+            count = 1
             print(f'Error fetching {url}?page={page}, {e}')
         
         if proceed : 
             cnt = 1
             count=len(records)
+            print(page,count)
             for r in records: 
                 print(f"{(page-1)*20+cnt}. {r.get('url',r.get('id'))}")
                 cnt=cnt+1
@@ -72,7 +74,7 @@ if 'document' in harvesttypes:
                                     resultobject=str(r),
                                     hashcode=hashcode,
                                     source=label,
-                                    itemtype='document') # insert into db
+                                    itemtype=r.get('type','document')) # insert into db
         page = page+1
 
 # harvest datasets
