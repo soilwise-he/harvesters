@@ -14,7 +14,7 @@ harvest-fao-dev:
     - export POSTGRES_DB=$POSTGRES_DB_TEST
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
+    - export HARVEST_URL=https://data.apps.fao.org/map/catalog/srv/eng/csw
     - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=FAO 
 
@@ -36,7 +36,7 @@ harvest-fao-prod:
     - export POSTGRES_DB=$POSTGRES_DB_PROD
     - export POSTGRES_USER=$POSTGRES_USER_TEST
     - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
-    - export HARVEST_URL=https://data.fao.org/map/catalog/srv/eng/csw
+    - export HARVEST_URL=https://data.apps.fao.org/map/catalog/srv/eng/csw
     - export HARVEST_FILTER='[{"any":"soil"}]'
     - export HARVEST_LABEL=FAO 
 
