@@ -15,6 +15,8 @@ label = "DATA.EUROPA.EU"
 
 url='https://data.europa.eu/api/hub/search/search'
 filter='?q=&filter=dataset&facets={"keywords":["soil","sol","boden","bodem","suelo","solo"]}'
+# &includes=id,title.en,description.en,languages,modified,issued,distributions.access_url,distributions.format.label,distributions.format.id,distributions.license,distributions.description.en,categories.label,keywords.id,publisher,subjects,provenance
+
 # add source if it does not exist
 hasSource(label,url,'',label)
 
@@ -46,7 +48,7 @@ while p<maxp and p * l < count:
             id = id[0]
         else:
             id = r.get('id')
-        # data.europe.eu adds a organisation to each identifier, to prevent id conflicts, strip it
+        # data.europe.eu adds a organisation to each identifier to prevent id conflicts, strip it
         id = id.split('@')[0]
         ttl = r.get('title',{}).get('en','')
         hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
