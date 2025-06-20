@@ -68,5 +68,5 @@ def hasSource(label,url,filter,type):
     sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
     if not len(sources) and len(sources) < 1:
         print(f'Add non existing source {label}')
-        dbQuery(f"insert into harvest.sources (name,url,filter,type) values (%s,%s,%s,%s)",(label,url,filter[:200],type),False)
+        dbQuery(f"insert into harvest.sources (name,url,filter,type) values (upper(%s),%s,%s,%s)",(label,url,filter[:200],type),False)
     

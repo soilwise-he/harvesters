@@ -1,0 +1,43 @@
+# a inspire harvest, db credentials are populated with git ci variables
+default:
+  interruptible: false
+stages:
+  - run-harvest
+  
+# metadata
+harvest-dee-dev:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+
+    - pip3 install -r data.europa.eu/requirements.txt
+    - python3 data.europa.eu/fetch.py
+    - python3 data.europa.eu/parse.py
+  rules:  
+    - if: $PROJECT != "DATA.EUROPA.EU"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "dev"
+
+# metadata
+harvest-dee-prod:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  stage: run-harvest
+  script:
+    - export POSTGRES_HOST=$POSTGRES_HOST_TEST
+    - export POSTGRES_PORT=$POSTGRES_PORT_TEST
+    - export POSTGRES_DB=$POSTGRES_DB_TEST
+    - export POSTGRES_USER=$POSTGRES_USER_TEST
+    - export POSTGRES_PASSWORD=$POSTGRES_PASSWORD_TEST
+
+    - pip3 install -r data.europa.eu/requirements.txt
+    - python3 data.europa.eu/fetch.py
+    - python3 data.europa.eu/parse.py
+  rules:  
+    - if: $PROJECT != "DATA.EUROPA.EU"
+      when: never
+    - if: $CI_COMMIT_REF_NAME == "main"
