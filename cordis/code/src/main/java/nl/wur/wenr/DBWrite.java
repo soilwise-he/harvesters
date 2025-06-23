@@ -54,7 +54,7 @@ public class DBWrite
 
     public static int loglevel = 1;
 
-    // public static String predicate = "";
+    // public static String predicate = "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E+%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+%0D%0ASELECT+%3Fsub+%3Fpred+%3Fobj%0D%0AWHERE+%7B%0D%0A++%3Fsub+%3Fpred+%3Fobj%0D%0AFILTER+%28%21%28regex%28%3Fpred%2C+%22hasResult%22%2C+%22i%22%29%29%29%0D%0AFILTER+%28%3Fsub%3D%3Chttps%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2F101000210%3E%29%0D%0A%7D%0D%0A&format=text%2Fturtle&should-sponge=&timeout=0&signal_void=on";
 // ALL:
 
     public static void main( String[] args )
@@ -78,6 +78,14 @@ public class DBWrite
                 } else if (args[0].equalsIgnoreCase("turtle")) {
 
                     System.out.println("Turtle count: " + dbwriter.turtleDOIs());
+
+                } else if (args[0].equalsIgnoreCase("pdfcontent")) {
+
+                    System.out.println("PDF objects stored: " + dbwriter.fetchPDFContent());
+
+                } else if (args[0].equalsIgnoreCase("turtleproject")) {
+
+                    System.out.println("Turtle by project fetched: " + dbwriter.fetchTurtleByProject());
 
                 } else if (args[0].equalsIgnoreCase("cordis")) {
 
