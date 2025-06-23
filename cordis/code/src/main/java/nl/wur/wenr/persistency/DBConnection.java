@@ -292,8 +292,8 @@ public class DBConnection {
 			ps.setDouble(1 + i, Double.parseDouble(parameter.toString()));
 		} else if (parameter.getClass() == Timestamp.class) {
 			ps.setTimestamp(1 + i, (Timestamp) parameter);
-		} else { // assuming varchar2
-			ps.setString(1 + i, parameter.toString());
+		} else { // assuming byte[]
+			ps.setBytes(1 + i, (byte[]) parameter);
 		}
 	}
 
@@ -315,8 +315,8 @@ public class DBConnection {
 			cs.setDouble(2 + i, Double.parseDouble(parameter.toString()));
 		} else if (parameter.getClass() == Timestamp.class) {
 			cs.setTimestamp(2 + i, (Timestamp) parameter);
-		} else { // assuming varchar2
-			cs.setString(2 + i, parameter.toString());
+		} else { // assuming byte[]
+			cs.setBytes(2 + i, (byte[]) parameter);
 		}
 	}
 
