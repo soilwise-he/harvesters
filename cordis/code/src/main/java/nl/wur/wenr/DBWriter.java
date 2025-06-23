@@ -6,7 +6,12 @@ import nl.wur.wenr.xml.XSLTConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -29,13 +34,162 @@ public class DBWriter {
         String username = System.getenv("POSTGRES_USERNAME");
         String password = System.getenv("POSTGRES_PASSWORD");
         String connecturi = System.getenv("POSTGRES_DB");
+//        DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
+        DBConnection.setupDatabaseParameters("org.postgresql.Driver", "soilwise", "Brugge2503", "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentschema=harvest");
 
-        DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
         db = DBConnection.instance();
 
         jatsxslt = db.executeSingleResultStatement(
                 "select value from harvest.xslt where type = ?"
                 ,  new Object[] {"jats"} );
+    }
+
+    public static byte[] downloadPdf(String pdfUrl) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (InputStream in = new URL(pdfUrl).openStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+//            e.printStackTrace();
+            return String.format("<%s", e.getMessage()).getBytes(StandardCharsets.UTF_8);
+        }
+        return baos.toByteArray();
+    }
+
+    // Method to store the downloaded PDF in PostgreSQL
+    private int storePdfInDatabase(String identifier, byte[] pdfData) throws Exception {
+
+        long existing = db.executeLongResultStatement(con, "select count(*) from harvest.pdf_items where identifier = ? "
+                , new Object[] { identifier } );
+
+        String message = new String(pdfData, StandardCharsets.UTF_8);
+
+        if( message.startsWith("<")) {
+             pdfData = null;
+        }
+        else {
+            message = null;
+        }
+
+        if( existing > 0 ) {
+            db.executeVoid(con, "update harvest.pdf_items set pdfobject = ?, message = ?  where identifier = ? "
+                    , new Object[] { pdfData, message, identifier });
+        }
+        else {
+            db.executeVoid(con, "insert into harvest.pdf_items(pdfobject, message, identifier) values(?, ?, ?)"
+                    , new Object[] { pdfData, message, identifier });
+        }
+
+        return 1;
+    }
+
+    private int fetchOnePDF(String identifier, String downloadlink) throws Exception {
+        int ret = 0;
+
+        byte[] pdfData = downloadPdf(downloadlink);
+
+        // Step 2: Store the PDF data in the PostgreSQL database
+        if (pdfData != null) {
+            ret = storePdfInDatabase(identifier, pdfData);
+        } else {
+            System.out.println("Failed to download the PDF file.");
+        }
+
+        return ret;
+    }
+
+    public int fetchTurtleByProject() throws Exception {
+        int cnt = 0;
+        int ret = 0;
+
+        String statement = "select identifier from harvest.items where itemtype =? and uri like '%cordis.europa.eu/project%' and turtle is null" ; // and downloadlink = 'https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1002/2016RG000543'
+        try {
+
+            WrapResultSet rs= db.executeQuery( statement, new Object[] { "project" } );
+
+            con = db.getConnection();
+
+            try {
+                while (rs.next()) {
+
+                    result = "";
+                    String identifier = rs.getString("identifier");
+
+                    String uri =  "https://sparql.soilwise-he.containers.wur.nl/sparql/?default-graph-uri=https%3A%2F%2Fsoilwise-he.github.io%2Fsoil-health&query=PREFIX+eurio%3A%3Chttp%3A%2F%2Fdata.europa.eu%2Fs66%23%3E+%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+%0D%0ACONSTRUCT+{%3Fsub+%3Fpred+%3Fobj+}%0D%0AWHERE+{%0D%0A++%3Fsub+%3Fpred+%3Fobj%0D%0AFILTER+(!(regex(%3Fpred%2C+%22hasResult%22%2C+%22i%22)))%0D%0AFILTER+(%3Fsub%3D%3Chttps%3A%2F%2Fcordis.europa.eu%2Fproject%2Fid%2FXXXXXX%3E)%0D%0A}%0D%0A&format=text%2Fturtle&should-sponge=&timeout=0&signal_void=on";
+                    uri = uri.replace("XXXXXX", identifier);
+                    String turtle = DBWrite.getHTTPResult(uri);
+
+                    db.executeVoid(con, "update harvest.items set turtle=? where identifier=?", new Object[] { turtle, identifier  } );
+
+                    cnt++;
+                    ret++;
+                    if (DBWrite.loglevel >= 1 && (cnt % 100 == 0)) {
+                        System.out.println(cnt);
+                    }
+                }
+            }
+            finally {
+                rs.close();
+
+                if ((con != null) && (!con.isClosed())) {
+                    con.close();
+                }
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+
+        // number of turtle loaded:
+        return ret;
+    }
+
+    public int fetchPDFContent() throws Exception {
+        int cnt = 0;
+        int ret = 0;
+
+        String statement = "select distinct identifier, downloadlink from harvest.items where downloadtype =? and downloadlink is not null and identifier not in (select identifier from harvest.pdf_items)" ; // and downloadlink = 'https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1002/2016RG000543'
+        try {
+
+            WrapResultSet rs= db.executeQuery( statement, new Object[] { "pdf" } );
+
+            con = db.getConnection();
+
+            try {
+                while (rs.next()) {
+
+                    result = "";
+                    String identifier = rs.getString("identifier");
+                    String downloadlink = rs.getString("downloadlink");
+
+                    ret = ret + fetchOnePDF(identifier, downloadlink);
+
+                    cnt++;
+
+                    if (DBWrite.loglevel >= 1 && (cnt % 100 == 0)) {
+                        System.out.println(cnt);
+                    }
+                }
+            }
+            finally {
+                rs.close();
+
+                if ((con != null) && (!con.isClosed())) {
+                    con.close();
+                }
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+
+        // number of loaded pdf objects:
+        return ret;
     }
 
     public int setCordisProjectTitles(JSONObject identifierlist) throws Exception {
@@ -262,6 +416,10 @@ public class DBWriter {
             }
             finally {
                 rs.close();
+
+                if ((con != null) && (!con.isClosed())) {
+                    con.close();
+                }
             }
         }
         catch(Exception e) {
@@ -383,7 +541,11 @@ public class DBWriter {
 //                cnt = i;
 //            }
 //            finally {
-//                rs.close();
+////                rs.close();
+//
+//                if ((con != null) && (!con.isClosed())) {
+//                    con.close();
+//                }
 //            }
 //        }
 //        catch(Exception e) {
@@ -432,6 +594,9 @@ public long turtleDOIs()  {
             }
             finally {
                 rs.close();
+                if ((con != null) && (!con.isClosed())) {
+                    con.close();
+                }
             }
     }
     catch(Exception e) {
@@ -777,6 +942,8 @@ public long turtleDOIs()  {
         if(obj.toLowerCase().contains("jats")) {
             objval = jats2html("<?xml version='1.0' encoding='UTF-8'?><article>" + obj + "</article>");
         }
+        objval = objval.replace("\n", "");  // remove newlines form turtle
+// also remove tabs form turtle?       objval = objval.replace("\t", "");
 
         result +=  "<" + sub + ">	dct:" + pred  + "	\"" + objval + "\" .\n";
     }
