@@ -5,7 +5,7 @@ from pycsw.core.etree import etree, PARSER
 from pycsw.core.util import parse_ini_config
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import DC, DCTERMS, RDF, FOAF, SKOS
-import html
+import html, logging
 import traceback,urllib
 import json, os, psycopg2, sys
 sys.path.append('utils')
@@ -14,6 +14,8 @@ from database import dbQuery, dbInit
 # Load environment variables from .env file
 from dotenv import load_dotenv
 load_dotenv()
+
+logging.getLogger().setLevel(logging.ERROR)
 
 # todo: dublin core parser for json, maybe even use rdflib, ask tom
 
