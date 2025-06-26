@@ -1,16 +1,3 @@
-
-
-
-
-
-
-# if record is in english, set language to english?
-# else (if not translated by dee yet) keep language
-
-
-# parse imported html from esdac
-
-
 from dotenv import load_dotenv
 from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, SKOS, SDO, FOAF
@@ -27,10 +14,11 @@ recsPerPage = 5000
 label = "DATA.EUROPA.EU"
 
 def addNS(e):
-    if e in ['thumbnailUrl']:
-        return SDO[e]
-    else:
+    if e in DCTERMS:
         return DCTERMS[e]
+    elif e in SDO:
+        return SDO[e]
+        
 
 def urlasid(uri,ds):
     if 'identifier' not in ds or 'doi.org' in uri: # prefer doi
@@ -51,11 +39,12 @@ def dict2graph(d):
         aURI = 'https://soilwise-he.github.io/soil-health#'  + d['identifier'][0]
     r = URIRef(urllib.parse.quote_plus(aURI))
     for k,v in d.items():
-        if isinstance(v, list):
-            for i in v:
-                g.add((r,addNS(k),Literal(i)))
-        else:
-            g.add((r,addNS(k),Literal(v)))
+        if v and (k in DCTERMS or k in SDO):
+            if isinstance(v, list):
+                for i in v:
+                    g.add((r,addNS(k),Literal(i)))
+            else:
+                g.add((r,addNS(k),Literal(v)))
     return g
 
 
@@ -144,15 +133,8 @@ def parseDOC(r):
         r['hasVersion'] = hv
     r.pop('version_info',None)
 
-
-    r.pop('adms_identifier',None)
-    r.pop('conforms_to',None)
-    r.pop('sample',None)
-    r.pop('page',None)
-    r.pop('applicable_legislation',None)
-    r.pop('hvd_category',None)
-    r.pop('version_notes',None)
-    r.pop('geocoding_description',None)
+#OTHER FIELDS
+# adms_identifier,conforms_to,sample,page,applicable_legislation,hvd_category,version_notes,geocoding_description,spatial_resolution_in_meters
     return r 
 
 
