@@ -165,7 +165,7 @@ if recs:
                         # in some cases the origianl id is not the derived id, update it
                         if '' not in [id,rec.identifier] and id != rec.identifier:
                             print(f'updating asynchronous id {id}')
-                            dbQuery(f"update {table} set identifier = '{rec.identifier}' where identifier = %s",(id),False)
+                            dbQuery(f"update harvest.items set identifier2 = %s where identifier = %s",(rec.identifier,id),False)
         except Exception as err:
             print(f'Error: Could not parse {id} as record, {err}')
             continue
