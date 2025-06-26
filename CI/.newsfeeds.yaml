@@ -6,7 +6,7 @@ stages:
   
 # metadata | this won't work, because endpoint is not open to outside
 harvest-newsfeeds-dev:
-  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.18-slim-bookworm
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
@@ -25,7 +25,7 @@ harvest-newsfeeds-dev:
 
 # metadata
 harvest-newsfeeds-prod:
-  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.8-slim-buster
+  image: harbor.containers.wurnet.nl/proxy-cache/library/python:3.10.18-slim-bookworm
   stage: run-harvest
   script:
     - export POSTGRES_HOST=$POSTGRES_HOST_TEST
