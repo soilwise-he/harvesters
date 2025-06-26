@@ -190,8 +190,9 @@ cursor.execute("""insert into public.records select
     k.soil_chemical_properties, k.soil_management
     from public.records2 r left join public.keywords_temp k on r.identifier = k.identifier""")
 
+# element matcher on type
+cursor.execute("""UPDATE public.records r SET type = a.value FROM harvest.augmentation a WHERE r.identifier = a.identifier AND a.element_type = 'type';""")
+cursor.execute("""UPDATE public.records SET type = NULL WHERE identifier NOT IN (SELECT DISTINCT identifier FROM harvest.augmentation WHERE element_type = 'type');""")
 # workaround for '//' to '/' bahavior
-print("remove '//' from identifier")
-cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%'""")
-cursor.execute("""UPDATE public.records r SET type = a.value FROM harvest.augmentation a WHERE r.identifier = a.identifier AND a.element_type = 'type';UPDATE public.records SET type = NULL WHERE identifier NOT IN (SELECT DISTINCT identifier FROM harvest.augmentation WHERE element_type = 'type');""")
+cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%';""")
 conn.commit()  
