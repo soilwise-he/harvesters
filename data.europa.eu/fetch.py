@@ -32,19 +32,19 @@ l=100 # limit
 count=1000 # initial value, updated from result
 maxp=100 # max pages for development only
 
-while p<maxp and p * l < count:
+while p < maxp and p * l < count:
 
     aUrl = f"{url}{filter}&page={p}&limit={l}"
     resp = requests.get(aUrl, headers=headers)
     resp = resp.json()
-    count = resp.get('result',{}).get('count',[])
+    count = resp.get('result',{}).get('count', 1000)
     records = resp.get('result',{}).get('results',[])
     print(p,p*l,len(records))
     p=p+1
 
     for r in records: 
         id = r.get('identifier',r.get('id'))
-        if isinstance(id, list) and id[0]:
+        if isinstance(id, list) and len(id) > 0 and len(id) > 0 and id[0]:
             id = id[0]
         else:
             id = r.get('id')

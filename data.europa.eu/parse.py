@@ -42,7 +42,13 @@ def urlasid(uri,ds):
 
 def dict2graph(d):
     g = Graph()
-    aURI = d['identifier']
+    aURI = ''
+    if 'identifier' in d and isinstance(d['identifier'], list) and len(d['identifier']) > 0 and d['identifier'][0]:
+        for i in d['identifier']:
+            if i.startswith('http'):
+                aURI = i
+    if not aURI.startswith('http'):
+        aURI = 'https://soilwise-he.github.io/soil-health#'  + d['identifier'][0]
     r = URIRef(urllib.parse.quote_plus(aURI))
     for k,v in d.items():
         if isinstance(v, list):
@@ -55,16 +61,19 @@ def dict2graph(d):
 
 def parseDOC(r):
 
-    # resource, # or id or identifier
-    try:
-      r['identifier'] = r['identifier'][0]  
-    except:
-      None
+    # identifier should be []
+    if 'identifier' not in r:
+        r['identifier'] = []
+    elif not isinstance(r['identifier'], list):
+        r['identifier'] = [r.get('identifier')] 
     
-    if 'identifier' not in r or r['identifier'] in [None,''] or not  r['identifier'].startswith('http'):
-        r['identifier'] = r['resource'];
-    r.pop('resource',None)
+    if 'id' in r and r['id'] not in [None,''] and r['id'] not in r['identifier']:
+        r['identifier'].append(r['id'])
     r.pop('id',None)
+
+    if 'resource' in r and r['resource'] not in [None,''] and r['resource'] not in r['identifier']:
+        r['identifier'].append(r['resource'])
+    r.pop('resource',None)
 
     r['subject'] = jsonpath.findall("$.subject.resource", r) 
     r['subject'] += jsonpath.findall("$.keywords[*].id", r)
@@ -160,7 +169,7 @@ for rec in sorted(unparsed):
 
     dsRDF = dict2graph(ds)    
     triples = dsRDF.serialize(format='turtle') # todo: strip the namespaces?
-    dbQuery(f"update harvest.items set uri=%s, turtle=%s where identifier=%s",(ds['identifier'],triples,rid),False)     
+    dbQuery(f"update harvest.items set turtle=%s where identifier=%s",(triples,rid),False)     
 
 
 

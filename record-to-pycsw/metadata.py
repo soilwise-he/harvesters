@@ -37,7 +37,7 @@ def parseRDF(md,id,title,rtype,project):
         g.parse(data=md.replace('\n\t','').replace('\t',''), format='turtle')
         s = None
         # map DCT to DC 
-        elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience','provenance']
+        elms = ['description','title','subject','publisher','creator','date','type','source','relation','coverage','contributor','rights','format','identifier','language','audience']
         for e in elms:
             for s,p,o in g.triples((None,DCTERMS[e],None)):
                 g.add((s,DC[e],o))
