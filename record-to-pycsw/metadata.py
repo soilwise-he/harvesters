@@ -90,8 +90,7 @@ def parseRDF(md,id,title,rtype,project):
     except Exception as err:
         print(f'failed parse as Dublin Core, {err}')
 
-
-# clean up public table first
+# clean up temporary public.records2 table first
 try:
     dbQuery("""truncate public.records2""",(),False)
 except:
@@ -108,9 +107,11 @@ loaded_files = []
 
 if recs:
     total = len(recs)
+    print('Process',total,'records')
     counter = 0
     failed_counter = 0
-    
+    uniqueRecords = []
+
     for rec in sorted(recs):
         id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle, project = rec
 
@@ -122,12 +123,10 @@ if recs:
             # import as xml
             recfile = resultobject
             try:
-                # print(f'{counter}. parse {id} as xml')
                 metadata_record = etree.fromstring(recfile)
             except etree.XMLSyntaxError as err:
                 print(f'ERROR: XML document {id} is not well-formed {err}')
             except Exception as err:
-                print(f'WARNING: XML parsing as string {id} failed, {err}')
                 try:
                     metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
                 except Exception as err:
@@ -148,33 +147,30 @@ if recs:
             if metadata_record not in [None,'']:
                 record = metadata.parse_record(context, metadata_record, repo)
                 for rec in record:
-                    try:
+                    if rec.identifier not in uniqueRecords:
                         dt = util.get_today_and_now()
                         if hasattr(rec,'date') and rec.date not in [None,'']:
                             dt = rec.date
-                        repo.insert(rec, 'local', dt)
-                        loaded_files.append(id)
-                    except Exception as err:
-                        if force_update:
-                            repo.update(rec)
-                            print(f'Updated {id}')
+                        try:
+                            repo.insert(rec, 'local', dt)
                             loaded_files.append(id)
-                        else:
-                            print(f'ERROR: {id} not inserted.') #: {err}, {traceback.print_exc()}')
-
-                        # in some cases the origianl id is not the derived id, update it
-                        if '' not in [id,rec.identifier] and id != rec.identifier:
-                            print(f'updating asynchronous id {id}')
+                            uniqueRecords.append(rec.identifier)
+                            # in some cases the origianl id is not the derived id, add it to identifier2
                             dbQuery(f"update harvest.items set identifier2 = %s where identifier = %s",(rec.identifier,id),False)
+                        except Exception as err:
+                            print('Record',id,'failed')
+                    else:
+                        print('Record',id,'skipped, final-id',rec.identifier,'already in database')
+
         except Exception as err:
             print(f'Error: Could not parse {id} as record, {err}')
             continue
 
+print('Prepare finished, move to records')
 conn = dbInit()
 cursor = conn.cursor()
-print('truncate records')
 cursor.execute("truncate table public.records")   
-print('move * from records2 to records') 
+
 cursor.execute("""insert into public.records select
     distinct on (r.identifier) r.identifier, typename, schema, mdsource, insert_date, xml, anytext, metadata, metadata_type, language, type, 
     coalesce((select max(target) from harvest.translations where source=r.title),r.title) as title, title_alternate,
@@ -198,3 +194,5 @@ cursor.execute("""UPDATE public.records SET type = NULL WHERE identifier NOT IN 
 # workaround for '//' to '/' bahavior
 cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%';""")
 conn.commit()  
+
+print('Inserted',len(uniqueRecords),'records')
