@@ -38,6 +38,7 @@ for rec in sorted(recs):
     
         print('project',grant,':',code,'nr of records',len(matches2))
         for r in matches2:
+            
             d=''
             try:
                 d = r.get('header',{}).get('dri:dateOfCollection',{}).get('$','')
@@ -61,10 +62,22 @@ for rec in sorted(recs):
 
             pid = None
             for p in m.get('pid',[]):
-                if isinstance(p, dict) and p.get('@classid') == 'doi':
+                if isinstance(p, dict):
                     pid = p.get('$','')
+                    break
                 #else:
                 #    print('Warning: failed parsing as dict',p)
+            if not pid:
+                pid2 = m.get('originalId')
+                if not isinstance(pid2, list):
+                    pid2 = [pid2]
+                for p in pid2:
+                    if isinstance(p, dict) and (p.get('$','').startswith('http') or p.get('$','').startswith('10.') or p.get('$','').startswith('doi:')):
+                        pid = p.get('$')
+                        break
+                if not pid:
+                    pid = pid2[0].get('$')
+
             if pid:
                 hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for json
                 insertRecord(   identifier=pid,

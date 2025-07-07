@@ -111,10 +111,11 @@ if recs:
     counter = 0
     failed_counter = 0
     uniqueRecords = []
-
+    cnt = 0
     for rec in sorted(recs):
         id, title, date, turtle_prefix, rtype, resultobject, rectype, restype, turtle, project = rec
-
+        cnt = cnt+1
+ #       print(cnt,id,rectype)
         counter += 1
         metadata_record = None
 
@@ -130,7 +131,7 @@ if recs:
                 try:
                     metadata_record = etree.fromstring(bytes(recfile, 'utf-8'))
                 except Exception as err:
-                    print(f'Error: Failed parsing XML {id}, {err} {traceback.print_exc()}')
+                    print(f'Error: Failed parsing iso XML {id}, {err}')
         elif turtle not in [None,'']: 
             # print(f'{counter}. Parse {id} as rdf ({restype})')  
             # import as Dublin Core
@@ -138,16 +139,15 @@ if recs:
             if turtle_prefix not in [None,'']: # identify if prefix is needed
                 recfile = f"{turtle_prefix}\n\n{turtle}"
             metadata_record = parseRDF(recfile,id,title,restype,project)
-            
         else: 
-            print(f'ERROR: Can not parse {id}')
+            print(f'ERROR: Can not parse {id}', rectype)
 
         # insert into repo
         try:
             if metadata_record not in [None,'']:
                 record = metadata.parse_record(context, metadata_record, repo)
                 for rec in record:
-                    if rec.identifier not in uniqueRecords:
+                    if rec.identifier and rec.identifier not in uniqueRecords:
                         dt = util.get_today_and_now()
                         if hasattr(rec,'date') and rec.date not in [None,'']:
                             dt = rec.date
@@ -158,7 +158,7 @@ if recs:
                             # in some cases the origianl id is not the derived id, add it to identifier2
                             dbQuery(f"update harvest.items set identifier2 = %s where identifier = %s",(rec.identifier,id),False)
                         except Exception as err:
-                            print('Record',id,'failed')
+                            print('Record',id,'failed',err)
                     else:
                         print('Record',id,'skipped, final-id',rec.identifier,'already in database')
 

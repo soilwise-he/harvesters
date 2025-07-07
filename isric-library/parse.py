@@ -11,10 +11,18 @@ load_dotenv()
 label = 'ISRIC-LIB'
 
 def addNS(e):
-    if e in ['thumbnailUrl']:
-        return SDO[e]
-    else:
+    if e in DCTERMS:
         return DCTERMS[e]
+    elif e in SDO:
+        return SDO[e]
+    elif e in DCAT:
+        return DCAT[e]
+    elif e in SKOS:
+        return SKOS[e]
+    elif e in FOAF:
+        return FOAF[e]
+    else:
+        return None        
 
 def dict2graph(d):
     g = Graph()
