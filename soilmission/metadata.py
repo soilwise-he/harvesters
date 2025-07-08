@@ -79,10 +79,18 @@ for rec in sorted(recs):
                     pid = pid2[0].get('$')
 
             if pid:
+                ruri = str(pid)
+                idtype = 'uuid'
+                if ruri.startswith('10.'):
+                    ruri = f'https://doi.org/{ruri}'
+                elif ruri.startswith('doi:'):
+                    ruri = f"https://doi.org/{ruri.split(':').pop()}"
+                if 'doi.org/10.' in ruri:
+                    idtype = 'doi'
                 hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for json
-                insertRecord(   identifier=pid,
-                                uri='https://doi.org/'+pid,
-                                identifiertype='doi',
+                insertRecord(   identifier=str(pid),
+                                uri=ruri,
+                                identifiertype=idtype,
                                 title=title,
                                 resulttype='JSON',
                                 resultobject=json.dumps(r),
