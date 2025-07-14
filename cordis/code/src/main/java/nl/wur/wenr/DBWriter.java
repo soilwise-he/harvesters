@@ -38,7 +38,6 @@ public class DBWriter {
 
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", "soilwise", "Brugge2503", "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentSchema=harvest");
 
-
         db = DBConnection.instance();
 
         jatsxslt = db.executeSingleResultStatement(
@@ -941,17 +940,19 @@ public long turtleDOIs()  {
         String inp = obj.replaceAll("<jats:p", "<p").replaceAll("</jats:p", "</p");
         // makes it worse, as jats"list-items seem to be provided as a paragraph <jats:p> inp = inp.replaceAll("<jats:list-item", "<br />- <jats:list-item");
         try {
+            ret = inp;
             XSLTConverter jatsConverter = new XSLTConverter();
-            ret =jatsConverter.transformXSLTFromString(inp,
-                    jatsxslt ) ;
-            ret = ret.substring(0, ret.length()-2);
+            if(inp.contains("<jats:")) {
+                ret = jatsConverter.transformXSLTFromString(inp,
+                        jatsxslt);
+                ret = ret.substring(0, ret.length() - 2);
+            }
         }
         catch(Exception e) {
-            if (DBWrite.loglevel >= 1) {
+            if (DBWrite.loglevel >= 3) {
 
                 System.out.println("Error jats2html: " + e.getMessage());
             }
-            ret = obj;
         }
         if (DBWrite.loglevel >= 3) {
 
