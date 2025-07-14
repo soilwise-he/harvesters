@@ -35,7 +35,9 @@ public class DBWriter {
         String password = System.getenv("POSTGRES_PASSWORD");
         String connecturi = System.getenv("POSTGRES_DB");
 //        DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
-        DBConnection.setupDatabaseParameters("org.postgresql.Driver", "soilwise", "Brugge2503", "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentschema=harvest");
+
+        DBConnection.setupDatabaseParameters("org.postgresql.Driver", "soilwise", "Brugge2503", "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentSchema=harvest");
+
 
         db = DBConnection.instance();
 
@@ -357,7 +359,7 @@ public class DBWriter {
                     try {  // REPLACE
 
                         db.executeVoid(con, "update harvest.items set identifier=?, resultobject=?, itemtype=?, identifiertype=?, resulttype=?, hash=? where uri=? "
-                                , new Object[] { doi, oafresult, "publication", "doi", "oaf", calculateMD5(oafresult + title.toLowerCase()), eurioIndentifier } );
+                                , new Object[] { doi, oafresult.toString(), "publication", "doi", "oaf", calculateMD5(oafresult + title.toLowerCase()), eurioIndentifier } );
 
                     }
                     catch(Exception e) {
@@ -469,7 +471,7 @@ public class DBWriter {
 
             JSONObject openaireresult = new JSONObject(opaire);
 
-            if (DBWrite.loglevel >= 4) {
+            if (DBWrite.loglevel >= 4) { // 4
 
                 System.out.println("With result: " + openaireresult.toString());
             }
@@ -483,12 +485,12 @@ public class DBWriter {
 
 
 
-                if (DBWrite.loglevel >= 4) {
-                    System.out.println(oafresult);
+                if (DBWrite.loglevel >= 4) {  // 4
+                    System.out.println(source + " - " + oafresult);
                 }
                 try {  // REPLACE
                     db.executeVoid(con, "update harvest.items set identifier=?, resultobject=?, identifiertype=?, resulttype=?, turtle=NULL where uri=? and source=? "
-                            , new Object[] { doi, oafresult, "doi", "oaf", uri, source } );
+                            , new Object[] { doi, oafresult.toString(), "doi", "oaf", uri, source } );
 
                 }
                 catch(Exception e) {
@@ -835,13 +837,42 @@ public long turtleDOIs()  {
                         }
                     }
                 }
+            predicate = "relevantdate";
+            if (oafresult.keySet().contains(predicate)) {
+                Object objPredicate = oafresult.get(predicate);
+
+                if (objPredicate instanceof JSONObject) {
+
+                    JSONObject resultObj = oafresult.getJSONObject(predicate);
+                    if (resultObj != null && resultObj.has("$") && resultObj.has("@classname")) {
+                        String classname = resultObj.get("@classname").toString();
+                        resultString = cleanValue(resultObj.get("$").toString());
+                        if (classname.equals("created") || classname.equals("available")) {
+                            writeDctermsTripleLiteral(doiURI, classname, resultString);
+                        }
+                    }
+                } else if (objPredicate instanceof JSONArray) {
+                    JSONArray arrPredicate = oafresult.getJSONArray(predicate);
+                    for (int i = 0; i < arrPredicate.length(); i++) {
+                        // inside for-loop: write separate Turtle for every element
+                        JSONObject jsonObj = arrPredicate.getJSONObject(i);
+                        if (jsonObj != null && jsonObj.has("$")  && jsonObj.has("@classname")) {
+                            String classname = jsonObj.get("@classname").toString();
+                            if (classname.equals("created") || classname.equals("available")) {
+                                resultString = cleanValue(jsonObj.get("$").toString());
+                                writeDctermsTripleLiteral(doiURI, classname, resultString);
+                            }
+                        }
+                    }
+                }
+            }
             predicate = "dateofacceptance";
             if (oafresult.keySet().contains(predicate)) {
                 Object objPredicate = oafresult.get(predicate);
 
                 if (JSONObject.NULL.equals(objPredicate)) {
                     resultString = "";
-                    writeDctermsTripleLiteral(doiURI, "date", resultString);
+                    writeDctermsTripleLiteral(doiURI, "dateAccepted", resultString);
                 } else if (objPredicate instanceof JSONObject) {
 
                     JSONObject resultObj = oafresult.getJSONObject(predicate);
