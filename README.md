@@ -30,7 +30,8 @@ flowchart LR
  hc[Harvest process] -->|rdf| dbtemp[(db-temp)]
  dbtemp -->|sql| aug[augmentation]
  aug -->|sql| dbtemp
- dbtemp -->|pycsw-ingest| dbrecords[(db-records)]
+ dbtemp -->|sql| pycswingest[pycsw-ingest]
+ pycswingest -->|sql| dbrecords[(db-records)]
  dbrecords -->|sql| solrize
  solrize -->|xml| solr[(SOLR)]
  solr -->|json| solrui[SOLR UI]
