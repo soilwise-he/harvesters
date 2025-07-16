@@ -23,17 +23,23 @@ This component is tightly related to the [triple store](https://github.com/soilw
 
 ```mermaid
 flowchart LR
- i[inspire] --> hc
- o[OpenAire] --> hc
- f[fao] --> hc
- hc[Harvest process]
- hc --> dbtemp[(temporary storage)]
- dbtemp --> aug[augmentation]
- aug --> dbtemp
- dbtemp -->|pycsw-ingest| dbrecords
- dbrecords -->|solrize| SOLR
- dbrecords --> pycsw
- dbtemp --> SPARQL
+ i[inspire] -->|iso19139| hc
+ o[OpenAire] -->|oaf| hc
+ f[fao] -->|iso19139| hc
+ de[data.europa.eu] -->|DCAT| hc
+ hc[Harvest process] -->|rdf| dbtemp[(db-temp)]
+ dbtemp -->|sql| aug[augmentation]
+ aug -->|sql| dbtemp
+ dbtemp -->|pycsw-ingest| dbrecords[(db-records)]
+ dbrecords -->|sql| solrize
+ solrize -->|xml| solr[(SOLR)]
+ solr -->|json| solrui[SOLR UI]
+ dbrecords -->|sql| pycsw[pycsw]
+ pycsw --> csw(csw)
+ pycsw --> html[catalogueUI]
+ dbtemp -->|rdf| vrt[(virtuoso)]
+ vrt -->|rdf| sparql(SPARQL)
+ sparql -->|json| html
 ```
 
 The following harvesting tasks are available.
