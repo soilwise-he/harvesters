@@ -19,6 +19,23 @@ flowchart LR
 
 This component is tightly related to the [triple store](https://github.com/soilwise-he/triplestore-virtuoso) component and [catalogue component](https://github.com/soilwise-he/pycsw). Harvested records are stored on the triple store as well as the catalogue storage. 
 
+## Harvest in full data flow
+
+```mermaid
+flowchart LR
+ i[inspire] --> hc
+ o[OpenAire] --> hc
+ f[fao] --> hc
+ hc[Harvest process]
+ hc --> dbtemp[(temporary storage)]
+ dbtemp --> aug[augmentation]
+ aug --> dbtemp
+ dbtemp -->|pycsw-ingest| dbrecords
+ dbrecords -->|solrize| SOLR
+ dbrecords --> pycsw
+ dbtemp --> SPARQL
+```
+
 The following harvesting tasks are available.
 
 ## Fetch records 
