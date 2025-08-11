@@ -50,6 +50,8 @@ docker run --env-file csw/.env soilwise/harvesters python csw/metadata.py
 Create script for harvest tables
 
 ```sql
+CREATE SCHEMA IF NOT EXISTS harvest;
+
 CREATE SEQUENCE IF NOT EXISTS harvest.sources_source_id_seq
     INCREMENT 1
     START 1
@@ -69,7 +71,7 @@ CREATE TABLE IF NOT EXISTS harvest.sources
     turtle_prefix text ,
     CONSTRAINT source_pkey PRIMARY KEY (source_id),
     CONSTRAINT source_name_key UNIQUE (name)
-)
+);
 
 CREATE TABLE IF NOT EXISTS harvest.items
 (
@@ -116,6 +118,6 @@ CREATE TABLE IF NOT EXISTS harvest.item_duplicates
         REFERENCES harvest.sources (name) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
-)
+);
 ```
 
