@@ -1,0 +1,241 @@
+{
+    "title": {
+        "@classid": "main title",
+        "@classname": "main title",
+        "@schemeid": "dnet:dataCite_title",
+        "@schemename": "dnet:dataCite_title",
+        "$": "\n\t\t\t\t\t\tWhat is agroforestry in the EU Carbon Removals Certification Framework (CRCF)?\n\t\t\t\t\t"
+    },
+    "creator": {
+        "@rank": "1",
+        "@name": "",
+        "@surname": "",
+        "$": "Lawson, Gerry"
+    },
+    "dateofacceptance": null,
+    "resulttype": {
+        "@classid": "publication",
+        "@classname": "publication",
+        "@schemeid": "dnet:result_typologies",
+        "@schemename": "dnet:result_typologies"
+    },
+    "language": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "dnet:languages",
+        "@schemename": "dnet:languages"
+    },
+    "description": {
+        "$": "\n\t\t\t\t\t\t<p>Presentation at the 2nd European Carbon Farming Summit, Dublin.&nbsp; Session on \"Agroforestry MRV\"4th March 2023.</p>\n\t\t\t\t\t"
+    },
+    "country": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "",
+        "@schemename": ""
+    },
+    "subject": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "",
+        "@schemename": ""
+    },
+    "relevantdate": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "",
+        "@schemename": ""
+    },
+    "publisher": {
+        "$": "Zenodo"
+    },
+    "embargoenddate": null,
+    "journal": {
+        "@issn": "",
+        "@eissn": "",
+        "@lissn": "",
+        "@ep": "",
+        "@iss": "",
+        "@sp": "",
+        "@vol": ""
+    },
+    "source": null,
+    "fulltext": null,
+    "format": null,
+    "storagedate": null,
+    "resourcetype": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "",
+        "@schemename": ""
+    },
+    "device": null,
+    "size": null,
+    "version": null,
+    "lastmetadataupdate": null,
+    "metadataversionnumber": null,
+    "documentationUrl": null,
+    "codeRepositoryUrl": null,
+    "programmingLanguage": {
+        "@classid": "",
+        "@classname": "",
+        "@schemeid": "",
+        "@schemename": ""
+    },
+    "contactperson": null,
+    "contactgroup": null,
+    "tool": null,
+    "originalId": {
+        "$": "oai:zenodo.org: 14988115"
+    },
+    "collectedfrom": {
+        "@name": "ZENODO",
+        "@id": "opendoar____: : 358aee4cc897452c00244351e4d91f69"
+    },
+    "pid": [
+        {
+            "@classid": "doi",
+            "@classname": "Digital Object Identifier",
+            "@schemeid": "dnet:pid_types",
+            "@schemename": "dnet:pid_types",
+            "$": "10.5281/zenodo.14988115"
+        },
+        {
+            "@classid": "oai",
+            "@classname": "Open Archives Initiative",
+            "@schemeid": "dnet:pid_types",
+            "@schemename": "dnet:pid_types",
+            "$": "oai:zenodo.org: 14988115"
+        }
+    ],
+    "bestaccessright": {
+        "@classid": "OPEN",
+        "@classname": "Open Access",
+        "@schemeid": "dnet:access_modes",
+        "@schemename": "dnet:access_modes"
+    },
+    "datainfo": {
+        "inferred": {
+            "$": false
+        },
+        "deletedbyinference": {
+            "$": false
+        },
+        "trust": {
+            "$": "0.9"
+        },
+        "inferenceprovenance": null,
+        "provenanceaction": {
+            "@classid": "user:insert",
+            "@classname": "user:insert",
+            "@schemeid": "dnet:provenanceActions",
+            "@schemename": "dnet:provenanceActions"
+        }
+    },
+    "rels": {
+        "rel": [
+            {
+                "@inferred": false,
+                "@trust": "0.9",
+                "@inferenceprovenance": "",
+                "@provenanceaction": "user:claim",
+                "to": {
+                    "@class": "isProducedBy",
+                    "@scheme": "dnet:result_project_relations",
+                    "@type": "project",
+                    "$": "corda_____he: :b85db8a088a073be59a4ce7159aa3860"
+                },
+                "code": {
+                    "$": "101059794"
+                },
+                "acronym": null,
+                "title": {
+                    "$": "DIGITAF"
+                },
+                "contracttype": {
+                    "@classid": "",
+                    "@classname": "",
+                    "@schemeid": "",
+                    "@schemename": ""
+                },
+                "funding": {
+                    "funder": {
+                        "@id": "ec__________: :EC",
+                        "@shortname": "EC",
+                        "@name": "European Commission",
+                        "@jurisdiction": "DIGItal+Tools+to+help+AgroForestry+meet+climate%2C+biodiversity+and+farming+sustainability+goals%3A+linking+field+and+cloud"
+                    },
+                    "funding_level_0": {
+                        "@name": "HORIZON.2.6",
+                        "$": "ec__________: :EC: :HORIZON.2.6"
+                    }
+                },
+                "websiteurl": null
+            },
+            {
+                "@inferred": false,
+                "@trust": "0.9",
+                "@inferenceprovenance": "",
+                "@provenanceaction": "user:claim",
+                "to": {
+                    "@class": "isProducedBy",
+                    "@scheme": "dnet:result_project_relations",
+                    "@type": "project",
+                    "$": "corda_____he: :e40f4fb9a4d77cc9bfaa59501ca0db21"
+                },
+                "code": {
+                    "$": "101112951"
+                },
+                "acronym": null,
+                "title": {
+                    "$": "CREDIBLE"
+                },
+                "contracttype": {
+                    "@classid": "",
+                    "@classname": "",
+                    "@schemeid": "",
+                    "@schemename": ""
+                },
+                "funding": {
+                    "funder": {
+                        "@id": "ec__________: :EC",
+                        "@shortname": "EC",
+                        "@name": "European Commission",
+                        "@jurisdiction": "Building+momentum+and+trust+to+achieve+credible+soil+carbon+farming+in+the+EU"
+                    },
+                    "funding_level_0": {
+                        "@name": "HORIZON.2.6",
+                        "$": "ec__________: :EC: :HORIZON.2.6"
+                    }
+                },
+                "websiteurl": null
+            }
+        ]
+    },
+    "children": {
+        "instance": {
+            "@id": "doi_________: : 02113cb5390489ae091b6b51fc83c930",
+            "instancetype": {
+                "@classid": "0004",
+                "@classname": "Conference object",
+                "@schemeid": "dnet:publication_resource",
+                "@schemename": "dnet:publication_resource"
+            },
+            "collectedfrom": {
+                "@name": "ZENODO",
+                "@id": "opendoar____: : 358aee4cc897452c00244351e4d91f69"
+            },
+            "hostedby": {
+                "@name": "ZENODO",
+                "@id": "opendoar____: : 358aee4cc897452c00244351e4d91f69"
+            },
+            "accessright": {
+                "@classid": "OPEN",
+                "@classname": "Open Access",
+                "@schemeid": "dnet:access_modes",
+                "@schemename": "dnet:access_modes"
+            },
+            "dateofacceptance": null,
+            "webresource": {
+                "url": {
+                    "$": "https: //zenodo.org/records/14988115"}}}}}

@@ -1,0 +1,533 @@
+<ns1:MD_Metadata xmlns:ns1="http://www.isotc211.org/2005/gmd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+    xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://web.bonares.de/md_schema/apiso/apiso.xsd">
+    <gmd:fileIdentifier xmlns:gmd="http://www.isotc211.org/2005/gmd"
+        xmlns:bnr="http://www.bonares.de/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:srv="http://www.isotc211.org/2005/srv">
+        <gco:CharacterString>99bb3a07-af6c-4463-965e-d2f1dc7fd902</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <LanguageCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#LanguageCode"
+            codeListValue="eng" />
+    </gmd:language>
+    <gmd:characterSet xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <MD_CharacterSetCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
+            codeListValue="utf8" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <MD_ScopeCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+            codeListValue="service" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">Other</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <gmd:CI_ResponsibleParty>
+            <gmd:individualName>
+                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">Prof. Dr. Willi E.
+                    R. Xylander</gco:CharacterString>
+            </gmd:individualName>
+            <gmd:organisationName>
+                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">Senckenberg Museum
+                    f&#252;r Naturkunde G&#246;rlitz</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:positionName>
+                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">ProjectLeader</gco:CharacterString>
+            </gmd:positionName>
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:phone>
+                        <gmd:CI_Telephone>
+                            <gmd:voice>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    +49-3581-4760-5101</gco:CharacterString>
+                            </gmd:voice>
+                            <gmd:facsimile>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    +49-3581-4760-5101</gco:CharacterString>
+                            </gmd:facsimile>
+                        </gmd:CI_Telephone>
+                    </gmd:phone>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:deliveryPoint>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">Am
+                                    Museum 1</gco:CharacterString>
+                            </gmd:deliveryPoint>
+                            <gmd:city>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">D-02826
+                                    G&#246;rlitz</gco:CharacterString>
+                            </gmd:city>
+                            <gmd:administrativeArea>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    G&#246;rlitz</gco:CharacterString>
+                            </gmd:administrativeArea>
+                            <gmd:postalCode>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    02826</gco:CharacterString>
+                            </gmd:postalCode>
+                            <gmd:country>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    Germany</gco:CharacterString>
+                            </gmd:country>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">
+                                    willi.xylander@senckenberg.de</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode
+                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                    codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <gco:Date xmlns:gco="http://www.isotc211.org/2005/gco">2019-02-08</gco:Date>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">ISO19119</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:metadataStandardVersion xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">2005/PDAM 1</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+    <identificationInfo xmlns="http://www.isotc211.org/2005/gmd"
+        xmlns:bnr="http://www.bonares.de/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:gml="http://www.opengis.net/gml"
+        xmlns:inspire_com="http://inspire.ec.europa.eu/schemas/common/1.0"
+        xmlns:inspire_ds="http://inspire.ec.europa.eu/schemas/inspire_ds/1.0"
+        xmlns:ows="http://www.opengis.net/ows" xmlns:srv="http://www.isotc211.org/2005/srv"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <srv:SV_ServiceIdentification xmlns:gmd="http://www.isotc211.org/2005/gmd">
+            <citation>
+                <CI_Citation>
+                    <title xsi:type="gmd:PT_FreeText_PropertyType">
+                        <gco:CharacterString>Edaphobase - CSW catalog</gco:CharacterString>
+                        <PT_FreeText>
+                            <textGroup>
+                                <LocalisedCharacterString locale="ger">Edaphobase CSW catalog</LocalisedCharacterString>
+                            </textGroup>
+                        </PT_FreeText>
+                    </title>
+                    <date>
+                        <CI_Date>
+                            <date>
+                                <gco:Date>2019-01-01</gco:Date>
+                            </date>
+                            <dateType>
+                                <CI_DateTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="publication" />
+                            </dateType>
+                        </CI_Date>
+                    </date>
+                    <date>
+                        <CI_Date>
+                            <date>
+                                <gco:Date>2019-01-01</gco:Date>
+                            </date>
+                            <dateType>
+                                <CI_DateTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="issued" />
+                            </dateType>
+                        </CI_Date>
+                    </date>
+                    <date>
+                        <CI_Date>
+                            <date>
+                                <gco:Date>2019-01-01</gco:Date>
+                            </date>
+                            <dateType>
+                                <CI_DateTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="creation" />
+                            </dateType>
+                        </CI_Date>
+                    </date>
+                    <date>
+                        <CI_Date>
+                            <date>
+                                <gco:Date>2019-01-01</gco:Date>
+                            </date>
+                            <dateType>
+                                <CI_DateTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="revision" />
+                            </dateType>
+                        </CI_Date>
+                    </date>
+                </CI_Citation>
+            </citation>
+            <abstract xsi:type="gmd:PT_FreeText_PropertyType">
+                <gco:CharacterString>Edaphobase CSW catalog
+
+                </gco:CharacterString>
+                <PT_FreeText>
+                    <textGroup>
+                        <gmd:LocalisedCharacterString locale="ger">Edaphobase CSW catalog</gmd:LocalisedCharacterString>
+                    </textGroup>
+                </PT_FreeText>
+            </abstract>
+            <pointOfContact>
+                <CI_ResponsibleParty>
+                    <individualName>
+                        <gco:CharacterString>Edaphobase Consortium</gco:CharacterString>
+                    </individualName>
+                    <organisationName>
+                        <gco:CharacterString>Senckenberg Museum f&#252;r Naturkunde G&#246;rlitz</gco:CharacterString>
+                    </organisationName>
+                    <positionName>
+                        <gco:CharacterString>-</gco:CharacterString>
+                    </positionName>
+                    <contactInfo>
+                        <CI_Contact>
+                            <address>
+                                <CI_Address>
+                                    <electronicMailAddress>
+                                        <gco:CharacterString> info@edaphobase.org</gco:CharacterString>
+                                    </electronicMailAddress>
+                                </CI_Address>
+                            </address>
+                        </CI_Contact>
+                    </contactInfo>
+                    <role>
+                        <CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="publisher">publisher</CI_RoleCode>
+                    </role>
+                </CI_ResponsibleParty>
+            </pointOfContact>
+            <pointOfContact>
+                <CI_ResponsibleParty>
+                    <individualName>
+                        <gco:CharacterString>Dr. David John Russell</gco:CharacterString>
+                    </individualName>
+                    <organisationName>
+                        <gco:CharacterString>Senckenberg Museum f&#252;r Naturkunde G&#246;rlitz</gco:CharacterString>
+                    </organisationName>
+                    <positionName>
+                        <gco:CharacterString>-</gco:CharacterString>
+                    </positionName>
+                    <contactInfo>
+                        <CI_Contact>
+                            <address>
+                                <CI_Address>
+                                    <electronicMailAddress>
+                                        <gco:CharacterString>david.russell@senckenberg.de</gco:CharacterString>
+                                    </electronicMailAddress>
+                                </CI_Address>
+                            </address>
+                        </CI_Contact>
+                    </contactInfo>
+                    <role>
+                        <CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="author">author</CI_RoleCode>
+                    </role>
+                </CI_ResponsibleParty>
+            </pointOfContact>
+            <pointOfContact>
+                <CI_ResponsibleParty>
+                    <individualName>
+                        <gco:CharacterString> Prof. Dr. Willi E. R. Xylander</gco:CharacterString>
+                    </individualName>
+                    <organisationName>
+                        <gco:CharacterString>Senckenberg Museum f&#252;r Naturkunde G&#246;rlitz</gco:CharacterString>
+                    </organisationName>
+                    <positionName>
+                        <gco:CharacterString>-</gco:CharacterString>
+                    </positionName>
+                    <contactInfo>
+                        <CI_Contact>
+                            <address>
+                                <CI_Address>
+                                    <electronicMailAddress>
+                                        <gco:CharacterString>willi.xylander@senckenberg.de</gco:CharacterString>
+                                    </electronicMailAddress>
+                                </CI_Address>
+                            </address>
+                        </CI_Contact>
+                    </contactInfo>
+                    <role>
+                        <CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="projectLeader">projectLeader</CI_RoleCode>
+                    </role>
+                </CI_ResponsibleParty>
+            </pointOfContact>
+            <descriptiveKeywords>
+                <MD_Keywords>
+                    <keyword>
+                        <gco:CharacterString>Biota</gco:CharacterString>
+                    </keyword>
+                    <keyword>
+                        <gco:CharacterString>Boden</gco:CharacterString>
+                    </keyword>
+                    <keyword>
+                        <gco:CharacterString>Biodiversity</gco:CharacterString>
+                    </keyword>
+                </MD_Keywords>
+            </descriptiveKeywords>
+            <descriptiveKeywords>
+                <MD_Keywords>
+                    <keyword>
+                        <gco:CharacterString>humanInteractionService</gco:CharacterString>
+                    </keyword>
+                </MD_Keywords>
+            </descriptiveKeywords>
+            <resourceConstraints>
+                <MD_LegalConstraints>
+                    <useLimitation>
+                        <gco:CharacterString>No</gco:CharacterString>
+                    </useLimitation>
+                </MD_LegalConstraints>
+            </resourceConstraints>
+            <resourceConstraints>
+                <MD_LegalConstraints>
+                    <accessConstraints>
+                        <MD_RestrictionCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                            codeListValue="otherRestrictions" />
+                    </accessConstraints>
+                    <otherConstraints>
+                        <gco:CharacterString>No</gco:CharacterString>
+                    </otherConstraints>
+                </MD_LegalConstraints>
+            </resourceConstraints>
+            <srv:serviceType>
+                <gco:LocalName>CSW</gco:LocalName>
+            </srv:serviceType>
+            <srv:serviceTypeVersion>
+                <gco:CharacterString>2.0.2</gco:CharacterString>
+            </srv:serviceTypeVersion>
+            <srv:couplingType>
+                <SV_CouplingType xmlns="http://www.isotc211.org/2005/srv"
+                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#SV_CouplingType"
+                    codeListValue="loose" />
+            </srv:couplingType>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetCapabilities</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>cgeonetwork/srv/eng/csw</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>DescribeRecord</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetDomain</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetRecords</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetRecordById</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>Transaction</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw-publication</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>Harvest</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="HTTPGet" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw-publication</URL>
+                            </linkage>
+                        </CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+        </srv:SV_ServiceIdentification>
+    </identificationInfo>
+    <distributionInfo xmlns="http://www.isotc211.org/2005/gmd" xmlns:bnr="http://www.bonares.de/gmd"
+        xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml"
+        xmlns:inspire_com="http://inspire.ec.europa.eu/schemas/common/1.0"
+        xmlns:inspire_ds="http://inspire.ec.europa.eu/schemas/inspire_ds/1.0"
+        xmlns:ows="http://www.opengis.net/ows" xmlns:srv="http://www.isotc211.org/2005/srv"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <MD_Distribution>
+            <transferOptions xmlns:gmd="http://www.isotc211.org/2005/gmd">
+                <MD_DigitalTransferOptions>
+                    <onLine>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>http://edaphobase.org:8080/geonetwork/srv/eng/csw
+                                    http://localhost:8080/geonetwork/srv/eng/csw
+                                    http://localhost:8080/geonetwork/srv/eng/csw
+                                    http://localhost:8080/geonetwork/srv/eng/csw
+                                    http://localhost:8080/geonetwork/srv/eng/csw
+                                    http://localhost:8080/geonetwork/srv/eng/csw-publication
+                                    http://localhost:8080/geonetwork/srv/eng/csw-publication</URL>
+                            </linkage>
+                            <function>
+                                <CI_OnLineFunctionCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+                                    codeListValue="information" />
+                            </function>
+                        </CI_OnlineResource>
+                    </onLine>
+                </MD_DigitalTransferOptions>
+            </transferOptions>
+        </MD_Distribution>
+    </distributionInfo>
+    <dataQualityInfo xmlns="http://www.isotc211.org/2005/gmd"
+        xmlns:gmd="http://www.isotc211.org/2005/gmd">
+        <DQ_DataQuality>
+            <scope>
+                <DQ_Scope>
+                    <level>
+                        <MD_ScopeCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                            codeListValue="service" />
+                    </level>
+                    <levelDescription xmlns:gco="http://www.isotc211.org/2005/gco"
+                        gco:nilReason="inapplicable" />
+                </DQ_Scope>
+            </scope>
+            <report>
+                <DQ_DomainConsistency>
+                    <result>
+                        <DQ_ConformanceResult>
+                            <specification>
+                                <CI_Citation>
+                                    <title>
+                                        <gco:CharacterString
+                                            xmlns:gco="http://www.isotc211.org/2005/gco">OGC service</gco:CharacterString>
+                                    </title>
+                                    <date>
+                                        <CI_Date>
+                                            <date>
+                                                <gco:Date
+                                                    xmlns:gco="http://www.isotc211.org/2005/gco">
+                                                    2019-01-01</gco:Date>
+                                            </date>
+                                            <dateType>
+                                                <CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication" />
+                                            </dateType>
+                                        </CI_Date>
+                                    </date>
+                                </CI_Citation>
+                            </specification>
+                            <explanation xmlns:gco="http://www.isotc211.org/2005/gco"
+                                gco:nilReason="missing" />
+                            <pass>
+                                <gco:Boolean xmlns:gco="http://www.isotc211.org/2005/gco">true</gco:Boolean>
+                            </pass>
+                        </DQ_ConformanceResult>
+                    </result>
+                </DQ_DomainConsistency>
+            </report>
+        </DQ_DataQuality>
+    </dataQualityInfo>
+</ns1:MD_Metadata>

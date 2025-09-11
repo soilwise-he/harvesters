@@ -1,0 +1,246 @@
+{
+  "@context": {
+    "adms": "http://www.w3.org/ns/adms#",
+    "brick": "https://brickschema.org/schema/Brick#",
+    "cpsv": "http://purl.org/vocab/cpsv#",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcam": "http://purl.org/dc/dcam/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcatap": "http://data.europa.eu/r5r/",
+    "dcmitype": "http://purl.org/dc/dcmitype/",
+    "dct": "http://purl.org/dc/terms/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "doap": "http://usefulinc.com/ns/doap#",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "eli": "http://data.europa.eu/eli/ontology#",
+    "epsg": "http://www.opengis.net/def/crs/EPSG/0/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "gsp": "http://www.opengis.net/ont/geosparql#",
+    "locn": "http://www.w3.org/ns/locn#",
+    "oa": "http://www.w3.org/ns/oa#",
+    "odrl": "http://www.w3.org/ns/odrl/2/",
+    "org": "http://www.w3.org/ns/org#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prof": "http://www.w3.org/ns/dx/prof/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "qb": "http://purl.org/linked-data/cube#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "https://schema.org/",
+    "schema1": "http://schema.org/",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "stat": "http://data.europa.eu/m8g/",
+    "time": "http://www.w3.org/2006/time#",
+    "time1": "http://www.w3.org/2006/time",
+    "vann": "http://purl.org/vocab/vann/",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "void": "http://rdfs.org/ns/void#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.gov.ie/dataset/a507c95a-d66e-4478-8621-f807c4cc53d2",
+      "@type": "dcat:Dataset",
+      "dcat:contactPoint": {
+        "@id": "_:N8b0fefc909a24c00996731eae11d00f8"
+      },
+      "dcat:distribution": [
+        {
+          "@id": "https://data.gov.ie/dataset/a507c95a-d66e-4478-8621-f807c4cc53d2/resource/8df69185-8101-42e9-8bc2-c759ddd2717f"
+        },
+        {
+          "@id": "https://data.gov.ie/dataset/a507c95a-d66e-4478-8621-f807c4cc53d2/resource/c917c32e-39ad-42b7-a3ef-b3a09ba47892"
+        }
+      ],
+      "dcat:keyword": [
+        "national soils database",
+        "soil",
+        "microbiology",
+        "national soils",
+        "major nutrients",
+        "ie",
+        "chemistry",
+        "nutrient",
+        "nucleic acid",
+        "essential trace elements",
+        "environment",
+        "major elements",
+        "soils"
+      ],
+      "dcat:landingPage": {
+        "@id": "https://eparesearch.epa.ie/safer/iso19115/displayISO19115.jsp?isoID=7"
+      },
+      "dcat:theme": [
+        {
+          "@id": "Environment"
+        },
+        {
+          "@id": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+        }
+      ],
+      "dct:accrualPeriodicity": "Other",
+      "dct:conformsTo": [
+        {
+          "@id": "epsg:29902"
+        },
+        "The INSPIRE Directive or INSPIRE lays down a general framework for a Spatial Data Infrastructure (SDI) for the purposes of European Community environmental policies and policies or activities which may have an impact on the environment."
+      ],
+      "dct:created": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-12-07T22:13:53"
+      },
+      "dct:description": {
+        "@language": "en",
+        "@value": "The National Soil Database has produced a national database of soil geochemistry including point and spatial distribution maps of major nutrients, major elements, essential trace elements, trace elements of special interest and minor elements. In addition, this study has generated a National Soil Archive, comprising bulk soil samples and a nucleic acids archive each of which represent a valuable resource for future soils research in Ireland. The geographical coherence of the geochemical results was considered to be predominantly underpinned by underlying parent material and glacial geology. Other factors such as soil type, land use, anthropogenic effects and climatic effects were also evident. The coherence between elements, as displayed by multivariate analyses, was evident in this study. Examples included strong relationships between Co, Fe, As, Mn and Cu. This study applied large-scale microbiological analysis of soils for the first time in Ireland and in doing so also investigated microbial community structure in a range of soil types in order to determine the relationship between soil microbiology and chemistry. The results of the microbiological analyses were consistent with geochemical analyses and demonstrated that bacterial community populations appeared to be predominantly determined by soil parent material and soil type."
+      },
+      "dct:identifier": "a507c95a-d66e-4478-8621-f807c4cc53d2",
+      "dct:issued": {
+        "@type": "xsd:date",
+        "@value": "2007-01-26"
+      },
+      "dct:language": {
+        "@id": "http://publications.europa.eu/resource/authority/language/ENG"
+      },
+      "dct:modified": {
+        "@type": "xsd:dateTime",
+        "@value": "2025-09-11T06:57:05"
+      },
+      "dct:provenance": "During 1995 and 1996, 295 soil samples were collected in the south eastern region of Ireland, while an additional 1015 soil samples were collected when the study was extended to include the remaining three quarters of the country in 2002. The two datasets were integrated into the National Soil Database",
+      "dct:publisher": {
+        "@id": "https://data.gov.ie/organization/environmental-protection-agency"
+      },
+      "dct:rights": {
+        "@id": "_:N154d93f0dd454c5da960a2c2c5196f4f"
+      },
+      "dct:spatial": {
+        "@id": "_:N078e7c670be848bd909ba0e86bb3f34a"
+      },
+      "dct:temporal": [
+        {
+          "@id": "_:N1ea25cee34924003adaf5adb3b4ba9e4"
+        },
+        {
+          "@id": "_:N0c5d823b02d84b3694ab06c4cc1d4b79"
+        }
+      ],
+      "dct:title": "National Soils Database"
+    },
+    {
+      "@id": "_:N8b0fefc909a24c00996731eae11d00f8",
+      "@type": "vcard:Organization",
+      "vcard:fn": "Environmental Protection Agency",
+      "vcard:hasEmail": {
+        "@id": "mailto:gis@epa.ie"
+      }
+    },
+    {
+      "@id": "_:N154d93f0dd454c5da960a2c2c5196f4f",
+      "@type": "dct:RightsStatement",
+      "skos:prefLabel": "{\"no limitations\",\"no limitations\",https://creativecommons.org/licenses/by/4.0/,license}"
+    },
+    {
+      "@id": "_:N078e7c670be848bd909ba0e86bb3f34a",
+      "@type": "dct:Location",
+      "locn:geometry": [
+        {
+          "@type": "https://www.iana.org/assignments/media-types/application/vnd.geo+json",
+          "@value": "{\"type\":\"Polygon\",\"coordinates\":[[[-10.47472, 51.44555],[-10.47472, 55.37999], [-6.01306, 55.37999], [-6.01306, 51.44555], [-10.47472, 51.44555]]]}"
+        },
+        {
+          "@type": "gsp:wktLiteral",
+          "@value": "POLYGON ((-10.4747 51.4455, -10.4747 55.3800, -6.0131 55.3800, -6.0131 51.4455, -10.4747 51.4455))"
+        }
+      ]
+    },
+    {
+      "@id": "_:N1ea25cee34924003adaf5adb3b4ba9e4",
+      "@type": "dct:PeriodOfTime",
+      "schema1:endDate": {
+        "@type": "xsd:date",
+        "@value": "2007-03-26"
+      },
+      "schema1:startDate": {
+        "@type": "xsd:date",
+        "@value": "2001-01-03"
+      }
+    },
+    {
+      "@id": "_:N0c5d823b02d84b3694ab06c4cc1d4b79",
+      "@type": "dct:PeriodOfTime",
+      "dcat:endDate": {
+        "@type": "xsd:date",
+        "@value": "2007-03-26"
+      },
+      "dcat:startDate": {
+        "@type": "xsd:date",
+        "@value": "2001-01-03"
+      }
+    },
+    {
+      "@id": "http://publications.europa.eu/resource/authority/language/ENG",
+      "@type": "dct:LinguisticSystem"
+    },
+    {
+      "@id": "https://data.gov.ie/organization/environmental-protection-agency",
+      "@type": [
+        "foaf:Organization",
+        "foaf:Agent"
+      ],
+      "foaf:name": "Environmental Protection Agency"
+    },
+    {
+      "@id": "https://data.gov.ie/dataset/a507c95a-d66e-4478-8621-f807c4cc53d2/resource/c917c32e-39ad-42b7-a3ef-b3a09ba47892",
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": {
+        "@id": "https://eparesearch.epa.ie/safer/iso19115/displayISO19115.jsp?isoID=7"
+      },
+      "dct:description": "available as html",
+      "dct:format": {
+        "@id": "_:N7e121761b78748b5813502f458a46308"
+      },
+      "dct:issued": {
+        "@type": "xsd:dateTime",
+        "@value": "2025-09-11T06:57:05"
+      },
+      "dct:modified": {
+        "@type": "xsd:dateTime",
+        "@value": "2025-09-11T06:57:05"
+      },
+      "dct:title": "View information about data"
+    },
+    {
+      "@id": "_:N7e121761b78748b5813502f458a46308",
+      "@type": "dct:MediaTypeOrExtent",
+      "rdf:value": "HTML",
+      "rdfs:label": "HTML"
+    },
+    {
+      "@id": "https://data.gov.ie/dataset/a507c95a-d66e-4478-8621-f807c4cc53d2/resource/8df69185-8101-42e9-8bc2-c759ddd2717f",
+      "@type": "dcat:Distribution",
+      "dcat:accessURL": {
+        "@id": "https://eparesearch.epa.ie/safer/iso19115/displayISO19115.jsp?isoID=7"
+      },
+      "dcat:downloadURL": {
+        "@id": "https://eparesearch.epa.ie/safer/iso19115/displayISO19115.jsp?isoID=7"
+      },
+      "dcat:mediaType": {
+        "@id": "https://www.iana.org/assignments/media-types/SHP%20/%20Zip"
+      },
+      "dct:description": "available as zip",
+      "dct:issued": {
+        "@type": "xsd:dateTime",
+        "@value": "2025-09-11T06:57:05"
+      },
+      "dct:modified": {
+        "@type": "xsd:dateTime",
+        "@value": "2025-09-11T06:57:05"
+      },
+      "dct:title": "Download data"
+    }
+  ]
+}

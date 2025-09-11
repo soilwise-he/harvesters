@@ -1,0 +1,1093 @@
+{
+    "creator": [
+        {
+            "$": "Zhuang Ke",
+            "@rank": "1"
+        },
+        {
+            "$": "Shuang-Jiang Liu",
+            "@rank": "2"
+        },
+        {
+            "$": "Osagie Obamwonyi",
+            "@rank": "3"
+        },
+        {
+            "$": "Boris A. Kolvenbach",
+            "@rank": "4"
+        },
+        {
+            "$": "Rong Ji",
+            "@rank": "5"
+        },
+        {
+            "$": "Jiandong Jiang",
+            "@rank": "6"
+        },
+        {
+            "$": "Philippe F.-X. Corvini",
+            "@rank": "7"
+        }
+    ],
+    "bestaccessright": {
+        "@classname": "not available",
+        "@schemename": "dnet:access_modes",
+        "@schemeid": "dnet:access_modes",
+        "@classid": "UNKNOWN"
+    },
+    "dateofacceptance": {
+        "$": "2021-01-01"
+    },
+    "subject": [
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Technology",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        },
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Biodegradation, Environmental",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        },
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Tissue Engineering",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        },
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Bioprinting",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        },
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Biocompatible Materials",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        },
+        {
+            "@classname": "keyword",
+            "@schemename": "dnet:subject_classification_typologies",
+            "@inferred": false,
+            "$": "Environmental Pollutants",
+            "@schemeid": "dnet:subject_classification_typologies",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "keyword"
+        }
+    ],
+    "collectedfrom": [
+        {
+            "@name": "Microsoft Academic Graph",
+            "@id": "openaire____::5f532a3fc4f1ea403f37070f59a7a53a"
+        },
+        {
+            "@name": "Europe PubMed Central",
+            "@id": "opendoar____::8b6dd7db9af49e67306feb59a8bdc52c"
+        },
+        {
+            "@name": "European Union Open Data Portal",
+            "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+        }
+    ],
+    "description": {
+        "$": "A plethora of organic pollutants such as pesticides, polycyclic and halogenated aromatic hydrocarbons, and emerging pollutants, such as flame retardants, is continuously being released into the environment. This poses a huge threat to the society in terms of environmental pollution, agricultural product quality, and general safety. Therefore, effective removal of organic pollutants from the environment has become an important challenge to be addressed. As a consequence of the recent and rapid developments in additive manufacturing, 3D bioprinting technology is playing an important role in the pharmaceutical industry. At the same time, an increasing number of microorganisms suitable for the production of biomaterials with complex structures and functions using 3D bioprinting technology, have been identified. This article briefly discusses the principles, advantages, and disadvantages of different 3D bioprinting technologies for pollutant removal. Furthermore, the feasibility and challenges of developing bioremediation technologies based on 3D bioprinting have also been discussed."
+    },
+    "pid": [
+        {
+            "@classname": "PubMed ID",
+            "@schemename": "dnet:pid_types",
+            "@inferred": false,
+            "$": 34708605,
+            "@schemeid": "dnet:pid_types",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "pmid"
+        },
+        {
+            "@classname": "Microsoft Academic Graph Identifier",
+            "@schemename": "dnet:pid_types",
+            "$": 3210606068,
+            "@schemeid": "dnet:pid_types",
+            "@classid": "mag_id"
+        },
+        {
+            "@classname": "Digital Object Identifier",
+            "@schemename": "dnet:pid_types",
+            "$": "10.13345/j.cjb.210427",
+            "@schemeid": "dnet:pid_types",
+            "@classid": "doi"
+        }
+    ],
+    "language": {
+        "@classname": "Undetermined",
+        "@schemename": "dnet:languages",
+        "@schemeid": "dnet:languages",
+        "@classid": "und"
+    },
+    "openaccesscolor": {
+        "$": "bronze"
+    },
+    "source": {
+        "$": "Chinese Journal of Biotechnology"
+    },
+    "title": [
+        {
+            "@classname": "main title",
+            "@schemename": "dnet:dataCite_title",
+            "@inferred": false,
+            "$": "[Insights into the applications of 3D bioprinting for bioremediation technologies].",
+            "@schemeid": "dnet:dataCite_title",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:actionset",
+            "@classid": "main title"
+        },
+        {
+            "@classname": "main title",
+            "@schemename": "dnet:dataCite_title",
+            "$": "insights into the applications of 3d bioprinting for bioremediation technologies",
+            "@schemeid": "dnet:dataCite_title",
+            "@classid": "main title"
+        },
+        {
+            "@classname": "main title",
+            "@schemename": "dnet:dataCite_title",
+            "@inferred": false,
+            "$": "Insights into the applications of 3D bioprinting forbioremediation technologies",
+            "@schemeid": "dnet:dataCite_title",
+            "@trust": "0.9",
+            "@provenanceaction": "sysimport:crosswalk",
+            "@classid": "main title"
+        }
+    ],
+    "resourcetype": {
+        "@classname": "UNKNOWN",
+        "@schemename": "dnet:dataCite_resource",
+        "@schemeid": "dnet:dataCite_resource",
+        "@classid": "UNKNOWN"
+    },
+    "resulttype": {
+        "@classname": "publication",
+        "@schemename": "dnet:result_typologies",
+        "@schemeid": "dnet:result_typologies",
+        "@classid": "publication"
+    },
+    "rels": {
+        "rel": [
+            {
+                "country": {
+                    "@classname": "China (People's Republic of)",
+                    "@schemename": "dnet:countries",
+                    "@schemeid": "dnet:countries",
+                    "@classid": "CN"
+                },
+                "@inferred": false,
+                "@trust": "0.9",
+                "websiteurl": {
+                    "$": "http://www.hbu.edu.cn/"
+                },
+                "legalname": {
+                    "$": "Hebei University"
+                },
+                "legalshortname": {
+                    "$": "Hebei University"
+                },
+                "@inferenceprovenance": "",
+                "@provenanceaction": "sysimport:actionset",
+                "to": {
+                    "@class": "hasAuthorInstitution",
+                    "$": "openorgs____::0153f073c67e09c2b54ae61176deed59",
+                    "@scheme": "dnet:result_organization_relations",
+                    "@type": "organization"
+                }
+            },
+            {
+                "country": {
+                    "@classname": "United States",
+                    "@schemename": "dnet:countries",
+                    "@schemeid": "dnet:countries",
+                    "@classid": "US"
+                },
+                "@inferred": false,
+                "@trust": "0.9",
+                "legalname": {
+                    "$": "Chinese Academy of Sciences"
+                },
+                "websiteurl": {
+                    "$": "http://english.cas.cn/"
+                },
+                "legalshortname": {
+                    "$": "Chinese Academy of Sciences"
+                },
+                "@inferenceprovenance": "",
+                "@provenanceaction": "sysimport:actionset",
+                "to": {
+                    "@class": "hasAuthorInstitution",
+                    "$": "pending_org_::46fe0ce5b96e10445683958d6f3fb70c",
+                    "@scheme": "dnet:result_organization_relations",
+                    "@type": "organization"
+                }
+            },
+            {
+                "country": {
+                    "@classname": "China (People's Republic of)",
+                    "@schemename": "dnet:countries",
+                    "@schemeid": "dnet:countries",
+                    "@classid": "CN"
+                },
+                "@inferred": false,
+                "@trust": "0.9",
+                "websiteurl": {
+                    "$": "http://english.njau.edu.cn/"
+                },
+                "legalname": {
+                    "$": "Nanjing Agricultural University"
+                },
+                "legalshortname": {
+                    "$": "NAU"
+                },
+                "@inferenceprovenance": "",
+                "@provenanceaction": "sysimport:actionset",
+                "to": {
+                    "@class": "hasAuthorInstitution",
+                    "$": "openorgs____::100073880837d9b48a533356d5bfc7fc",
+                    "@scheme": "dnet:result_organization_relations",
+                    "@type": "organization"
+                }
+            },
+            {
+                "country": {
+                    "@classname": "Switzerland",
+                    "@schemename": "dnet:countries",
+                    "@schemeid": "dnet:countries",
+                    "@classid": "CH"
+                },
+                "@inferred": false,
+                "@trust": "0.9",
+                "websiteurl": {
+                    "$": "http://www.fhnw.ch/homepage"
+                },
+                "legalname": {
+                    "$": "University of Applied Sciences and Arts Northwestern Switzerland"
+                },
+                "legalshortname": {
+                    "$": "FHNW"
+                },
+                "@inferenceprovenance": "",
+                "@provenanceaction": "sysimport:actionset",
+                "to": {
+                    "@class": "hasAuthorInstitution",
+                    "$": "openorgs____::1735942e6655b539a1b62a4c547aa12e",
+                    "@scheme": "dnet:result_organization_relations",
+                    "@type": "organization"
+                }
+            },
+            {
+                "funding": {
+                    "funder": {
+                        "@shortname": "EC",
+                        "@name": "European Commission",
+                        "@jurisdiction": "EU",
+                        "@id": "ec__________::EC"
+                    },
+                    "funding_level_1": {
+                        "@name": "RIA",
+                        "$": "ec__________::EC::H2020::RIA"
+                    },
+                    "funding_level_0": {
+                        "@name": "H2020",
+                        "$": "ec__________::EC::H2020"
+                    }
+                },
+                "code": {
+                    "$": "826244"
+                },
+                "@inferred": false,
+                "validated": {
+                    "@date": "2022-03-01"
+                },
+                "contracttype": {
+                    "@classname": "Research and Innovation action",
+                    "@schemename": "Horizon 2020 - Type of Actions",
+                    "@schemeid": "ec:h2020toas",
+                    "@classid": "RIA"
+                },
+                "acronym": {
+                    "$": "ELECTRA"
+                },
+                "@trust": "0.9",
+                "@inferenceprovenance": "",
+                "@provenanceaction": "sysimport:crosswalk",
+                "to": {
+                    "@class": "isProducedBy",
+                    "$": "corda__h2020::2e649d6d8bdf94eae2ebf0e7f96f0e99",
+                    "@scheme": "dnet:result_project_relations",
+                    "@type": "project"
+                },
+                "title": {
+                    "$": "Electricity driven Low Energy and Chemical input Technology foR Accelerated bioremediation"
+                }
+            }
+        ]
+    },
+    "measure": [
+        {
+            "@class": "C5",
+            "@id": "influence",
+            "@score": "2.841867E-9"
+        },
+        {
+            "@class": "C5",
+            "@id": "popularity",
+            "@score": "2.155773E-9"
+        },
+        {
+            "@class": "C5",
+            "@id": "influence_alt",
+            "@score": "0"
+        },
+        {
+            "@class": "C5",
+            "@id": "popularity_alt",
+            "@score": "0.0"
+        },
+        {
+            "@class": "C5",
+            "@id": "impulse",
+            "@score": "0"
+        }
+    ],
+    "journal": {
+        "@issn": "1872-2075",
+        "$": "Sheng wu gong cheng xue bao = Chinese journal of biotechnology",
+        "@iss": "10",
+        "@vol": "37"
+    },
+    "datainfo": {
+        "trust": {
+            "$": "0.8"
+        },
+        "provenanceaction": {
+            "@classname": "Inferred by OpenAIRE",
+            "@schemename": "dnet:provenanceActions",
+            "@schemeid": "dnet:provenanceActions",
+            "@classid": "sysimport:dedup"
+        },
+        "inferenceprovenance": {
+            "$": "dedup-result-decisiontree-v4"
+        },
+        "inferred": {
+            "$": true
+        },
+        "deletedbyinference": {
+            "$": false
+        }
+    },
+    "isgreen": {
+        "$": false
+    },
+    "children": {
+        "result": [
+            {
+                "creator": [
+                    {
+                        "$": "Rong, Ji"
+                    },
+                    {
+                        "$": "Osagie, Obamwonyi"
+                    },
+                    {
+                        "$": "Philippe F-X, Corvini"
+                    },
+                    {
+                        "$": "Jiandong, Jiang"
+                    },
+                    {
+                        "$": "Zhuang, Ke"
+                    },
+                    {
+                        "$": "Shuangjiang, Liu"
+                    },
+                    {
+                        "$": "Boris, Kolvenbach"
+                    }
+                ],
+                "instance": {
+                    "hostedby": {
+                        "@name": "Chinese Journal of Biotechnology",
+                        "@id": "issn___print::c07e1fe8a1bf6c562d012784235d0917"
+                    },
+                    "dateofacceptance": {
+                        "$": "2021-10-28"
+                    },
+                    "webresource": {
+                        "url": {
+                            "$": "https://pubmed.ncbi.nlm.nih.gov/34708605"
+                        }
+                    },
+                    "accessright": {
+                        "@classname": "not available",
+                        "@schemename": "dnet:access_modes",
+                        "@schemeid": "dnet:access_modes",
+                        "@classid": "UNKNOWN"
+                    },
+                    "instancetype": {
+                        "@classname": "Article",
+                        "@schemename": "dnet:publication_resource",
+                        "@schemeid": "dnet:publication_resource",
+                        "@classid": "0001"
+                    },
+                    "refereed": {
+                        "@classname": "nonPeerReviewed",
+                        "@schemename": "dnet:review_levels",
+                        "@schemeid": "dnet:review_levels",
+                        "@classid": "0002"
+                    },
+                    "url": {
+                        "$": "https://pubmed.ncbi.nlm.nih.gov/34708605"
+                    }
+                },
+                "dateofacceptance": {
+                    "$": "2021-10-28"
+                },
+                "collectedfrom": {
+                    "@name": "Europe PubMed Central",
+                    "@id": "opendoar____::8b6dd7db9af49e67306feb59a8bdc52c"
+                },
+                "description": {
+                    "$": "A plethora of organic pollutants such as pesticides, polycyclic and halogenated aromatic hydrocarbons, and emerging pollutants, such as flame retardants, is continuously being released into the environment. This poses a huge threat to the society in terms of environmental pollution, agricultural product quality, and general safety. Therefore, effective removal of organic pollutants from the environment has become an important challenge to be addressed. As a consequence of the recent and rapid de"
+                },
+                "pid": {
+                    "@classname": "PubMed ID",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "$": 34708605,
+                    "@schemeid": "dnet:pid_types",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:actionset",
+                    "@classid": "pmid"
+                },
+                "title": {
+                    "@classname": "main title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "$": "[Insights into the applications of 3D bioprinting for bioremediation technologies].",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:actionset",
+                    "@classid": "main title"
+                },
+                "@objidentifier": "pmid________::5d9bddef3373cc035fe4c3289bca45a1",
+                "resulttype": {
+                    "@classname": "publication",
+                    "@schemename": "dnet:result_typologies",
+                    "@schemeid": "dnet:result_typologies",
+                    "@classid": "publication"
+                }
+            },
+            {
+                "creator": {
+                    "$": "Zhuang Ke, Osagie Obamwonyi, Boris Kolvenbach, Rong Ji, Shuangjiang Liu, Jiandong Jiang and Philippe F.-X. Corvini"
+                },
+                "instance": {
+                    "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                    },
+                    "dateofacceptance": {
+                        "$": "2021-01-01"
+                    },
+                    "webresource": {
+                        "url": {
+                            "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                        }
+                    },
+                    "accessright": {
+                        "@classname": "not available",
+                        "@schemename": "dnet:access_modes",
+                        "@schemeid": "dnet:access_modes",
+                        "@classid": "UNKNOWN"
+                    },
+                    "instancetype": {
+                        "@classname": "Article",
+                        "@schemename": "dnet:publication_resource",
+                        "@schemeid": "dnet:publication_resource",
+                        "@classid": "0001"
+                    },
+                    "refereed": {
+                        "@classname": "peerReviewed",
+                        "@schemename": "dnet:review_levels",
+                        "@schemeid": "dnet:review_levels",
+                        "@classid": "0001"
+                    },
+                    "url": {
+                        "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                    }
+                },
+                "dateofacceptance": {
+                    "$": "2021-01-01"
+                },
+                "collectedfrom": {
+                    "@name": "European Union Open Data Portal",
+                    "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+                },
+                "publisher": {
+                    "$": "Kexue Chubaneshe/Science Press"
+                },
+                "title": {
+                    "@classname": "main title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "$": "Insights into the applications of 3D bioprinting forbioremediation technologies",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:crosswalk",
+                    "@classid": "main title"
+                },
+                "@objidentifier": "r3c4b2081b22::cbca8ac7f088032ef07cc8b9b6229b13",
+                "resulttype": {
+                    "@classname": "publication",
+                    "@schemename": "dnet:result_typologies",
+                    "@schemeid": "dnet:result_typologies",
+                    "@classid": "publication"
+                }
+            },
+            {
+                "creator": [
+                    {
+                        "$": "Osagie Obamwonyi"
+                    },
+                    {
+                        "$": "Philippe F.-X. Corvini"
+                    },
+                    {
+                        "$": "Shuang-Jiang Liu"
+                    },
+                    {
+                        "$": "Jiandong Jiang"
+                    },
+                    {
+                        "$": "Zhuang Ke"
+                    },
+                    {
+                        "$": "Boris A. Kolvenbach"
+                    },
+                    {
+                        "$": "Rong Ji"
+                    }
+                ],
+                "instance": [
+                    {
+                        "hostedby": {
+                            "@name": "Unknown Repository",
+                            "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                        },
+                        "dateofacceptance": {
+                            "$": "2021-01-01"
+                        },
+                        "webresource": {
+                            "url": {
+                                "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                            }
+                        },
+                        "accessright": {
+                            "@classname": "not available",
+                            "@schemename": "dnet:access_modes",
+                            "@schemeid": "dnet:access_modes",
+                            "@classid": "UNKNOWN"
+                        },
+                        "instancetype": {
+                            "@classname": "Article",
+                            "@schemename": "dnet:publication_resource",
+                            "@schemeid": "dnet:publication_resource",
+                            "@classid": "0001"
+                        },
+                        "refereed": {
+                            "@classname": "peerReviewed",
+                            "@schemename": "dnet:review_levels",
+                            "@schemeid": "dnet:review_levels",
+                            "@classid": "0001"
+                        },
+                        "url": {
+                            "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                        }
+                    },
+                    {
+                        "hostedby": {
+                            "@name": "Unknown Repository",
+                            "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                        },
+                        "dateofacceptance": {
+                            "$": "2021-01-01"
+                        },
+                        "webresource": {
+                            "url": {
+                                "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                            }
+                        },
+                        "accessright": {
+                            "@classname": "not available",
+                            "@schemename": "dnet:access_modes",
+                            "@schemeid": "dnet:access_modes",
+                            "@classid": "UNKNOWN"
+                        },
+                        "instancetype": {
+                            "@classname": "Other literature type",
+                            "@schemename": "dnet:publication_resource",
+                            "@schemeid": "dnet:publication_resource",
+                            "@classid": "0038"
+                        },
+                        "refereed": {
+                            "@classname": "nonPeerReviewed",
+                            "@schemename": "dnet:review_levels",
+                            "@schemeid": "dnet:review_levels",
+                            "@classid": "0002"
+                        },
+                        "url": {
+                            "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                        }
+                    },
+                    {
+                        "hostedby": {
+                            "@name": "Chinese Journal of Biotechnology",
+                            "@id": "issn___print::c07e1fe8a1bf6c562d012784235d0917"
+                        },
+                        "dateofacceptance": {
+                            "$": "2021-10-28"
+                        },
+                        "webresource": {
+                            "url": {
+                                "$": "https://pubmed.ncbi.nlm.nih.gov/34708605"
+                            }
+                        },
+                        "accessright": {
+                            "@classname": "not available",
+                            "@schemename": "dnet:access_modes",
+                            "@schemeid": "dnet:access_modes",
+                            "@classid": "UNKNOWN"
+                        },
+                        "instancetype": {
+                            "@classname": "Article",
+                            "@schemename": "dnet:publication_resource",
+                            "@schemeid": "dnet:publication_resource",
+                            "@classid": "0001"
+                        },
+                        "refereed": {
+                            "@classname": "nonPeerReviewed",
+                            "@schemename": "dnet:review_levels",
+                            "@schemeid": "dnet:review_levels",
+                            "@classid": "0002"
+                        },
+                        "url": {
+                            "$": "https://pubmed.ncbi.nlm.nih.gov/34708605"
+                        }
+                    },
+                    {
+                        "hostedby": {
+                            "@name": "Unknown Repository",
+                            "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                        },
+                        "webresource": {
+                            "url": {
+                                "$": "https://cjb.ijournals.cn/cjbcn/article/html/gc21103475"
+                            }
+                        },
+                        "accessright": {
+                            "@classname": "not available",
+                            "@schemename": "dnet:access_modes",
+                            "@schemeid": "dnet:access_modes",
+                            "@classid": "UNKNOWN"
+                        },
+                        "instancetype": {
+                            "@classname": "Journal",
+                            "@schemename": "dnet:publication_resource",
+                            "@schemeid": "dnet:publication_resource",
+                            "@classid": "0043"
+                        },
+                        "refereed": {
+                            "@classname": "nonPeerReviewed",
+                            "@schemename": "dnet:review_levels",
+                            "@schemeid": "dnet:review_levels",
+                            "@classid": "0002"
+                        },
+                        "url": {
+                            "$": "https://cjb.ijournals.cn/cjbcn/article/html/gc21103475"
+                        }
+                    }
+                ],
+                "dateofacceptance": {
+                    "$": "2021-01-01"
+                },
+                "collectedfrom": [
+                    {
+                        "@name": "European Union Open Data Portal",
+                        "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+                    },
+                    {
+                        "@name": "Europe PubMed Central",
+                        "@id": "opendoar____::8b6dd7db9af49e67306feb59a8bdc52c"
+                    },
+                    {
+                        "@name": "Microsoft Academic Graph",
+                        "@id": "openaire____::5f532a3fc4f1ea403f37070f59a7a53a"
+                    }
+                ],
+                "publisher": {
+                    "$": "Chinese Journal of Biotechnology"
+                },
+                "description": {
+                    "$": "A plethora of organic pollutants such as pesticides, polycyclic and halogenated aromatic hydrocarbons, and emerging pollutants, such as flame retardants, is continuously being released into the environment. This poses a huge threat to the society in terms of environmental pollution, agricultural product quality, and general safety. Therefore, effective removal of organic pollutants from the environment has become an important challenge to be addressed. As a consequence of the recent and rapid de"
+                },
+                "pid": [
+                    {
+                        "@classname": "PubMed ID",
+                        "@schemename": "dnet:pid_types",
+                        "@inferred": false,
+                        "$": 34708605,
+                        "@schemeid": "dnet:pid_types",
+                        "@trust": "0.9",
+                        "@provenanceaction": "sysimport:actionset",
+                        "@classid": "pmid"
+                    },
+                    {
+                        "@classname": "Digital Object Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": "10.13345/j.cjb.210427",
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "doi"
+                    },
+                    {
+                        "@classname": "Microsoft Academic Graph Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": 3210606068,
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "mag_id"
+                    }
+                ],
+                "title": {
+                    "@classname": "main title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "$": "[Insights into the applications of 3D bioprinting for bioremediation technologies].",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:actionset",
+                    "@classid": "main title"
+                },
+                "@objidentifier": "dedup_wf_002::c17704aeae13d26db7abde63408bb11a",
+                "resulttype": {
+                    "@classname": "publication",
+                    "@schemename": "dnet:result_typologies",
+                    "@schemeid": "dnet:result_typologies",
+                    "@classid": "publication"
+                }
+            },
+            {
+                "creator": {
+                    "$": "Zhuang Ke, Osagie Obamwonyi, Boris Kolvenbach, Rong Ji, Shuangjiang Liu, Jiandong Jiang and Philippe F.-X. Corvini"
+                },
+                "instance": {
+                    "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                    },
+                    "dateofacceptance": {
+                        "$": "2021-01-01"
+                    },
+                    "webresource": {
+                        "url": {
+                            "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                        }
+                    },
+                    "accessright": {
+                        "@classname": "not available",
+                        "@schemename": "dnet:access_modes",
+                        "@schemeid": "dnet:access_modes",
+                        "@classid": "UNKNOWN"
+                    },
+                    "instancetype": {
+                        "@classname": "Other literature type",
+                        "@schemename": "dnet:publication_resource",
+                        "@schemeid": "dnet:publication_resource",
+                        "@classid": "0038"
+                    },
+                    "refereed": {
+                        "@classname": "nonPeerReviewed",
+                        "@schemename": "dnet:review_levels",
+                        "@schemeid": "dnet:review_levels",
+                        "@classid": "0002"
+                    },
+                    "url": {
+                        "$": "http://dx.doi.org/10.13345/j.cjb.210427"
+                    }
+                },
+                "dateofacceptance": {
+                    "$": "2021-01-01"
+                },
+                "collectedfrom": {
+                    "@name": "European Union Open Data Portal",
+                    "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+                },
+                "title": {
+                    "@classname": "main title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "$": "Insights into the applications of 3D bioprinting forbioremediation technologies",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:crosswalk",
+                    "@classid": "main title"
+                },
+                "@objidentifier": "r3c4b2081b22::786952a7d0b3244e9581d62ff60d2dfe",
+                "resulttype": {
+                    "@classname": "publication",
+                    "@schemename": "dnet:result_typologies",
+                    "@schemeid": "dnet:result_typologies",
+                    "@classid": "publication"
+                }
+            }
+        ],
+        "instance": [
+            {
+                "hostedby": {
+                    "@name": "Chinese Journal of Biotechnology",
+                    "@id": "issn___print::c07e1fe8a1bf6c562d012784235d0917"
+                },
+                "dateofacceptance": {
+                    "$": "2021-10-28"
+                },
+                "webresource": {
+                    "url": {
+                        "$": "https://pubmed.ncbi.nlm.nih.gov/34708605"
+                    }
+                },
+                "accessright": {
+                    "@classname": "not available",
+                    "@schemename": "dnet:access_modes",
+                    "@schemeid": "dnet:access_modes",
+                    "@classid": "UNKNOWN"
+                },
+                "collectedfrom": {
+                    "@name": "Europe PubMed Central",
+                    "@id": "opendoar____::8b6dd7db9af49e67306feb59a8bdc52c"
+                },
+                "instancetype": {
+                    "@classname": "Article",
+                    "@schemename": "dnet:publication_resource",
+                    "@schemeid": "dnet:publication_resource",
+                    "@classid": "0001"
+                },
+                "pid": {
+                    "@classname": "PubMed ID",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "$": 34708605,
+                    "@schemeid": "dnet:pid_types",
+                    "@trust": "0.9",
+                    "@provenanceaction": "sysimport:actionset",
+                    "@classid": "pmid"
+                },
+                "alternateidentifier": {
+                    "@classname": "Digital Object Identifier",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.13345/j.cjb.210427",
+                    "@schemeid": "dnet:pid_types",
+                    "@classid": "doi"
+                },
+                "refereed": {
+                    "@classname": "nonPeerReviewed",
+                    "@schemename": "dnet:review_levels",
+                    "@schemeid": "dnet:review_levels",
+                    "@classid": "0002"
+                }
+            },
+            {
+                "hostedby": {
+                    "@name": "Unknown Repository",
+                    "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                },
+                "webresource": {
+                    "url": {
+                        "$": "https://cjb.ijournals.cn/cjbcn/article/html/gc21103475"
+                    }
+                },
+                "accessright": {
+                    "@classname": "not available",
+                    "@schemename": "dnet:access_modes",
+                    "@schemeid": "dnet:access_modes",
+                    "@classid": "UNKNOWN"
+                },
+                "collectedfrom": {
+                    "@name": "Microsoft Academic Graph",
+                    "@id": "openaire____::5f532a3fc4f1ea403f37070f59a7a53a"
+                },
+                "instancetype": {
+                    "@classname": "Journal",
+                    "@schemename": "dnet:publication_resource",
+                    "@schemeid": "dnet:publication_resource",
+                    "@classid": "0043"
+                },
+                "pid": [
+                    {
+                        "@classname": "Digital Object Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": "10.13345/j.cjb.210427",
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "doi"
+                    },
+                    {
+                        "@classname": "Microsoft Academic Graph Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": 3210606068,
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "mag_id"
+                    }
+                ],
+                "refereed": {
+                    "@classname": "nonPeerReviewed",
+                    "@schemename": "dnet:review_levels",
+                    "@schemeid": "dnet:review_levels",
+                    "@classid": "0002"
+                }
+            },
+            {
+                "hostedby": [
+                    {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                    },
+                    {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                    }
+                ],
+                "dateofacceptance": {
+                    "$": "2021-01-01"
+                },
+                "webresource": {
+                    "url": {
+                        "$": "https://doi.org/10.13345/j.cjb.210427"
+                    }
+                },
+                "accessright": {
+                    "@classname": "not available",
+                    "@schemename": "dnet:access_modes",
+                    "@schemeid": "dnet:access_modes",
+                    "@classid": "UNKNOWN"
+                },
+                "collectedfrom": [
+                    {
+                        "@name": "European Union Open Data Portal",
+                        "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+                    },
+                    {
+                        "@name": "European Union Open Data Portal",
+                        "@id": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631"
+                    }
+                ],
+                "instancetype": [
+                    {
+                        "@classname": "Article",
+                        "@schemename": "dnet:publication_resource",
+                        "@schemeid": "dnet:publication_resource",
+                        "@classid": "0001"
+                    },
+                    {
+                        "@classname": "Other literature type",
+                        "@schemename": "dnet:publication_resource",
+                        "@schemeid": "dnet:publication_resource",
+                        "@classid": "0038"
+                    }
+                ],
+                "alternateidentifier": [
+                    {
+                        "@classname": "Digital Object Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": "10.13345/j.cjb.210427",
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "doi"
+                    },
+                    {
+                        "@classname": "Digital Object Identifier",
+                        "@schemename": "dnet:pid_types",
+                        "$": "10.13345/j.cjb.210427",
+                        "@schemeid": "dnet:pid_types",
+                        "@classid": "doi"
+                    }
+                ],
+                "refereed": {
+                    "@classname": "peerReviewed",
+                    "@schemename": "dnet:review_levels",
+                    "@schemeid": "dnet:review_levels",
+                    "@classid": "0001"
+                }
+            }
+        ]
+    },
+    "isindiamondjournal": {
+        "$": false
+    },
+    "context": {
+        "@label": "European Commission",
+        "@type": "funding",
+        "@id": "EC",
+        "category": {
+            "@label": "Horizon 2020 Framework Programme",
+            "concept": {
+                "@label": "Research and Innovation action",
+                "@id": "EC::H2020::RIA"
+            },
+            "@id": "EC::H2020"
+        }
+    },
+    "publisher": {
+        "$": "Chinese Journal of Biotechnology"
+    },
+    "publiclyfunded": {
+        "$": false
+    },
+    "originalId": [
+        {
+            "$": "34708605"
+        },
+        {
+            "$": "3210606068"
+        },
+        {
+            "$": "10.13345/j.cjb.210427"
+        },
+        {
+            "$": "50|r3c4b2081b22::786952a7d0b3244e9581d62ff60d2dfe"
+        },
+        {
+            "$": "826244_1292280_PUBLI"
+        },
+        {
+            "$": "50|r3c4b2081b22::cbca8ac7f088032ef07cc8b9b6229b13"
+        }
+    ]
+}

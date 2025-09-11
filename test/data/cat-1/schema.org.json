@@ -1,0 +1,66 @@
+{
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Georeferenced point data of soil properties in the Netherlands",
+        "identifier": "https://doi.org/10.4121/c90215b3-bdc6-4633-b721-4c4a0259d6dc.v4",
+        "citation": "Anatol Helfenstein; Teuling, Kees; Walvoort, Dennis J.J.; Hack-ten Broeke, Mirjam J.D.; Mulder, Vera L. et. al. (2024): Georeferenced point data of soil properties in the Netherlands. Version 4. 4TU.ResearchData. dataset. https://doi.org/10.4121/c90215b3-bdc6-4633-b721-4c4a0259d6dc.v4",
+        "version": 4,
+        "description": "&lt;p&gt;This dataset contains georeferenced point data of basic soil properties in the Netherlands from the &lt;a href=&#34;https://www.wur.nl/nl/onderzoek-resultaten/onderzoeksinstituten/environmental-research/faciliteiten-tools/bodemkundig-informatie-systeem-bis-nederland.htm&#34; target=&#34;_blank&#34;&gt;&#34;Bodemkundig Informatie Systeem&#34; (BIS)&lt;/a&gt;, the national soil database of the Netherlands. It includes soil point data of clay content [%], silt content [%], sand content [%], bulk density (BD) [g/cm3], soil organic matter (SOM) [%], pH [KCl], total N (Ntot) [mg/kg], oxalate-extractable P (Pox) [mmol/kg] and cation exchange capacity (CEC) [mmol(c)/kg]. All of the soil properties were measured with conventional laboratory methods. In addition to the laboratory measurements, there are also field estimates made by soil surveyors for clay, BD and SOM. All laboratory measurements are part of the &#34;Profielbeschrijving&#34; (PFB) dataset of BIS. Field estimates for clay, BD and SOM are mostly from the &#34;Boring Bodemkundige paket&#34; (BPK) dataset of BIS, as well as some from the PFB dataset. Field estimates from PFB for which there was a laboratory measurement available from the same location and depth were removed from the dataset. All soil laboratory measurements and field estimates were collected by taking soil samples in the field. Soil samples were taken by genetic soil horizons from depths between 0-2 m, excluding the humus/litter/O horizon layer between 1953-2023.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Tabular datasets of each georeferenced soil property point data are provided as separate CSV files for each soil property. The soil point data cover the entire Netherlands (national scale) and the spatial projection of the provided X and Y coordinates is &lt;a href=&#34;https://epsg.io/28992&#34; target=&#34;_blank&#34;&gt;EPSG:28992 (Amersfoort / RD New)&lt;/a&gt;, which is the national projection most commonly used in the Netherlands.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;All laboratory measurements of all 9 soil properties can be viewed at &lt;a href=&#34;https://bodemdata.nl/bodemprofielen&#34; target=&#34;_blank&#34;&gt;bodemdata.nl&lt;/a&gt; under &#34;Profielbeschrijvingen met analyses&#34;. All field estimates can be viewed via the same link under &#34;Profielbeschrijvingen&#34;. Here you can also find additional metadata and information of soil properties not included in this dataset. Part of the BIS is also part of the &lt;a href=&#34;https://basisregistratieondergrond.nl/&#34; target=&#34;_blank&#34;&gt;National Key registry of the Subsurface (BRO)&lt;/a&gt;&amp;nbsp;of the Netherlands. For more information on subsurface data in the Netherlands you can also see this &lt;a href=&#34;https://docs.geostandaarden.nl/bro/bhr-g/&#34; target=&#34;_blank&#34;&gt;detailed manual&lt;/a&gt;.&lt;/p&gt;",
+        "publisher": {
+            "@type": "Organization",
+            "name": "4TU.ResearchData"
+        },
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "keywords": ["bulk density", "cation exchange capacity", "clay", "digital soil mapping", "nitrogen", "pH", "phosphorus", "sand", "silt", "soil organic matter", "soil point data", "Soil properties", "soil texture", "spatial modelling", "the Netherlands"],
+        "creator": [
+        {
+            "@type": "Person",
+            "name": "Anatol Helfenstein",
+            "sameAs": "https://orcid.org/0000-0003-2432-2672"
+          },
+        {
+            "@type": "Person",
+            "name": "Kees Teuling",
+            "sameAs": "https://orcid.org/"
+          },
+        {
+            "@type": "Person",
+            "name": "Dennis J.J. Walvoort",
+            "sameAs": "https://orcid.org/0000-0002-3967-5430"
+          },
+        {
+            "@type": "Person",
+            "name": "Mirjam J.D. Hack-ten Broeke",
+            "sameAs": "https://orcid.org/0000-0001-5035-6492"
+          },
+        {
+            "@type": "Person",
+            "name": "Vera L. Mulder",
+            "sameAs": "https://orcid.org/0000-0003-4936-0077"
+          },
+        {
+            "@type": "Person",
+            "name": "Maarten van Doorn",
+            "sameAs": "https://orcid.org/0000-0001-9197-5687"
+          },
+        {
+            "@type": "Person",
+            "name": "Gerard B.M. Heuvelink",
+            "sameAs": "https://orcid.org/0000-0003-0959-9358"
+          }
+        ]
+            ,"spatialCoverage": "The Netherlands (national scale)"
+            ,"temporalCoverage": "1953-2023"
+            ,"funder": [
+                {
+                    "@type": "Organization",
+                    "name": "Wageningen Environmental Research, Wageningen University &amp; Research, Dutch Ministry of Agriculture, Nature and Food Quality"
+                }
+            ]
+            ,"isAccessibleForFree" : true,
+            "distribution": {
+                "@type": "DataDownload",
+                "contentUrl": "https://data.4tu.nl/ndownloader/items/c90215b3-bdc6-4633-b721-4c4a0259d6dc/versions/4",
+                "encodingFormat": "application/zip"
+            }
+    }

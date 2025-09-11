@@ -1,0 +1,18 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<http://data.europa.eu/88u/dataset/9125c784-6346-4a67-ab28-506ac70f9bf0> dcterms:description "The soil quality map (bkk) is a municipal map, which describes the general chemical soil quality of an area. The card consists of three layers of card: the function card, bottom quality card and application card. Each municipality has a Note Soil Management, in which the map is established and anchored. Therefore, nuance differences in map are possible per municipality. This map is composed of all available bkk’s of the Zeeland municipalities.
+The soil quality map is primarily used to enable earthmoving in an efficient, cost-effective and environmentally hygienic way." ;
+    dcterms:identifier "431657a6-c438-4fd9-b588-35bc5fec52a2",
+        "9125c784-6346-4a67-ab28-506ac70f9bf0",
+        "http://data.europa.eu/88u/dataset/9125c784-6346-4a67-ab28-506ac70f9bf0" ;
+    dcterms:isReferencedBy "https://nationaalgeoregister.nl" ;
+    dcterms:issued "2018-06-20" ;
+    dcterms:language "nl" ;
+    dcterms:provenance "{'label': 'Betreft samenvoeging van onder Besluit bodemkwaliteit vastgestelde bodemkwaliteitskaarten in Zeeland, aangevuld met enkele gemeentes waarvan de bodemkwaliteitskaart en Nota bodembeheer in concept gereed zijn voor de vaststellingsprocedure.'}" ;
+    dcterms:references "https://opengeodata.zeeland.nl/geoserver/bodem/wms?request=GetCapabilities" ;
+    dcterms:spatial "[[[3.23631, 51.82638], [4.34889, 51.82638], [4.34889, 51.15533], [3.23631, 51.15533], [3.23631, 51.82638]]]" ;
+    dcterms:subject "bodem",
+        "nl" ;
+    dcterms:temporal "2012-06-14/2021-07-14" ;
+    dcterms:title "Soil application map Zeeland" .
+

@@ -1,0 +1,16 @@
+<metadata
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:title>this is a test</dc:title>
+<dc:creator>test</dc:creator>
+<dc:subject>test</dc:subject>
+<dc:description>test</dc:description>
+<dc:publisher>test</dc:publisher>
+<dc:contributor>test</dc:contributor>
+<dc:date>2025-04-04</dc:date>
+<dc:type>dataset</dc:type>
+<dc:format>application/vnd-shapefile</dc:format>
+<dc:identifier>aba8-44a-772c</dc:identifier>
+<dc:source>None</dc:source>
+<dc:language>eng</dc:language>
+</metadata>

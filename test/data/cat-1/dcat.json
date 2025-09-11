@@ -1,0 +1,872 @@
+{
+    "identifier": [
+        "fa5048f9-0f9c-4a77-b763-f418d5891d7a@geoinformation_kanton_freiburg"
+    ],
+    "country": {
+        "label": "Switzerland",
+        "id": "ch",
+        "resource": "http: //publications.europa.eu/resource/authority/country/CHE"
+    },
+    "keywords": [
+        {
+            "id": "qualita-dellambiente",
+            "label": "qualita-dellambiente",
+            "language": "it"
+        },
+        {
+            "id": "agriculture",
+            "label": "agriculture",
+            "language": "fr"
+        },
+        {
+            "id": "bodengute",
+            "label": "bodengute",
+            "language": "de"
+        },
+        {
+            "id": "soil-quality",
+            "label": "soil-quality",
+            "language": "en"
+        },
+        {
+            "id": "environmental-legislation-on-agriculture",
+            "label": "environmental-legislation-on-agriculture",
+            "language": "en"
+        },
+        {
+            "id": "soil",
+            "label": "soil",
+            "language": "en"
+        },
+        {
+            "id": "agriculture",
+            "label": "agriculture",
+            "language": "en"
+        },
+        {
+            "id": "sol",
+            "label": "sol",
+            "language": "fr"
+        },
+        {
+            "id": "qualita-del-suolo",
+            "label": "qualita-del-suolo",
+            "language": "it"
+        },
+        {
+            "id": "agricoltura",
+            "label": "agricoltura",
+            "language": "it"
+        },
+        {
+            "id": "environmental-quality",
+            "label": "environmental-quality",
+            "language": "en"
+        },
+        {
+            "id": "carico-da-metalli-pesanti",
+            "label": "carico-da-metalli-pesanti",
+            "language": "it"
+        },
+        {
+            "id": "charge-en-metaux-lourds",
+            "label": "charge-en-metaux-lourds",
+            "language": "fr"
+        },
+        {
+            "id": "boden",
+            "label": "boden",
+            "language": "de"
+        },
+        {
+            "id": "umweltqualitat",
+            "label": "umweltqualitat",
+            "language": "de"
+        },
+        {
+            "id": "landwirtschaft",
+            "label": "landwirtschaft",
+            "language": "de"
+        },
+        {
+            "id": "qualite-de-lenvironnement",
+            "label": "qualite-de-lenvironnement",
+            "language": "fr"
+        },
+        {
+            "id": "legislazione-ambientale-agricola",
+            "label": "legislazione-ambientale-agricola",
+            "language": "it"
+        },
+        {
+            "id": "legislation-environnementale-sur-lagriculture",
+            "label": "legislation-environnementale-sur-lagriculture",
+            "language": "fr"
+        },
+        {
+            "id": "qualite-du-sol",
+            "label": "qualite-du-sol",
+            "language": "fr"
+        },
+        {
+            "id": "agrarumweltrecht",
+            "label": "agrarumweltrecht",
+            "language": "de"
+        },
+        {
+            "id": "heavy-metal-load",
+            "label": "heavy-metal-load",
+            "language": "en"
+        },
+        {
+            "id": "schwermetallbelastung",
+            "label": "schwermetallbelastung",
+            "language": "de"
+        },
+        {
+            "id": "suolo",
+            "label": "suolo",
+            "language": "it"
+        }
+    ],
+    "resource": "http://data.europa.eu/88u/dataset/fa5048f9-0f9c-4a77-b763-f418d5891d7a-geoinformation_kanton_freiburg",
+    "catalog": {
+        "country": {
+            "label": "Switzerland",
+            "id": "ch",
+            "resource": "http://publications.europa.eu/resource/authority/country/CHE"
+        },
+        "creator": null,
+        "catalog": null,
+        "is_part_of": null,
+        "description": {
+            "en": "Open Data Portal Switzerland"
+        },
+        "language": [
+            {
+                "id": "de",
+                "label": "German",
+                "resource": "http://publications.europa.eu/resource/authority/language/DEU"
+            }
+        ],
+        "title": {
+            "de": "opendata.swiss"
+        },
+        "theme_taxonomy": null,
+        "license": null,
+        "spatial_resource": null,
+        "rights": null,
+        "publisher": {
+            "type": "Agent",
+            "homepage": "https://www.bfs.admin.ch",
+            "name": "Federal Statistical Office",
+            "email": "mailto:opendata@bfs.admin.ch"
+        },
+        "modified": "2024-03-12T10:32:33Z",
+        "id": "opendata-swiss",
+        "has_part": null,
+        "spatial": [],
+        "issued": "2024-03-12T10:32:33Z",
+        "homepage": "https://opendata.swiss"
+    },
+    "translation_meta": {
+        "details": {
+            "da": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "ga": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "en": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "it": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "lv": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "hu": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "de": {
+                "machine_translated": false,
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "es": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "pl": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "et": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "ro": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "sk": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "fr": {
+                "machine_translated": false,
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "bg": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "fi": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "el": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "sl": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "uk": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "nl": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "pt": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "mt": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "lt": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "cs": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "hr": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            },
+            "sv": {
+                "machine_translated": true,
+                "original_language": "de",
+                "received": "2023-07-04T20:28:08Z",
+                "issued": "2023-07-04T20:07:06Z"
+            }
+        },
+        "full_available_languages": [
+            "da",
+            "ga",
+            "en",
+            "it",
+            "lv",
+            "hu",
+            "de",
+            "es",
+            "pl",
+            "et",
+            "ro",
+            "sk",
+            "fr",
+            "bg",
+            "fi",
+            "el",
+            "sl",
+            "uk",
+            "nl",
+            "pt",
+            "mt",
+            "lt",
+            "cs",
+            "hr",
+            "sv"
+        ],
+        "status": "completed"
+    },
+    "description": {
+        "ga": "Chruthaigh Institi\u00faid Talmha\u00edochta Canton de Fribourg an leibh\u00e9al seo. Cuims\u00edonn an l\u00edonra breathn\u00f3ireachta ithreach talmha\u00edochta 250 l\u00e1ithre\u00e1n a chl\u00fada\u00edonn limist\u00e9ar talmha\u00edochta ioml\u00e1n Chant\u00fan Freiburg. D\u00e9antar sampl\u00e1il ar gach su\u00edomh uair amh\u00e1in gach c\u00faig bliana, a fhreagra\u00edonn do thimthriall. Ceada\u00edonn na sonra\u00ed a bhail\u00edtear monat\u00f3ireacht a dh\u00e9anamh ar fhorbairt fhadt\u00e9armach thorth\u00falacht na hithreach sa chant\u00e1n agus na hathruithe n\u00e1d\u00fartha n\u00f3 antrapaigineacha a thaispe\u00e1int.",
+        "el": "\u03a4\u03bf \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf \u03b1\u03c5\u03c4\u03cc \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03ae\u03b8\u03b7\u03ba\u03b5 \u03b1\u03c0\u03cc \u03c4\u03bf \u0391\u03b3\u03c1\u03bf\u03c4\u03b9\u03ba\u03cc \u0399\u03bd\u03c3\u03c4\u03b9\u03c4\u03bf\u03cd\u03c4\u03bf \u03c4\u03bf\u03c5 \u03ba\u03b1\u03bd\u03c4\u03bf\u03bd\u03af\u03bf\u03c5 \u03c4\u03bf\u03c5 \u03a6\u03c1\u03b9\u03bc\u03c0\u03bf\u03cd\u03c1\u03b3\u03ba. \u03a4\u03bf \u03b4\u03af\u03ba\u03c4\u03c5\u03bf \u03c0\u03b1\u03c1\u03b1\u03c4\u03ae\u03c1\u03b7\u03c3\u03b7\u03c2 \u03c4\u03bf\u03c5 \u03b3\u03b5\u03c9\u03c1\u03b3\u03b9\u03ba\u03bf\u03cd \u03b5\u03b4\u03ac\u03c6\u03bf\u03c5\u03c2 \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9 250 \u03c4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c3\u03af\u03b5\u03c2 \u03c0\u03bf\u03c5 \u03ba\u03b1\u03bb\u03cd\u03c0\u03c4\u03bf\u03c5\u03bd \u03bf\u03bb\u03cc\u03ba\u03bb\u03b7\u03c1\u03b7 \u03c4\u03b7 \u03b3\u03b5\u03c9\u03c1\u03b3\u03b9\u03ba\u03ae \u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03ba\u03b1\u03bd\u03c4\u03bf\u03bd\u03af\u03bf\u03c5 \u03c4\u03bf\u03c5 \u03a6\u03c1\u03ac\u03b9\u03bc\u03c0\u03bf\u03c5\u03c1\u03b3\u03ba. \u039a\u03ac\u03b8\u03b5 \u03c4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c3\u03af\u03b1 \u03c5\u03c0\u03bf\u03b2\u03ac\u03bb\u03bb\u03b5\u03c4\u03b1\u03b9 \u03c3\u03b5 \u03b4\u03b5\u03b9\u03b3\u03bc\u03b1\u03c4\u03bf\u03bb\u03b7\u03c8\u03af\u03b1 \u03bc\u03af\u03b1 \u03c6\u03bf\u03c1\u03ac \u03ba\u03ac\u03b8\u03b5 \u03c0\u03ad\u03bd\u03c4\u03b5 \u03ad\u03c4\u03b7, \u03b7 \u03bf\u03c0\u03bf\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03c3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af \u03c3\u03b5 \u03ad\u03bd\u03b1\u03bd \u03ba\u03cd\u03ba\u03bb\u03bf.\n\u03a4\u03b1 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03b1 \u03c0\u03bf\u03c5 \u03c3\u03c5\u03bb\u03bb\u03ad\u03b3\u03bf\u03bd\u03c4\u03b1\u03b9 \u03b5\u03c0\u03b9\u03c4\u03c1\u03ad\u03c0\u03bf\u03c5\u03bd \u03c4\u03b7\u03bd \u03c0\u03b1\u03c1\u03b1\u03ba\u03bf\u03bb\u03bf\u03cd\u03b8\u03b7\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bc\u03b1\u03ba\u03c1\u03bf\u03c0\u03c1\u03cc\u03b8\u03b5\u03c3\u03bc\u03b7\u03c2 \u03b1\u03bd\u03ac\u03c0\u03c4\u03c5\u03be\u03b7\u03c2 \u03c4\u03b7\u03c2 \u03b3\u03bf\u03bd\u03b9\u03bc\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5 \u03b5\u03b4\u03ac\u03c6\u03bf\u03c5\u03c2 \u03c3\u03c4\u03bf \u03ba\u03b1\u03bd\u03c4\u03cc\u03bd\u03b9 \u03ba\u03b1\u03b9 \u03c4\u03b7\u03bd \u03b5\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c6\u03c5\u03c3\u03b9\u03ba\u03ce\u03bd \u03ae \u03b1\u03bd\u03b8\u03c1\u03c9\u03c0\u03bf\u03b3\u03b5\u03bd\u03ce\u03bd \u03b1\u03bb\u03bb\u03b1\u03b3\u03ce\u03bd.",
+        "sv": "Denna niv\u00e5 skapades av jordbruksinstitutet i kantonen Fribourg. N\u00e4tverket f\u00f6r jordobservation av jordbruksmark omfattar 250 omr\u00e5den som t\u00e4cker hela jordbruksarealen i kantonen Freiburg. Varje plats provtas en g\u00e5ng vart femte \u00e5r, vilket motsvarar en cykel.\nDe insamlade uppgifterna g\u00f6r det m\u00f6jligt att \u00f6vervaka den l\u00e5ngsiktiga utvecklingen av jordens b\u00f6rdighet i kantonen och visa de naturliga eller antropogena f\u00f6r\u00e4ndringarna.",
+        "de": "Diese Ebene wurde durch das Landwirtschaftliche Institut des Kantons Freiburg erstellt. Das landwirtschaftliche Bodenbeobachtungsnetz umfasst 250 Standorte, die die gesamte landwirtschaftlich genutzte Fl\u00e4che des Kantons Freiburg abdecken. Jeder Standort wird alle f\u00fcnf Jahre einmal beprobt, was jeweils einem Zyklus entspricht. Die gesammelten Daten erlauben, die langfristige Entwicklung der Bodenfruchtbarkeit im Kanton zu beobachten und die nat\u00fcrlichen oder anthropogenen Ver\u00e4nderungen aufzuzeigen.",
+        "es": "Este nivel fue creado por el Instituto Agr\u00edcola del Cant\u00f3n de Friburgo. La red de observaci\u00f3n del suelo agr\u00edcola comprende 250 sitios que cubren toda la superficie agr\u00edcola del cant\u00f3n de Friburgo. Cada sitio se muestra una vez cada cinco a\u00f1os, lo que corresponde a un ciclo.\nLos datos recopilados permiten monitorear el desarrollo a largo plazo de la fertilidad del suelo en el cant\u00f3n y mostrar los cambios naturales o antropog\u00e9nicos.",
+        "uk": "\u0426\u0435\u0439 \u0440\u0456\u0432\u0435\u043d\u044c \u0431\u0443\u0432 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u0438\u0439 \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u043c \u0456\u043d\u0441\u0442\u0438\u0442\u0443\u0442\u043e\u043c \u043a\u0430\u043d\u0442\u043e\u043d\u0443 \u0424\u0440\u0456\u0431\u0443\u0440\u0433. \u041c\u0435\u0440\u0435\u0436\u0430 \u0441\u043f\u043e\u0441\u0442\u0435\u0440\u0435\u0436\u0435\u043d\u043d\u044f \u0437\u0430 \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u043c\u0438 \u0491\u0440\u0443\u043d\u0442\u0430\u043c\u0438 \u043d\u0430\u043b\u0456\u0447\u0443\u0454 250 \u043e\u0431'\u0454\u043a\u0442\u0456\u0432, \u0449\u043e \u043e\u0445\u043e\u043f\u043b\u044e\u044e\u0442\u044c \u0432\u0441\u044e \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0443 \u043f\u043b\u043e\u0449\u0443 \u043a\u0430\u043d\u0442\u043e\u043d\u0443 \u0424\u0440\u0430\u0439\u0431\u0443\u0440\u0433. \u041a\u043e\u0436\u0435\u043d \u0441\u0430\u0439\u0442 \u0432\u0438\u0431\u0438\u0440\u0430\u0454\u0442\u044c\u0441\u044f \u0440\u0430\u0437 \u043d\u0430 \u043f'\u044f\u0442\u044c \u0440\u043e\u043a\u0456\u0432, \u0449\u043e \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0430\u0454 \u0446\u0438\u043a\u043b\u0443. \u0417\u0456\u0431\u0440\u0430\u043d\u0456 \u0434\u0430\u043d\u0456 \u0434\u043e\u0437\u0432\u043e\u043b\u044f\u044e\u0442\u044c \u0441\u0442\u0435\u0436\u0438\u0442\u0438 \u0437\u0430 \u0434\u043e\u0432\u0433\u043e\u0441\u0442\u0440\u043e\u043a\u043e\u0432\u0438\u043c \u0440\u043e\u0437\u0432\u0438\u0442\u043a\u043e\u043c \u0440\u043e\u0434\u044e\u0447\u043e\u0441\u0442\u0456 \u0491\u0440\u0443\u043d\u0442\u0456\u0432 \u0432 \u043a\u0430\u043d\u0442\u043e\u043d\u0456 \u0456 \u043f\u043e\u043a\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043f\u0440\u0438\u0440\u043e\u0434\u043d\u0456 \u0430\u0431\u043e \u0430\u043d\u0442\u0440\u043e\u043f\u043e\u0433\u0435\u043d\u043d\u0456 \u0437\u043c\u0456\u043d\u0438. \u0426\u0435\u0439 \u0440\u0456\u0432\u0435\u043d\u044c \u0431\u0443\u0432 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u0438\u0439 \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u043c \u0456\u043d\u0441\u0442\u0438\u0442\u0443\u0442\u043e\u043c \u043a\u0430\u043d\u0442\u043e\u043d\u0443 \u0424\u0440\u0456\u0431\u0443\u0440\u0433.\n\u041c\u0435\u0440\u0435\u0436\u0430 \u0441\u043f\u043e\u0441\u0442\u0435\u0440\u0435\u0436\u0435\u043d\u043d\u044f \u0437\u0430 \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u043c\u0438 \u0491\u0440\u0443\u043d\u0442\u0430\u043c\u0438 \u043d\u0430\u043b\u0456\u0447\u0443\u0454 250 \u043e\u0431'\u0454\u043a\u0442\u0456\u0432, \u0449\u043e \u043e\u0445\u043e\u043f\u043b\u044e\u044e\u0442\u044c \u0432\u0441\u044e \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0443 \u043f\u043b\u043e\u0449\u0443 \u043a\u0430\u043d\u0442\u043e\u043d\u0443 \u0424\u0440\u0430\u0439\u0431\u0443\u0440\u0433.\n\u041a\u043e\u0436\u0435\u043d \u0441\u0430\u0439\u0442 \u0432\u0438\u0431\u0438\u0440\u0430\u0454\u0442\u044c\u0441\u044f \u0440\u0430\u0437 \u043d\u0430 \u043f'\u044f\u0442\u044c \u0440\u043e\u043a\u0456\u0432, \u0449\u043e \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0430\u0454 \u0446\u0438\u043a\u043b\u0443.\n\u0417\u0456\u0431\u0440\u0430\u043d\u0456 \u0434\u0430\u043d\u0456 \u0434\u043e\u0437\u0432\u043e\u043b\u044f\u044e\u0442\u044c \u0441\u0442\u0435\u0436\u0438\u0442\u0438 \u0437\u0430 \u0434\u043e\u0432\u0433\u043e\u0441\u0442\u0440\u043e\u043a\u043e\u0432\u0438\u043c \u0440\u043e\u0437\u0432\u0438\u0442\u043a\u043e\u043c \u0440\u043e\u0434\u044e\u0447\u043e\u0441\u0442\u0456 \u0491\u0440\u0443\u043d\u0442\u0456\u0432 \u0432 \u043a\u0430\u043d\u0442\u043e\u043d\u0456 \u0456 \u043f\u043e\u043a\u0430\u0437\u0443\u0432\u0430\u0442\u0438 \u043f\u0440\u0438\u0440\u043e\u0434\u043d\u0456 \u0430\u0431\u043e \u0430\u043d\u0442\u0440\u043e\u043f\u043e\u0433\u0435\u043d\u043d\u0456 \u0437\u043c\u0456\u043d\u0438.",
+        "lt": "\u0160\u012f lyg\u012f suk\u016br\u0117 Frib\u016bro kantono \u017eem\u0117s \u016bkio institutas. \u017dem\u0117s \u016bkio paskirties dirvo\u017eemio steb\u0117jimo tinkl\u0105 sudaro 250 viet\u0173, apiman\u010di\u0173 vis\u0105 Freiburgo kantono \u017eem\u0117s \u016bkio paskirties \u017eem\u0119. Kiekvienos vietos m\u0117giniai imami kart\u0105 per penkerius metus, o tai atitinka cikl\u0105. Surinkti duomenys leid\u017eia steb\u0117ti ilgalaik\u012f dirvo\u017eemio derlingumo vystym\u0105si kantone ir parodyti gamtinius arba antropogeninius poky\u010dius. \u0160\u012f lyg\u012f suk\u016br\u0117 Frib\u016bro kantono \u017eem\u0117s \u016bkio institutas. \u017dem\u0117s \u016bkio paskirties dirvo\u017eemio steb\u0117jimo tinkl\u0105 sudaro 250 viet\u0173, apiman\u010di\u0173 vis\u0105 Freiburgo kantono \u017eem\u0117s \u016bkio paskirties \u017eem\u0119. Kiekvienos vietos m\u0117giniai imami kart\u0105 per penkerius metus, o tai atitinka cikl\u0105. Surinkti duomenys leid\u017eia steb\u0117ti ilgalaik\u012f dirvo\u017eemio derlingumo vystym\u0105si kantone ir parodyti gamtinius arba antropogeninius poky\u010dius.",
+        "pl": "Poziom ten zosta\u0142 stworzony przez Instytut Rolniczy Kantonu we Fryburgu. Sie\u0107 obserwacji gleby rolniczej obejmuje 250 teren\u00f3w obejmuj\u0105cych ca\u0142y obszar u\u017cytk\u00f3w rolnych kantonu Fryburga. Ka\u017cdy obiekt jest pobierany raz na pi\u0119\u0107 lat, co odpowiada cyklowi. Zebrane dane pozwalaj\u0105 monitorowa\u0107 d\u0142ugoterminowy rozw\u00f3j \u017cyzno\u015bci gleby w kantonie oraz pokaza\u0107 naturalne lub antropogeniczne zmiany. Poziom ten zosta\u0142 stworzony przez Instytut Rolniczy Kantonu we Fryburgu. Sie\u0107 obserwacji gleby rolniczej obejmuje 250 teren\u00f3w obejmuj\u0105cych ca\u0142y obszar u\u017cytk\u00f3w rolnych kantonu Fryburga. Ka\u017cdy obiekt jest pobierany raz na pi\u0119\u0107 lat, co odpowiada cyklowi. Zebrane dane pozwalaj\u0105 monitorowa\u0107 d\u0142ugoterminowy rozw\u00f3j \u017cyzno\u015bci gleby w kantonie oraz pokaza\u0107 naturalne lub antropogeniczne zmiany.",
+        "lv": "\u0160o l\u012bmeni izveidoja Frib\u016bras kantona Lauksaimniec\u012bbas instit\u016bts. Lauksaimniec\u012bbas augsnes nov\u0113ro\u0161anas t\u012bkl\u0101 ietilpst 250 teritorijas, kas aptver visu Freiburgas kantona lauksaimniec\u012bbas plat\u012bbu. No katras vietas paraugus \u0146em reizi piecos gados, kas atbilst ciklam. Sav\u0101ktie dati \u013cauj uzraudz\u012bt augsnes augl\u012bbas ilgtermi\u0146a att\u012bst\u012bbu kanton\u0101 un par\u0101d\u012bt dabisk\u0101s vai antropog\u0113n\u0101s izmai\u0146as. \u0160o l\u012bmeni izveidoja Frib\u016bras kantona Lauksaimniec\u012bbas instit\u016bts.\nLauksaimniec\u012bbas augsnes nov\u0113ro\u0161anas t\u012bkl\u0101 ietilpst 250 teritorijas, kas aptver visu Freiburgas kantona lauksaimniec\u012bbas plat\u012bbu.\nNo katras vietas paraugus \u0146em reizi piecos gados, kas atbilst ciklam.\nSav\u0101ktie dati \u013cauj uzraudz\u012bt augsnes augl\u012bbas ilgtermi\u0146a att\u012bst\u012bbu kanton\u0101 un par\u0101d\u012bt dabisk\u0101s vai antropog\u0113n\u0101s izmai\u0146as.",
+        "pt": "Este n\u00edvel foi criado pelo Instituto Agr\u00edcola do Cant\u00e3o de Friburgo. A rede de observa\u00e7\u00e3o dos solos agr\u00edcolas compreende 250 s\u00edtios que abrangem toda a \u00e1rea agr\u00edcola do cant\u00e3o de Freiburg. Cada local \u00e9 amostrado uma vez de cinco em cinco anos, o que corresponde a um ciclo. Os dados recolhidos permitem monitorizar o desenvolvimento a longo prazo da fertilidade do solo no cant\u00e3o e mostrar as altera\u00e7\u00f5es naturais ou antropog\u00e9nicas. Este n\u00edvel foi criado pelo Instituto Agr\u00edcola do Cant\u00e3o de Friburgo.\nA rede de observa\u00e7\u00e3o dos solos agr\u00edcolas compreende 250 s\u00edtios que abrangem toda a \u00e1rea agr\u00edcola do cant\u00e3o de Freiburg.\nCada local \u00e9 amostrado uma vez de cinco em cinco anos, o que corresponde a um ciclo.\nOs dados recolhidos permitem monitorizar o desenvolvimento a longo prazo da fertilidade do solo no cant\u00e3o e mostrar as altera\u00e7\u00f5es naturais ou antropog\u00e9nicas.",
+        "ro": "Acest nivel a fost creat de Institutul Agricol din Cantonul Fribourg. Re\u021beaua de observare a solului agricol cuprinde 250 de situri care acoper\u0103 \u00eentreaga suprafa\u021b\u0103 agricol\u0103 a cantonului Freiburg. Fiecare sit este e\u0219antionat o dat\u0103 la cinci ani, ceea ce corespunde unui ciclu. Datele colectate permit monitorizarea dezvolt\u0103rii pe termen lung a fertilit\u0103\u021bii solului \u00een canton \u0219i prezentarea modific\u0103rilor naturale sau antropice. Acest nivel a fost creat de Institutul Agricol din Cantonul Fribourg.\nRe\u021beaua de observare a solului agricol cuprinde 250 de situri care acoper\u0103 \u00eentreaga suprafa\u021b\u0103 agricol\u0103 a cantonului Freiburg.\nFiecare sit este e\u0219antionat o dat\u0103 la cinci ani, ceea ce corespunde unui ciclu.\nDatele colectate permit monitorizarea dezvolt\u0103rii pe termen lung a fertilit\u0103\u021bii solului \u00een canton \u0219i prezentarea modific\u0103rilor naturale sau antropice.",
+        "et": "Selle taseme l\u00f5i Fribourgi kantoni p\u00f5llumajandusinstituut. P\u00f5llumajandusmaa seirev\u00f5rgustik koosneb 250 alast, mis h\u00f5lmavad Freiburgi kantoni kogu p\u00f5llumajandusmaad. Igast kohast v\u00f5etakse proove iga viie aasta j\u00e4rel, mis vastab ts\u00fcklile. Kogutud andmed v\u00f5imaldavad j\u00e4lgida mullaviljakuse pikaajalist arengut kantonis ning n\u00e4idata looduslikke v\u00f5i inimtekkelisi muutusi. Selle taseme l\u00f5i Fribourgi kantoni p\u00f5llumajandusinstituut. P\u00f5llumajandusmaa seirev\u00f5rgustik koosneb 250 alast, mis h\u00f5lmavad Freiburgi kantoni kogu p\u00f5llumajandusmaad. Igast kohast v\u00f5etakse proove iga viie aasta j\u00e4rel, mis vastab ts\u00fcklile. Kogutud andmed v\u00f5imaldavad j\u00e4lgida mullaviljakuse pikaajalist arengut kantonis ning n\u00e4idata looduslikke v\u00f5i inimtekkelisi muutusi.",
+        "it": "Questo livello \u00e8 stato creato dall'Istituto Agrario del Canton Friburgo. La rete agricola di osservazione del suolo comprende 250 siti che coprono l'intera superficie agricola del cantone di Friburgo. Ogni sito viene campionato una volta ogni cinque anni, che corrisponde a un ciclo. I dati raccolti consentono di monitorare lo sviluppo a lungo termine della fertilit\u00e0 del suolo nel cantone e di mostrare i cambiamenti naturali o antropici. Questo livello \u00e8 stato creato dall'Istituto Agrario del Canton Friburgo.\nLa rete agricola di osservazione del suolo comprende 250 siti che coprono l'intera superficie agricola del cantone di Friburgo.\nOgni sito viene campionato una volta ogni cinque anni, che corrisponde a un ciclo.\nI dati raccolti consentono di monitorare lo sviluppo a lungo termine della fertilit\u00e0 del suolo nel cantone e di mostrare i cambiamenti naturali o antropici.",
+        "mt": "Dan il-livell in\u0127oloq mill-Istitut Agrikolu tal-Canton ta \u2018Fribourg. In-netwerk agrikolu g\u0127all-osservazzjoni tal-\u0127amrija jinkludi 250 sit li jkopru \u017c-\u017cona agrikola kollha tal-canton ta\u2019 Freiburg. Kull sit ji\u0121i kkampjunat darba kull \u0127ames snin, li jikkorrispondi g\u0127al \u010biklu. Id-data mi\u0121bura tippermetti li ji\u0121i mmonitorjat l-i\u017cvilupp fit-tul tal-fertilit\u00e0 tal-\u0127amrija fil-canton u li jintwerew il-bidliet naturali jew antropo\u0121eni\u010bi. Dan il-livell in\u0127oloq mill-Istitut Agrikolu tal-Canton ta \u2018Fribourg. In-netwerk agrikolu g\u0127all-osservazzjoni tal-\u0127amrija jinkludi 250 sit li jkopru \u017c-\u017cona agrikola kollha tal-canton ta\u2019 Freiburg. Kull sit ji\u0121i kkampjunat darba kull \u0127ames snin, li jikkorrispondi g\u0127al \u010biklu. Id-data mi\u0121bura tippermetti li ji\u0121i mmonitorjat l-i\u017cvilupp fit-tul tal-fertilit\u00e0 tal-\u0127amrija fil-canton u li jintwerew il-bidliet naturali jew antropo\u0121eni\u010bi.",
+        "sl": "To raven je ustvaril Kmetijski in\u0161titut kantona Fribourg. Mre\u017ea za opazovanje kmetijskih zemlji\u0161\u010d obsega 250 obmo\u010dij, ki pokrivajo celotno kmetijsko povr\u0161ino kantona Freiburg. Vsaka lokacija se vzor\u010di vsakih pet let, kar ustreza ciklu. Zbrani podatki omogo\u010dajo spremljanje dolgoro\u010dnega razvoja rodovitnosti tal v kantonu in prikaz naravnih ali antropogenih sprememb.",
+        "hr": "Ovu razinu je stvorio Poljoprivredni institut Kantona Fribourg. Poljoprivredna mre\u017ea za promatranje tla obuhva\u0107a 250 lokacija koje pokrivaju cijelu poljoprivrednu povr\u0161inu kantona Freiburg. Svaka se lokacija uzorkuje svakih pet godina, \u0161to odgovara ciklusu. Prikupljeni podaci omogu\u0107uju pra\u0107enje dugoro\u010dnog razvoja plodnosti tla u kantonu i prikazivanje prirodnih ili antropogenih promjena. Ovu razinu je stvorio Poljoprivredni institut Kantona Fribourg. Poljoprivredna mre\u017ea za promatranje tla obuhva\u0107a 250 lokacija koje pokrivaju cijelu poljoprivrednu povr\u0161inu kantona Freiburg. Svaka se lokacija uzorkuje svakih pet godina, \u0161to odgovara ciklusu. Prikupljeni podaci omogu\u0107uju pra\u0107enje dugoro\u010dnog razvoja plodnosti tla u kantonu i prikazivanje prirodnih ili antropogenih promjena.",
+        "nl": "Dit niveau werd gecre\u00eberd door het Landbouwinstituut van het kanton Fribourg. Het landobservatienetwerk bestaat uit 250 locaties die het gehele landbouwgebied van het kanton Freiburg bestrijken. Elke locatie wordt eens in de vijf jaar bemonsterd, wat overeenkomt met een cyclus. De verzamelde gegevens maken het mogelijk om de langetermijnontwikkeling van bodemvruchtbaarheid in het kanton te monitoren en de natuurlijke of antropogene veranderingen aan te tonen. Dit niveau werd gecre\u00eberd door het Landbouwinstituut van het kanton Fribourg. Het landobservatienetwerk bestaat uit 250 locaties die het gehele landbouwgebied van het kanton Freiburg bestrijken. Elke locatie wordt eens in de vijf jaar bemonsterd, wat overeenkomt met een cyclus. De verzamelde gegevens maken het mogelijk om de langetermijnontwikkeling van bodemvruchtbaarheid in het kanton te monitoren en de natuurlijke of antropogene veranderingen aan te tonen.",
+        "da": "Dette niveau blev skabt af landbrugsinstituttet i kantonen Fribourg. Landbrugsjordobservationsnettet omfatter 250 lokaliteter, der d\u00e6kker hele landbrugsarealet i kantonen Freiburg. Hver lokalitet udtages en gang hvert femte \u00e5r, hvilket svarer til en cyklus.\nDe indsamlede data g\u00f8r det muligt at overv\u00e5ge den langsigtede udvikling af jordens frugtbarhed i kantonen og vise de naturlige eller menneskeskabte \u00e6ndringer.",
+        "cs": "Tuto \u00farove\u0148 vytvo\u0159il zem\u011bd\u011blsk\u00fd institut kantonu Fribourg. S\u00ed\u0165 pro pozorov\u00e1n\u00ed zem\u011bd\u011blsk\u00e9 p\u016fdy zahrnuje 250 lokalit pokr\u00fdvaj\u00edc\u00edch celou zem\u011bd\u011blskou plochu kantonu Freiburg. Ka\u017ed\u00e9 m\u00edsto je vzorkov\u00e1no jednou za p\u011bt let, co\u017e odpov\u00edd\u00e1 cyklu. Shrom\u00e1\u017ed\u011bn\u00e9 \u00fadaje umo\u017e\u0148uj\u00ed sledovat dlouhodob\u00fd v\u00fdvoj \u00farodnosti p\u016fdy v kantonu a uk\u00e1zat p\u0159irozen\u00e9 nebo antropogenn\u00ed zm\u011bny. Tuto \u00farove\u0148 vytvo\u0159il zem\u011bd\u011blsk\u00fd institut kantonu Fribourg. S\u00ed\u0165 pro pozorov\u00e1n\u00ed zem\u011bd\u011blsk\u00e9 p\u016fdy zahrnuje 250 lokalit pokr\u00fdvaj\u00edc\u00edch celou zem\u011bd\u011blskou plochu kantonu Freiburg. Ka\u017ed\u00e9 m\u00edsto je vzorkov\u00e1no jednou za p\u011bt let, co\u017e odpov\u00edd\u00e1 cyklu. Shrom\u00e1\u017ed\u011bn\u00e9 \u00fadaje umo\u017e\u0148uj\u00ed sledovat dlouhodob\u00fd v\u00fdvoj \u00farodnosti p\u016fdy v kantonu a uk\u00e1zat p\u0159irozen\u00e9 nebo antropogenn\u00ed zm\u011bny.",
+        "hu": "Ezt a szintet a Fribourgi Kanton Mez\u0151gazdas\u00e1gi Int\u00e9zete hozta l\u00e9tre. A mez\u0151gazdas\u00e1gi talajmegfigyel\u00e9si h\u00e1l\u00f3zat 250 ter\u00fcletet foglal mag\u00e1ban, amelyek a Freiburg kanton teljes mez\u0151gazdas\u00e1gi ter\u00fclet\u00e9t lefedik. Minden helysz\u00ednb\u0151l \u00f6t\u00e9vente egyszer mint\u00e1t vesznek, ami egy ciklusnak felel meg. Az \u00f6sszegy\u0171jt\u00f6tt adatok lehet\u0151v\u00e9 teszik a talaj term\u00e9kenys\u00e9g\u00e9nek hossz\u00fa t\u00e1v\u00fa fejl\u0151d\u00e9s\u00e9t a kantonban, valamint a term\u00e9szetes vagy antropog\u00e9n v\u00e1ltoz\u00e1sokat. Ezt a szintet a Fribourgi Kanton Mez\u0151gazdas\u00e1gi Int\u00e9zete hozta l\u00e9tre.\nA mez\u0151gazdas\u00e1gi talajmegfigyel\u00e9si h\u00e1l\u00f3zat 250 ter\u00fcletet foglal mag\u00e1ban, amelyek a Freiburg kanton teljes mez\u0151gazdas\u00e1gi ter\u00fclet\u00e9t lefedik.\nMinden helysz\u00ednb\u0151l \u00f6t\u00e9vente egyszer mint\u00e1t vesznek, ami egy ciklusnak felel meg.\nAz \u00f6sszegy\u0171jt\u00f6tt adatok lehet\u0151v\u00e9 teszik a talaj term\u00e9kenys\u00e9g\u00e9nek hossz\u00fa t\u00e1v\u00fa fejl\u0151d\u00e9s\u00e9t a kantonban, valamint a term\u00e9szetes vagy antropog\u00e9n v\u00e1ltoz\u00e1sokat.",
+        "bg": "\u0422\u043e\u0432\u0430 \u043d\u0438\u0432\u043e \u0435 \u0441\u044a\u0437\u0434\u0430\u0434\u0435\u043d\u043e \u043e\u0442 \u0421\u0435\u043b\u0441\u043a\u043e\u0441\u0442\u043e\u043f\u0430\u043d\u0441\u043a\u0438\u044f \u0438\u043d\u0441\u0442\u0438\u0442\u0443\u0442 \u043d\u0430 \u043a\u0430\u043d\u0442\u043e\u043d\u0430 \u0424\u0440\u0438\u0431\u0443\u0440\u0433. \u0421\u0435\u043b\u0441\u043a\u043e\u0441\u0442\u043e\u043f\u0430\u043d\u0441\u043a\u0430\u0442\u0430 \u043c\u0440\u0435\u0436\u0430 \u0437\u0430 \u043d\u0430\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0435 \u043d\u0430 \u043f\u043e\u0447\u0432\u0438\u0442\u0435 \u0441\u0435 \u0441\u044a\u0441\u0442\u043e\u0438 \u043e\u0442 250 \u043e\u0431\u0435\u043a\u0442\u0430, \u043e\u0431\u0445\u0432\u0430\u0449\u0430\u0449\u0438 \u0446\u044f\u043b\u0430\u0442\u0430 \u0437\u0435\u043c\u0435\u0434\u0435\u043b\u0441\u043a\u0430 \u043f\u043b\u043e\u0449 \u043d\u0430 \u043a\u0430\u043d\u0442\u043e\u043d \u0424\u0440\u0430\u0439\u0431\u0443\u0440\u0433. \u041e\u0442 \u0432\u0441\u044f\u043a\u043e \u043c\u044f\u0441\u0442\u043e \u0441\u0435 \u0432\u0437\u0435\u043c\u0430\u0442 \u043f\u0440\u043e\u0431\u0438 \u0432\u0435\u0434\u043d\u044a\u0436 \u043d\u0430 \u0432\u0441\u0435\u043a\u0438 \u043f\u0435\u0442 \u0433\u043e\u0434\u0438\u043d\u0438, \u043a\u043e\u0435\u0442\u043e \u0441\u044a\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0430 \u043d\u0430 \u0446\u0438\u043a\u044a\u043b. \u0421\u044a\u0431\u0440\u0430\u043d\u0438\u0442\u0435 \u0434\u0430\u043d\u043d\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u044f\u0432\u0430\u0442 \u0434\u0430 \u0441\u0435 \u043d\u0430\u0431\u043b\u044e\u0434\u0430\u0432\u0430 \u0434\u044a\u043b\u0433\u043e\u0441\u0440\u043e\u0447\u043d\u043e\u0442\u043e \u0440\u0430\u0437\u0432\u0438\u0442\u0438\u0435 \u043d\u0430 \u043f\u043b\u043e\u0434\u043e\u0440\u043e\u0434\u0438\u0435\u0442\u043e \u043d\u0430 \u043f\u043e\u0447\u0432\u0430\u0442\u0430 \u0432 \u043a\u0430\u043d\u0442\u043e\u043d\u0430 \u0438 \u0434\u0430 \u0441\u0435 \u043f\u043e\u043a\u0430\u0436\u0430\u0442 \u0435\u0441\u0442\u0435\u0441\u0442\u0432\u0435\u043d\u0438\u0442\u0435 \u0438\u043b\u0438 \u0430\u043d\u0442\u0440\u043e\u043f\u043e\u0433\u0435\u043d\u043d\u0438\u0442\u0435 \u043f\u0440\u043e\u043c\u0435\u043d\u0438.",
+        "sk": "T\u00fato \u00farove\u0148 vytvoril po\u013enohospod\u00e1rsky in\u0161tit\u00fat kant\u00f3nu Fribourg. Sie\u0165 na pozorovanie po\u013enohospod\u00e1rskej p\u00f4dy zah\u0155\u0148a 250 lokal\u00edt pokr\u00fdvaj\u00facich cel\u00fa po\u013enohospod\u00e1rsku plochu kant\u00f3nu Freiburg. Ka\u017ed\u00e9 miesto sa odober\u00e1 raz za p\u00e4\u0165 rokov, \u010do zodpoved\u00e1 cyklu.\nZhroma\u017eden\u00e9 \u00fadaje umo\u017e\u0148uj\u00fa monitorova\u0165 dlhodob\u00fd v\u00fdvoj \u00farodnosti p\u00f4dy v kant\u00f3ne a uk\u00e1za\u0165 prirodzen\u00e9 alebo antropog\u00e9nne zmeny.",
+        "fi": "T\u00e4m\u00e4n tason loi Fribourgin kantonien maatalousinstituutti. Maatalouden maaper\u00e4n havainnointiverkostoon kuuluu 250 aluetta, jotka kattavat Freiburgin kantonin koko maatalousmaan. Jokaisesta alueesta otetaan n\u00e4ytteet viiden vuoden v\u00e4lein, mik\u00e4 vastaa sykli\u00e4. Ker\u00e4ttyjen tietojen avulla voidaan seurata maaper\u00e4n hedelm\u00e4llisyyden pitk\u00e4n aikav\u00e4lin kehityst\u00e4 kantonissa ja osoittaa luonnolliset tai ihmisen toiminnan muutokset. T\u00e4m\u00e4n tason loi Fribourgin kantonien maatalousinstituutti.\nMaatalouden maaper\u00e4n havainnointiverkostoon kuuluu 250 aluetta, jotka kattavat Freiburgin kantonin koko maatalousmaan.\nJokaisesta alueesta otetaan n\u00e4ytteet viiden vuoden v\u00e4lein, mik\u00e4 vastaa sykli\u00e4.\nKer\u00e4ttyjen tietojen avulla voidaan seurata maaper\u00e4n hedelm\u00e4llisyyden pitk\u00e4n aikav\u00e4lin kehityst\u00e4 kantonissa ja osoittaa luonnolliset tai ihmisen toiminnan muutokset.",
+        "en": "This level was created by the Agricultural Institute of the Canton of Fribourg. The agricultural soil observation network comprises 250 sites covering the entire agricultural area of the canton of Freiburg. Each site is sampled once every five years, which corresponds to a cycle. The data collected allow to monitor the long-term development of soil fertility in the canton and to show the natural or anthropogenic changes.",
+        "fr": "250 sites d'observation des sols sur lesquels sont pr\u00e9lev\u00e9s des \u00e9chantillons pour analyse (50 pr\u00e9l\u00e8vements par ann\u00e9e)"
+    },
+    "landing_page": [
+        {
+            "resource": "http://map.geo.fr.ch/arcgis/rest/services/PortailCarto/Theme_agriculture/MapServer"
+        }
+    ],
+    "index": "dataset",
+    "title": {
+        "da": "Data om landbrugsjord (Fribo)",
+        "ga": "Sonra\u00ed maidir le hithreacha talmha\u00edochta (Fribo)",
+        "en": "Data on agricultural soils (Fribo)",
+        "it": "Dati sui suoli agricoli (Fribo)",
+        "lv": "Dati par lauksaimniec\u012bbas augsn\u0113m (Fribo)",
+        "hu": "Mez\u0151gazdas\u00e1gi talajokra vonatkoz\u00f3 adatok (Fribo)",
+        "de": "Daten landwirtschaftlicher B\u00f6den (FRIBO)",
+        "es": "Datos sobre suelos agr\u00edcolas (Fribo)",
+        "pl": "Dane dotycz\u0105ce gleb rolniczych (Fribo)",
+        "et": "Andmed p\u00f5llumajanduslike muldade kohta (Fribo)",
+        "ro": "Date privind solurile agricole (Fribo)",
+        "sk": "\u00dadaje o po\u013enohospod\u00e1rskej p\u00f4de (Fribo)",
+        "fr": "Observation des sols agricoles (FRIBO)",
+        "bg": "\u0414\u0430\u043d\u043d\u0438 \u0437\u0430 \u0437\u0435\u043c\u0435\u0434\u0435\u043b\u0441\u043a\u0438\u0442\u0435 \u043f\u043e\u0447\u0432\u0438 (Fribo)",
+        "fi": "Maatalousmaata koskevat tiedot (Fribo)",
+        "el": "\u03a3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af\u03b1 \u03b3\u03b9\u03b1 \u03c4\u03b1 \u03b3\u03b5\u03c9\u03c1\u03b3\u03b9\u03ba\u03ac \u03b5\u03b4\u03ac\u03c6\u03b7 (Fribo)",
+        "sl": "Podatki o kmetijskih tleh (Fribo)",
+        "uk": "\u0414\u0430\u043d\u0456 \u043f\u0440\u043e \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0456 \u0491\u0440\u0443\u043d\u0442\u0438 (Fribo)",
+        "nl": "Gegevens over landbouwgronden (Fribo)",
+        "pt": "Dados sobre solos agr\u00edcolas (Fribo)",
+        "mt": "Data dwar il-\u0127amrija agrikola (Fribo)",
+        "lt": "Duomenys apie \u017eem\u0117s \u016bkio paskirties dirvo\u017eem\u012f (Fribo)",
+        "cs": "\u00dadaje o zem\u011bd\u011blsk\u00e9 p\u016fd\u011b (Fribo)",
+        "hr": "Podaci o poljoprivrednim tlima (Fribo)",
+        "sv": "Uppgifter om jordbruksmark (Fribo)"
+    },
+    "distributions": [
+        {
+            "id": "3d5af523-7dd0-415d-aef4-d7cb0a843ded",
+            "description": {
+                "el": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "ro": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "sv": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal) Acc\u00e8s aux donn\u00e9es (fr):\nT\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "de": "Acc\u00e8s aux donn\u00e9es (fr) : t\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "uk": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal) Acc\u00e8s aux donn\u00e9es (fr):\nT\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "cs": "Acc\u00e8s aux donn\u00e9es (fr): Webov\u00e9 str\u00e1nky T\u00e9l\u00e9chargement et services (G\u00e9oportail cantonal)",
+                "pt": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "fr": "Acc\u00e8s aux donn\u00e9es (fr) : t\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "bg": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (\u041a\u0430\u043d\u0442\u043e\u043d\u0430\u043b \u043d\u0430 \u0414\u0436\u043e\u0440\u0434\u0436\u0438\u044f)",
+                "da": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "mt": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "it": "Acc\u00e8s aux donn\u00e9es (fr) : t\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "pl": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal) \u2013 opinie, recenzje u\u017cytkownik\u00f3w, ekspert\u00f3w, por\u00f3wnanie cen. \u2013 alaTest.pl",
+                "ga": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement and services web (Cant\u00fan G\u00e9oportail)",
+                "sl": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "nl": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonaal)",
+                "sk": "Acc\u00e8s aux donn\u00e9es (fr): Webov\u00e1 str\u00e1nka T\u00e9l\u00e9chargement et services (G\u00e9oportail cantonal) Acc\u00e8s aux donn\u00e9es (fr):\nWebov\u00e1 str\u00e1nka T\u00e9l\u00e9chargement et services (G\u00e9oportail cantonal)",
+                "fi": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "hu": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonal)",
+                "et": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonal) Acc\u00e8s aux donn\u00e9es (fr):\nT\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonal)",
+                "es": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal) Acc\u00e8s aux donn\u00e9es (fr):\nT\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "hr": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonal)",
+                "en": "Acc\u00e8s aux donn\u00e9es (fr) : t\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "lv": "Acc\u00e8s aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail cantonal)",
+                "lt": "Acc\u010ds aux donn\u00e9es (fr): T\u00e9l\u00e9chargement et services web (G\u00e9oportail kantonal)"
+            },
+            "issued": "2000-01-01T00:00:00Z",
+            "language": [
+                {
+                    "id": "en",
+                    "label": "English",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ENG"
+                },
+                {
+                    "id": "de",
+                    "label": "German",
+                    "resource": "http://publications.europa.eu/resource/authority/language/DEU"
+                },
+                {
+                    "id": "it",
+                    "label": "Italian",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ITA"
+                },
+                {
+                    "id": "fr",
+                    "label": "French",
+                    "resource": "http://publications.europa.eu/resource/authority/language/FRA"
+                }
+            ],
+            "access_url": [
+                "https://geo.fr.ch/portal/apps/sites/#/geoportail/search?q=fa5048f9-0f9c-4a77-b763-f418d5891d7a"
+            ],
+            "license": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "id": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "label": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "rights": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "modified": "2000-01-01T00:00:00Z"
+        },
+        {
+            "id": "9e3b7189-6ee1-44ee-9d4e-f9607d72fc9a",
+            "description": {
+                "es": "Acceso a los datos (en): Descarga y servicios web (cantonial Geoportal)",
+                "da": "Adgang til data (en): Download og webtjenester (kantonial Geoportal)",
+                "ga": "Rochtain ar shonra\u00ed (en): \u00cdosl\u00f3d\u00e1il agus seirbh\u00eds\u00ed gr\u00e9as\u00e1in (Cantonial Geoportal)",
+                "fr": "Datenzugriff (de): Download und Webservices (Kantonales Geoportal)",
+                "lv": "Piek\u013cuve datiem (en): Lejupiel\u0101de un t\u012bmek\u013ca pakalpojumi (kantona \u0123eoport\u0101ls)",
+                "uk": "\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0434\u0430\u043d\u0438\u0445 (uk): \u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438 \u0442\u0430 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0456\u0441\u0438 (\u043a\u0430\u043d\u0442\u043e\u043d\u0456\u0430\u043b\u044c\u043d\u0438\u0439 \u0433\u0435\u043e\u043f\u043e\u0440\u0442\u0430\u043b)",
+                "sk": "Pr\u00edstup k \u00fadajom (en): S\u0165ahovanie a webov\u00e9 slu\u017eby (kantonial Geoportal)",
+                "ro": "Accesul la date (ro): Servicii de desc\u0103rcare \u0219i web (Geoportal cantonial)",
+                "it": "Datenzugriff (de): Download und Webservices (Kantonales Geoportal)",
+                "fi": "P\u00e4\u00e4sy tietoihin (fi): Lataaminen ja verkkopalvelut (kantonial Geoportal)",
+                "de": "Datenzugriff (de): Download und Webservices (Kantonales Geoportal)",
+                "sl": "Dostop do podatkov (sl): Prenos in spletne storitve (kantonski geoportal)",
+                "pt": "Acesso aos dados (pt): Download e servi\u00e7os web (Cantonial Geoportal)",
+                "mt": "A\u010b\u010bess g\u0127ad-dejta (en): Servizzi ta\u2019 tni\u017c\u017cil u web (cantonial Geoportal)",
+                "cs": "P\u0159\u00edstup k \u00fadaj\u016fm (cs): Stahov\u00e1n\u00ed a webov\u00e9 slu\u017eby (kantoni\u00e1ln\u00ed geoport\u00e1l)",
+                "el": "\u03a0\u03c1\u03cc\u03c3\u03b2\u03b1\u03c3\u03b7 \u03c3\u03b5 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03b1 (en): Download \u03ba\u03b1\u03b9 web \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b5\u03c2 (cantonial Geoportal)",
+                "et": "Juurdep\u00e4\u00e4s andmetele (et):\nAllalaadimine ja veebiteenused (kantoniaalne geoportaal)",
+                "hu": "Adathozz\u00e1f\u00e9r\u00e9s (hu): Let\u00f6lt\u00e9s \u00e9s webes szolg\u00e1ltat\u00e1sok (kantoni Geoportal)",
+                "sv": "\u00c5tkomst till uppgifter (sv): Nedladdning och webbtj\u00e4nster (kantonial Geoportal)",
+                "en": "Datenzugriff (de): Download und Webservices (Kantonales Geoportal)",
+                "bg": "\u0414\u043e\u0441\u0442\u044a\u043f \u0434\u043e \u0434\u0430\u043d\u043d\u0438 (en): \u0418\u0437\u0442\u0435\u0433\u043b\u044f\u043d\u0435 \u0438 \u0443\u0435\u0431 \u0443\u0441\u043b\u0443\u0433\u0438 (\u043a\u0430\u043d\u0442\u043e\u043d\u0438\u0430\u043b\u0435\u043d \u0433\u0435\u043e\u043f\u043e\u0440\u0442\u0430\u043b)",
+                "pl": "Dost\u0119p do danych (en): Pobieranie i us\u0142ugi internetowe (cantonial Geoportal)",
+                "hr": "Pristup podacima (en): Preuzimanje i web usluge (kantonijalni geoportal)",
+                "lt": "Prieiga prie duomen\u0173 (en): Atsisiuntimo ir interneto paslaugos (kantoninis geoportalas)",
+                "nl": "Toegang tot gegevens (nl): Download en webservices (kantoniaal Geoportal)"
+            },
+            "access_url": [
+                "https://geo.fr.ch/portal/apps/sites/#/geoportal/search?q=fa5048f9-0f9c-4a77-b763-f418d5891d7a"
+            ],
+            "language": [
+                {
+                    "id": "it",
+                    "label": "Italian",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ITA"
+                },
+                {
+                    "id": "en",
+                    "label": "English",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ENG"
+                },
+                {
+                    "id": "de",
+                    "label": "German",
+                    "resource": "http://publications.europa.eu/resource/authority/language/DEU"
+                },
+                {
+                    "id": "fr",
+                    "label": "French",
+                    "resource": "http://publications.europa.eu/resource/authority/language/FRA"
+                }
+            ],
+            "license": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "id": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "label": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "modified": "2000-01-01T00:00:00Z",
+            "rights": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "issued": "2000-01-01T00:00:00Z"
+        },
+        {
+            "id": "7831b323-37c2-4402-8f3f-a9322b6adf40",
+            "title": {
+                "pl": "Mapa (Przegl\u0105d) Wizualizacja danych",
+                "da": "Kort (Preview) Visualisering af data",
+                "mt": "Mappa (Preview) Vi\u017cwalizzazzjoni tad-data",
+                "fr": "Map (Preview) Visualisation des donn\u00e9es",
+                "es": "Mapa (Preview) Visualizaci\u00f3n de datos",
+                "lv": "Karte (priek\u0161skat\u012bjums) Datu vizualiz\u0101cija",
+                "sl": "Zemljevid (predogled) Vizualizacija podatkov",
+                "nl": "Kaart (Voorbeeld) Visualisatie van gegevens",
+                "ga": "L\u00e9arsc\u00e1il (R\u00e9amhamharc) Sonra\u00ed a amharcl\u00e9iri\u00fa",
+                "hr": "Karta (Pregled) Vizualizacija podataka",
+                "cs": "Mapa (P\u0159ehled) Vizualizace dat",
+                "de": "Map (Preview) Visualisierung der Daten",
+                "pt": "Mapa (Pr\u00e9-visualiza\u00e7\u00e3o) Visualiza\u00e7\u00e3o de dados",
+                "fi": "Kartta (esikatselu) Tietojen visualisointi",
+                "el": "\u03a7\u03ac\u03c1\u03c4\u03b7\u03c2 (\u03a0\u03c1\u03bf\u03b5\u03c0\u03b9\u03c3\u03ba\u03cc\u03c0\u03b7\u03c3\u03b7) \u039f\u03c0\u03c4\u03b9\u03ba\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7 \u03c4\u03c9\u03bd \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd",
+                "uk": "\u041a\u0430\u0440\u0442\u0430 (\u041f\u043e\u043f\u0435\u0440\u0435\u0434\u043d\u0456\u0439 \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u0434) \u0412\u0456\u0437\u0443\u0430\u043b\u0456\u0437\u0430\u0446\u0456\u044f \u0434\u0430\u043d\u0438\u0445",
+                "it": "Map (Preview) Visualizzazione dei dati",
+                "hu": "T\u00e9rk\u00e9p (el\u0151zetes) Adatok megjelen\u00edt\u00e9se",
+                "et": "Kaart (eelvaade) Andmete visualiseerimine",
+                "en": "Map (Preview) Visualization of the data",
+                "bg": "\u041a\u0430\u0440\u0442\u0430 (\u041f\u0440\u0435\u0433\u043b\u0435\u0434) \u0412\u0438\u0437\u0443\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f \u043d\u0430 \u0434\u0430\u043d\u043d\u0438",
+                "sv": "Karta (F\u00f6rhandsgranska) Visualisering av data",
+                "sk": "Mapa (Preview) Vizualiz\u00e1cia d\u00e1t",
+                "ro": "Hart\u0103 (Previzualizare) Vizualizarea datelor",
+                "lt": "\u017dem\u0117lapis (per\u017ei\u016bra) Duomen\u0173 vizualizavimas"
+            },
+            "description": {
+                "pl": "Wizualizacja danych",
+                "sv": "Visualisering av data",
+                "cs": "Vizualizace dat",
+                "el": "\u0391\u03c0\u03b5\u03b9\u03ba\u03cc\u03bd\u03b9\u03c3\u03b7 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd",
+                "es": "Visualizaci\u00f3n de datos",
+                "sl": "Vizualizacija podatkov",
+                "ga": "L\u00e9irshamhl\u00fa sonra\u00ed",
+                "hr": "Vizualizacija podataka",
+                "da": "Visualisering af data",
+                "nl": "Visualisatie van data",
+                "uk": "\u0412\u0456\u0437\u0443\u0430\u043b\u0456\u0437\u0430\u0446\u0456\u044f \u0434\u0430\u043d\u0438\u0445",
+                "it": "Visualizzazione dei dati",
+                "hu": "Az adatok vizualiz\u00e1ci\u00f3ja",
+                "en": "Visualization of the data",
+                "bg": "\u0412\u0438\u0437\u0443\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f \u043d\u0430 \u0434\u0430\u043d\u043d\u0438\u0442\u0435",
+                "mt": "Vi\u017cwalizzazzjoni tad-data",
+                "lv": "Datu vizualiz\u0101cija",
+                "sk": "Vizualiz\u00e1cia \u00fadajov",
+                "pt": "Visualiza\u00e7\u00e3o de dados",
+                "et": "Andmete visualiseerimine",
+                "ro": "Vizualizarea datelor",
+                "lt": "Duomen\u0173 vizualizavimas",
+                "fi": "Datan visualisointi",
+                "fr": "Visualisation des donn\u00e9es",
+                "de": "Visualisierung der Daten"
+            },
+            "language": [
+                {
+                    "id": "it",
+                    "label": "Italian",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ITA"
+                },
+                {
+                    "id": "fr",
+                    "label": "French",
+                    "resource": "http://publications.europa.eu/resource/authority/language/FRA"
+                },
+                {
+                    "id": "de",
+                    "label": "German",
+                    "resource": "http://publications.europa.eu/resource/authority/language/DEU"
+                },
+                {
+                    "id": "en",
+                    "label": "English",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ENG"
+                }
+            ],
+            "license": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "id": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "label": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "rights": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "access_url": [
+                "https://geo.fr.ch/CartoFR/?showLegend&uniquelayer=https://geo.fr.ch/ags/rest/services/OpenData/Donnees_FRIBO_sol_agricole/MapServer/0"
+            ],
+            "modified": "2000-01-01T00:00:00Z",
+            "issued": "2000-01-01T00:00:00Z"
+        },
+        {
+            "id": "bb263450-42bb-4658-bb7d-0c5eaf0036a3",
+            "description": {
+                "et": "FRIBO p\u00f5llumajandusliku mulla andmed",
+                "de": "Daten FRIBO landwirtschaftlicher Boden",
+                "es": "Datos de suelos agr\u00edcolas de FRIBO",
+                "ro": "Date privind solul agricol FRIBO",
+                "fi": "FRIBO:n maatalousmaata koskevat tiedot",
+                "mt": "Data tal-FRIBO dwar il-\u0127amrija agrikola",
+                "en": "FRIBO agricultural soil data",
+                "sv": "Uppgifter om jordbruksmark fr\u00e5n FRIBO",
+                "hu": "FRIBO mez\u0151gazdas\u00e1gi talajra vonatkoz\u00f3 adatok",
+                "da": "FRIBO landbrugsjorddata",
+                "sl": "Podatki o kmetijskih tleh FRIBO",
+                "sk": "\u00dadaje o po\u013enohospod\u00e1rskej p\u00f4de FRIBO",
+                "nl": "Gegevens over de landbouwgrond van de FRIBO",
+                "cs": "\u00dadaje o zem\u011bd\u011blsk\u00e9 p\u016fd\u011b FRIBO",
+                "el": "\u03a3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af\u03b1 \u03c4\u03bf\u03c5 FRIBO \u03b3\u03b9\u03b1 \u03c4\u03bf \u03b3\u03b5\u03c9\u03c1\u03b3\u03b9\u03ba\u03cc \u03ad\u03b4\u03b1\u03c6\u03bf\u03c2",
+                "fr": "Donn\u00e9es FRIBO sol agricole",
+                "lt": "FRIBO \u017eem\u0117s \u016bkio paskirties dirvo\u017eemio duomenys",
+                "it": "Dati del suolo agricolo FRIBO",
+                "lv": "FRIBO lauksaimniec\u012bbas augsnes dati",
+                "pl": "Dane dotycz\u0105ce gleby rolniczej FRIBO",
+                "hr": "Podaci o poljoprivrednom tlu FRIBO-a",
+                "pt": "Dados relativos aos solos agr\u00edcolas FRIBO",
+                "uk": "\u0414\u0430\u043d\u0456 \u043f\u0440\u043e \u0441\u0456\u043b\u044c\u0441\u044c\u043a\u043e\u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0456 \u0491\u0440\u0443\u043d\u0442\u0438 Fribo",
+                "bg": "\u0414\u0430\u043d\u043d\u0438 \u043d\u0430 FRIBO \u0437\u0430 \u0437\u0435\u043c\u0435\u0434\u0435\u043b\u0441\u043a\u0430\u0442\u0430 \u043f\u043e\u0447\u0432\u0430",
+                "ga": "Sonra\u00ed ithreach talmha\u00edochta Fribo"
+            },
+            "title": {
+                "it": "0",
+                "hr": "0",
+                "de": "0",
+                "fr": "0",
+                "hu": "0",
+                "et": "0",
+                "ro": "0",
+                "el": "0",
+                "ga": "0",
+                "es": "0",
+                "sk": "0",
+                "uk": "0",
+                "fi": "0",
+                "bg": "0",
+                "lt": "0",
+                "pl": "0",
+                "en": "0",
+                "da": "0",
+                "nl": "0",
+                "pt": "0",
+                "lv": "0",
+                "cs": "0",
+                "sv": "0",
+                "sl": "0",
+                "mt": "0"
+            },
+            "language": [
+                {
+                    "id": "fr",
+                    "label": "French",
+                    "resource": "http://publications.europa.eu/resource/authority/language/FRA"
+                },
+                {
+                    "id": "en",
+                    "label": "English",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ENG"
+                },
+                {
+                    "id": "de",
+                    "label": "German",
+                    "resource": "http://publications.europa.eu/resource/authority/language/DEU"
+                },
+                {
+                    "id": "it",
+                    "label": "Italian",
+                    "resource": "http://publications.europa.eu/resource/authority/language/ITA"
+                }
+            ],
+            "modified": "2000-01-01T00:00:00Z",
+            "access_url": [
+                "https://geo.fr.ch/ags/services/OpenData/Donnees_FRIBO_sol_agricole/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+            ],
+            "license": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "id": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+                "label": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "rights": {
+                "resource": "http://dcat-ap.ch/vocabulary/licenses/terms_by"
+            },
+            "format": {
+                "id": "WMS_SRVC",
+                "label": "WMS",
+                "resource": "http://publications.europa.eu/resource/authority/file-type/WMS_SRVC"
+            },
+            "issued": "2000-01-01T00:00:00Z"
+        }
+    ],
+    "relation": [
+        "https://www.geocat.ch/geonetwork/srv/ger/catalog.search#/metadata/fa5048f9-0f9c-4a77-b763-f418d5891d7a"
+    ],
+    "is_hvd": false,
+    "quality_meas": {
+        "scoring": 215
+    },
+    "publisher": {
+        "type": "Agent",
+        "name": "Grangeneuve",
+        "resource": "http://www.grangeneuve.ch"
+    },
+    "modified": "2000-01-01T00:00:00Z",
+    "id": "fa5048f9-0f9c-4a77-b763-f418d5891d7a-geoinformation_kanton_freiburg",
+    "categories": [
+        {
+            "id": "AGRI",
+            "label": {
+                "ro": "Agricultur\u0103, pescuit, silvicultur\u0103 \u015fi hran\u0103",
+                "it": "Agricoltura, pesca, silvicoltura e prodotti alimentari",
+                "hu": "Mez\u0151gazdas\u00e1g, hal\u00e1szat, erd\u00e9szet \u00e9s \u00e9lelmiszer",
+                "nn": "Jordbruk, fiskeri, skogbruk og mat",
+                "et": "P\u00f5llumajandus, kalandus, metsandus ja toiduained",
+                "sl": "Kmetijstvo, ribi\u0161tvo, gozdarstvo in prehrana",
+                "hr": "Poljoprivreda, ribarstvo, \u0161umarstvo i hrana",
+                "sv": "Jordbruk, fiske, skogsbruk och livsmedel",
+                "lt": "\u017dem\u0117s \u016bkis, \u017euvininkyst\u0117, mi\u0161kininkyst\u0117 ir maistas",
+                "mt": "Agrikoltura, sajd, forestrija u ikel",
+                "es": "Agricultura, pesca, silvicultura y alimentaci\u00f3n",
+                "no": "Jordbruk, fiskeri, skogbruk og mat",
+                "en": "Agriculture, fisheries, forestry and food",
+                "lv": "Lauksaimniec\u012bba, zivsaimniec\u012bba, me\u017esaimniec\u012bba un p\u0101rtika",
+                "nb": "Jordbruk, fiskeri, skogbruk og mat",
+                "pt": "Agricultura, pesca, silvicultura e alimenta\u00e7\u00e3o",
+                "da": "Landbrug, fiskeri, skovbrug og f\u00f8devarer",
+                "de": "Landwirtschaft, Fischerei, Forstwirtschaft und Nahrungsmittel",
+                "pl": "Rolnictwo, rybo\u0142\u00f3wstwo, le\u015bnictwo i \u017cywno\u015b\u0107",
+                "el": "\u0393\u03b5\u03c9\u03c1\u03b3\u03af\u03b1, \u03b1\u03bb\u03b9\u03b5\u03af\u03b1, \u03b4\u03b1\u03c3\u03bf\u03ba\u03bf\u03bc\u03af\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03c1\u03cc\u03c6\u03b9\u03bc\u03b1",
+                "cs": "Zem\u011bd\u011blstv\u00ed, rybolov, lesnictv\u00ed a v\u00fd\u017eiva",
+                "ga": "Talmha\u00edocht, iascach, foraoiseacht agus bia",
+                "bg": "\u0421\u0435\u043b\u0441\u043a\u043e \u0441\u0442\u043e\u043f\u0430\u043d\u0441\u0442\u0432\u043e, \u0440\u0438\u0431\u0430\u0440\u0441\u0442\u0432\u043e, \u0433\u043e\u0440\u0441\u043a\u043e \u0441\u0442\u043e\u043f\u0430\u043d\u0441\u0442\u0432\u043e \u0438 \u0445\u0440\u0430\u043d\u0438",
+                "sk": "Po\u013enohospod\u00e1rstvo, rybn\u00e9 hospod\u00e1rstvo, lesn\u00edctvo a potravin\u00e1rstvo",
+                "fr": "Agriculture, p\u00eache, sylviculture et alimentation",
+                "nl": "Landbouw, visserij, bosbouw en voeding",
+                "fi": "Maatalous, kalastus, mets\u00e4talous ja elintarvikkeet"
+            },
+            "resource": "http://publications.europa.eu/resource/authority/data-theme/AGRI"
+        },
+        {
+            "id": "ENVI",
+            "label": {
+                "fi": "Ymp\u00e4rist\u00f6",
+                "lt": "Aplinka",
+                "hr": "Okoli\u0161",
+                "no": "Milj\u00f8",
+                "ro": "Mediu",
+                "sk": "\u017divotn\u00e9 prostredie",
+                "cs": "\u017divotn\u00ed prost\u0159ed\u00ed",
+                "nb": "Milj\u00f8",
+                "nl": "Milieu",
+                "it": "Ambiente",
+                "sl": "Okolje",
+                "bg": "\u041e\u043a\u043e\u043b\u043d\u0430 \u0441\u0440\u0435\u0434\u0430",
+                "da": "Milj\u00f8",
+                "et": "Keskkond",
+                "sv": "Milj\u00f6",
+                "es": "Medio ambiente",
+                "ga": "Comhshaol",
+                "de": "Umwelt",
+                "lv": "Vide",
+                "fr": "Environnement",
+                "pt": "Ambiente",
+                "mt": "Ambjent",
+                "en": "Environment",
+                "pl": "\u015arodowisko",
+                "hu": "K\u00f6rnyezet",
+                "nn": "Milj\u00f8",
+                "el": "\u03a0\u03b5\u03c1\u03b9\u03b2\u03ac\u03bb\u03bb\u03bf\u03bd"
+            },
+            "resource": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+        },
+        {
+            "id": "REGI",
+            "label": {
+                "nn": "Regionar og byar",
+                "da": "Regioner og byer",
+                "lv": "Re\u0123ioni un pils\u0113tas",
+                "nb": "Regioner og byer",
+                "pt": "Regi\u00f5es e cidades",
+                "lt": "Regionai ir miestai",
+                "ro": "Regiuni \u015fi ora\u0219e",
+                "de": "Regionen und St\u00e4dte",
+                "el": "\u03a0\u03b5\u03c1\u03b9\u03c6\u03ad\u03c1\u03b5\u03b9\u03b5\u03c2 \u03ba\u03b1\u03b9 \u03c0\u03cc\u03bb\u03b5\u03b9\u03c2",
+                "fr": "R\u00e9gions et villes",
+                "en": "Regions and cities",
+                "nl": "Regio's en steden",
+                "hr": "Regije i gradovi",
+                "sl": "Regije in mesta",
+                "no": "Regioner og byer",
+                "pl": "Regiony i miasta",
+                "et": "Piirkonnad ja linnad",
+                "fi": "Alueet ja kaupungit",
+                "ga": "R\u00e9igi\u00fain agus cathracha",
+                "cs": "Regiony a m\u011bsta",
+                "sk": "Regi\u00f3ny a mest\u00e1",
+                "it": "Regioni e citt\u00e0",
+                "mt": "Re\u0121juni u bliet",
+                "bg": "\u0420\u0435\u0433\u0438\u043e\u043d\u0438 \u0438 \u0433\u0440\u0430\u0434\u043e\u0432\u0435",
+                "hu": "R\u00e9gi\u00f3k \u00e9s v\u00e1rosok",
+                "sv": "Regioner och st\u00e4der",
+                "es": "Regiones y ciudades"
+            },
+            "resource": "http://publications.europa.eu/resource/authority/data-theme/REGI"
+        }
+    ],
+    "page": [
+        {
+            "resource": "https://map.geo.fr.ch/?dataTheme=Agriculture&theme&lang=fr"
+        },
+        {
+            "resource": "https://www.geocat.ch/geonetwork/srv/api/records/fa5048f9-0f9c-4a77-b763-f418d5891d7a/attachments/FRIBO_agricole_mod%C3%A8le.xlsx"
+        },
+        {
+            "resource": "https://geo.fr.ch"
+        }
+    ],
+    "spatial": [],
+    "issued": "2000-01-01T00:00:00Z",
+    "catalog_record": {
+        "issued": "2023-01-26T20:05:05Z",
+        "modified": "2025-06-13T20:08:33Z"
+    },
+    "contact_point": [
+        {
+            "type": "Organization",
+            "name": "adrian.vonniederhaeusern@fr.ch",
+            "email": "mailto:adrian.vonniederhaeusern@fr.ch"
+        }
+    ]
+}

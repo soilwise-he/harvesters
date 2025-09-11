@@ -1,0 +1,847 @@
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gco="http://www.isotc211.org/2005/gco"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+    xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://web.bonares.de/md_schema/apiso/apiso.xsd">
+    <gmd:fileIdentifier>
+        <gco:CharacterString>same-id-diff-record</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+        <LanguageCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#LanguageCode"
+            codeListValue="eng" />
+    </gmd:language>
+    <gmd:characterSet>
+        <MD_CharacterSetCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
+            codeListValue="utf8" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+        <MD_ScopeCode xmlns="http://www.isotc211.org/2005/gmd"
+            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+            codeListValue="service" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+        <gco:CharacterString>Other</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:individualName>
+                <gco:CharacterString>Bunlong Yim</gco:CharacterString>
+            </gmd:individualName>
+            <gmd:organisationName>
+                <gco:CharacterString>Julius-K&#252;hn
+                    Institut</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:city>
+                                <gco:CharacterString>
+                                    Braunschweig</gco:CharacterString>
+                            </gmd:city>
+                            <gmd:postalCode>
+                                <gco:CharacterString>
+                                    38104</gco:CharacterString>
+                            </gmd:postalCode>
+                            <gmd:country>
+                                <gco:CharacterString>
+                                    Germany</gco:CharacterString>
+                            </gmd:country>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString>
+                                    bunlong.yim@julius-kuehn.de</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode
+                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                    codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+        <gco:Date>2021-03-02</gco:Date>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName>
+        <gco:CharacterString>BonaRes Metadata Schema
+            (https://doi.org/10.20387/BonaRes-5PGG-8YRP)</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:metadataStandardVersion>
+        <gco:CharacterString>1.0</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+    <gmd:referenceSystemInfo>
+        <gmd:MD_ReferenceSystem>
+            <gmd:referenceSystemIdentifier>
+                <gmd:RS_Identifier>
+                    <gmd:code>
+                        <gco:CharacterString>4326</gco:CharacterString>
+                    </gmd:code>
+                    <gmd:codeSpace>
+                        <gco:CharacterString>
+                            urn:ogc:def:crs:EPSG</gco:CharacterString>
+                    </gmd:codeSpace>
+                    <gmd:version>
+                        <gco:CharacterString>6.11.2</gco:CharacterString>
+                    </gmd:version>
+                </gmd:RS_Identifier>
+            </gmd:referenceSystemIdentifier>
+        </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo xmlns:srv="http://www.isotc211.org/2005/srv">
+        <srv:SV_ServiceIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                        <gco:CharacterString>WMS Service of the dataset 'Primary and secondary
+                            metabolites in roots of Rosa corymbifera 'Laxa''</gco:CharacterString>
+                        <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                                <gmd:LocalisedCharacterString locale="ger">WMS dienst des
+                                    Datensatzes 'Prim&#228;r- und Sekund&#228;rmetaboliten in
+                                    Wurzeln von Rosa corymbifera 'Laxa''</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                        </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2020-07-02</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="issued" />
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2020-07-02</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="creation" />
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2020-07-02</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="revision" />
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2020-07-17</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                    codeListValue="publication" />
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                </gmd:CI_Citation>
+            </gmd:citation>
+            <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+                <gco:CharacterString>This WMS Service includes spatial information used by datasets
+                    'WMS Service of the dataset 'Primary and secondary metabolites in roots of Rosa
+                    corymbifera 'Laxa'''</gco:CharacterString>
+                <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                        <gmd:LocalisedCharacterString locale="ger">DieserWMS dienst enth&#228;lt
+                            r&#228;umliche Informationen zu den Datens&#228;tzen'WMS dienst des
+                            Datensatzes 'Prim&#228;r- und Sekund&#228;rmetaboliten in Wurzeln von
+                            Rosa corymbifera 'Laxa'''</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                </gmd:PT_FreeText>
+            </gmd:abstract>
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    <gmd:individualName>
+                        <gco:CharacterString>Bunlong Yim</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>Julius-K&#252;hn Institut</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:positionName>
+                        <gco:CharacterString>PostDoc</gco:CharacterString>
+                    </gmd:positionName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:city>
+                                        <gco:CharacterString>Braunschweig</gco:CharacterString>
+                                    </gmd:city>
+                                    <gmd:postalCode>
+                                        <gco:CharacterString>38104</gco:CharacterString>
+                                    </gmd:postalCode>
+                                    <gmd:country>
+                                        <gco:CharacterString>Germany</gco:CharacterString>
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>bunlong.yim@julius-kuehn.de</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="author">author</gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    <gmd:individualName>
+                        <gco:CharacterString>Traud Winkelmann</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>Leibniz Universit&#228;t Hannover</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:positionName>
+                        <gco:CharacterString>Prof. Dr.</gco:CharacterString>
+                    </gmd:positionName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:city>
+                                        <gco:CharacterString>Hannover</gco:CharacterString>
+                                    </gmd:city>
+                                    <gmd:postalCode>
+                                        <gco:CharacterString>30419</gco:CharacterString>
+                                    </gmd:postalCode>
+                                    <gmd:country>
+                                        <gco:CharacterString>Germany</gco:CharacterString>
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>traud.winkelmann@zier.uni-hannover.de</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="projectLeader">projectLeader</gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    <gmd:individualName>
+                        <gco:CharacterString>BonaRes Data Centre</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>Leibniz Centre for Agricultural Landscape Research
+                            (ZALF)</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:positionName>
+                        <gco:CharacterString>Research Platform 'Data Analysis &amp; Simulation' - WG
+                            Geodata</gco:CharacterString>
+                    </gmd:positionName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:phone>
+                                <gmd:CI_Telephone>
+                                    <gmd:voice>
+                                        <gco:CharacterString>+49 33432 82 171</gco:CharacterString>
+                                    </gmd:voice>
+                                    <gmd:facsimile>
+                                        <gco:CharacterString>+49 33432 82 4082</gco:CharacterString>
+                                    </gmd:facsimile>
+                                </gmd:CI_Telephone>
+                            </gmd:phone>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:deliveryPoint>
+                                        <gco:CharacterString>Eberswalder Strasse 84</gco:CharacterString>
+                                    </gmd:deliveryPoint>
+                                    <gmd:city>
+                                        <gco:CharacterString>M&#252;ncheberg</gco:CharacterString>
+                                    </gmd:city>
+                                    <gmd:administrativeArea>
+                                        <gco:CharacterString>Brandenburg</gco:CharacterString>
+                                    </gmd:administrativeArea>
+                                    <gmd:postalCode>
+                                        <gco:CharacterString>15374</gco:CharacterString>
+                                    </gmd:postalCode>
+                                    <gmd:country>
+                                        <gco:CharacterString>Germany</gco:CharacterString>
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>bonares-datenzentrum@zalf.de</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="publisher">publisher</gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>infoMapAccessService</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:type>
+                        <MD_KeywordTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="theme" />
+                    </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2018-08-03</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                            codeListValue="creation" />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xlink:href="http://aims.fao.org/aos/agrovoc/c_92336">Biochemical
+                            compounds</gmx:Anchor>
+                    </gmd:keyword>
+                    <gmd:type>
+                        <MD_KeywordTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="theme" />
+                    </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>AGROVOC Multilingual agricultural thesaurus</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2020-07-09</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                            codeListValue="revision" />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xlink:href="http://aims.fao.org/aos/agrovoc/c_7788">Tissue analysis</gmx:Anchor>
+                    </gmd:keyword>
+                    <gmd:type>
+                        <MD_KeywordTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="discipline" />
+                    </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>GEMET - Concepts, version 2.4</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2012-07-20</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <CI_DateTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                            codeListValue="publication" />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:useLimitation>
+                        <gco:CharacterString>Restrictions applied to assure the protection of
+                            privacy or intellectual property, and any special restrictions or
+                            limitations or warnings on using the resource or metadata. Reports,
+                            articles, papers, scientific and non - scientific works of any form,
+                            including tables, maps, or any other kind of output, in printed or
+                            electronic form, based in whole or in part on the data supplied, must
+                            contain an acknowledgement of the form: "Data reused from the BonaRes
+                            Data Centre www.bonares.de. This data were created as part of the
+                            Other's research activities." Although every care has been taken in
+                            preparing and testing the data, the Other and the BonaRes Data Centre
+                            cannot guarantee that the data are correct; neither does the Other and
+                            the BonaRes Data Centre accept any liability whatsoever for any error,
+                            missing data or omission in the data, or for any loss or damage arising
+                            from its use. The Other and BonaRes Data Centre will not be responsible
+                            for any direct or indirect use which might be made of the data.</gco:CharacterString>
+                    </gmd:useLimitation>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:accessConstraints>
+                        <MD_RestrictionCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                            codeListValue="copyright" />
+                    </gmd:accessConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:accessConstraints>
+                        <MD_RestrictionCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                            codeListValue="intellectualPropertyRights" />
+                    </gmd:accessConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:accessConstraints>
+                        <MD_RestrictionCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                            codeListValue="restricted" />
+                    </gmd:accessConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:useConstraints>
+                        <MD_RestrictionCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                            codeListValue="license" />
+                    </gmd:useConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:otherConstraints>
+                        <gco:CharacterString>CC BY</gco:CharacterString>
+                    </gmd:otherConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:aggregationInfo>
+                <gmd:MD_AggregateInformation>
+                    <gmd:aggregateDataSetIdentifier>
+                        <gmd:RS_Identifier>
+                            <gmd:code>
+                                <gco:CharacterString>
+                                    https://maps.bonares.de/mapapps/resources/apps/bonares/index.html?lang=en&amp;mid=738aec60-e6c8-474e-8f04-0465de24d8eb</gco:CharacterString>
+                            </gmd:code>
+                            <gmd:codeSpace>
+                                <gco:CharacterString>URL</gco:CharacterString>
+                            </gmd:codeSpace>
+                        </gmd:RS_Identifier>
+                    </gmd:aggregateDataSetIdentifier>
+                    <gmd:associationType>
+                        <DS_AssociationTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DS_AssociationTypeCode"
+                            codeListValue="IsVariantFormOf" />
+                    </gmd:associationType>
+                </gmd:MD_AggregateInformation>
+            </gmd:aggregationInfo>
+            <gmd:aggregationInfo>
+                <gmd:MD_AggregateInformation>
+                    <gmd:aggregateDataSetIdentifier>
+                        <gmd:RS_Identifier>
+                            <gmd:code>
+                                <gco:CharacterString>
+                                    https://maps.bonares.de/mapapps/resources/apps/bonares/index.html?lang=en&amp;mid=09862ced-bef3-4b20-bf70-df5ef28cf2e8</gco:CharacterString>
+                            </gmd:code>
+                            <gmd:codeSpace>
+                                <gco:CharacterString>URL</gco:CharacterString>
+                            </gmd:codeSpace>
+                        </gmd:RS_Identifier>
+                    </gmd:aggregateDataSetIdentifier>
+                    <gmd:associationType>
+                        <DS_AssociationTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DS_AssociationTypeCode"
+                            codeListValue="IsVariantFormOf" />
+                    </gmd:associationType>
+                </gmd:MD_AggregateInformation>
+            </gmd:aggregationInfo>
+            <gmd:aggregationInfo>
+                <gmd:MD_AggregateInformation>
+                    <gmd:aggregateDataSetIdentifier>
+                        <gmd:RS_Identifier>
+                            <gmd:code>
+                                <gco:CharacterString>
+                                    https://maps.bonares.de/mapapps/resources/apps/bonares/index.html?lang=en&amp;mid=45061c8d-877b-4db0-b363-83eda2324ade</gco:CharacterString>
+                            </gmd:code>
+                            <gmd:codeSpace>
+                                <gco:CharacterString>URL</gco:CharacterString>
+                            </gmd:codeSpace>
+                        </gmd:RS_Identifier>
+                    </gmd:aggregateDataSetIdentifier>
+                    <gmd:associationType>
+                        <DS_AssociationTypeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DS_AssociationTypeCode"
+                            codeListValue="IsVariantFormOf" />
+                    </gmd:associationType>
+                </gmd:MD_AggregateInformation>
+            </gmd:aggregationInfo>
+            <srv:serviceType>
+                <gco:LocalName>WMS</gco:LocalName>
+            </srv:serviceType>
+            <srv:serviceTypeVersion>
+                <gco:CharacterString>OGC:WMS 1.3.0</gco:CharacterString>
+            </srv:serviceTypeVersion>
+            <srv:extent>
+                <gmd:EX_Extent>
+                    <gmd:geographicElement>
+                        <gmd:EX_GeographicBoundingBox>
+                            <gmd:extentTypeCode>
+                                <gco:Boolean>true</gco:Boolean>
+                            </gmd:extentTypeCode>
+                            <gmd:westBoundLongitude>
+                                <gco:Decimal>9.16</gco:Decimal>
+                            </gmd:westBoundLongitude>
+                            <gmd:eastBoundLongitude>
+                                <gco:Decimal>12.55</gco:Decimal>
+                            </gmd:eastBoundLongitude>
+                            <gmd:southBoundLatitude>
+                                <gco:Decimal>51.25</gco:Decimal>
+                            </gmd:southBoundLatitude>
+                            <gmd:northBoundLatitude>
+                                <gco:Decimal>54.20</gco:Decimal>
+                            </gmd:northBoundLatitude>
+                        </gmd:EX_GeographicBoundingBox>
+                    </gmd:geographicElement>
+                </gmd:EX_Extent>
+            </srv:extent>
+            <srv:coupledResource xmlns:xlink="http://www.w3.org/1999/xlink">
+                <srv:SV_CoupledResource>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:identifier>
+                        <gco:CharacterString>09862ced-bef3-4b20-bf70-df5ef28cf2e8</gco:CharacterString>
+                    </srv:identifier>
+                    <gco:ScopedName codeSpace="Zalf_Testservice_CR_Namespace">ID_E029_XY</gco:ScopedName>
+                </srv:SV_CoupledResource>
+            </srv:coupledResource>
+            <srv:coupledResource xmlns:xlink="http://www.w3.org/1999/xlink">
+                <srv:SV_CoupledResource>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:identifier>
+                        <gco:CharacterString>45061c8d-877b-4db0-b363-83eda2324ade</gco:CharacterString>
+                    </srv:identifier>
+                    <gco:ScopedName codeSpace="Zalf_Testservice_CR_Namespace">ID_E029_XY</gco:ScopedName>
+                </srv:SV_CoupledResource>
+            </srv:coupledResource>
+            <srv:coupledResource xmlns:xlink="http://www.w3.org/1999/xlink">
+                <srv:SV_CoupledResource>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:identifier>
+                        <gco:CharacterString>738aec60-e6c8-474e-8f04-0465de24d8eb</gco:CharacterString>
+                    </srv:identifier>
+                    <gco:ScopedName codeSpace="Zalf_Testservice_CR_Namespace">ID_E029_XY</gco:ScopedName>
+                </srv:SV_CoupledResource>
+            </srv:coupledResource>
+            <srv:coupledResource xmlns:xlink="http://www.w3.org/1999/xlink">
+                <srv:SV_CoupledResource>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:identifier>
+                        <gco:CharacterString>09baaa87-2398-453a-b166-b6975ee8d746</gco:CharacterString>
+                    </srv:identifier>
+                    <gco:ScopedName codeSpace="Zalf_Testservice_CR_Namespace">ID_E030_XY</gco:ScopedName>
+                </srv:SV_CoupledResource>
+            </srv:coupledResource>
+            <srv:coupledResource xmlns:xlink="http://www.w3.org/1999/xlink">
+                <srv:SV_CoupledResource>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:identifier>
+                        <gco:CharacterString>13d16c08-b4f5-43ed-a663-cae95d4a9097</gco:CharacterString>
+                    </srv:identifier>
+                    <gco:ScopedName codeSpace="Zalf_Testservice_CR_Namespace">ID_E031_XY</gco:ScopedName>
+                </srv:SV_CoupledResource>
+            </srv:coupledResource>
+            <srv:couplingType>
+                <SV_CouplingType xmlns="http://www.isotc211.org/2005/srv" codeList="tight"
+                    codeListValue="tight" />
+            </srv:couplingType>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetCapabilities</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv" codeList="WebService"
+                            codeListValue="WebServices" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>
+                                    https://maps.bonares.de/wss/service/ags-relay/ags/guest/arcgis/rest/services/Extern/EXTERN_ID_E029_YIM_ET_AL_2020_PLANT_METABOLITES_IN_ROOTS_XY_PROD/MapServer/WMSServer?request=GetCapabilities&amp;service=WMS</gmd:URL>
+                            </gmd:linkage>
+                        </gmd:CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetFeatureInfo</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="WebServices" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>
+                                    https://maps.bonares.de/wss/service/ags-relay/ags/guest/arcgis/rest/services/Extern/EXTERN_ID_E029_YIM_ET_AL_2020_PLANT_METABOLITES_IN_ROOTS_XY_PROD/MapServer/WMSServer?request=GetCapabilities&amp;service=WMS</gmd:URL>
+                            </gmd:linkage>
+                        </gmd:CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetFeature</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="WebServices" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>
+                                    https://maps.bonares.de/wss/service/ags-relay/ags/guest/arcgis/rest/services/Extern/EXTERN_ID_E029_YIM_ET_AL_2020_PLANT_METABOLITES_IN_ROOTS_XY_PROD/MapServer/WMSServer?request=GetCapabilities&amp;service=WMS</gmd:URL>
+                            </gmd:linkage>
+                        </gmd:CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:containsOperations>
+                <srv:SV_OperationMetadata>
+                    <srv:operationName>
+                        <gco:CharacterString>GetMap</gco:CharacterString>
+                    </srv:operationName>
+                    <srv:DCP>
+                        <DCPList xmlns="http://www.isotc211.org/2005/srv"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#DCPList"
+                            codeListValue="WebServices" />
+                    </srv:DCP>
+                    <srv:connectPoint>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>
+                                    https://maps.bonares.de/wss/service/ags-relay/ags/guest/arcgis/rest/services/Extern/EXTERN_ID_E029_YIM_ET_AL_2020_PLANT_METABOLITES_IN_ROOTS_XY_PROD/MapServer/WMSServer?request=GetCapabilities&amp;service=WMS</gmd:URL>
+                            </gmd:linkage>
+                        </gmd:CI_OnlineResource>
+                    </srv:connectPoint>
+                </srv:SV_OperationMetadata>
+            </srv:containsOperations>
+            <srv:operatesOn xmlns:xlink="http://www.w3.org/1999/xlink"
+                uuidref="09862ced-bef3-4b20-bf70-df5ef28cf2e8" />
+            <srv:operatesOn xmlns:xlink="http://www.w3.org/1999/xlink"
+                uuidref="45061c8d-877b-4db0-b363-83eda2324ade" />
+            <srv:operatesOn xmlns:xlink="http://www.w3.org/1999/xlink"
+                uuidref="738aec60-e6c8-474e-8f04-0465de24d8eb" />
+            <srv:operatesOn xmlns:xlink="http://www.w3.org/1999/xlink"
+                uuidref="09baaa87-2398-453a-b166-b6975ee8d746" />
+            <srv:operatesOn xmlns:xlink="http://www.w3.org/1999/xlink"
+                uuidref="13d16c08-b4f5-43ed-a663-cae95d4a9097" />
+        </srv:SV_ServiceIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+        <MD_Distribution xmlns="http://www.isotc211.org/2005/gmd"
+            xmlns:gml="http://www.opengis.net/gml"
+            xmlns:gts="http://www.isotc211.org/2005/gts"
+            xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <distributor>
+                <MD_Distributor>
+                    <distributorContact>
+                        <CI_ResponsibleParty>
+                            <individualName>
+                                <gco:CharacterString>BonaRes Data Centre</gco:CharacterString>
+                            </individualName>
+                            <organisationName>
+                                <gco:CharacterString>Leibniz Centre for Agricultural Landscape
+                                    Research (ZALF)</gco:CharacterString>
+                            </organisationName>
+                            <positionName>
+                                <gco:CharacterString>Research Platform 'Data Analysis &amp;
+                                    Simulation' - WG Geodata</gco:CharacterString>
+                            </positionName>
+                            <contactInfo>
+                                <CI_Contact>
+                                    <phone>
+                                        <CI_Telephone>
+                                            <voice>
+                                                <gco:CharacterString>+49 33432 82 171</gco:CharacterString>
+                                            </voice>
+                                            <facsimile>
+                                                <gco:CharacterString>+49 33432 82 4082</gco:CharacterString>
+                                            </facsimile>
+                                        </CI_Telephone>
+                                    </phone>
+                                    <address>
+                                        <CI_Address>
+                                            <deliveryPoint>
+                                                <gco:CharacterString>Eberswalder Strasse 84</gco:CharacterString>
+                                            </deliveryPoint>
+                                            <city>
+                                                <gco:CharacterString>M&#252;ncheberg</gco:CharacterString>
+                                            </city>
+                                            <administrativeArea>
+                                                <gco:CharacterString>Brandenburg</gco:CharacterString>
+                                            </administrativeArea>
+                                            <postalCode>
+                                                <gco:CharacterString>15374</gco:CharacterString>
+                                            </postalCode>
+                                            <country>
+                                                <gco:CharacterString>Germany</gco:CharacterString>
+                                            </country>
+                                            <electronicMailAddress>
+                                                <gco:CharacterString>bonares-datenzentrum@zalf.de</gco:CharacterString>
+                                            </electronicMailAddress>
+                                        </CI_Address>
+                                    </address>
+                                    <onlineResource>
+                                        <CI_OnlineResource>
+                                            <linkage>
+                                                <URL>https://www.bonares.de/research-data</URL>
+                                            </linkage>
+                                        </CI_OnlineResource>
+                                    </onlineResource>
+                                </CI_Contact>
+                            </contactInfo>
+                            <role>
+                                <CI_RoleCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                    codeListValue="distributor">distributor</CI_RoleCode>
+                            </role>
+                        </CI_ResponsibleParty>
+                    </distributorContact>
+                </MD_Distributor>
+            </distributor>
+            <transferOptions>
+                <MD_DigitalTransferOptions>
+                    <onLine>
+                        <CI_OnlineResource>
+                            <linkage>
+                                <URL>
+                                    https://maps.bonares.de/mapapps/resources/apps/bonares/index.html?lang=en&amp;mid=8dea5ed9-2bed-4796-bb43-a981929aa1cc</URL>
+                            </linkage>
+                            <function>
+                                <CI_OnLineFunctionCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+                                    codeListValue="information" />
+                            </function>
+                        </CI_OnlineResource>
+                    </onLine>
+                </MD_DigitalTransferOptions>
+            </transferOptions>
+        </MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+        <gmd:DQ_DataQuality>
+            <gmd:scope>
+                <gmd:DQ_Scope>
+                    <gmd:level>
+                        <MD_ScopeCode xmlns="http://www.isotc211.org/2005/gmd"
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                            codeListValue="service" />
+                    </gmd:level>
+                    <gmd:levelDescription
+                        gco:nilReason="inapplicable" />
+                </gmd:DQ_Scope>
+            </gmd:scope>
+            <gmd:report>
+                <gmd:DQ_DomainConsistency>
+                    <gmd:result>
+                        <gmd:DQ_ConformanceResult>
+                            <gmd:specification>
+                                <gmd:CI_Citation>
+                                    <gmd:title>
+                                        <gco:CharacterString>BonaRes</gco:CharacterString>
+                                    </gmd:title>
+                                    <gmd:date>
+                                        <gmd:CI_Date>
+                                            <gmd:date>
+                                                <gco:Date>2018-08-03</gco:Date>
+                                            </gmd:date>
+                                            <gmd:dateType>
+                                                <CI_DateTypeCode
+                                                    xmlns="http://www.isotc211.org/2005/gmd"
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="creation" />
+                                            </gmd:dateType>
+                                        </gmd:CI_Date>
+                                    </gmd:date>
+                                </gmd:CI_Citation>
+                            </gmd:specification>
+                            <gmd:explanation>
+                                <gco:CharacterString>Map
+                                    service published.</gco:CharacterString>
+                            </gmd:explanation>
+                            <gmd:pass>
+                                <gco:Boolean>true</gco:Boolean>
+                            </gmd:pass>
+                        </gmd:DQ_ConformanceResult>
+                    </gmd:result>
+                </gmd:DQ_DomainConsistency>
+            </gmd:report>
+        </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+</gmd:MD_Metadata>
