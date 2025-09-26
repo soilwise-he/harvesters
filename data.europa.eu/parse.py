@@ -84,11 +84,11 @@ def parseDOC(r):
     r['language'] = next(iter(jsonpath.findall("$.language[*].id", r)), None)
     desc = next(iter(jsonpath.findall("$.description.en", r)), None)
     if not desc: # then use first lang
-        desc = next(iter(jsonpath.findall("$.description.[*]", r)), None)
+        desc = next(iter(jsonpath.findall("$.description..", r)), None)
     r['description'] = desc
     ttl = next(iter(jsonpath.findall("$.title.en", r)), None)
     if not ttl:
-        ttl = next(iter(jsonpath.findall("$.title.[*]", r)), None)
+        ttl = next(iter(jsonpath.findall("$.title..", r)), None)
     r['title'] = ttl
     cat = next(iter(jsonpath.findall("$.catalog.homepage", r)), None)
     if cat:
@@ -105,7 +105,7 @@ def parseDOC(r):
     r.pop('distributions',None)
     r['spatial'] = json.dumps(jsonpath.findall("$.spatial[0].coordinates[*]", r))
     try:
-        trl="/".join(jsonpath.findall("$.temporal[*].[*]", r))
+        trl="/".join(jsonpath.findall("$.temporal[*]..", r))
         if trl:
             r['temporal'] = trl
         else:
