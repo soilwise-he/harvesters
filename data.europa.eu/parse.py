@@ -104,10 +104,13 @@ def parseDOC(r):
     r['format'] = list(set(jsonpath.findall("$.distributions[*].format.id", r))) # unique values only
     r.pop('distributions',None)
     r['spatial'] = json.dumps(jsonpath.findall("$.spatial[0].coordinates[*]", r))
-    trl="/".join(jsonpath.findall("$.temporal[*].[*]", r))
-    if trl:
-        r['temporal'] = trl
-    else:
+    try:
+        trl="/".join(jsonpath.findall("$.temporal[*].[*]", r))
+        if trl:
+            r['temporal'] = trl
+        else:
+            r.pop('temporal',None)
+    except:
         r.pop('temporal',None)
     r['references'] += jsonpath.findall("$.landing_page[*].resource", r) 
     r.pop('landing_page',None)
