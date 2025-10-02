@@ -61,22 +61,24 @@ for rec in sorted(recs):
             title = re.sub('<[^<]+?>', '', title.get('$','') )
 
             pid = None
-            for p in m.get('pid',[]):
+            pids = m.get('pid',[])
+            if not isinstance(pids, list):
+                pids = [pids]
+            for p in pids:
                 if isinstance(p, dict):
-                    pid = p.get('$','')
-                    break
-                #else:
-                #    print('Warning: failed parsing as dict',p)
+                    if p.get('$'):
+                        pid = p.get('$')
+                        if p.get("classid") == "doi":
+                            break
             if not pid:
                 pid2 = m.get('originalId')
                 if not isinstance(pid2, list):
                     pid2 = [pid2]
                 for p in pid2:
-                    if isinstance(p, dict) and (p.get('$','').startswith('http') or p.get('$','').startswith('10.') or p.get('$','').startswith('doi:')):
-                        pid = p.get('$')
-                        break
-                if not pid:
-                    pid = pid2[0].get('$')
+                    if p.get('$'):
+                        pid = p.get('$').split('|').pop().split('::').pop() # typical format 50|od______2659::df09b7a0eea847fe66dd338241c41415
+                        if isinstance(p, dict) and (p.get('$','').startswith('http') or p.get('$','').startswith('10.') or p.get('$','').startswith('doi:')):
+                            break
 
             if pid:
                 ruri = str(pid)
