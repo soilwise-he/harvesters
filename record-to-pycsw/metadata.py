@@ -185,7 +185,7 @@ cursor.execute("""insert into public.records select
     cloudcover, bands, links, contacts, anytext_tsvector, wkb_geometry, 
     k.soil_functions, k.soil_physical_properties, k.productivity, k.soil_services, k.soil_classification, k.soil_processes, 
     k.soil_biological_properties, k.contamination, k.soil_properties, k.soil_threats, k.ecosystem_services, 
-    k.soil_chemical_properties, k.soil_management
+    k.soil_chemical_properties, k.soil_management, illuminationelevationangle
     from public.records2 r left join public.keywords_temp k on r.identifier = k.identifier""")
 
 # element matcher on type
