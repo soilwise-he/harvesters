@@ -1,5 +1,6 @@
 import os
 from pygeometa.core import import_metadata
+md = import_metadata('autodetect', blob) 
 
 def test_metadata_in_folder():
 

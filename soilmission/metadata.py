@@ -49,7 +49,13 @@ for rec in sorted(recs):
                 m = r.get('metadata',{}).get('oaf:entity',{}).get('oaf:result',{})
             except:
                 None
+            
+            # oaf does not have a article type, so check if a journal is referenced
             type = m.get('resulttype',{}).get('@classid','')
+            if m.get('journal'):
+                type = "journal article"  
+                m['resulttype']['@classid'] = type 
+
             title = m.get('title',{})
             if isinstance(title, list): # multilingual
                 for t2 in title:
