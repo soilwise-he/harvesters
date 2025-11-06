@@ -34,7 +34,7 @@ public class DBWriter {
         String username = System.getenv("POSTGRES_USERNAME");
         String password = System.getenv("POSTGRES_PASSWORD");
         String connecturi = System.getenv("POSTGRES_DB");
-//        DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
+ //       DBConnection.setupDatabaseParameters("org.postgresql.Driver", username, password, connecturi);
 
         DBConnection.setupDatabaseParameters("org.postgresql.Driver", "soilwise", "Brugge2503", "jdbc:postgresql://ppostgres12_si.cdbe.wurnet.nl:5432/prod_soilwise?currentSchema=harvest");
 
@@ -345,7 +345,11 @@ public class DBWriter {
 
                 JSONObject resultsObj = openaireresult.getJSONObject("response").optJSONObject("results");
                 if (resultsObj != null && !JSONObject.NULL.equals(resultsObj)) {
-                    JSONObject oafresult = resultsObj.getJSONArray("result").getJSONObject(0)
+
+
+                    try {
+
+                        JSONObject oafresult = resultsObj.getJSONObject("record").getJSONArray("result").getJSONObject(0)
                             .getJSONObject("metadata")
                             .getJSONObject("oaf:entity")
                             .getJSONObject("oaf:result");
@@ -355,7 +359,6 @@ public class DBWriter {
                     if (DBWrite.loglevel >= 4) {
                         System.out.println(oafresult);
                     }
-                    try {  // REPLACE
 
                         db.executeVoid(con, "update harvest.items set identifier=?, resultobject=?, itemtype=?, identifiertype=?, resulttype=?, hash=? where uri=? "
                                 , new Object[] { doi, oafresult.toString(), "publication", "doi", "oaf", calculateMD5(oafresult + title.toLowerCase()), eurioIndentifier } );
@@ -477,6 +480,7 @@ public class DBWriter {
 
             JSONObject resultsObj = openaireresult.getJSONObject("response").optJSONObject("results");
             if (resultsObj != null && !JSONObject.NULL.equals(resultsObj)) {
+                //System.out.println("here" );
                 JSONObject oafresult = resultsObj.getJSONArray("result").getJSONObject(0)
                         .getJSONObject("metadata")
                         .getJSONObject("oaf:entity")
