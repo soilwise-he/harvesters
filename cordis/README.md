@@ -329,7 +329,7 @@ CONSTRUCT {
 }
 ```
 
-This results in 2598 hits.
+This results in 4856 hits.
 
 And now the other way round
 
@@ -574,4 +574,5 @@ FILTER regex(?sub,  "cordis.europa.eu/project/id", "i")
 FILTER (!regex(?pred,  "title", "i") )
 }
 ```
+
 
