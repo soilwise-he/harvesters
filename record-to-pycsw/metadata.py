@@ -192,7 +192,8 @@ cursor.execute("""insert into public.records select
 cursor.execute("""UPDATE public.records r SET type = a.value FROM harvest.augmentation a WHERE r.identifier = a.identifier AND a.element_type = 'type';""")
 cursor.execute("""UPDATE public.records SET type = NULL WHERE identifier NOT IN (SELECT DISTINCT identifier FROM harvest.augmentation WHERE element_type = 'type');""")
 # workaround for '//' to '/' bahavior
-cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%';""")
+cursor.execute("""UPDATE public.records set identifier = MD5(identifier) where identifier like '%//%' and NOT EXISTS (SELECT 1 FROM public.records WHERE identifier = MD5(identifier));""")
+
 conn.commit()  
 
 print('Inserted',len(uniqueRecords),'records')
