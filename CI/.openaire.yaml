@@ -16,8 +16,9 @@ harvest-openaire-turtle-dev:
 
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar openairedoi
-    - java -jar /opt/app/soilwise_doi.jar turtle
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar openairedoi
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar turtle
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar pdfcontent
   rules:  
     - if: $PROJECT != "openaire"
       when: never
@@ -35,8 +36,9 @@ harvest-openaire-turtle-prod:
     
     - mkdir /opt/app
     - cp cordis/soilwise_doi.jar /opt/app
-    - java -jar /opt/app/soilwise_doi.jar openairedoi
-    - java -jar /opt/app/soilwise_doi.jar turtle
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar openairedoi
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar turtle
+    - java -Xms512m -Xmx2g -XX:MaxMetaspaceSize=256m -jar /opt/app/soilwise_doi.jar pdfcontent
   rules:  
     - if: $PROJECT != "openaire"
       when: never
