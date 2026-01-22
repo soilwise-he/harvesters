@@ -17,7 +17,6 @@ harvest-prepsoil-dev:
 
     - pip3 install -r prepsoil/requirements.txt
     - python3 prepsoil/fetch.py
-    - python3 prepsoil/parse.py
   rules:  
     - if: $PROJECT != "PREPSOIL"
       when: never

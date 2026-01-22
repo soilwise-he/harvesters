@@ -1,36 +1,28 @@
 import requests
 
 from dotenv import load_dotenv
-import sys,time,hashlib,os
+import sys,time,hashlib,os,json
 sys.path.append('utils')
 from database import insertRecord, dbQuery, hasSource
+from utils import doi_from_url, pid_type, to_schema_org
 # Load environment variables from .env file
 load_dotenv()
 
-def stripdoi(uri):
-    if 'doi.org/' in uri:
-        return uri.split('doi.org/').pop()
-    elif 'geonetwork/' in uri:
-        return uri.split('/').pop()
-    else:
-        return uri
-
-def tp(id):
-    if 'doi.org' in id:
-        return 'doi'
-    elif 'geonetwork' in id:
-        return 'uuid'
-    elif id.startswith('http'):
-        return 'uri'
-    else:
-        return 'uuid'
-
-
 label = "IMPACT4SOIL"
 
+dcmapping = {
+    'short_description': 'description',
+    'title': 'name',
+    'id': '@id',
+    '_id': '@id',
+    'publication_date': 'datePublished',
+    'authors': 'creator',
+    'year': 'datePublished',
+    'created': 'dateCreated'
+}
 
-if os.environ.get("HARVESTTYPES"):
-    harvesttypes = os.environ.get("HARVESTTYPES").split(',')
+if os.environ.get("HARVEST_TYPES"):
+    harvesttypes = os.environ.get("HARVEST_TYPES").split(',')
 else:
     harvesttypes = ['document','dataset']
 
@@ -60,16 +52,18 @@ if 'document' in harvesttypes:
             count=len(records)
             for r in records: 
                 print(f"{(page-1)*20+cnt}. {r.get('url',r.get('id'))}")
+                r = to_schema_org(r, dcmapping) 
                 cnt=cnt+1
-                id = r.get('url',r.get('id'))
+                id = r['@id']
+                r['@type'] = 'ScholarlyArticle'
                 if r.get('url','').startswith('http'):
-                    hashcode = hashlib.md5(str(r).encode("utf-8")).hexdigest() # get unique hash for html 
-                    insertRecord(   identifier=stripdoi(id),
+                    hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
+                    insertRecord(   identifier=id,
                                     uri=r.get('url'),
-                                    identifiertype=tp(id),
+                                    identifiertype=pid_type(id),
                                     title=r.get('title',''),
                                     resulttype='JSON',
-                                    resultobject=str(r),
+                                    resultobject=json.dumps(r),
                                     hashcode=hashcode,
                                     source=label,
                                     itemtype=r.get('type','document')) # insert into db
@@ -102,16 +96,18 @@ if 'dataset' in harvesttypes:
             
             count=len(records)
             for r in records: 
-                print(f"{(page-1)*size+cnt}. {r.get('url',r.get('id'))}")
+                r = to_schema_org(r, dcmapping)
+                print(f"{(page-1)*size+cnt}. {r.get('identifier')}")
+                id = r['@id']
+                r['@type'] = 'Dataset'
                 cnt=cnt+1
-                hashcode = hashlib.md5(str(r).encode("utf-8")).hexdigest() # get unique hash for html 
-                id = r.get('url',r.get('id'))
-                insertRecord(   identifier=stripdoi(id),
+                hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
+                insertRecord(   identifier=id,
                                 uri=r.get('url'),
-                                identifiertype=tp(id),
+                                identifiertype=pid_type(id),
                                 title=r.get('title',''),
                                 resulttype='JSON',
-                                resultobject=str(r),
+                                resultobject=json.dumps(r),
                                 hashcode=hashcode,
                                 source=label,
                                 itemtype='dataset') # insert into db

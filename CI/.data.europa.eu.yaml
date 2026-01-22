@@ -17,7 +17,6 @@ harvest-deu-dev:
 
     - pip3 install -r data.europa.eu/requirements.txt
     - python3 data.europa.eu/fetch.py
-    - python3 data.europa.eu/parse.py
   rules:  
     - if: $PROJECT != "DATA.EUROPA.EU"
       when: never

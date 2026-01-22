@@ -7,6 +7,7 @@ from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
 from datetime import datetime
+from utils import doi_from_url, pid_type
 sys.path.append('utils')
 from database import insertRecord,dbQuery,hasSource
 
@@ -109,6 +110,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                                     id = i2
                     if id in [None,'']:
                         id = m.identifier
+                    id = doi_from_url(id) 
                     identifier = m.identifier
                     hierarchy = m.hierarchy
                 except Exception as e:
@@ -116,7 +118,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
 
                 insertRecord(       identifier=id,
                                     uri=identifier,
-                                    identifiertype='uuid',
+                                    identifiertype=pid_type(id),
                                     resulttype='iso19139:2007',
                                     resultobject=recxml.decode('UTF-8'),
                                     hashcode=hashcode,

@@ -1,4 +1,4 @@
-from dotenv import load_dotenv
+from dotenv import load_dotenv, json
 from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, SKOS, SDO, FOAF
 import sys,time,hashlib,os
@@ -48,45 +48,7 @@ for rec in sorted(unparsed):
     rid,txt,restype,itemtype,uri = rec
     print(f'Parse {rid}')
     
-    txt2 = txt.splitlines()
-    md = {'creator':[],'subject':[],'isReferencedBy':label,'identifier':[uri],'contributor':'ISRIC - World Soil Information'}
-    tps = {'AU':'creator','KW':'subject','TY':'type','ID':'identifier','N2':'abstract','AV':'source','PB':'publisher','UR':'references','PY':'date','T1':'title','CY':'source'}
-    mdn1 = []
-    for l in txt2:
-        tp = l[:2]
-        if tp.isalnum():
-            ln = l[6:]
-            if ln.strip() not in [None,'']:
-                if tp == 'ID':
-                    None
-                elif tp in ['AU','KW']:
-                    md[tps.get(tp)].append(ln)
-                elif tp in ['C1','C2','ER']:
-                    mdn1.append(ln)
-                elif tp == 'N1':
-                    if ':' in ln:
-                        k = ln.split(':')[0].strip()
-                        v = ln.split(':')[1].strip()
-                        if k == 'GeoJSON bbox':
-                            md['spatial'] = v
-                        elif k == 'Country':
-                            None # 2 letter code, full country is also mentioned
-                        elif k in ['Library holding','Former ISRIC-id','Link report-map','Map']:
-                            md['identifier'].append(v)
-                        elif k in ['sndegr','wedegr']:
-                            None
-                        else:
-                            md['subject'].append(v)
-                    else:
-                        mdn1.append(ln)
-                elif tp in tps.keys():
-                    md[tps.get(tp,tp)] = ln
-                else:
-                    md['subject'].append(ln)
-    md['abstract'] = md.get('abstract','') + ','.join(mdn1)
-
-    if md['identifier'] == []:
-        md['identifier'] = rid
+    md = json.loads(txt)
 
     dsRDF = dict2graph(md)    
     triples = dsRDF.serialize(format='turtle') # todo: strip the namespaces?

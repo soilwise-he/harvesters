@@ -4,26 +4,9 @@ from dotenv import load_dotenv
 import sys,time,hashlib,os,json
 sys.path.append('utils')
 from database import insertRecord, dbQuery, hasSource
+from utils import doi_from_url, pid_type, to_schema_org
 # Load environment variables from .env file
 load_dotenv()
-
-def stripdoi(uri):
-    if 'doi.org/' in uri:
-        return uri.split('doi.org/').pop()
-    elif 'geonetwork/' in uri:
-        return uri.split('/').pop()
-    else:
-        return uri
-
-def tp(id):
-    if 'doi.org' in id:
-        return 'doi'
-    # elif 'geonetwork' in id:
-    #    return 'uuid'
-    elif id.startswith('http'):
-        return 'uri'
-    else:
-        return 'uuid'
 
 label = "PREPSOIL"
 
@@ -53,15 +36,30 @@ if 'document' in harvesttypes:
         for r in records: 
             id = r.get('field_link_external_resource').strip()
             if id.startswith('http'):
-                print(id)
+                r['@id'] = id
                 hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
-                insertRecord(   identifier=stripdoi(id),
-                                uri=id,
-                                identifiertype=tp(id),
-                                title=r.get('title',''),
+                dcmapping = {
+                    "title": "name",
+                    "field_country_select": "spatial",
+                    "field_language": "language",
+                    "field_media_format": "format",
+                    "field_soil_qualities_properties": "about",
+                    "field_link_external_resource": "url",
+                    "field_name_external_resource": "source",
+                    "field_soil_mission_objectives": "keywords",
+                    "field_source": "source",
+                    "field_sustainable_practices": "keywords",
+                    "field_t_content": "@type"
+                }
+                r2 = to_schema_org(r, dcmapping)
+
+                insertRecord(   identifier=r2['identifier'], 
+                                uri=r2.get('url',r2['identifier']), 
+                                identifiertype=pid_type(r2['identifier']),
+                                title=r2.get('title',''),
                                 resulttype='JSON',
-                                resultobject=json.dumps(r),
+                                resultobject=json.dumps(r2),
                                 hashcode=hashcode,
                                 source=label,
-                                itemtype='document') # insert into db
+                                itemtype=r2.get('type','document')[:50]) # insert into db
 

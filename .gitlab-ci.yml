@@ -1,4 +1,5 @@
-
+stages:
+  - build
 workflow:
   name: 'Harvest: $PROJECT'
 
@@ -24,3 +25,19 @@ include:
   - local: "/CI/.translation.yaml"
   - local: "/CI/.newsfeeds.yaml"
   - local: "/CI/.data.europa.eu.yaml"
+
+# build a new container
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  when: on_success
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$HARBOR_REGISTRY\":{\"username\":\"$HARBOR_USER\",\"password\":\"$HARBOR_PASSWORD\"},\"$GHCR_REGISTRY\":{\"username\":\"$GHCR_USER\",\"password\":\"$GHCR_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - echo "build; $CI_COMMIT_REF_NAME:$CI_COMMIT_TAG@$CI_COMMIT_SHORT_SHA"
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $GHCR_REGISTRY/$GHCR_PROJECT/harvesters-soilwise:$CI_COMMIT_TAG --destination $GHCR_REGISTRY/$GHCR_PROJECT/harvesters-soilwise:latest; 
+  only:
+    - tags
+
