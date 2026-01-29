@@ -1,1 +1,8 @@
 pytest
+owslib
+psycopg2-binary
+python-dotenv
+requests
+rdflib
+python-jsonpath
+pygeometa @ git+https://github.com/pvgenuchten/pygeometa@soilwise

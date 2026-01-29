@@ -39,7 +39,7 @@ def test_metadata_in_folder():
                     # import from arbitrary schema
                     md = import_metadata('autodetect', f.read()) 
                     assert md, f"Failed parsing on '{filename}'"
-                    assert md.get('metadata',{}).get('identifier') not in [None,''], f"No identifier on '{filename}'"
+                    assert md.get('metadata',{}).get('identifier') not in [None,''], f"No identifier on '{filename}', md.keys: {md.get('metadata',{}).keys()}"
 
 
 

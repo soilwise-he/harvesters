@@ -1,4 +1,4 @@
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
     xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://web.bonares.de/md_schema/apiso/apiso.xsd">
@@ -63,7 +63,9 @@
             </gmd:role>
         </gmd:CI_ResponsibleParty>
     </gmd:contact>
-    <gmd:"tamp><gco:Date xmlns:gco=" http:// www.isotc211.org/ 2005/ gco">2021-03-02</gco:Date></gmd:" tamp>
+    <gmd:dateStamp xmlns:gml="http://www.opengis.net/gml">
+        <gco:DateTime>2024-11-12T18:00:41.908Z</gco:DateTime>
+    </gmd:dateStamp>
     <gmd:metadataStandardName>
         <gco:CharacterString xmlns:gco="http://www.isotc211.org/2005/gco">BonaRes Metadata Schema
             (https://doi.org/10.20387/BonaRes-5PGG-8YRP)</gco:CharacterString>
@@ -407,9 +409,9 @@
                             articles, papers, scientific and non - scientific works of any form,
                             including tables, maps, or any other kind of output, in printed or
                             electronic form, based in whole or in part on the data supplied, must
-                            contain an acknowledgement of the form: "Data reused from the BonaRes
+                            contain an acknowledgement of the form Data reused from the BonaRes
                             Data Centre www.bonares.de. This data were created as part of the
-                            Other's research activities." Although every care has been taken in
+                            Other's research activities. Although every care has been taken in
                             preparing and testing the data, the Other and the BonaRes Data Centre
                             cannot guarantee that the data are correct; neither does the Other and
                             the BonaRes Data Centre accept any liability whatsoever for any error,
