@@ -57,7 +57,7 @@
                     "name": "Wageningen Environmental Research, Wageningen University &amp; Research, Dutch Ministry of Agriculture, Nature and Food Quality"
                 }
             ]
-            ,"isAccessibleForFree" : true,
+           ,
             "distribution": {
                 "@type": "DataDownload",
                 "contentUrl": "https://data.4tu.nl/ndownloader/items/c90215b3-bdc6-4633-b721-4c4a0259d6dc/versions/4",

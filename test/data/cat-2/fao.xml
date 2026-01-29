@@ -1,0 +1,385 @@
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:srv="http://www.isotc211.org/2005/srv"
+    xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gsr="http://www.isotc211.org/2005/gsr"
+    xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:geonet="http://www.fao.org/geonetwork"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+    xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
+    <gmd:fileIdentifier>
+        <gco:CharacterString>D3S_63781554788488483147317013698313433106</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+        <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+    </gmd:language>
+    <gmd:characterSet>
+        <gmd:MD_CharacterSetCode codeListValue="utf8"
+            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" />
+    </gmd:characterSet>
+    <gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:individualName>
+                <gco:CharacterString>RANDRIANJAFIMANANA Toky Nirina</gco:CharacterString>
+            </gmd:individualName>
+            <gmd:organisationName>
+                <gco:CharacterString>Minist&#232;re de l'Environnement, de l'Ecologie et des
+                    For&#234;ts</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:positionName>
+                <gco:CharacterString>Chef de division</gco:CharacterString>
+            </gmd:positionName>
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:phone>
+                        <gmd:CI_Telephone>
+                            <gmd:voice gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </gmd:voice>
+                            <gmd:facsimile gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </gmd:facsimile>
+                        </gmd:CI_Telephone>
+                    </gmd:phone>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:deliveryPoint>
+                                <gco:CharacterString />
+                            </gmd:deliveryPoint>
+                            <gmd:city>
+                                <gco:CharacterString />
+                            </gmd:city>
+                            <gmd:administrativeArea gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </gmd:administrativeArea>
+                            <gmd:postalCode>
+                                <gco:CharacterString />
+                            </gmd:postalCode>
+                            <gmd:country>
+                                <gco:CharacterString />
+                            </gmd:country>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString>tokirandrianjafimanana@gmail.com</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode codeListValue="pointOfContact"
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" />
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+        <gco:DateTime>2016-06-21</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName>
+        <gco:CharacterString>ISO 19115:2003/19139</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:metadataStandardVersion>
+        <gco:CharacterString>1.0</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+    <gmd:identificationInfo>
+        <gmd:MD_DataIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title>
+                        <gco:CharacterString>Productions foresti&#232;res ligneuses par r&#233;gions
+                            de 2008 &#224; 2015(Countrystat - Madagascar - National)</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2016-06-21</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <gmd:CI_DateTypeCode codeListValue="creation"
+                                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" />
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                    <gmd:edition>
+                        <gco:CharacterString />
+                    </gmd:edition>
+                </gmd:CI_Citation>
+            </gmd:citation>
+            <gmd:otherCitationDetails>
+                <gco:CharacterString>D3S Data source: cstat_mdg</gco:CharacterString>
+            </gmd:otherCitationDetails>
+            <gmd:abstract>
+                <gco:CharacterString>Productions foresti&#232;res (Bois non d&#233;bit&#233;s, Bois
+                    d&#233;bit&#233;s, Charbon de bois, Bois de chauffe) des 22 r&#233;gions
+
+                    **Table content**
+
+                    - Year
+
+                    - Area
+
+                    - Indicator
+
+                    - Product
+
+                    - Value
+
+                    - flag
+
+                    - Unit
+
+                    **Value assigned to No-data**:NA</gco:CharacterString>
+            </gmd:abstract>
+            <gmd:purpose>
+                <gco:CharacterString />
+            </gmd:purpose>
+            <gmd:status>
+                <gmd:MD_ProgressCode codeListValue="completed"
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ProgressCode" />
+            </gmd:status>
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    <gmd:individualName>
+                        <gco:CharacterString>RANDRIANJAFIMANANA Toky Nirina</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>Minist&#232;re de l'Environnement, de l'Ecologie et des
+                            For&#234;ts</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:positionName gco:nilReason="missing">
+                        <gco:CharacterString>Chef de division</gco:CharacterString>
+                    </gmd:positionName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:phone>
+                                <gmd:CI_Telephone>
+                                    <gmd:voice gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:voice>
+                                    <gmd:facsimile gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:facsimile>
+                                </gmd:CI_Telephone>
+                            </gmd:phone>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:deliveryPoint gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:deliveryPoint>
+                                    <gmd:city gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:city>
+                                    <gmd:administrativeArea gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:administrativeArea>
+                                    <gmd:postalCode gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:postalCode>
+                                    <gmd:country gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>tokirandrianjafimanana@gmail.com</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeListValue="pointOfContact"
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" />
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            <gmd:resourceMaintenance>
+                <gmd:MD_MaintenanceInformation>
+                    <gmd:maintenanceAndUpdateFrequency>
+                        <gmd:MD_MaintenanceFrequencyCode codeListValue="annually"
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_MaintenanceFrequencyCode" />
+                    </gmd:maintenanceAndUpdateFrequency>
+                    <gmd:dateOfNextUpdate>
+                        <gco:Date>2017-01-18</gco:Date>
+                    </gmd:dateOfNextUpdate>
+                    <gmd:updateScope>
+                        <gmd:MD_ScopeCode
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode"
+                            codeListValue="dimensionGroup" />
+                    </gmd:updateScope>
+                    <gmd:maintenanceNote>
+                        <gco:CharacterString />
+                    </gmd:maintenanceNote>
+                </gmd:MD_MaintenanceInformation>
+            </gmd:resourceMaintenance>
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>CountrySTAT</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:keyword>
+                        <gco:CharacterString>Production</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:keyword>
+                        <gco:CharacterString>For&#234;t</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="Theme" />
+                    </gmd:type>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            <gmd:resourceConstraints>
+                <gmd:MD_LegalConstraints>
+                    <gmd:useConstraints>
+                        <gmd:MD_RestrictionCode codeListValue="license"
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" />
+                    </gmd:useConstraints>
+                    <gmd:otherConstraints>
+                        <gco:CharacterString>Creative Commons Attribution-NonCommercial-ShareAlike
+                            3.0 IGO</gco:CharacterString>
+                    </gmd:otherConstraints>
+                </gmd:MD_LegalConstraints>
+            </gmd:resourceConstraints>
+            <gmd:spatialRepresentationType>
+                <gmd:MD_SpatialRepresentationTypeCode codeListValue="textTable"
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" />
+            </gmd:spatialRepresentationType>
+            <gmd:language>
+                <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/"
+                    codeListValue="eng" />
+            </gmd:language>
+            <gmd:characterSet>
+                <gmd:MD_CharacterSetCode codeListValue="utf8"
+                    codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" />
+            </gmd:characterSet>
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>farming</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+            <gmd:extent>
+                <gmd:EX_Extent>
+                    <gmd:temporalElement>
+                        <gmd:EX_TemporalExtent>
+                            <gmd:extent>
+                                <gml:TimePeriod gml:id="d1299964e242a1053982">
+                                    <gml:beginPosition>2016-12-02</gml:beginPosition>
+                                    <gml:endPosition>2016-12-02</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gmd:extent>
+                        </gmd:EX_TemporalExtent>
+                    </gmd:temporalElement>
+                </gmd:EX_Extent>
+            </gmd:extent>
+            <gmd:extent>
+                <gmd:EX_Extent>
+                    <gmd:geographicElement>
+                        <gmd:EX_GeographicBoundingBox>
+                            <gmd:westBoundLongitude>
+                                <gco:Decimal>-180.00</gco:Decimal>
+                            </gmd:westBoundLongitude>
+                            <gmd:eastBoundLongitude>
+                                <gco:Decimal>180.00</gco:Decimal>
+                            </gmd:eastBoundLongitude>
+                            <gmd:southBoundLatitude>
+                                <gco:Decimal>-90.00</gco:Decimal>
+                            </gmd:southBoundLatitude>
+                            <gmd:northBoundLatitude>
+                                <gco:Decimal>90.00</gco:Decimal>
+                            </gmd:northBoundLatitude>
+                        </gmd:EX_GeographicBoundingBox>
+                    </gmd:geographicElement>
+                </gmd:EX_Extent>
+            </gmd:extent>
+            <gmd:supplementalInformation>
+                <gco:CharacterString>**CountrySTAT Codelists**
+
+                    - GAUL: GAUL0
+
+                    - Indicators: Households
+
+                    - Unit of Measurement: m3,tonnes
+
+                    - Flag: calculated
+
+                    **Statistical concepts/definitions:** Collecte/Traitement/Diffusion
+
+
+                    **Reference population**
+
+                    - Statistical Population: Produits forestiers ligneux
+
+                    - Statistical unit: m3,tonnes
+
+                    - Reference Period: Yearly
+
+                    - Reference Area: Sub-national level 1
+
+                    **Coverage**
+
+                    - Main sectors: Forestry
+
+                    - Main sectors code: FOR
+
+                    - Geographic coverage: GAUL0
+
+                    - Geographic coverage version: 2014
+
+                    - Geographic coverage name: Global administrative unit layer country level
+
+                    - Geographic coverage code: 150
+
+                    - Geographic extent: Madagascar</gco:CharacterString>
+            </gmd:supplementalInformation>
+        </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:dataQualityInfo>
+        <gmd:DQ_DataQuality>
+            <gmd:scope>
+                <gmd:DQ_Scope>
+                    <gmd:level>
+                        <gmd:MD_ScopeCode codeListValue="dataset"
+                            codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode" />
+                    </gmd:level>
+                </gmd:DQ_Scope>
+            </gmd:scope>
+            <gmd:lineage>
+                <gmd:LI_Lineage>
+                    <gmd:statement>
+                        <gco:CharacterString>**StatisticalProcessing - Primary Data Collection**
+
+                            - Data Collection: Exploitation des rapports regionaux
+
+                            - Type of Collection: National accounts data
+
+                            - Collection codelist: FAOSTAT_Collection
+
+                            - Collection version: 1.0
+
+                            - Collection code: 02
+
+                            - Periodicity of data collection: Quarterly
+
+                            - Periodicity version: 1.0
+
+                            - Periodicity codelist: FAO_Period_cstat
+
+                            **Data Compilation**
+
+                            - Aggregation Processing: Consolidation des donn&#233;es trimestrielles
+                            &#233;manant des 22 Directions R&#233;gionales
+
+                            - Data Adjustment Details: estimation &#224; partir des dix
+                            derni&#232;res ann&#233;es
+
+                            **Data Validation**
+
+                            - Data Validation Output: yes
+
+                            **Data Revision**
+
+                            - Revision Practice: Mise &#224; jour des donn&#233;es manquantes</gco:CharacterString>
+                    </gmd:statement>
+                </gmd:LI_Lineage>
+            </gmd:lineage>
+        </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+</gmd:MD_Metadata>
+    

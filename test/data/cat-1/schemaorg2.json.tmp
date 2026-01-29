@@ -1,0 +1,146 @@
+{
+    "@context": "http://schema.org",
+    "@type": "Dataset",
+    "@id": "https://doi.org/10.15454/BPN57S",
+    "identifier": "https://doi.org/10.15454/BPN57S",
+    "name": "Base de Données Géographique des Sols de France à 1/1 000 000 version 3.2.8.0, 10/09/1998",
+    "creator": [
+        {
+            "@type": "Person",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "INRA - Institut National de la Recherche Agronomique"
+            },
+            "name": "INRA"
+        }
+    ],
+    "author": [
+        {
+            "@type": "Person",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "INRA - Institut National de la Recherche Agronomique"
+            },
+            "name": "INRA"
+        }
+    ],
+    "datePublished": "2018-10-10",
+    "dateModified": "2025-04-09",
+    "version": "1",
+    "description": "The Soil Geographical Data Base of France at Scale 1:1,000,000 is part of the European Soil Geographical Data Base of Europe. It is the resulting product of a collaborative project involving all the European Union and neighbouring countries. It is a simplified representation of the diversity and spatial variability of the soil coverage for France. The methodology used to differentiate and name the main soil types is based on the terminology of the F.A.O. legend for the Soil Map of the World at Scale 1:5,000,000. This terminology has been refined and adapted to take account of the specificities of the landscapes in Europe. It is itself founded on the distinction of the main pedogenetic processes leading to soil differentiation. The database contains a list of Soil Typological Units (STU). Besides the soil names they represent, these units are described by variables (attributes) specifying the nature and properties of the soils: for example the texture, the water regime, etc. The geographical representation was chosen at a scale corresponding to the 1:1,000,000. At this scale, it is not feasible to delineate the STUs. Therefore they are grouped into Soil Mapping Units (SMU) to form soil associations and to illustrate the functioning of pedological systems within the landscapes. Harmonisation of the soil data from the member countries is based on a dictionary giving the definition for each occurrence of the variables. Considering the scale, the precision of the variables is weak. Furthermore these variables were estimated over large areas by expert judgement rather than measured on local soil samples. This expertise results from synthesis and generalisation tasks of national or regional maps published at more detailed scales, for example 1:50,000 or 1:25,000 scales. Delineation of the Soil Mapping Units is also the result of expertise and experience. The spatial variability of soils is very important and is difficult to express at global levels of precision. Quality indices of the information (purity and confidence level) are included with the data in order to guide usage.",
+    "keywords": [
+        "Earth and Environmental Sciences",
+        "Soils and soil sciences",
+        "soil",
+        "soil map"
+    ],
+    "license": "https://spdx.org/licenses/etalab-2.0.html",
+    "includedInDataCatalog": {
+        "@type": "DataCatalog",
+        "name": "Recherche Data Gouv",
+        "url": "https://entrepot.recherche.data.gouv.fr"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Recherche Data Gouv"
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "Recherche Data Gouv"
+    },
+    "spatialCoverage": [
+        "France"
+    ],
+    "distribution": [
+        {
+            "@type": "DataDownload",
+            "name": "attricod.txt",
+            "encodingFormat": "text/plain",
+            "contentSize": 23402,
+            "description": "list of codes used in the data base\r\nliste des codes utilisés dans la base de données",
+            "@id": "https://doi.org/10.15454/BPN57S/EZMX5J",
+            "identifier": "https://doi.org/10.15454/BPN57S/EZMX5J",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8791"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "dictiona.txt",
+            "encodingFormat": "text/plain",
+            "contentSize": 6063,
+            "description": "dictionary file",
+            "@id": "https://doi.org/10.15454/BPN57S/CMMA5F",
+            "identifier": "https://doi.org/10.15454/BPN57S/CMMA5F",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8796"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "LISEZMOI.txt",
+            "encodingFormat": "text/plain",
+            "contentSize": 2512,
+            "description": "file to read before using the data\r\nfichier à lire avant d'utiliser les données",
+            "@id": "https://doi.org/10.15454/BPN57S/2DKQKL",
+            "identifier": "https://doi.org/10.15454/BPN57S/2DKQKL",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8788"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "metadata.txt",
+            "encodingFormat": "text/plain",
+            "contentSize": 11659,
+            "description": "metadata file\r\nfichier de métadonnées",
+            "@id": "https://doi.org/10.15454/BPN57S/DBT9RX",
+            "identifier": "https://doi.org/10.15454/BPN57S/DBT9RX",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8790"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "README.txt",
+            "encodingFormat": "text/plain",
+            "contentSize": 3678,
+            "description": "file to read before using the data\r\nfichier à lire avant d'utiliser les données",
+            "@id": "https://doi.org/10.15454/BPN57S/445YWD",
+            "identifier": "https://doi.org/10.15454/BPN57S/445YWD",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8789"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "30169_L93.zip",
+            "encodingFormat": "application/zipped-shapefile",
+            "contentSize": 2678915,
+            "description": "zip archive containing the files in shapefile format for the graphical layer of the Soil Geographical Data base of France at 1:1,000,000\r\narchive zip contenant les fichiers en format shapefile pour la couche graphique de la Base de Données Géographique des SDols de France à 1:1 000 000",
+            "@id": "https://doi.org/10.15454/BPN57S/O0P7JU",
+            "identifier": "https://doi.org/10.15454/BPN57S/O0P7JU",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8787"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "smu.tab",
+            "encodingFormat": "text/tab-separated-values",
+            "contentSize": 7302,
+            "description": "file describing the Soil Mapping Units",
+            "@id": "https://doi.org/10.15454/BPN57S/QEJHZR",
+            "identifier": "https://doi.org/10.15454/BPN57S/QEJHZR",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8793"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "stu.tab",
+            "encodingFormat": "text/tab-separated-values",
+            "contentSize": 91043,
+            "description": "File describing the Soil Typological Units",
+            "@id": "https://doi.org/10.15454/BPN57S/QJGBO0",
+            "identifier": "https://doi.org/10.15454/BPN57S/QJGBO0",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8794"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "stuorg.tab",
+            "encodingFormat": "text/tab-separated-values",
+            "contentSize": 17369,
+            "description": "File describing the relation between the Soil Typological Units and the Soil Mapping Units",
+            "@id": "https://doi.org/10.15454/BPN57S/Q14TBE",
+            "identifier": "https://doi.org/10.15454/BPN57S/Q14TBE",
+            "contentUrl": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/8795"
+        }
+    ]
+}

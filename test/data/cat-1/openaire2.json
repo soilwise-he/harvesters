@@ -1,0 +1,688 @@
+{
+    "header": {
+        "numFound": 1,
+        "maxScore": 1.0,
+        "queryTime": 10,
+        "page": 1,
+        "pageSize": 10
+    },
+    "results": [
+        {
+            "authors": [
+                {
+                    "fullName": "Dor, Eyal Ben",
+                    "name": "Eyal Ben",
+                    "surname": "Dor",
+                    "rank": 1,
+                    "pid": null
+                },
+                {
+                    "fullName": "Granot, Amihai",
+                    "name": "Amihai",
+                    "surname": "Granot",
+                    "rank": 2,
+                    "pid": null
+                },
+                {
+                    "fullName": "Wallach, Rony",
+                    "name": "Rony",
+                    "surname": "Wallach",
+                    "rank": 3,
+                    "pid": {
+                        "id": {
+                            "scheme": "orcid_pending",
+                            "value": "0000-0003-3210-6451"
+                        },
+                        "provenance": null
+                    }
+                },
+                {
+                    "fullName": "Francos, Nicolas",
+                    "name": "Nicolas",
+                    "surname": "Francos",
+                    "rank": 4,
+                    "pid": {
+                        "id": {
+                            "scheme": "orcid",
+                            "value": "0000-0002-3770-7793"
+                        },
+                        "provenance": null
+                    }
+                },
+                {
+                    "fullName": "Heller Pearlstein, Daniela",
+                    "name": "Daniela",
+                    "surname": "Heller Pearlstein",
+                    "rank": 5,
+                    "pid": null
+                },
+                {
+                    "fullName": "Efrati, Bar",
+                    "name": "Bar",
+                    "surname": "Efrati",
+                    "rank": 6,
+                    "pid": null
+                },
+                {
+                    "fullName": "Borůvka, Luboš",
+                    "name": "Luboš",
+                    "surname": "Borůvka",
+                    "rank": 7,
+                    "pid": null
+                },
+                {
+                    "fullName": "Gholizadeh, Asa",
+                    "name": "Asa",
+                    "surname": "Gholizadeh",
+                    "rank": 8,
+                    "pid": {
+                        "id": {
+                            "scheme": "orcid_pending",
+                            "value": "0000-0003-4419-5463"
+                        },
+                        "provenance": null
+                    }
+                },
+                {
+                    "fullName": "Schmid, Thomas",
+                    "name": "Thomas",
+                    "surname": "Schmid",
+                    "rank": 9,
+                    "pid": {
+                        "id": {
+                            "scheme": "orcid",
+                            "value": "0000-0002-2849-4730"
+                        },
+                        "provenance": null
+                    }
+                }
+            ],
+            "openAccessColor": "gold",
+            "publiclyFunded": false,
+            "type": "publication",
+            "language": {
+                "code": "eng",
+                "label": "English"
+            },
+            "countries": null,
+            "subjects": [
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "EJP SOIL"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "ProbeField"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "Field measurements"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "Science"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "Soil reflectance"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "EJPSOIL"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "Q"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "FOS",
+                        "value": "0401 agriculture, forestry, and fisheries"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "FOS",
+                        "value": "04 agricultural and veterinary sciences"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "FOS",
+                        "value": "01 natural sciences"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "SoilPRO"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "keyword",
+                        "value": "Soil surface properties"
+                    },
+                    "provenance": null
+                },
+                {
+                    "subject": {
+                        "scheme": "FOS",
+                        "value": "0105 earth and related environmental sciences"
+                    },
+                    "provenance": null
+                }
+            ],
+            "mainTitle": "Exploitation of the SoilPRO® (SP) apparatus to measure soil surface reflectance in the field: Five case studies",
+            "subTitle": null,
+            "descriptions": [
+                "The SoilPRO® (SP) is an assembly designed to acquire soil reflectance information in the field without disturbing the soil surface, and regardless of atmospheric and solar radiation conditions. This paper summarizes five case studies in which the SP assembly was used for different applications. The case studies consisted of: (1) generating surface spectral measurements under any atmospheric condition; (2) comparing the performance of the SP to the traditional bare fiber method for vicarious calibration of hyperspectral satellite sensors; (3) assessing water repellency of a soil surface governed by organic matter hydrophobicity; (4) spatial prediction of the rate of water infiltration into the soil profile as governed by the soil surface seal; and (5) using the SP apparatus to measure soil surface reflectance in South Shetland Island, Antartica under severe weather conditions. The case studies included calculation of spectral quality, prediction accuracy and measurement stability. The paper discusses each of the cases in detail and concludes that the SP (or similar assembly) is the best way to measure the reflectance of the original soil surface in the field. In the first case study, the spectrum collected by the SP under daily changing illumination was shown to be stable relative to the traditional measurement methods of contact probe or bare fiber. The second case study indicated that use of the SP for vicarious calibration is much more efficient (in terms of time and stability) than ground-truth practice over a large area, and in the third case study, the SP was able to assess a soil surface property governed by organic matter hydrophobicity better than the contact probe, which destroys the soil surface organic seal. A similar achievement was gained in the fourth case study, providing a better assessment of the water-infiltration rate into the soil. In the fifth case study, the SP demonstrated impressive high-quality acquisition of soil surface reflectance with a very low sun angle over the South Pole. Based on these case studies and the high quality of the data generated by the SP in the field, we suggest building, in parallel to the classical soil spectral libraries generated in the laboratory, field soil spectral libraries that will preserve the soil surface properties scanned in the field. We anticipate the development of more applications for the SP assembly based on the capabilities shown in this paper."
+            ],
+            "publicationDate": "2023-10-01",
+            "publisher": "Elsevier BV",
+            "embargoEndDate": null,
+            "sources": [
+                "Crossref",
+                "Geoderma, Vol 438, Iss , Pp 116636- (2023)",
+                "Geoderma"
+            ],
+            "formats": null,
+            "contributors": null,
+            "coverages": null,
+            "bestAccessRight": {
+                "code": "c_abf2",
+                "label": "OPEN",
+                "scheme": "http://vocabularies.coar-repositories.org/documentation/access_rights/"
+            },
+            "container": {
+                "name": "Geoderma",
+                "issnPrinted": "0016-7061",
+                "issnOnline": null,
+                "issnLinking": null,
+                "ep": null,
+                "iss": null,
+                "sp": "116636",
+                "vol": "438",
+                "edition": null,
+                "conferencePlace": null,
+                "conferenceDate": null
+            },
+            "documentationUrls": null,
+            "codeRepositoryUrl": null,
+            "programmingLanguage": null,
+            "contactPeople": null,
+            "contactGroups": null,
+            "tools": null,
+            "size": null,
+            "version": null,
+            "geoLocations": null,
+            "id": "doi_dedup___::a6a19776602b41f7b47a7330b4e9493e",
+            "originalIds": [
+                "S0016706123003130",
+                "10.1016/j.geoderma.2023.116636",
+                "50|doiboost____|a6a19776602b41f7b47a7330b4e9493e",
+                "50|datacite____::25192a04c9d9bc17c2bc7db56b32dfb7",
+                "10.5281/zenodo.13844800",
+                "50|datacite____::9076e031b32033767ef374f6c9d815f8",
+                "10.5281/zenodo.13844801",
+                "oai:doaj.org/article:5ff6181d230240ed90d5a241392eb33c",
+                "50|doajarticles::bcfd550f6fd8127e6870ed5ec7a44529",
+                "50|r3c4b2081b22::a6a19776602b41f7b47a7330b4e9493e",
+                "50|sygma_______::a6a19776602b41f7b47a7330b4e9493e"
+            ],
+            "pids": [
+                {
+                    "scheme": "doi",
+                    "value": "10.1016/j.geoderma.2023.116636"
+                },
+                {
+                    "scheme": "doi",
+                    "value": "10.5281/zenodo.13844800"
+                },
+                {
+                    "scheme": "doi",
+                    "value": "10.5281/zenodo.13844801"
+                }
+            ],
+            "dateOfCollection": null,
+            "lastUpdateTimeStamp": null,
+            "indicators": {
+                "citationImpact": {
+                    "citationCount": 12.0,
+                    "influence": 3.5104926E-9,
+                    "popularity": 1.1438112E-8,
+                    "impulse": 12.0,
+                    "citationClass": "C4",
+                    "influenceClass": "C4",
+                    "impulseClass": "C4",
+                    "popularityClass": "C4"
+                }
+            },
+            "projects": [
+                {
+                    "id": "corda__h2020::f3d09ef95fcf5a35c0e90e6560b6b2e0",
+                    "code": "862695",
+                    "acronym": "EJP SOIL",
+                    "title": "Towards climate-smart sustainable management of agricultural soils",
+                    "funder": "European Commission",
+                    "pids": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.3030/862695"
+                        }
+                    ]
+                }
+            ],
+            "organizations": [
+                {
+                    "legalName": "Tel Aviv University",
+                    "acronym": "TAU",
+                    "id": "openorgs____::5656309fcc047a6baed238617779a152",
+                    "pids": [
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100004237"
+                        },
+                        {
+                            "scheme": "ISNI",
+                            "value": "0000000419370546"
+                        },
+                        {
+                            "scheme": "mag_id",
+                            "value": "16391192"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100006099"
+                        },
+                        {
+                            "scheme": "Wikidata",
+                            "value": "Q319239"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100007539"
+                        },
+                        {
+                            "scheme": "ROR",
+                            "value": "https://ror.org/04mhzgx49"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100021796"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100005310"
+                        },
+                        {
+                            "scheme": "Wikidata",
+                            "value": "Q56612885"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100004375"
+                        },
+                        {
+                            "scheme": "OrgRef",
+                            "value": "161402"
+                        },
+                        {
+                            "scheme": "PIC",
+                            "value": "999901609"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100020573"
+                        },
+                        {
+                            "scheme": "GRID",
+                            "value": "grid.12136.37"
+                        }
+                    ]
+                },
+                {
+                    "legalName": "Czech University of Life Sciences Prague",
+                    "acronym": "CULS",
+                    "id": "openorgs____::588f3cfa4993105d745f3504b2faf50d",
+                    "pids": [
+                        {
+                            "scheme": "ROR",
+                            "value": "https://ror.org/0415vcw02"
+                        },
+                        {
+                            "scheme": "Wikidata",
+                            "value": "Q1460141"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100006207"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100007154"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100006501"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100006206"
+                        },
+                        {
+                            "scheme": "ISNI",
+                            "value": "000000012238631X"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100006502"
+                        },
+                        {
+                            "scheme": "OrgRef",
+                            "value": "3313106"
+                        },
+                        {
+                            "scheme": "PIC",
+                            "value": "999912570"
+                        },
+                        {
+                            "scheme": "OrgReg",
+                            "value": "CZ0003"
+                        },
+                        {
+                            "scheme": "mag_id",
+                            "value": "205984670"
+                        },
+                        {
+                            "scheme": "GRID",
+                            "value": "grid.15866.3c"
+                        }
+                    ]
+                },
+                {
+                    "legalName": "Hebrew University of Jerusalem",
+                    "acronym": "HUJI",
+                    "id": "openorgs____::d117190979c3977d2438914a00c27168",
+                    "pids": [
+                        {
+                            "scheme": "ISNI",
+                            "value": "0000000419370538"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100011085"
+                        },
+                        {
+                            "scheme": "PIC",
+                            "value": "999975038"
+                        },
+                        {
+                            "scheme": "OrgRef",
+                            "value": "229168"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100022658"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100012293"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100001740"
+                        },
+                        {
+                            "scheme": "ROR",
+                            "value": "https://ror.org/03qxff017"
+                        },
+                        {
+                            "scheme": "GRID",
+                            "value": "grid.9619.7"
+                        },
+                        {
+                            "scheme": "OrgReg",
+                            "value": "IL0004"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100008302"
+                        },
+                        {
+                            "scheme": "Wikidata",
+                            "value": "Q174158"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100001737"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100001739"
+                        },
+                        {
+                            "scheme": "mag_id",
+                            "value": "197251160"
+                        },
+                        {
+                            "scheme": "FundRef",
+                            "value": "501100003483"
+                        }
+                    ]
+                }
+            ],
+            "communities": [
+                {
+                    "code": "eosc",
+                    "label": "EOSC",
+                    "provenance": null
+                }
+            ],
+            "collectedFrom": [
+                {
+                    "key": "openaire____::9e3be59865b2c1c335d32dae2fe7b254",
+                    "value": "Datacite"
+                },
+                {
+                    "key": "openaire____::a8db6f6b2ce4fe72e8b2314a9a93e7d9",
+                    "value": "Sygma"
+                },
+                {
+                    "key": "driver______::bee53aa31dc2cbb538c10c2b65fa5824",
+                    "value": "DOAJ"
+                },
+                {
+                    "key": "openaire____::081b82f96300b6a6e3d282bad31cb6e2",
+                    "value": "Crossref"
+                },
+                {
+                    "key": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631",
+                    "value": "European Union Open Data Portal"
+                }
+            ],
+            "instances": [
+                {
+                    "pids": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.1016/j.geoderma.2023.116636"
+                        }
+                    ],
+                    "license": "CC BY",
+                    "accessRight": {
+                        "code": "c_abf2",
+                        "label": "OPEN",
+                        "scheme": "http://vocabularies.coar-repositories.org/documentation/access_rights/",
+                        "openAccessRoute": "hybrid"
+                    },
+                    "type": "Article",
+                    "urls": [
+                        "https://doi.org/10.1016/j.geoderma.2023.116636"
+                    ],
+                    "publicationDate": "2023-10-01",
+                    "refereed": "peerReviewed",
+                    "hostedBy": {
+                        "key": "issn___print::12af254e77e895b470cf9ac4dafc47d9",
+                        "value": "Geoderma"
+                    },
+                    "collectedFrom": {
+                        "key": "openaire____::081b82f96300b6a6e3d282bad31cb6e2",
+                        "value": "Crossref"
+                    }
+                },
+                {
+                    "pids": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.5281/zenodo.13844800"
+                        }
+                    ],
+                    "license": "CC BY",
+                    "type": "Article",
+                    "urls": [
+                        "https://dx.doi.org/10.5281/zenodo.13844800"
+                    ],
+                    "publicationDate": "2023-08-11",
+                    "refereed": "nonPeerReviewed",
+                    "hostedBy": {
+                        "key": "opendoar____::358aee4cc897452c00244351e4d91f69",
+                        "value": "ZENODO"
+                    },
+                    "collectedFrom": {
+                        "key": "openaire____::9e3be59865b2c1c335d32dae2fe7b254",
+                        "value": "Datacite"
+                    }
+                },
+                {
+                    "pids": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.5281/zenodo.13844801"
+                        }
+                    ],
+                    "license": "CC BY",
+                    "type": "Article",
+                    "urls": [
+                        "https://dx.doi.org/10.5281/zenodo.13844801"
+                    ],
+                    "publicationDate": "2023-08-11",
+                    "refereed": "nonPeerReviewed",
+                    "hostedBy": {
+                        "key": "opendoar____::358aee4cc897452c00244351e4d91f69",
+                        "value": "ZENODO"
+                    },
+                    "collectedFrom": {
+                        "key": "openaire____::9e3be59865b2c1c335d32dae2fe7b254",
+                        "value": "Datacite"
+                    }
+                },
+                {
+                    "alternateIdentifiers": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.1016/j.geoderma.2023.116636"
+                        }
+                    ],
+                    "accessRight": {
+                        "code": "c_abf2",
+                        "label": "OPEN",
+                        "scheme": "http://vocabularies.coar-repositories.org/documentation/access_rights/",
+                        "openAccessRoute": "gold"
+                    },
+                    "type": "Article",
+                    "urls": [
+                        "https://doaj.org/article/5ff6181d230240ed90d5a241392eb33c"
+                    ],
+                    "publicationDate": "2023-10-01",
+                    "refereed": "nonPeerReviewed",
+                    "hostedBy": {
+                        "key": "doajarticles::f0304507c42c907c0e257269de1f000f",
+                        "value": "Geoderma"
+                    },
+                    "collectedFrom": {
+                        "key": "driver______::bee53aa31dc2cbb538c10c2b65fa5824",
+                        "value": "DOAJ"
+                    }
+                },
+                {
+                    "alternateIdentifiers": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.1016/j.geoderma.2023.116636"
+                        }
+                    ],
+                    "type": "Article",
+                    "urls": [
+                        "http://dx.doi.org/10.1016/j.geoderma.2023.116636"
+                    ],
+                    "publicationDate": "2023-01-01",
+                    "refereed": "peerReviewed",
+                    "hostedBy": {
+                        "key": "issn___print::12af254e77e895b470cf9ac4dafc47d9",
+                        "value": "Geoderma"
+                    },
+                    "collectedFrom": {
+                        "key": "re3data_____::c4b2081b224be6b3e79d0e5e5556f631",
+                        "value": "European Union Open Data Portal"
+                    }
+                },
+                {
+                    "alternateIdentifiers": [
+                        {
+                            "scheme": "doi",
+                            "value": "10.1016/j.geoderma.2023.116636"
+                        }
+                    ],
+                    "license": "Elsevier TDM",
+                    "accessRight": {
+                        "code": "c_abf2",
+                        "label": "OPEN",
+                        "scheme": "http://vocabularies.coar-repositories.org/documentation/access_rights/",
+                        "openAccessRoute": null
+                    },
+                    "type": "Article",
+                    "urls": [
+                        "http://dx.doi.org/10.1016/j.geoderma.2023.116636"
+                    ],
+                    "refereed": "nonPeerReviewed",
+                    "hostedBy": {
+                        "key": "openaire____::55045bd2a65019fd8e6741a755395c8c",
+                        "value": "Unknown Repository"
+                    },
+                    "collectedFrom": {
+                        "key": "openaire____::a8db6f6b2ce4fe72e8b2314a9a93e7d9",
+                        "value": "Sygma"
+                    }
+                }
+            ],
+            "isGreen": false,
+            "isInDiamondJournal": false
+        }
+    ]
+}

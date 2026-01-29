@@ -29,11 +29,19 @@ The following harvesting tasks are available.
 - [Prepsoil](./prepsoil/) a dedicated API
 - [Newsfeeds](./newsfeeds/) imports newsfeeds from soil mission websites
 
-## Process records
+## Unit tests
 
-- [iso-triplify](./iso-triplify/) exports iso19139 records to GeoDCAT-AP to be included in SWR triplestore
-- [record-to-pycsw](./record-to-pycsw/) exports records to catalogue (as iso19139 or Dublin Core)
-- [translate](./translate/) triggers a translation of non english records
+Run unit tests with pytest (from root folder)
+
+```
+pip install -r test/requirements.txt
+pytest test
+```
+To test a specific file, use:
+```
+pygeometa metadata import -s autodetect -v DEBUG ./test/data/cat-2/fao.xml
+```
+
 
 ## Docker
 

@@ -4,15 +4,16 @@ import hashlib,json
 def to_schema_org(r, mapping=None):
     if mapping is None:
         mapping =  {
+            'title': 'name',
             'abstract': 'description',
             'id': 'identifier',
-            'publication_date': 'datePublished',
+            'published': 'datePublished',
             'authors': 'creator',
             'author': 'creator',
             'issued': 'datePublished',
             'created': 'dateCreated',
             'modified': 'dateModified',
-            'subject': 'about'
+            'subject': 'keywords'
         }
     for k,v in mapping.items():
         if k in r:
@@ -34,18 +35,26 @@ def to_schema_org(r, mapping=None):
         r['@context'] = "https://schema.org"
     if not '@type' in r:
         r['@type'] = 'CreativeWork'
-    if 'url' in r and r['url'] not in [None,'']:
-        firsturl = r['url']
-        if isinstance(r['url'], list) and len(r['url'])>0:
-            firsturl = r['url'][0]
-        if firsturl.startswith('http'):
-            r['identifier'] = firsturl
-
-    r['identifier'] = doi_from_url(r.get('identifier',hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest()))
+    r['identifier'] = doi_from_url(r.get('identifier', 
+                                    r.get('@id', 
+                                     r.get('url',
+                                      hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest()))), 
+                                    r.get('@id', r.get('url','')))
+    if '@id' not in r:
+        r['@id'] = r.get('url',r.get('identifier'))
 
     return r
 
-def doi_from_url(uri):
+def doi_from_url(uri, uri2=""):
+    # prefer doi urls
+    if not isinstance(uri2, list):
+        uri2 = [uri2]
+    for u in uri2:
+        selected = ['doi.org','doi:','zenodo.org','data.jrc.ec.europa.eu','figshare.com','datadryad.org','/geonetwork']
+        for s in selected:
+            if s in u:
+                uri = u
+                break
     try:
         if 'doi.org' in uri:
             return uri.split('?')[0].split('doi.org/').pop().strip()
@@ -57,6 +66,10 @@ def doi_from_url(uri):
                     return '10.5281/zenodo.' + parts[idx + 1]
         elif 'doi:' in uri:
             return uri.split('doi:').pop().strip()
+        elif 'data.jrc.ec.europa.eu' in uri:
+            return uri.split('?')[0].split('/').pop().strip()
+        elif '/geonetwork' in uri:
+            return uri.split('?')[0].split('/').pop().strip()
         elif 'figshare.com' in uri:
             # remove querystring
             parts = uri('?')[0].split('/')
@@ -74,10 +87,12 @@ def doi_from_url(uri):
         None
     return uri
 
-def pid_type(id):
-    if id.startswith('10.') and len(id.split('/')) > 1:
+def pid_type(id1, resolve=False):
+    if id1.startswith('10.') and len(id1.split('/')) > 1 and len(id1.split('/')[0].split('.')) == 2:
+        if resolve: # could try a resolve of the doi... slow...
+            None
         return 'doi'
-    elif id.startswith('http'):
+    elif id1.startswith('http'):
         return 'uri'
     else:
         return 'uuid'

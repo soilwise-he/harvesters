@@ -49,7 +49,8 @@ for INSPIRE Soil theme
 HARVEST_FILTER=[{"th_httpinspireeceuropaeutheme-theme.link":"http://inspire.ec.europa.eu/theme/so"}] 
 ```
 
+## Fetch 2
 
-
+Uses the sparql endpoint to extract relevant records by filtering on specific soil concepts (as dcat theme or dct:subject or dcat:keyword=soil). Returns around 2500 records. Records need to be augmented, currently only extracts id, uri, and title.
 
 

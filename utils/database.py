@@ -1,6 +1,9 @@
 import json, os, psycopg2
 from datetime import datetime
 
+def reset(source):
+    dbQuery("delete from harvest.items where source=%s",(source),False)
+    print(f'{source} has been reset')
 
 def dbInit():
     return psycopg2.connect(
