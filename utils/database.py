@@ -14,6 +14,23 @@ def dbInit():
         password=os.environ.get("POSTGRES_PASSWORD")
     )  
 
+
+def insQry(table, values, cur):
+    """
+    A insert query on an open connection 
+    :param table: the table to insert to (including schema)
+    :param values: a dict of key-value, mind that key should match database field name
+    :param cnx: a database cursor
+    """
+    sql = f"""INSERT INTO {table} (
+        {', '.join(values.keys())}
+    ) VALUES (
+        {','.join(['%s' for x in range(len(values.keys()))])}
+    ) ON CONFLICT DO NOTHING;"""
+    return cur.execute(sql, list(values.values()))
+
+
+
 def dbQuery(sql,params=(),hasoutput=True):
     dbconn = dbInit()
     try:
