@@ -1,0 +1,63 @@
+{
+    "catalog_record": {
+        "modified": "2022-07-09T06:24:53Z",
+        "issued": "2021-12-18T06:22:29Z"
+    },
+    "spatial": [
+        {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [
+                        1.80265903,
+                        49.48500061
+                    ],
+                    [
+                        0.297225,
+                        49.48500061
+                    ],
+                    [
+                        0.297225,
+                        48.66651917
+                    ],
+                    [
+                        1.80265903,
+                        48.66651917
+                    ],
+                    [
+                        1.80265903,
+                        49.48500061
+                    ]
+                ]
+            ]
+        }
+    ],
+    "subject": [],
+    "provenance": [
+        {
+            "label": "Indice mentionn\u00e9 sur une grande \u00e9tendue mais non localis\u00e9 pr\u00e9cisement."
+        }
+    ],
+    "type": {
+        "resource": "http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset"
+    },
+    "quality_meas": null,
+    "@type": "Dataset",
+    "@id": "http://data.europa.eu/88u/dataset/fr-120066022-jdd-221bdf78-a4d6-4462-b8db-dbfba8f1b56f",
+    "includedInDataCatalog": "https://www.geocatalogue.fr",
+    "name": "CS_Indices not specifically located",
+    "countryOfOrigin": "France",
+    "inLanguage": [],
+    "mainEntityOfPage": [
+        "http://catalogue.geo-ide.developpement-durable.gouv.fr/catalogue/srv/fre/catalog.search#/metadata/fr-120066022-jdd-221bdf78-a4d6-4462-b8db-dbfba8f1b56f",
+        "http://carto.geo-ide.application.developpement-durable.gouv.fr/125/Risques_CS.map",
+        "https://ogc.geo-ide.developpement-durable.gouv.fr/csw/all-dataset?REQUEST=GetRecordById&SERVICE=CSW&VERSION=2.0.2&RESULTTYPE=results&elementSetName=full&TYPENAMES=gmd:MD_Metadata&OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&ID=fr-120066022-jdd-221bdf78-a4d6-4462-b8db-dbfba8f1b56f",
+        "http://www.eure.gouv.fr/Politiques-publiques/Securite-et-protection-de-la-population/Risques-naturels-et-technologiques-Nuisances/Risques-naturels/Risques-naturels-majeurs/Marnieres-et-autres-cavites-souterraines",
+        "https://ogc.geo-ide.e2.rie.gouv.fr/wxs?map=/opt/data/carto/geoide-catalogue/1.4/org_37992/c6c27254-edb6-47c2-b7a1-d59400bdb629.intranet.map",
+        "https://atom.geo-ide.developpement-durable.gouv.fr/atomArchive/GetResource?id=c6c27254-edb6-47c2-b7a1-d59400bdb629&dataType=dataset",
+        "https://ogc.geo-ide.developpement-durable.gouv.fr/wxs?map=/opt/data/carto/geoide-catalogue/1.4/org_37992/c6c27254-edb6-47c2-b7a1-d59400bdb629.internet.map",
+        "https://atom.geo-ide.e2.rie.gouv.fr/atomArchive/GetResource?id=c6c27254-edb6-47c2-b7a1-d59400bdb629&dataType=dataset"
+    ],
+    "@context": "https://schema.org",
+    "identifier": "http://data.europa.eu/88u/dataset/fr-120066022-jdd-221bdf78-a4d6-4462-b8db-dbfba8f1b56f"
+}

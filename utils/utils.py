@@ -16,19 +16,22 @@ def to_schema_org(r, mapping=None):
             'subject': 'keywords'
         }
     for k,v in mapping.items():
-        if k in r:
+        if k == v:
+            continue
+        elif k in r:
             # if target field exists, append or extend 
             if v in r and r[v] not in [None,'']:
                 if isinstance(r[v], list):
                     if isinstance(r[k], list):
-                        r[v].extend(r[k])
+                        r[v].extend([f for f in r[k] if f not in [None,'']])
                     elif r[k] not in [None,'']:
                         r[v].append(r[k])
                 else:
                     if isinstance(r[k], list):
-                        r[v] = [r[v]] + r[k]
+                        r[v] = [r[v]] + [f for f in r[k] if f not in [None,'']]
                     elif r[k] not in [None,'']:
                         r[v] = [r[v], r[k]]
+                r.pop(k) # clean up k
             else:
                 r[v] = r.pop(k) 
     if not '@context' in r:
@@ -58,6 +61,9 @@ def doi_from_url(uri, uri2=""):
     try:
         if 'doi.org' in uri:
             return uri.split('?')[0].split('doi.org/').pop().strip()
+        elif 'oai-zenodo-org-' in uri:
+            id = uri.split('oai-zenodo-org-')[1]
+            return '10.5281/zenodo.' + id
         elif 'zenodo.org' in uri:
             parts = uri.split('?')[0].split('/')
             if 'record' in parts:

@@ -7,9 +7,9 @@ from owslib.etree import etree
 from owslib.csw import CatalogueServiceWeb
 from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
 from datetime import datetime
-from utils import doi_from_url, pid_type
 sys.path.append('utils')
 from database import insertRecord,dbQuery,hasSource
+from utils import doi_from_url, pid_type
 
 # Load environment variables from .env file
 load_dotenv()
@@ -105,9 +105,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                     id = m.dataseturi
                     if id in [None,'']:
                         for i in m.identification:
-                            for i2 in i.uricode:
-                                if i2 not in [None,'']:
-                                    id = i2
+                            id = ",".join([i for i in i.uricode if i not in [None,'']])
                     if id in [None,'']:
                         id = m.identifier
                     id = doi_from_url(id) 
@@ -116,9 +114,9 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                 except Exception as e:
                     print(f'Failed parse xml: {str(e)} {str(sys.exc_info())}')
 
-                insertRecord(       identifier=id,
+                insertRecord(       identifier=doi_from_url(id),
                                     uri=identifier,
-                                    identifiertype=pid_type(id),
+                                    identifiertype=pid_type(doi_from_url(id)),
                                     resulttype='iso19139:2007',
                                     resultobject=recxml.decode('UTF-8'),
                                     hashcode=hashcode,

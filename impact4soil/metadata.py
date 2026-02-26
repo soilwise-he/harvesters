@@ -49,6 +49,7 @@ if 'document' in harvesttypes:
             cnt = 1
             count=len(records)
             for r in records: 
+                r.pop('_id') # _id is internal id, keeps changing and is not relevant for us
                 print(f"{(page-1)*20+cnt}. {r.get('url',r.get('id'))}")
                 r = to_schema_org(r, dcmapping) 
                 cnt=cnt+1

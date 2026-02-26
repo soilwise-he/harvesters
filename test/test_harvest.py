@@ -22,7 +22,10 @@ def test_schema_org():
     assert rp['description'] == 'zozo'
     assert rp['abstract'] == 'hoe la'
     assert 'title' not in rp
-
+    m = {'description': 'description'} # should keep description
+    r = {'description': 'hoe la', 'name':'foo'}
+    rp = to_schema_org(r , m) # with mapping
+    assert rp['description'] == 'hoe la'
 def test_pid_type():
     assert pid_type('lala') == 'uuid'
     assert pid_type('10.100/rty') == 'doi'
