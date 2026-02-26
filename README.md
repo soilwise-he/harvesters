@@ -120,4 +120,3 @@ CREATE TABLE IF NOT EXISTS harvest.item_duplicates
         ON DELETE NO ACTION
 );
 ```
-
