@@ -83,7 +83,7 @@ def insertSQL(table, fields, values):
             dbconn.close();
       
 
-def hasSource(label,url,filter,type):
+def hasSource(label,url='',filter='',type=''):
     # check if source is in sources table
     sources = dbQuery(f"select name from harvest.sources where name = upper('{label}')")
     if not len(sources) and len(sources) < 1:
