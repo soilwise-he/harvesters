@@ -9,7 +9,7 @@ from owslib.fes import PropertyIsEqualTo, PropertyIsLike, BBox
 from datetime import datetime
 sys.path.append('utils')
 from database import insertRecord,dbQuery,hasSource
-from utils import doi_from_url, pid_type
+from utils import doi_from_url, url_from_pid, pid_type
 
 # Load environment variables from .env file
 load_dotenv()
@@ -108,14 +108,13 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                             id = ",".join([i for i in i.uricode if i not in [None,'']])
                     if id in [None,'']:
                         id = m.identifier
-                    id = doi_from_url(id) 
                     identifier = m.identifier
                     hierarchy = m.hierarchy
                 except Exception as e:
                     print(f'Failed parse xml: {str(e)} {str(sys.exc_info())}')
 
                 insertRecord(       identifier=doi_from_url(id),
-                                    uri=identifier,
+                                    uri=url_from_pid(identifier)
                                     identifiertype=pid_type(doi_from_url(id)),
                                     resulttype='iso19139:2007',
                                     resultobject=recxml.decode('UTF-8'),

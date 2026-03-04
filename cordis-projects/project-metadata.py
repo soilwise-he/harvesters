@@ -1,11 +1,10 @@
 import requests, yaml
-import xml.etree.ElementTree as ET
 from itertools import islice
 from dotenv import load_dotenv
 import json, sys, hashlib, os
 sys.path.append('utils')
 from database import insQry, dbInit, hasSource
-from utils import doi_from_url, pid_type, to_schema_org
+from utils import doi_from_url, url_from_pid, pid_type, to_schema_org
 
 # Load environment variables from .env file
 load_dotenv()
@@ -13,6 +12,8 @@ load_dotenv()
 SPARQL_ENDPOINT = "https://cordis.europa.eu/datalab/sparql"
 BATCH_SIZE = 10
 SOURCE = "CORDIS"
+
+print('This harvester selects relevant projects from the harvest.projects table and fetches additional metadata about these projects from the cordis platform')
 
 # -------------------------------------------------
 # Fetch project identifiers in batches
@@ -213,12 +214,11 @@ def store_documents(projects):
 
         for pid, mcf in projects.items():
             try:
-
                 hashcode = hashlib.md5(yaml.dump(mcf, sort_keys=False).encode("utf-8")).hexdigest() # get unique hash for html 
                 values = {
                     'identifier': doi_from_url(pid),
                     'identifiertype': pid_type(doi_from_url(pid)),
-                    'uri': pid,
+                    'uri': url_from_pid(pid),
                     'resultobject': yaml.dump(mcf, sort_keys=False),
                     'resulttype': 'yaml',
                     'hash': hashcode,

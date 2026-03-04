@@ -48,6 +48,22 @@ def to_schema_org(r, mapping=None):
 
     return r
 
+def url_from_pid(uri):
+    # for a given pid, extend it to a url
+    if uri.startswith('http'):
+        return uri
+    elif uri.lower().startswith('ror:'):
+        return f'https://ror.org/{uri.split(":").pop()}'
+    elif uri.lower().startswith('orcid:'):
+        return f'https://orcid.org/{uri.split(":").pop()}'
+    elif uri.lower().startswith('doi:'):    
+        return f'https://doi.org/{uri.split(":").pop()}'
+    elif uri.startswith('10.') and uri.split('/').length() > 1:
+        return f'https://doi.org/{uri}'
+    else:
+        return ''
+
+
 def doi_from_url(uri, uri2=""):
     # prefer doi urls
     if not isinstance(uri2, list):
