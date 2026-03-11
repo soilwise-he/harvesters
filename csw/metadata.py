@@ -114,7 +114,7 @@ while nextRecord > 0 and returned > 0 and nextRecord < matched and nextRecord < 
                     print(f'Failed parse xml: {str(e)} {str(sys.exc_info())}')
 
                 insertRecord(       identifier=doi_from_url(id),
-                                    uri=url_from_pid(identifier)
+                                    uri=url_from_pid(identifier),
                                     identifiertype=pid_type(doi_from_url(id)),
                                     resulttype='iso19139:2007',
                                     resultobject=recxml.decode('UTF-8'),

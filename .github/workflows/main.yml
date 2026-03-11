@@ -2,8 +2,8 @@ name: Build and Publish Docker Image (Release)
 
 on:
   push:
-    tags:
-      - "v*.*.*"   # Adjust if you use a different tagging scheme
+    branches:
+      - main
 
 permissions:
   contents: read
