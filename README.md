@@ -1,8 +1,8 @@
-# SWR Harvesters
+# SoilWise-HE - Harvesting component
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14923563.svg)](https://doi.org/10.5281/zenodo.14923563)
 
-A component to fetch metadata from remote sources as documented at <https://soilwise-he.github.io/SoilWise-documentation/technical_components/ingestion/>.
+A component to ingest metadata from remote sources as documented at <https://soilwise-he.github.io/SoilWise-documentation/technical_components/ingestion/>.
 
 Harvesting tasks can best be triggered from a task runner, such as a CI-CD pipeline. Configuration scripts for running various harvesting tasks in a Gitlab CI-CD environment are available in [CI](./CI/). Tasks are configured using environment variables. The result of the harvester are ingested into a PostGres storage, where follow up processes pick up the results.
 
@@ -19,9 +19,52 @@ flowchart LR
 
 This component is tightly related to the [md-harmonization](https://github.com/soilwise-he/md-harmonization) and [md-augmentation](https://github.com/soilwise-he/metadata-augmentation) components. Harvested records are stored on a postgres database. 
 
-The following harvesting tasks are available.
+## Features
+- Ingests metadata from various source types (CSW, Datacite, tailored) 
+- Can run as a containerised workflow
+- Stores metadata on a PostGres Database
 
-## Fetch records 
+## Installation & Unit tests
+
+Set up the SoilWise PostGres database following the instructions at [db-migrate](https://github.com/soilwise-he/db-migrate). 
+Connection details are configured through environment variables, for example as a `.env` file.
+
+```
+git clone https://github.com/soilwise-he/harvesters
+cd harvesters
+pip install -r test/requirements.txt
+```
+
+Run unit tests with pytest (from root folder)
+```
+pytest test
+```
+
+## Usage
+
+### Local
+
+From a python enables shell run:
+
+```
+python csw/metadata.py
+```
+
+
+
+### Docker
+
+Run script as docker.
+Create a .env file with harvester details.
+
+```
+docker build -t soilwise/harvesters .
+docker run --env-file csw/.env soilwise/harvesters python csw/metadata.py
+```
+
+## Additional information 
+
+The following harvesters are configured:
 
 Generic repositories
 - [inspire](#)
@@ -40,98 +83,14 @@ Alternate harvesters
 - [Projects](./projects) are harvested from ESDAC as well as Soil Mission platform
 - [Newsfeeds](./newsfeeds/) imports newsfeeds from soil mission websites
 
-## Unit tests
+---
+## Soilwise-he project
+This work has been initiated as part of the [Soilwise-he](https://soilwise-he.eu) project. The project receives
+funding from the European Union’s HORIZON Innovation Actions 2022 under grant agreement No.
+101112838. Views and opinions expressed are however those of the author(s) only and do not necessarily
+reflect those of the European Union or Research Executive Agency. Neither the European Union nor the
+granting authority can be held responsible for them.
 
-Run unit tests with pytest (from root folder)
-
-```
-pip install -r test/requirements.txt
-pytest test
-```
-
-
-## Docker
-
-Run script as docker.
-Create a .env file with harvester details.
-
-```
-docker build -t soilwise/harvesters .
-docker run --env-file csw/.env soilwise/harvesters python csw/metadata.py
-```
-
-## Database
-
-Create script for harvest tables
-
-```sql
-CREATE SCHEMA IF NOT EXISTS harvest;
-
-CREATE SEQUENCE IF NOT EXISTS harvest.sources_source_id_seq
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CACHE 1;
-
-CREATE TABLE IF NOT EXISTS harvest.sources
-(
-    source_id integer NOT NULL DEFAULT nextval('harvest.sources_source_id_seq'::regclass),
-    name character varying(99)  NOT NULL,
-    description character varying(255) ,
-    url character varying(99) ,
-    schedule character varying(99) ,
-    type character varying(99) ,
-    filter character varying(255) ,
-    turtle_prefix text ,
-    CONSTRAINT source_pkey PRIMARY KEY (source_id),
-    CONSTRAINT source_name_key UNIQUE (name)
-);
-
-CREATE TABLE IF NOT EXISTS harvest.items
-(
-    identifier text  NOT NULL DEFAULT ''::text,
-    identifiertype character varying(50) ,
-    itemtype character varying(50) ,
-    resultobject text  NOT NULL,
-    resulttype character varying(50) ,
-    uri text  NOT NULL DEFAULT ''::text,
-    insert_date timestamp without time zone,
-    title text ,
-    source text ,
-    hash text  NOT NULL DEFAULT ''::text,
-    turtle text ,
-    date character varying(10) ,
-    error text ,
-    language character varying(9) ,
-    project text ,
-    downloadlink text ,
-    downloadtype text ,
-    CONSTRAINT item_pkey PRIMARY KEY (identifier, uri, hash),
-    CONSTRAINT item_sources_name_fkey FOREIGN KEY (source)
-        REFERENCES harvest.sources (name) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE NO ACTION
-);
-
-CREATE INDEX IF NOT EXISTS ix_items_itemtype
-    ON harvest.items USING btree
-    (itemtype  ASC NULLS LAST);
-
-CREATE INDEX IF NOT EXISTS ix_items_source
-    ON harvest.items USING btree
-    (source  ASC NULLS LAST);
-
-CREATE TABLE IF NOT EXISTS harvest.item_duplicates
-(
-    identifier text  NOT NULL,
-    identifiertype character varying(50) ,
-    source text  NOT NULL,
-    hash text  NOT NULL,
-    CONSTRAINT item_duplicates_pkey PRIMARY KEY (identifier, hash),
-    CONSTRAINT duplicate_sources_name_fkey FOREIGN KEY (source)
-        REFERENCES harvest.sources (name) MATCH SIMPLE
-        ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
 ```
