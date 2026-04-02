@@ -4,29 +4,40 @@
 
 A component to fetch metadata from remote sources as documented at <https://soilwise-he.github.io/SoilWise-documentation/technical_components/ingestion/>.
 
-Harvesting tasks can best be triggered from a tast runner, such as a CI-CD pipeline. Configuration scripts for running various harvesting tasks in a Gitlab CI-CD environment are available in [CI](./CI/). Tasks are configured using environment variables. The result of the harvester are ingested into a PostGres storage, where follow up processes pick up the results.
+Harvesting tasks can best be triggered from a task runner, such as a CI-CD pipeline. Configuration scripts for running various harvesting tasks in a Gitlab CI-CD environment are available in [CI](./CI/). Tasks are configured using environment variables. The result of the harvester are ingested into a PostGres storage, where follow up processes pick up the results.
 
 ``` mermaid
 flowchart LR
-    c[CI-CD] -->|task| q[/Queue\]
-    r[Runner] --> q
-    r -->|deploys| hc[Harvest container]
-    hc -->|harvests| db[(temporary storage)]
-    hc -->|data cleaning| db[(storage)]
+    hc[engine] -->|harvests| db[(temporary storage)]
+    mh[harmonisation] <-->|harmonize| db[(storage)]
+    ma[augmentaton]<-->|enrich| db
     db -->|triplify| TS[(Triple store)]
-    db -->|indexing| CT[Catalogue] 
+    db -->|query| py[(pycsw)]
+    db -->|indexing| SOLR[(SORL)]
+    SOLR <-->|query|CT[Catalogue] 
 ```
 
-This component is tightly related to the [triple store](https://github.com/soilwise-he/triplestore-virtuoso) component and [catalogue component](https://github.com/soilwise-he/pycsw). Harvested records are stored on the triple store as well as the catalogue storage. 
+This component is tightly related to the [md-harmonization](https://github.com/soilwise-he/md-harmonization) and [md-augmentation](https://github.com/soilwise-he/metadata-augmentation) components. Harvested records are stored on a postgres database. 
 
 The following harvesting tasks are available.
 
 ## Fetch records 
 
-- [CSW](./csw) (for example Bonares, EJP Soil, islandr, inspire)
-- [ESDAC](./esdac) a dedicated API
-- [Cordis/OpenAire](./cordis) combination of SPARQL and API's
-- [Prepsoil](./prepsoil/) a dedicated API
+Generic repositories
+- [inspire](#)
+- [Bonares repository](#)
+- [data.europa.eu](#)
+- [OpenAire](#)
+- [EEA](./eea) (including copernicus)
+
+Some project specific repositories (while they are running)
+- [Prepsoil](./prepsoil/) 
+- [Islandr](./CI/islandr)
+- [EJP Soil](./CI/ejpsoil)
+- [Impact4Soil](./CI/impact4soil)
+
+Alternate harvesters
+- [Projects](./projects) are harvested from ESDAC as well as Soil Mission platform
 - [Newsfeeds](./newsfeeds/) imports newsfeeds from soil mission websites
 
 ## Unit tests
@@ -36,10 +47,6 @@ Run unit tests with pytest (from root folder)
 ```
 pip install -r test/requirements.txt
 pytest test
-```
-To test a specific file, use:
-```
-pygeometa metadata import -s autodetect -v DEBUG ./test/data/cat-2/fao.xml
 ```
 
 
