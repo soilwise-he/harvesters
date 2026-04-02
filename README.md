@@ -26,6 +26,8 @@ This component is tightly related to the [md-harmonization](https://github.com/s
 
 ## Installation & Unit tests
 
+Python >3.10 required.
+
 Set up the SoilWise PostGres database following the instructions at [db-migrate](https://github.com/soilwise-he/db-migrate). 
 Connection details are configured through environment variables, for example as a `.env` file.
 
@@ -44,17 +46,15 @@ pytest test
 
 ### Local
 
-From a python enables shell run:
+From a python enabled shell run:
 
 ```
 python csw/metadata.py
 ```
 
-
-
 ### Docker
 
-Run script as docker.
+Run script in a docker.
 Create a .env file with harvester details.
 
 ```
@@ -87,10 +87,6 @@ Alternate harvesters
 ## Soilwise-he project
 This work has been initiated as part of the [Soilwise-he](https://soilwise-he.eu) project. The project receives
 funding from the European Union’s HORIZON Innovation Actions 2022 under grant agreement No.
-101112838. Views and opinions expressed are however those of the author(s) only and do not necessarily
+[101112838](doi.org/10.3030/101112838). Views and opinions expressed are however those of the author(s) only and do not necessarily
 reflect those of the European Union or Research Executive Agency. Neither the European Union nor the
 granting authority can be held responsible for them.
-
-        ON DELETE NO ACTION
-);
-```
