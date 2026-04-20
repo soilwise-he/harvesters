@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "SoilWise Technical Documentation"
+authors:
+  - family-names: "van Genuchten"
+    given-names: "Paul"
+    email: "paul.vangenuchten@wur.nl"
+    affiliation: "ISRIC World Soil Information"
+    orcid: "https://orcid.org/0000-0002-4789-174X"
+  - family-names: "de Groot"
+    given-names: "Hugo"
+    email: "hugo.degroot@wur.nl"
+    affiliation: "Wageningen University & Research"
+    orcid: "https://orcid.org/0000-0003-0556-158X"
+  - family-names: "Li"
+    given-names: "Jiarong"
+    email: "jiarong.li@wur.nl"
+    affiliation: "Wageningen University & Research"
+  - family-names: "Radu"
+    given-names: "Giurgiu"
+    email: "Radu.Giurgiu@ilvo.vlaanderen.be"
+    affiliation: "EV ILVO"
+repository-code: "https://github.com/soilwise-he/harvesters"
+url: "https://soilwise-he.eu"
+abstract: >-
+  This GitHub repository contains the code for the Harvesters. This component harvest at intervals metadata records from various sources. Harvested metadata is further processed in md-harmonization and md-augmentation.
+keywords:
+  - harvesting
+  - metadata
+  - repositories
+license: "MIT"
+version: "0.3.0"
+date-released: "2026-04-27"
+identifiers:
+  - type: doi
+    value: ""
+    description: "DOI for the software (to be assigned)"
+  - type: other
+    value: "101112838"
+    description: "EU Horizon grant agreement number"
+references:
+  - type: grant
+    title: "SoilWise — Enabling Soil Data and Knowledge for Informed Decision-Making"
+    authors:
+      - name: "European Commission"
+    number: "101112838"
+    institution:
+      name: "European Union"
+    url: "https://doi.org/10.3030/101112838"
