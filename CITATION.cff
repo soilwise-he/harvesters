@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "SoilWise Technical Documentation"
+title: "Harvester"
 authors:
   - family-names: "van Genuchten"
     given-names: "Paul"
