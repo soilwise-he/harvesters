@@ -58,7 +58,7 @@ def url_from_pid(uri):
         return f'https://orcid.org/{uri.split(":").pop()}'
     elif uri.lower().startswith('doi:'):    
         return f'https://doi.org/{uri.split(":").pop()}'
-    elif uri.startswith('10.') and uri.split('/').length() > 1:
+    elif uri.startswith('10.') and len(uri.split('/')) > 1:
         return f'https://doi.org/{uri}'
     else:
         return ''
