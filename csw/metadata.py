@@ -25,9 +25,12 @@ label = os.environ.get("HARVEST_LABEL").upper() or url
 filters = None
 filterstring = ''
 if os.environ.get("HARVEST_FILTER"):
-    filterstring = os.environ.get("HARVEST_FILTER",'')
-    print('Filter:', filterstring)
-    filters = json.loads(filterstring)
+    filterstring = os.environ.get("HARVEST_FILTER")
+    try:
+        filters = json.loads(filterstring)
+        print('Filter:', filterstring)
+    except Exception as e:
+        print('Error: json parse failed for:', filterstring, e)
 
 # add source, if it does not exist yet
 hasSource(label,url,filterstring,'CSW')
