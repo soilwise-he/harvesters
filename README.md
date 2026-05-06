@@ -8,13 +8,12 @@ Harvesting tasks can best be triggered from a task runner, such as a CI-CD pipel
 
 ``` mermaid
 flowchart LR
-    hc[engine] -->|harvests| db[(temporary storage)]
-    mh[harmonisation] <-->|harmonize| db[(storage)]
-    ma[augmentaton]<-->|enrich| db
-    db -->|triplify| TS[(Triple store)]
-    db -->|query| py[(pycsw)]
-    db -->|indexing| SOLR[(SORL)]
-    SOLR <-->|query|CT[Catalogue] 
+    S1[Source 1] -->|harvest| h[(Ingested)]
+    S2[Source 2] -->|harvest| h[(Ingested)]
+    h --> HM{harmonise}
+    HM --> h2[(Harmonised)]
+    h2 --> AU{augment}
+    AU --> h3[(Search index)]
 ```
 
 This component is tightly related to the [md-harmonization](https://github.com/soilwise-he/md-harmonization) and [md-augmentation](https://github.com/soilwise-he/metadata-augmentation) components. Harvested records are stored on a postgres database. 
