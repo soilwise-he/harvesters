@@ -1,0 +1,54 @@
+{
+  "title": "SoilWise-HE - Harvesting component",
+  "description": "<p>This GitHub repository contains the code for the Harvesters. This component harvests at intervals metadata records from various sources. Harvested metadata is further processed in md-harmonization and md-augmentation.</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "publication_date": "2026-04-27",
+  "version": "0.3.0",
+  "keywords": [
+    "harvesting",
+    "metadata",
+    "SoilWise",
+    "repositories",
+  ],
+  "creators": [
+    {
+      "name": "van Genuchten, Paul",
+      "affiliation": "ISRIC World Soil Information",
+      "orcid": "0000-0002-4789-174X"
+    }
+    {
+      "name": "de Groot, Hugo",
+      "affiliation": "Wageningen University & Research",
+      "orcid": "0000-0003-0556-158X"
+    }
+    {
+      "name": "Li, Jiarong",
+      "affiliation": "Wageningen University & Research",
+      "orcid": "0009-0002-6433-9217"
+    }
+    {
+      "name": "Giurgiu, Radu",
+      "affiliation": "EV ILVO",
+    }
+  ],
+  "grants": [
+    {
+      "id": "101112838"
+    }
+  ],
+  "communities": [
+    {
+      "identifier": "soilwise-he"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/soilwise-he/harvesters",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+  ],
+  "language": "eng"
+}
