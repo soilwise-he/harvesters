@@ -131,6 +131,13 @@ dbconn = dbInit()
 with dbconn.cursor() as cur:
   for r2 in records:
     r = r2.get('result')
+    pid = None
+    if 'adms_identifier' in r:
+       for pid2 in r['adms_identifier']:
+          pid = pid2.get('identifier',pid2.get('resource'))
+          if 'doi.org' in pid.get('resource',''):
+             break
+    
     if r:
       transkeys = "title,description,license,categories,spatial_resource,country,rights,format,access_right,landing_page,accrual_periodicity,keywords,provenance".split(',')
       r['catalog'] = r.get('catalog',{}).get('homepage',r.get('catalog',{}).get('id'))
@@ -221,6 +228,7 @@ with dbconn.cursor() as cur:
       r['@type'] = "Dataset"
       r.pop('translation_meta')
       r = to_schema_org(r, mapping)
+      # if has pid, use it
       id_ = r.get('@id')
       #print(r.get('name',r.get('identifier','')))
 

@@ -1,5 +1,5 @@
 # various metadata utils
-import hashlib,json
+import hashlib,json,re
 
 def to_schema_org(r, mapping=None):
     if mapping is None:
@@ -47,6 +47,14 @@ def to_schema_org(r, mapping=None):
         r['@id'] = r.get('url',r.get('identifier'))
 
     return r
+
+DOI_PATTERN = re.compile(r"^10\.\d{4,9}/\S+$")
+
+def is_doi(value: str) -> bool:
+    return bool(DOI_PATTERN.fullmatch(value))
+
+def pid_from_url(uri):
+    return uri.split('doi.org/').pop().split('doi:').pop()
 
 def url_from_pid(uri):
     # for a given pid, extend it to a url

@@ -55,6 +55,13 @@ if 'document' in harvesttypes:
                 r = to_schema_org(r, dcmapping) 
                 cnt=cnt+1
                 id = r['@id']
+                # some publications have author name in doi, strip doi
+                if 'doi.org' in id:
+                    id = id.split('doi.org/').pop()
+                    if ',' in id:
+                        id = id.split(',')[0]
+                # last char of id can not be '.' or ','
+                id = id.rstrip(".,")
                 r['@type'] = 'ScholarlyArticle'
                 if r.get('url','').startswith('http'):
                     hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
