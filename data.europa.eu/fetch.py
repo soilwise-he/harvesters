@@ -54,18 +54,17 @@ def extract_id(uri):
 def run_query(query):
     r = requests.post(
         ENDPOINT,
-        data={"query": query, "locale": "en"},
+        data={"query": query, "locale": "en", "timeout": 360000},
         headers={"Accept": "application/sparql-results+json,*/*;q=0.9", "Content-Type": "application/x-www-form-urlencoded"},
-        timeout=60
+        timeout=361
     )
     r.raise_for_status()
     return r.json()["results"]["bindings"]
 
-
 def initial():
   # to do, run a query to get id hash on all records from this source, 
   # to check if a record already exists, so doesn't need to be retrieved/inserted -> which will fail
-  pl = """
+  pl1 = """
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dct:  <http://purl.org/dc/terms/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -73,175 +72,218 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT DISTINCT ?URI ?identifier
 WHERE {
+?URI a dcat:Dataset ;
+    dct:identifier ?identifier .
 
-  ?URI a dcat:Dataset ;
-       dct:identifier ?identifier .
-
-  {
-    VALUES ?soilConcept {
-      <http://inspire.ec.europa.eu/theme/so>
-      <http://eurovoc.europa.eu/100277>
-      <http://data.europa.eu/cpv/cpv/14212400>
-      <http://data.europa.eu/bna/c_87a129d9>
-      <http://www.eionet.europa.eu/gemet/concept/7843>
-      <http://aims.fao.org/aos/agrovoc/c_7156>
-      "Soil"
-      "soil"
-    }
-
-    ?URI dcat:theme | dct:subject | dcat:keyword ?soilConcept .
-  }
-  UNION
-  {
-    ?URI dct:isPartOf <https://data.jrc.ec.europa.eu/collection/esdac> .
-  }
+FILTER NOT EXISTS {
+  ?URI a dcat:DataService .
 }
 """
+  pl2 = """
+  } 
+LIMIT 50
+OFFSET """
 
+
+  f1 = """
+{
+VALUES ?soilConcept {
+  <http://inspire.ec.europa.eu/theme/so>
+  <http://eurovoc.europa.eu/100277>
+  <http://data.europa.eu/cpv/cpv/14212400>
+  <http://data.europa.eu/bna/c_87a129d9>
+  <http://www.eionet.europa.eu/gemet/concept/7843>
+  <http://aims.fao.org/aos/agrovoc/c_7156>
+}
+?URI dcat:theme | dct:subject | dcat:keyword ?soilConcept .
+}"""
+  f2 = """
+{
+?URI (dcat:theme | dct:subject | dcat:keyword) ?keyword .
+FILTER(
+isLiteral(?keyword) &&
+LCASE(STR(?keyword)) IN (
+"soil","suelo","sol","bodem","boden","jord","muld","maaperä","maa","maapind",
+"gruntas","dirvožemis","augsne","talaj","pôda","půda","gleba","sol",
+"suolo","jord","zemlja","почва","έδαφος","ithir","ħamrija","pământ"
+))
+}"""
+  f3 = """
+{
+?URI dcat:contactPoint <http://data.jrc.ec.europa.eu/contact/ec-esdac> .
+}
+"""
   recs=[]
-  qry_res = run_query(pl)
-  print(f'Identified {len(qry_res)} records, fetch them individually...')
-  for r in qry_res:
-     # check if uri is blanknode or already in recs, then use identifier
-     uri = r.get("URI",{}).get("value")
-     id = r.get("identifier",{}).get("value")
-     if uri.startswith('nodeID://'):
-        uri = None
-     if not uri or uri in recs:
-       #if id not in recs:
-       #   recs.append(id)
-       None
-     else:      
-       recs.append(uri)
+  failures = 0
+  for f in [f3,f1,f2]:
+    offset = 0
+    bypage = 50
+    while bypage > 49:
+      offset = offset + 50
+      try:
+        qry = pl1+f+pl2+str(offset)
+        qry_res = run_query(qry)
+        bypage = len(qry_res)
+        failures = 0
+        print(f'Identified batch from:{offset-50} #:{len(qry_res)} records, add to selection')
+        for r in qry_res:
+          # check if uri is blanknode or already in recs, then use identifier
+          uri = r.get("URI",{}).get("value")
+          id = r.get("identifier",{}).get("value")
+          if uri.startswith('nodeID://'):
+            uri = None
+          if not uri or uri in recs:
+            print('duplicate:',uri)
+          else:      
+            recs.append(uri)
+      except Exception as e:
+        failures = failures + 1
+        if failures > 2:
+          print('Skip further processing')
+          bypage = 0 # if it continues after full query size
+        print(f'WARNING: SPARQL Query at batch {offset} failed, {e}.')
 
   return recs
 
+print(f'Fetch unique records from sparql')
 sparql_ids = initial()
 
+print(f'Fetch {len(sparql_ids)} individual records from sparql')
 records = []
 for did in sparql_ids:
+    print('Process', did)
     try:
         rec = get_detail(extract_id(did))
         records.append(rec)
     except Exception as e:
         print("Failed:", did, e)
 
+print(f'Push {len(records)} records to db')
+
 dbconn = dbInit()
 with dbconn.cursor() as cur:
   for r2 in records:
-    r = r2.get('result')
+    try:
+      r = r2.get('result')
 
-    if r:
-      transkeys = "title,description,license,categories,spatial_resource,country,rights,format,access_right,landing_page,accrual_periodicity,keywords,provenance".split(',')
-      r['catalog'] = r.get('catalog',{}).get('homepage',r.get('catalog',{}).get('id'))
+      if r:
+        transkeys = "title,description,license,categories,spatial_resource,country,rights,format,access_right,landing_page,accrual_periodicity,keywords,provenance,adms_identifier".split(',')
+        r['catalog'] = r.get('catalog',{}).get('homepage',r.get('catalog',{}).get('id'))
 
-      for k in transkeys:
-        if k in r and r[k] is not None:
-          r[k] = get_label_or_trans(r[k])
-      mapping = {
-        "id": "identifier",
-        "resource": "@id",
-        "catalog": "includedInDataCatalog",
-        "categories": "keywords",
-        "title": "name",
-        "spatial_resource": "spatial",
-        "country": "countryOfOrigin",
-        "rights": "usageInfo",
-        "format": "encodingFormat",
-        "access_right": "conditionsOfAccess",
-        "language": "inLanguage",
-        "landing_page": "mainEntityOfPage"
+        for k in transkeys:
+          if k in r and r[k] is not None:
+            r[k] = get_label_or_trans(r[k])
+        mapping = {
+          "id": "identifier",
+          "resource": "@id",
+          "catalog": "includedInDataCatalog",
+          "categories": "keywords",
+          "title": "name",
+          "spatial_resource": "spatial",
+          "country": "countryOfOrigin",
+          "rights": "usageInfo",
+          "format": "encodingFormat",
+          "access_right": "conditionsOfAccess",
+          "language": "inLanguage",
+          "landing_page": "mainEntityOfPage",
+          "adms_identifier": "identifier"
+          }
+        # distributions
+        dsts = [{
+          "@type": "DataDownload",
+          "contentUrl": did,
+          "name": "identifier",
+          "encodingFormat": "text/html"
+        }]
+
+        if 'distributions' in r:
+          
+          for d in r.pop("distributions"):
+            dsts.append({
+                "@type": "DataDownload",
+                "contentUrl": ",".join(d.get('access_url','')),
+                "name": get_label_or_trans(d.get('title','')),
+                "encodingFormat": get_label_or_trans(d.get("format","")),
+                "license": get_label_or_trans(d.get("license",''))
+            })
+          r['distribution'] = dsts
+        
+        if 'keywords' in r: 
+          for k in r['keywords']:
+            if isinstance(k, dict):
+              if 'language' in k:
+                k['@language'] = k.pop('language')
+              if 'label' in k:
+                k['@value'] = k.pop('label')
+              if 'id' in k: 
+                if k['id'].startswith('http'):
+                  k['@id'] = k.pop('id')
+                else:
+                  k.pop('id')
+
+        if 'inLanguage' in r and isinstance(r['inLanguage'],list):
+          r['inLanguage'] = next(iter(r['inLanguage']),'')
+        # temporal
+
+        # "temporal": [ {"gte": "2025-12-01T00:00:00Z", "lte": "2025-12-04T00:00:00Z"} ]
+        if 'temporal' in r or "temporalCoverage" in r:
+          tmp = r.get('temporalCoverage',r.get('temporal',[]))
+          if isinstance(tmp,list):
+              tmp = next(iter(tmp),{}) # use first
+          if isinstance(tmp, dict):
+              tmp = f"{tmp.get('gte','...')}/{tmp.get('lte','...')}"
+          if "temporal" in r:
+              r.pop('temporal')
+          r["temporalCoverage"] = tmp
+
+        # process contacts / translate agent to org/person
+        for ct in ['author', 'publisher', 'creator', 'provider', 'funder','contact_point']:
+          if not isinstance(r.get(ct), list):
+              r[ct] = [r.get(ct)]
+          for c in r[ct]:
+              if isinstance(c, dict):
+                c['@type'] = "Organization" if c.get('type') == 'Agent' else "Person"
+                c.pop('type', None)
+    
+        # quality_meas
+
+        # spatial [{"type": "Polygon", "coordinates": [[[8.0381, 57.7536], [15.5724, 57.7536], [15.5724, 54.453], [8.0381, 54.453], [8.0381, 57.7536]]]}]
+        if 'spatial' in r:
+          geom = r['spatial']
+          if isinstance(geom,list):
+              geom = next(iter(geom),{}) # use first
+          if isinstance(geom, dict) and "coordinates" in geom: 
+            try:
+                geom = {"@type": "GeoShape",
+                        "polygon": [f'{c[1]} {c[0]}' for c in geom['coordinates'][0]]}
+            except Exception as e:
+                print(f'{geom} is not an expected geometry, {e}')
+                None
+          r['spatial'] = geom
+        
+        r['@type'] = "Dataset"
+        r.pop('translation_meta')
+        r = to_schema_org(r, mapping)
+        # if has pid, use it
+        id_ = r.get('@id')
+        #print(r.get('name',r.get('identifier','')))
+
+        hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
+        values = {
+            'identifier': doi_from_url(id_),
+            'identifiertype': pid_type(doi_from_url(id_)),
+            'uri': r.get('@id',''),
+            'resultobject': json.dumps(r),
+            'resulttype': 'json',
+            'hash': hashcode,
+            'source': label,
+            'itemtype':'dataset',
+            'title': r.get('name','')
         }
-      # distributions
-      if 'distributions' in r:
-        dsts = []
-        for d in r.pop("distributions"):
-          dsts.append({
-              "@type": "DataDownload",
-              "contentUrl": ",".join(d.get('access_url','')),
-              "name": get_label_or_trans(d.get('title','')),
-              "encodingFormat": "https://www.iana.org/assignments/media-types/application/gml%2Bxml",
-              "license": get_label_or_trans(d.get("license",''))
-          })
-        r['distribution'] = dsts
 
-      if 'keywords' in r: 
-        for k in r['keywords']:
-          if isinstance(k, dict):
-            if 'language' in k:
-              k['@language'] = k.pop('language')
-            if 'label' in k:
-              k['@value'] = k.pop('label')
-            if 'id' in k: 
-              if k['id'].startswith('http'):
-                k['@id'] = k.pop('id')
-              else:
-                k.pop('id')
-
-      if 'inLanguage' in r and isinstance(r['inLanguage'],list):
-         r['inLanguage'] = next(iter(r['inLanguage']),'')
-      # temporal
-
-      # "temporal": [ {"gte": "2025-12-01T00:00:00Z", "lte": "2025-12-04T00:00:00Z"} ]
-      if 'temporal' in r or "temporalCoverage" in r:
-         tmp = r.get('temporalCoverage',r.get('temporal',[]))
-         if isinstance(tmp,list):
-            tmp = next(iter(tmp),{}) # use first
-         if isinstance(tmp, dict):
-            tmp = f"{tmp.get('gte','...')}/{tmp.get('lte','...')}"
-         if "temporal" in r:
-            r.pop('temporal')
-         r["temporalCoverage"] = tmp
-
-      # process contacts / translate agent to org/person
-      for ct in ['author', 'publisher', 'creator', 'provider', 'funder']:
-         if not isinstance(r.get(ct), list):
-            r[ct] = [r.get(ct)]
-         for c in r[ct]:
-            if isinstance(c, dict):
-              c['@type'] = "Organization" if c.get('type') == 'Agent' else "Person"
-              c.pop('type', None)
-  
-      # quality_meas
-
-      # spatial [{"type": "Polygon", "coordinates": [[[8.0381, 57.7536], [15.5724, 57.7536], [15.5724, 54.453], [8.0381, 54.453], [8.0381, 57.7536]]]}]
-      if 'spatial' in r:
-        geom = r['spatial']
-        if isinstance(geom,list):
-            geom = next(iter(geom),{}) # use first
-        if isinstance(geom, dict) and "coordinates" in geom: 
-          try:
-              geom = {"@type": "GeoShape",
-                      "polygon": [f'{c[1]} {c[0]}' for c in geom['coordinates'][0]]}
-          except Exception as e:
-              print(f'{geom} is not an expected geometry, {e}')
-              None
-        r['spatial'] = geom
-      
-      r['@type'] = "Dataset"
-      r.pop('translation_meta')
-      r = to_schema_org(r, mapping)
-      # if has pid, use it
-      id_ = r.get('@id')
-      #print(r.get('name',r.get('identifier','')))
-
-      hashcode = hashlib.md5(json.dumps(r).encode("utf-8")).hexdigest() # get unique hash for html 
-      values = {
-          'identifier': doi_from_url(id_),
-          'identifiertype': pid_type(doi_from_url(id_)),
-          'uri': r.get('@id',''),
-          'resultobject': json.dumps(r),
-          'resulttype': 'json',
-          'hash': hashcode,
-          'source': label,
-          'itemtype':'dataset',
-          'title': r.get('name','')
-      }
-
-      try:
         insQry('harvest.items',values,cur)        
-      except Exception as e:
-        print(f"Error: {str(e)}")
+    except Exception as e:
+      print(f"Error: {str(e)}")
 
 dbconn.commit()   
 dbconn.close()

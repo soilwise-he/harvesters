@@ -89,7 +89,7 @@ for tbl in soup.find_all("table", {"class": "ecl-table"}):
                         DO UPDATE SET
                         website = EXCLUDED.website,
                         funding = EXCLUDED.funding""", 
-                            ( k2, fund, v2.get('project website',''), grantnr ), False)
+                            ( k2.replace(') ',''), fund, v2.get('project website',''), grantnr ), False)
                 else:
                     print(f'{k2} or {grantnr} empty')
 

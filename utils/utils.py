@@ -54,7 +54,8 @@ def is_doi(value: str) -> bool:
     return bool(DOI_PATTERN.fullmatch(value))
 
 def pid_from_url(uri):
-    return uri.split('doi.org/').pop().split('doi:').pop()
+    uri = uri[:-1] if uri.endswith(".") else uri
+    return uri.split('doi.org/').pop().split('doi:').pop().split(' ')[0]
 
 def url_from_pid(uri):
     # for a given pid, extend it to a url

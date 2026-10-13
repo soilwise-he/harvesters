@@ -16,17 +16,14 @@ CrossUrl = ''
 
 # get doi metadata, prevent failed
 # doi is either 10.xxx/yyy.zzz or https://doi.org/10.xxx/yyy.zzz
-recs = dbQuery('''SELECT regexp_replace(identifier, '^.*?doi\\.org/', '') AS pid, uri, hash 
+recs = dbQuery('''SELECT regexp_replace(identifier, '^.*?doi.org/', '') AS pid, uri, hash 
                FROM harvest.vw_unique_harvest_items 
-               where (
-                identifiertype = 'doi'
-               OR 
-                (identifiertype = 'uri' and identifier like '%%doi.org%%')
-               )
+               where (identifiertype = 'doi' and identifier like '%%/%%')
+               OR (identifiertype = 'uri' and identifier like '%%doi.org%%')
                and source <> 'OPENAIRE' 
-               and coalesce (error,'') = ''
-               and regexp_replace(identifier, '^.*?doi\\.org/', '') not in (select identifier from harvest.items where source='OPENAIRE')
-               LIMIT 500''')
+               and coalesce(error,'') = ''
+               and regexp_replace(identifier, '^.*?doi.org/', '') not in (select identifier from harvest.items where source='OPENAIRE')
+               LIMIT 5000''')
 
 # todo: how do we identify if updated record is available in openaire?
 
@@ -36,7 +33,10 @@ dbconn = dbInit()
 with dbconn.cursor() as cur:
 
     # for each record, get openaire doi's    
-    for rec in sorted(recs):  
+
+    for i, rec in enumerate(recs, start=1):
+        if i % 20 == 0:
+            dbconn.commit() 
         err2 = None
         hasFound = None
         headers = { "User-Agent": "Soilwise Harvest v0.1" }
@@ -49,7 +49,7 @@ with dbconn.cursor() as cur:
             dbQuery(f"update harvest.items set error=%s where hash=%s",(f'no doi; {identifier}',hash),False) 
             continue
         url=OAurl+'?pid='+identifier  
-        print('parse id ',identifier)
+        print('Parse id',i,identifier)
         jsonResponse = None
         try:
             response = requests.get(url)
@@ -75,7 +75,7 @@ with dbconn.cursor() as cur:
             jsonResp = None
 
             try:
-                response = requests.get(uri2, headers=headers)
+                response = requests.get(uri2, headers=headers, timeout=3)
                 response.raise_for_status()
                 jsonResp = response.json()
             except HTTPError as http_err:
