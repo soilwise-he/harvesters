@@ -1,7 +1,6 @@
 # fetches data from data.europa.eu based on inspire theme 'theme/so'
 
-import requests
-import time
+import requests, html, time
 from urllib.parse import urlparse
 from dotenv import load_dotenv
 import sys,time,hashlib,os,json
@@ -191,21 +190,24 @@ with dbconn.cursor() as cur:
         # distributions
         dsts = [{
           "@type": "DataDownload",
-          "contentUrl": did,
+          "contentUrl": html.unescape(did),
           "name": "identifier",
           "encodingFormat": "text/html"
         }]
 
         if 'distributions' in r:
           
-          for d in r.pop("distributions"):
-            dsts.append({
-                "@type": "DataDownload",
-                "contentUrl": ",".join(d.get('access_url','')),
-                "name": get_label_or_trans(d.get('title','')),
-                "encodingFormat": get_label_or_trans(d.get("format","")),
-                "license": get_label_or_trans(d.get("license",''))
-            })
+          for d2 in r.pop("distributions"):
+            if not isinstance(d2.get('access_url'), list):
+              d2['access_url'] = [d2['access_url']]
+            for d in (d2.get('access_url') or []):
+              dsts.append({
+                  "@type": "DataDownload",
+                  "contentUrl": html.unescape(d),
+                  "name": get_label_or_trans(d2.get('title','')),
+                  "encodingFormat": get_label_or_trans(d2.get("format","")),
+                  "license": get_label_or_trans(d2.get("license",''))
+              })
           r['distribution'] = dsts
         
         if 'keywords' in r: 
@@ -280,7 +282,6 @@ with dbconn.cursor() as cur:
             'itemtype':'dataset',
             'title': r.get('name','')
         }
-
         insQry('harvest.items',values,cur)        
     except Exception as e:
       print(f"Error: {str(e)}")

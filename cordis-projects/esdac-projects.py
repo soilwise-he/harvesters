@@ -73,11 +73,15 @@ for tbl in soup.find_all("table", {"class": "ecl-table"}):
             lnks = td[2]
             t = 'foo'
             lks={}
+# <td>TRAILS4SOIL (<a href="https://mission-soil-platform.ec.europa.eu/project-hub/trails4soil">
+# project website</a>, <a href="https://cordis.europa.eu/project/id/101218949">CORDIS</a>), Nemesis (<a href="https://mission-soil-platform.ec.europa.eu/project-hub/nemesis">project website</a>, 
+# <a href="https://cordis.europa.eu/project/id/101219087">
+# CORDIS</a>)</td>
             for lnk in lnks.find_all("a"):
                 if lnk.previousSibling.text.strip() not in ['',',']:
                     t = lnk.previousSibling
-                    lks[t.replace('(','').strip()] = {}
-                lks[t.replace('(','').strip()][lnk.text] = lnk.get('href') 
+                    lks[t.replace('(','').replace(')','').replace(',','').strip()] = {}
+                lks[t.replace('(','').replace(')','').replace(',','').strip()][lnk.text] = lnk.get('href') 
 
             for k2,v2 in lks.items():
                 grantnr = v2.get('CORDIS','').split('/').pop()
@@ -89,7 +93,7 @@ for tbl in soup.find_all("table", {"class": "ecl-table"}):
                         DO UPDATE SET
                         website = EXCLUDED.website,
                         funding = EXCLUDED.funding""", 
-                            ( k2.replace(') ',''), fund, v2.get('project website',''), grantnr ), False)
+                            ( k2, fund, v2.get('project website',''), grantnr ), False)
                 else:
                     print(f'{k2} or {grantnr} empty')
 

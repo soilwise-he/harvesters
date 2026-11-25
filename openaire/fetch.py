@@ -1,3 +1,6 @@
+# script ingests all records with a keyword soil from openaire
+# filtered by month (env.DATEFROM), default this month
+
 import requests, calendar
 from datetime import datetime
 from requests.exceptions import HTTPError

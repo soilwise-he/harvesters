@@ -78,9 +78,9 @@ def doi_from_url(uri, uri2=""):
     if not isinstance(uri2, list):
         uri2 = [uri2]
     for u in uri2:
-        selected = ['doi.org','doi:','zenodo.org','data.jrc.ec.europa.eu','figshare.com','datadryad.org','/geonetwork']
+        selected = ['doi.org','doi:','zenodo.org','data.jrc.ec.europa.eu','figshare.com','datadryad.org']
         for s in selected:
-            if s in u:
+            if s in u or s.startswith('10.'):
                 uri = u
                 break
     try:
@@ -99,8 +99,12 @@ def doi_from_url(uri, uri2=""):
             return uri.split('doi:').pop().strip()
         elif 'data.jrc.ec.europa.eu' in uri:
             return uri.split('?')[0].split('/').pop().strip()
+        elif 'data.europa.eu/doi/' in uri:
+            return uri.split('?')[0].split('doi/').pop().strip()
         elif '/geonetwork' in uri:
-            return uri.split('?')[0].split('/').pop().strip()
+            tmp = uri.split('?')[0].split('/').pop().strip()
+            if len(tmp) > 5:
+                return tmp
         elif 'figshare.com' in uri:
             # remove querystring
             parts = uri('?')[0].split('/')
@@ -114,6 +118,8 @@ def doi_from_url(uri, uri2=""):
                 idx = parts.index('dataset')
                 if idx + 1 < len(parts):
                     return '10.5061/dryad.' + parts[idx + 1]
+        elif uri.startswith('http://data.europa.eu/88u/dataset/'):
+            return uri.split('dataset/').pop()
     except Exception:
         None
     return uri

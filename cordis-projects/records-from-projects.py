@@ -1,4 +1,4 @@
-import requests
+import requests, html
 from requests.exceptions import HTTPError
 from dotenv import load_dotenv
 import sys,time,hashlib,os,json,re
